@@ -4,6 +4,38 @@ var fs = require('fs');
 var cc = require('ceci-core');
 
 
+var cellVolume = function(cell) {
+  var a = cell.a;
+  var b = cell.b;
+  var c = cell.c;
+  var f = Math.PI / 180.0;
+  var ca = Math.cos(cell.alpha * f);
+  var cb = Math.cos(cell.beta * f);
+  var cc = Math.cos(cell.gamma * f);
+
+  return a*b*c * Math.sqrt(1 + 2*ca*cb*cc - ca*ca - cb*cb - cc*cc);
+};
+
+
+var sumOfMultiplicities = function(elements) {
+  return elements.reduce(function(sum, vert) {
+    return sum + vert.multiplicity;
+  }, 0);
+};
+
+
+var cellMultiplicity = function(symbol) {
+  return {
+    P: 1,
+    A: 2,
+    B: 2,
+    C: 2,
+    I: 2,
+    R: 3,
+    F: 4 }[symbol[0]];
+};
+
+
 var fileContents = function(path) {
   return cc.nbind(fs.readFile, fs)(path, { encoding: 'utf8' });
 };
@@ -28,11 +60,13 @@ var parseVertexOrEdge = function(lines, startIndex, isVertex) {
   result.name = tmp[0];
   result.coordinationNumber = parseInt(tmp[1]);
 
-  result.coordinatesNumerical = lines[++i].split(/\s+/).map(parseFloat);
-  result.coordinatesSymbolic = lines[++i];
+  result.coordinates = {
+    numerical: lines[++i].split(/\s+/).map(parseFloat),
+    symbolic : lines[++i]
+  };
 
-  tmp = lines[++i].split(/\s+/);
-  result.wyckoff = { number: parseInt(tmp[0]), letter: tmp[1] };
+  result.wyckoff = lines[++i];
+  result.multiplicity = parseInt(result.wyckoff);
 
   result.symmetry = lines[++i];
 
@@ -75,6 +109,23 @@ var parseSection = function(lines, startIndex, parseBlock) {
 };
 
 
+var parseCell = function(line) {
+  var tmp = line.split(/\s+/).map(parseFloat);
+  var result = {};
+
+  result.a     = tmp[0];
+  result.b     = tmp[1];
+  result.c     = tmp[2];
+  result.alpha = tmp[3];
+  result.beta  = tmp[4];
+  result.gamma = tmp[5];
+
+  result.volume = cellVolume(result);
+
+  return result;
+};
+
+
 var parseStructure = function(lines, startIndex) {
   var result = {};
   var i, k, key, tmp;
@@ -111,17 +162,12 @@ var parseStructure = function(lines, startIndex) {
   }
 
   tmp = lines[i].split(/\s+/);
-  result.spacegroupSymbol = tmp[0];
-  result.spacegroupNumber = parseInt(tmp[1]);
+  result.spacegroup = {
+    symbol: tmp[0],
+    number: parseInt(tmp[1])
+  };
 
-  tmp = lines[++i].split(/\s+/).map(parseFloat);
-  result.cell = {};
-  result.cell.a     = tmp[0];
-  result.cell.b     = tmp[1];
-  result.cell.c     = tmp[2];
-  result.cell.alpha = tmp[3];
-  result.cell.beta  = tmp[4];
-  result.cell.gamma = tmp[5];
+  result.cell = parseCell(lines[++i]);
 
   tmp = parseSection(lines, ++i, parseVertex);
   result.vertices = tmp.result;
@@ -137,15 +183,32 @@ var parseStructure = function(lines, startIndex) {
   result.tiling = lines[++i];
   result.dual = lines[++i];
 
-  for (k = 0; k < result.vertices.length; ++k)
-    result.vertices[k].coordinationSequence = lines[++i]
-    .split(/\s+/)
-    .map(function(s) { return parseInt(s); });
+  for (k = 0; k < result.vertices.length; ++k) {
+    tmp = lines[++i].split(/\s+/).map(function(s) { return parseInt(s); });
+    result.vertices[k].coordinationSequence = tmp.slice(0, -1);
+    result.vertices[k].cum10 = tmp.slice(-1)[0];
+  }
 
   for (k = 0; k < result.vertices.length; ++k)
     result.vertices[k].symbol = lines[++i];
 
   result.smallestRingSize = parseInt(lines[++i]);
+
+  result.verticesPerUnitCell = sumOfMultiplicities(result.vertices);
+  result.edgesPerUnitCell = sumOfMultiplicities(result.edges);
+
+  result.density =  result.verticesPerUnitCell / result.cell.volume;
+  result.genus = 1 +
+    (result.edgesPerUnitCell - result.verticesPerUnitCell) / 
+    cellMultiplicity(result.spacegroup.symbol);
+
+  result.averageVertexOrder = result.vertices.reduce(function(s, v) {
+    return s + v.multiplicity * v.order;
+  }, 0) / result.verticesPerUnitCell;
+
+  result.td10 = Math.round(result.vertices.reduce(function(s, v) {
+    return s + v.multiplicity * v.cum10;
+  }, 0) / result.verticesPerUnitCell);
 
   return { result: result, nextLine: ++i };
 };
