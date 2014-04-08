@@ -1,8 +1,5 @@
 'use strict';
 
-var fs = require('fs');
-var cc = require('ceci-core');
-
 
 var cellVolume = function(cell) {
   var a = cell.a;
@@ -33,11 +30,6 @@ var cellMultiplicity = function(symbol) {
     I: 2,
     R: 3,
     F: 4 }[symbol[0]];
-};
-
-
-var fileContents = function(path) {
-  return cc.nbind(fs.readFile, fs)(path, { encoding: 'utf8' });
 };
 
 
@@ -214,8 +206,7 @@ var parseStructure = function(lines, startIndex) {
 };
 
 
-cc.top(cc.go(function*() {
-  var text = yield fileContents(process.argv[2]);
+module.exports = function(text) {
   var lines = splitIntoLines(text).map(cleanupLine);
   var lineNo = 0;
   var result = [];
@@ -229,5 +220,5 @@ cc.top(cc.go(function*() {
     lineNo = tmp.nextLine;
   }
 
-  console.log(JSON.stringify(result, null, 4));
-}));
+  return result;
+};
