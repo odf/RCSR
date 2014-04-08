@@ -154,10 +154,8 @@ var parseStructure = function(lines, startIndex) {
   }
 
   tmp = lines[i].split(/\s+/);
-  result.spacegroup = {
-    symbol: tmp[0],
-    number: parseInt(tmp[1])
-  };
+  result.spacegroupSymbol = tmp[0];
+  result.spacegroupNumber = parseInt(tmp[1]);
 
   result.cell = parseCell(lines[++i]);
 
@@ -169,19 +167,22 @@ var parseStructure = function(lines, startIndex) {
   result.edges = tmp.result;
   i = tmp.nextLine;
 
+  result.numberOfVertices = result.vertices.length;
+  result.numberOfEdges    = result.edges.length;
+
   result.numberOfFaces = parseInt(lines[i]);
   result.numberOfTiles = parseInt(lines[++i]);
   result.sizeOfDSymbol = parseInt(lines[++i]);
-  result.tiling = lines[++i];
-  result.dual = lines[++i];
+  result.tiling        = lines[++i];
+  result.dual          = lines[++i];
 
-  for (k = 0; k < result.vertices.length; ++k) {
+  for (k = 0; k < result.numberOfVertices; ++k) {
     tmp = lines[++i].split(/\s+/).map(function(s) { return parseInt(s); });
     result.vertices[k].coordinationSequence = tmp.slice(0, -1);
     result.vertices[k].cum10 = tmp.slice(-1)[0];
   }
 
-  for (k = 0; k < result.vertices.length; ++k)
+  for (k = 0; k < result.numberOfVertices; ++k)
     result.vertices[k].symbol = lines[++i];
 
   result.smallestRingSize = parseInt(lines[++i]);
@@ -192,7 +193,7 @@ var parseStructure = function(lines, startIndex) {
   result.density =  result.verticesPerUnitCell / result.cell.volume;
   result.genus = 1 +
     (result.edgesPerUnitCell - result.verticesPerUnitCell) / 
-    cellMultiplicity(result.spacegroup.symbol);
+    cellMultiplicity(result.spacegroupSymbol);
 
   result.averageVertexOrder = result.vertices.reduce(function(s, v) {
     return s + v.multiplicity * v.order;
