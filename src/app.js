@@ -10,6 +10,15 @@ var search = require('./search');
 var $ = React.DOM;
 
 
+var setIn = function(obj, key, val) {
+  var result = {};
+  for (var k in obj)
+    result[k] = obj[k];
+  result[key] = val;
+  return result;
+};
+
+
 var loadFile = function(f) {
   var result = cc.defer();
   var reader = new FileReader();
@@ -37,23 +46,52 @@ var Uploader = React.createClass({
     }
   },
   render: function() {
-    return $.div(null,
-                 $.h2(null, 'Locate 3Dall.txt'),
-                 $.form({ onSubmit: this.preventSubmit },
-                        $.fieldset(null,
-                                   $.legend(null, 'Select a file'),
-                                   $.input({ type: 'file',
-                                             onChange: this.loadFile }))));
+    return $.form({ onSubmit: this.preventSubmit },
+                  $.fieldset(null,
+                             $.legend(null, 'Select a file'),
+                             $.input({ type: 'file',
+                                       onChange: this.loadFile })));
+  }
+});
+
+
+var InputField = React.createClass({
+  handleChange: function(event) {
+    this.props.update(this.props.path, event.target.value);
+  },
+  handleKeyPress: function(event) {
+    if (event.keyCode == 13)
+      event.preventDefault();
+  },
+  render: function() {
+    var label = this.props.label;
+    return $.p({ key: label },
+               label ? $.label(null, label) : $.span(),
+               label ? $.br() : $.span(),
+               $.input({ type      : "text",
+                         value     : this.props.value,
+                         onKeyPress: this.handleKeyPress,
+                         onChange  : this.handleChange }));
   }
 });
 
 
 var SearchForm = React.createClass({
+  getInitialState: function() {
+    return {
+      data: {}
+    }
+  },
   preventSubmit: function(event) {
     event.preventDefault();
   },
   handleSubmit: function(event) {
-    console.log(event.target.value);
+    console.log(JSON.stringify(this.state.data), event.target.value);
+  },
+  update: function(path, value) {
+    this.setState({
+      data: setIn(this.state.data, path, value)
+    });
   },
   render: function() {
     var buttons =
@@ -66,7 +104,11 @@ var SearchForm = React.createClass({
 
     return $.form({ onSubmit: this.preventSubmit },
                   $.fieldset(null,
-                             $.input({ type: 'text' })),
+                             InputField({ label : 'Symbol',
+                                          value : this.state.data['symbol'],
+                                          path  : 'symbol',
+                                          update: this.update
+                                        })),
                   buttons);
   }
 });
@@ -87,9 +129,12 @@ var Application = React.createClass({
     if (this.state.data)
       page = $.div(null,
                    "Read " + this.state.data.length + " structures",
+                   $.h2(null, 'Search nets'),
                    SearchForm());
     else
-      page = Uploader({ handleData: this.handleUpload });
+      page = $.div(null,
+                   $.h2(null, 'Locate 3Dall.txt'),
+                   Uploader({ handleData: this.handleUpload }));
 
     return $.div(null,
                  $.h1(null, 'RCSR'),
