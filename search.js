@@ -1,26 +1,21 @@
 'use strict';
 
 
+var asSet = function(a) {
+  var result = {};
+  for (var i in a)
+    result[a[i]] = 1;
+  return result;
+};
+
+
 var equalSets = function(a, b) {
-  var sa = {};
-  var sb = {};
-  var i, k;
+  var sa = asSet(a);
+  var sb = asSet(b);
 
-  for (i in a)
-    sa[a[i]] = 1;
-
-  for (i in b)
-    sb[b[i]] = 1;
-
-  for (k in sa)
-    if (sb[k] != 1)
-      return false;
-
-  for (k in sb)
-    if (sa[k] != 1)
-      return false;
-
-  return true;
+  return (a.every(function(x) { return sb[x] == 1; })
+          &&
+          b.every(function(x) { return sa[x] == 1; }));
 };
 
 
