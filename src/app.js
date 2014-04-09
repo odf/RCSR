@@ -48,6 +48,30 @@ var Uploader = React.createClass({
 });
 
 
+var SearchForm = React.createClass({
+  preventSubmit: function(event) {
+    event.preventDefault();
+  },
+  handleSubmit: function(event) {
+    console.log(event.target.value);
+  },
+  render: function() {
+    var buttons =
+      (this.props.buttons || ['Cancel', 'Submit']).map(function(value) {
+        return $.input({ type   : 'submit',
+                         key    : value,
+                         value  : value,
+                         onClick: this.handleSubmit })
+      }.bind(this));
+
+    return $.form({ onSubmit: this.preventSubmit },
+                  $.fieldset(null,
+                             $.input({ type: 'text' })),
+                  buttons);
+  }
+});
+
+
 var Application = React.createClass({
   getInitialState: function() {
     return {
@@ -61,7 +85,9 @@ var Application = React.createClass({
     var page;
 
     if (this.state.data)
-      page = $.div(null, "Read " + this.state.data.length + " structures");
+      page = $.div(null,
+                   "Read " + this.state.data.length + " structures",
+                   SearchForm());
     else
       page = Uploader({ handleData: this.handleUpload });
 
