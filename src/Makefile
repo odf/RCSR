@@ -1,8 +1,8 @@
-BIN=../node_modules/.bin
+BROWSERIFY=../node_modules/.bin/browserify
 BUILD=../public/js
 
 MAKEDEPEND= \
-	$(BIN)/browserify --list app.js | \
+	$(BROWSERIFY) --list app.js | \
 		sort | \
 		sed "s|^$$PWD/||" | \
 		grep -v '^\(\/\|\sapp.js\)' | \
@@ -10,7 +10,8 @@ MAKEDEPEND= \
 
 $(BUILD)/app.js:	app.js
 	@$(MAKEDEPEND)
-	$(BIN)/browserify -t regeneratorify -x React app.js -o $@ || rm $@
+	mkdir -p $(BUILD) && \
+	$(BROWSERIFY) -t regeneratorify -x React app.js -o $@ || rm -f $@
 
 deps.mk:
 	@$(MAKEDEPEND)
