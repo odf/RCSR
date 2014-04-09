@@ -4,8 +4,8 @@
 var fs = require('fs');
 var cc = require('ceci-core');
 
-var parse  = require('./parse-3dall');
-var search = require('./search');
+var parse  = require('./src/parse-3dall');
+var search = require('./src/search');
 
 
 var fileContents = function(path) {
