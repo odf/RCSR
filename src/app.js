@@ -67,7 +67,18 @@ var schema = {
     },
     keywords: {
       title: "Keywords",
-      type: "string"
+      description: "Keywords",
+      type: "object",
+      properties: {
+        chiral: {
+          title: "Chiral",
+          type: "boolean"
+        },
+        clathrate: {
+          title: "Clathrate",
+          type: "boolean"
+        }
+      }
     },
     coordination: {
       title: "Coordination",
@@ -78,10 +89,12 @@ var schema = {
 };
 
 var conversions = {
-  keywords: function(text) {
-    return text.split(/,/).map(function(s) {
-      return s.trim().replace(/\s+/, ' ');
-    });
+  keywords: function(obj) {
+    var result = [];
+    for (var key in obj)
+      if (obj[key])
+        result.push(key);
+    return result;
   },
   coordination: function(text) {
     return text.split(/,/).map(function(s) {
