@@ -55,14 +55,53 @@ var schema = {
   properties: {
     symbol: {
       title: "Symbol",
-      description: "A symbol",
+      description: "The symbol for a net.",
       type: "string",
       minLength: 3,
       maxLength: 7,
       pattern: "^[a-z][a-z][a-z](-[a-z])*$"
+    },
+    names: {
+      title: "Names",
+      type: "string"
+    },
+    keywords: {
+      title: "Keywords",
+      type: "string"
+    },
+    coordination: {
+      title: "Coordination",
+      type: "string",
+      pattern: "^[1-9][0-9]*(,[1-9][0-9]*)*$"
     }
   }
 };
+
+var conversions = {
+  keywords: function(text) {
+    return text.split(/,/).map(function(s) {
+      return s.trim().replace(/\s+/, ' ');
+    });
+  },
+  coordination: function(text) {
+    return text.split(/,/).map(function(s) {
+      return parseInt(s);
+    });
+  }
+};
+
+
+var makeQuery = function(inputs) {
+  var result = {};
+  for (var key in inputs) {
+    if (conversions.hasOwnProperty(key))
+      result[key] = conversions[key](inputs[key]);
+    else
+      result[key] = inputs[key];
+  }
+  return result;
+};
+
 
 var SearchForm = React.createClass({
   render: function() {
@@ -86,9 +125,9 @@ var Application = React.createClass({
   handleUpload: function(data) {
     this.setState({ data: parse(data) });
   },
-  onFormSubmit: function(query, value) {
+  onFormSubmit: function(inputs, value) {
     if (value == 'Search')
-      this.setState({ results: search(this.state.data, query) });
+      this.setState({ results: search(this.state.data, makeQuery(inputs)) });
   },
   render: function() {
     var page;
