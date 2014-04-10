@@ -1,22 +1,15 @@
 'use strict';
 
-var React = require('react');
-var cc    = require('ceci-core');
+var React    = require('react');
+var cc       = require('ceci-core');
+var validate = require('plexus-validate');
+var Form     = require('plexus-form');
 
-var parse  = require('./parse-3dall');
-var search = require('./search');
+var parse    = require('./parse-3dall');
+var search   = require('./search');
 
 
 var $ = React.DOM;
-
-
-var setIn = function(obj, key, val) {
-  var result = {};
-  for (var k in obj)
-    result[k] = obj[k];
-  result[key] = val;
-  return result;
-};
 
 
 var loadFile = function(f) {
@@ -55,61 +48,30 @@ var Uploader = React.createClass({
 });
 
 
-var InputField = React.createClass({
-  handleChange: function(event) {
-    this.props.update(this.props.path, event.target.value);
-  },
-  handleKeyPress: function(event) {
-    if (event.keyCode == 13)
-      event.preventDefault();
-  },
-  render: function() {
-    var label = this.props.label;
-    return $.p({ key: label },
-               label ? $.label(null, label) : $.span(),
-               label ? $.br() : $.span(),
-               $.input({ type      : "text",
-                         value     : this.props.value,
-                         onKeyPress: this.handleKeyPress,
-                         onChange  : this.handleChange }));
+var schema = {
+  title: "Search for nets",
+  type: "object",
+  required: [],
+  properties: {
+    symbol: {
+      title: "Symbol",
+      description: "A symbol",
+      type: "string",
+      minLength: 3,
+      maxLength: 7,
+      pattern: "^[a-z][a-z][a-z](-[a-z])*$"
+    }
   }
-});
-
+};
 
 var SearchForm = React.createClass({
-  getInitialState: function() {
-    return {
-      data: {}
-    }
-  },
-  preventSubmit: function(event) {
-    event.preventDefault();
-  },
-  handleSubmit: function(event) {
-    console.log(JSON.stringify(this.state.data), event.target.value);
-  },
-  update: function(path, value) {
-    this.setState({
-      data: setIn(this.state.data, path, value)
-    });
-  },
   render: function() {
-    var buttons =
-      (this.props.buttons || ['Cancel', 'Submit']).map(function(value) {
-        return $.input({ type   : 'submit',
-                         key    : value,
-                         value  : value,
-                         onClick: this.handleSubmit })
-      }.bind(this));
-
-    return $.form({ onSubmit: this.preventSubmit },
-                  $.fieldset(null,
-                             InputField({ label : 'Symbol',
-                                          value : this.state.data['symbol'],
-                                          path  : 'symbol',
-                                          update: this.update
-                                        })),
-                  buttons);
+    return Form({
+      buttons: ['Cancel', 'Search'],
+      onSubmit: this.props.onSubmit,
+      schema: schema,
+      validate: validate
+    });
   }
 });
 
@@ -117,24 +79,36 @@ var SearchForm = React.createClass({
 var Application = React.createClass({
   getInitialState: function() {
     return {
-      data: null
+      data: null,
+      results: null
     }
   },
   handleUpload: function(data) {
     this.setState({ data: parse(data) });
   },
+  onFormSubmit: function(query, value) {
+    if (value == 'Search')
+      this.setState({ results: search(this.state.data, query) });
+  },
   render: function() {
     var page;
 
-    if (this.state.data)
+    if (this.state.data) {
+      var resultList = [];
+
+      if (this.state.results)
+        resultList = this.state.results.map(function(net) {
+          return $.p({ key: net.symbol }, net.symbol);
+        });
+
       page = $.div(null,
-                   "Read " + this.state.data.length + " structures",
-                   $.h2(null, 'Search nets'),
-                   SearchForm());
-    else
+                   SearchForm({ onSubmit: this.onFormSubmit }),
+                   resultList);
+    } else {
       page = $.div(null,
                    $.h2(null, 'Locate 3Dall.txt'),
                    Uploader({ handleData: this.handleUpload }));
+    }
 
     return $.div(null,
                  $.h1(null, 'RCSR'),

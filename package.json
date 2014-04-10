@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "react": "~0.9.0",
-    "ceci-core": "~0.2.0"
+    "ceci-core": "~0.2.0",
+    "plexus-validate": "~0.0.1",
+    "plexus-form": "~0.0.1"
   },
   "engines": {
     "node": ">=0.11.10"
