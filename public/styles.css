@@ -12,3 +12,16 @@ html {
 .error, .error * {
     color: red;
 }
+
+fieldset p {
+    margin: 5px 0px;
+}
+
+fieldset label {
+    min-width: 12em;
+    display: inline-block;
+}
+
+fieldset br {
+    display: none;
+}
