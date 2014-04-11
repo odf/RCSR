@@ -53,24 +53,32 @@ var matcher = {
     var seen = item.vertices.map(function(v) { return v.coordinationNumber; });
     return equalSets(values, seen);
   },
-  density: rangeMatcher('density'),
-  td10   : rangeMatcher('td10'),
-  genus  : rangeMatcher('genus'),
-  nrVerts: rangeMatcher('numberOfVertices'),
-  nrEdges: rangeMatcher('numberOfEdges'),
-  nrFaces: rangeMatcher('numberOfFaces'),
-  nrTiles: rangeMatcher('numberOfTiles'),
-  group  : rangeMatcher('spacegroupNumber'),
-  minRing: rangeMatcher('smallestRingSize'),
-  order  : rangeMatcher('averageVertexOrder'),
-  dsSize : rangeMatcher('sizeOfDSymbol')
+  "density"           : rangeMatcher('density'),
+  "td10"              : rangeMatcher('td10'),
+  "genus"             : rangeMatcher('genus'),
+  "kinds of vertex"   : rangeMatcher('numberOfVertices'),
+  "kinds of edge"     : rangeMatcher('numberOfEdges'),
+  "kinds of face"     : rangeMatcher('numberOfFaces'),
+  "kinds of tile"     : rangeMatcher('numberOfTiles'),
+  "space group number": rangeMatcher('spacegroupNumber'),
+  "smallest ring"     : rangeMatcher('smallestRingSize'),
+  "order"             : rangeMatcher('averageVertexOrder'),
+  "Dsize"             : rangeMatcher('sizeOfDSymbol')
 };
 
 
 var matches = function(item, query) {
-  for (var key in query)
-    if (!matcher[key](item, query[key]))
+  var key, good;
+  
+  for (var key in query) {
+    if (matcher[key])
+      good = matcher[key](item, query[key]);
+    else
+      good = matches(item, query[key]);
+
+    if (!good)
       return false;
+  }
   return true;
 };
 

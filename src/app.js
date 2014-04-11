@@ -48,6 +48,28 @@ var Uploader = React.createClass({
 });
 
 
+var makeBooleanProperties = function(names) {
+  var result = {};
+  names.forEach(function(name) {
+    result[name] = { title: name, type: "boolean" };
+  });
+  return result;
+};
+
+
+var makeBoundsProperties = function(names) {
+  var result = {};
+  names.forEach(function(name) {
+    result[name] = {
+      title: name,
+      type: "string",
+      pattern: "^[0-9]+(\.[0-9]+)?(-[0-9]+(\.[0-9]+)?)?$"
+    };
+  });
+  return result;
+};
+
+
 var schema = {
   title: "Search for nets",
   type: "object",
@@ -66,24 +88,47 @@ var schema = {
       type: "string"
     },
     keywords: {
-      title: "Keywords",
       description: "Keywords",
       type: "object",
-      properties: {
-        chiral: {
-          title: "Chiral",
-          type: "boolean"
-        },
-        clathrate: {
-          title: "Clathrate",
-          type: "boolean"
-        }
-      }
+      properties: makeBooleanProperties([
+        "bipartite",
+        "chiral",
+        "clathrate",
+        "good",
+        "polar",
+        "quasiregular net",
+        "quasisimple tiling",
+        "regular net",
+        "self dual net",
+        "semiregular net",
+        "simple net",
+        "uniform net",
+        "uniform tiling",
+        "zeolite net"
+      ])
     },
     coordination: {
       title: "Coordination",
       type: "string",
       pattern: "^[1-9][0-9]*(,[1-9][0-9]*)*$"
+    },
+    bounds: {
+      description: "Bounds",
+      type: "object",
+      properties: makeBoundsProperties([
+        "density",
+        "td10",
+        "genus",
+        "kinds of vertex",
+        "kinds of edge",
+        "kinds of face",
+        "kinds of tile",
+        "space group number",
+        "smallest ring",
+        "coordination",
+        "order",
+        "Dsize"
+      ])
     }
   }
 };
@@ -100,6 +145,19 @@ var conversions = {
     return text.split(/,/).map(function(s) {
       return parseInt(s);
     });
+  },
+  bounds: function(data) {
+    var result = {};
+    var key, tmp;
+    for (var key in data) {
+      if (data[key]) {
+        tmp = data[key].split('-');
+        result[key] = { from: parseFloat(tmp[0]) };
+        if (tmp.length > 1)
+          result[key].to = parseFloat(tmp[1]);
+      }
+    }
+    return result;
   }
 };
 
