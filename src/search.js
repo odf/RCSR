@@ -19,6 +19,20 @@ var equalSets = function(a, b) {
 };
 
 
+var matchText = {
+  'is'         : function(s, p) { return s == p; },
+  'contains'   : function(s, p) { return s.match(p) != null; },
+  'begins with': function(s, p) { return s.match('^' + p) != null; }
+};
+
+
+var search = function(pattern, mode, list) {
+  return list.some(function(text) {
+    return matchText[mode](text, pattern);
+  });
+};
+
+
 var rangeMatcher = function(key) {
   return function(item, range) {
     var value = item[key];
@@ -35,13 +49,14 @@ var rangeMatcher = function(key) {
 
 var matcher = {
   symbol: function(item, value) {
-    var x = value.toLowerCase()
-    return item.symbol == value || item.otherSymbols.indexOf(value) >= 0;
+    var s = value.text.toLowerCase()
+    var m = value.mode || 'is';
+    return search(s, m, [item.symbol]) || search(s, m, item.otherSymbols);
   },
   names: function(item, value) {
-    var x = value.toLowerCase()
-    return item.names.indexOf(value) >= 0 ||
-      item.otherNames.indexOf(value) >= 0;
+    var s = value.text.toLowerCase()
+    var m = value.mode || 'is';
+    return search(s, m, item.names) || search(s, m, item.otherNames);
   },
   keywords: function(item, values) {
     for (var i in values)

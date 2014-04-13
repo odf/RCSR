@@ -76,16 +76,30 @@ var schema = {
   required: [],
   properties: {
     symbol: {
-      title: "Symbol",
-      description: "The symbol for a net.",
-      type: "string",
-      minLength: 3,
-      maxLength: 7,
-      pattern: "^[a-z][a-z][a-z](-[a-z])*$"
+      description: "Symbol",
+      type: "object",
+      properties: {
+        mode: {
+          enum: ["is", "contains", "begins with"]
+        },
+        text: {
+          type: "string",
+          maxLength: 7,
+          pattern: "^[a-z]{0,3}(-[a-z])*$"
+        }
+      }
     },
     names: {
-      title: "Names",
-      type: "string"
+      description: "Names",
+      type: "object",
+      properties: {
+        mode: {
+          enum: ["is", "contains", "begins with"]
+        },
+        text: {
+          type: "string"
+        }
+      }
     },
     keywords: {
       description: "Keywords",
@@ -134,6 +148,12 @@ var schema = {
 };
 
 var conversions = {
+  symbol: function(obj) {
+    return obj.text && obj.text.length > 0 && obj;
+  },
+  names: function(obj) {
+    return obj.text && obj.text.length > 0 && obj;
+  },
   keywords: function(obj) {
     var result = [];
     for (var key in obj)
@@ -163,12 +183,16 @@ var conversions = {
 
 
 var makeQuery = function(inputs) {
+  var tmp;
   var result = {};
   for (var key in inputs) {
     if (conversions.hasOwnProperty(key))
-      result[key] = conversions[key](inputs[key]);
+      tmp = conversions[key](inputs[key]);
     else
-      result[key] = inputs[key];
+      tmp = inputs[key];
+
+    if (tmp != null)
+      result[key] = tmp;
   }
   return result;
 };
