@@ -212,8 +212,11 @@ var Application = React.createClass({
         });
 
       page = $.div(null,
-                   SearchForm({ onSubmit: this.onFormSubmit }),
-                   resultList);
+                   $.ul({ className: 'flexContainer' },
+                        $.li({ className: 'flexItem' },
+                             SearchForm({ onSubmit: this.onFormSubmit })),
+                        $.li({ className: 'flexItem' },
+                             resultList)));
     } else {
       page = $.div(null,
                    $.h2(null, 'Locate 3Dall.txt'),
