@@ -64,6 +64,13 @@ var matcher = {
         return false;
     return true;
   },
+  modifiers: function(item, values) {
+    if (item.symbol.match(/-a/) && !values.include_a)
+      return false;
+    if (values.exclude_b_c && item.symbol.match(/-[bc]/))
+      return false;
+    return true;
+  },
   coordination: function(item, values) {
     var seen = item.vertices.map(function(v) { return v.coordinationNumber; });
     return equalSets(values, seen);
@@ -84,7 +91,7 @@ var matcher = {
 
 var matches = function(item, query) {
   var key, good;
-  
+
   for (var key in query) {
     if (matcher[key])
       good = matcher[key](item, query[key]);

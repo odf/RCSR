@@ -111,6 +111,14 @@ var schema = {
         "zeolite net"
       ])
     },
+    modifiers: {
+      description: "Modifiers",
+      type: "object",
+      properties: makeBooleanProperties([
+        "include augmented (-a)",
+        "exclude binary (-b) and cateneated pair (-c)"
+      ])
+    },
     coordination: {
       title: "Coordination",
       type: "string",
@@ -150,6 +158,12 @@ var conversions = {
       if (obj[key])
         result.push(key);
     return result;
+  },
+  modifiers: function(obj) {
+    return {
+      include_a  : obj['include augmented (-a)'],
+      exclude_b_c: obj['exclude binary (-b) and cateneated pair (-c)']
+    };
   },
   coordination: function(text) {
     return text.split(/,/).map(function(s) {
