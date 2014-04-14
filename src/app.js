@@ -220,10 +220,11 @@ var makeQuery = function(inputs) {
 var SearchForm = React.createClass({
   render: function() {
     return Form({
-      buttons: ['Cancel', 'Search'],
+      buttons: ['Search', 'Clear'],
       onSubmit: this.props.onSubmit,
       schema: schema,
-      validate: validate
+      validate: validate,
+      values: this.props.values
     });
   }
 });
@@ -241,10 +242,17 @@ var Application = React.createClass({
   },
   onFormSubmit: function(inputs, value) {
     if (value == 'Search')
-      this.setState({ results: search(this.state.data, makeQuery(inputs)) });
+      this.setState({
+        results: search(this.state.data, makeQuery(inputs)),
+        reset  : false });
+    else
+      this.setState({
+        reset: true
+      });
   },
   render: function() {
     var page;
+    var values = this.state.reset ? {} : null;
 
     if (this.state.data) {
       var resultList = [];
@@ -257,7 +265,10 @@ var Application = React.createClass({
       page = $.div(null,
                    $.ul({ className: 'flexContainer' },
                         $.li({ className: 'flexItem' },
-                             SearchForm({ onSubmit: this.onFormSubmit })),
+                             SearchForm({
+                               onSubmit: this.onFormSubmit,
+                               values: values
+                             })),
                         $.li({ className: 'flexItem' },
                              resultList)));
     } else {
