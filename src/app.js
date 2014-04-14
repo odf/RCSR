@@ -63,7 +63,7 @@ var makeBoundsProperties = function(names) {
     result[name] = {
       title: name,
       type: "string",
-      pattern: "^[0-9]+(\.[0-9]+)?(-[0-9]+(\.[0-9]+)?)?$"
+      pattern: /^(([<>]?=?\d+(\.\d+)?)|(\d+(\.\d+)?-\d+(\.\d+)?))$/
     };
   });
   return result;
@@ -79,26 +79,16 @@ var schema = {
       description: "Symbol",
       type: "object",
       properties: {
-        mode: {
-          enum: ["is", "contains", "begins with"]
-        },
-        text: {
-          type: "string",
-          maxLength: 7,
-          pattern: "^[a-z]{0,3}(-[a-z])*$"
-        }
+        mode: { enum: ["is", "contains", "begins with"] },
+        text: { type: "string" }
       }
     },
     names: {
       description: "Names",
       type: "object",
       properties: {
-        mode: {
-          enum: ["is", "contains", "begins with"]
-        },
-        text: {
-          type: "string"
-        }
+        mode: { enum: ["is", "contains", "begins with"] },
+        text: { type: "string" }
       }
     },
     keywords: {
@@ -168,13 +158,28 @@ var conversions = {
   },
   bounds: function(data) {
     var result = {};
-    var key, tmp;
+    var key, text, tmp;
     for (var key in data) {
-      if (data[key]) {
-        tmp = data[key].split('-');
-        result[key] = { from: parseFloat(tmp[0]) };
-        if (tmp.length > 1)
-          result[key].to = parseFloat(tmp[1]);
+      text = data[key];
+      if (text.length > 0) {
+        if (text.match(/-/)) {
+          tmp = text.split('-');
+          result[key] = {
+            from: parseFloat(tmp[0]),
+            to  : parseFloat(tmp[1])
+          };
+        } else if (text.match(/^<=/))
+          result[key] = { to: parseFloat(text.slice(2)) };
+        else if (text.match(/^</))
+          result[key] = { to: parseFloat(text.slice(1)) };
+        else if (text.match(/^>=/))
+          result[key] = { from: parseFloat(text.slice(2)) };
+        else if (text.match(/^>/))
+          result[key] = { from: parseFloat(text.slice(1)) };
+        else {
+          tmp = parseFloat(text);
+          result[key] = { from: tmp, to: tmp };
+        }
       }
     }
     return result;
