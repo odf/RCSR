@@ -347,6 +347,19 @@ var edges = function(net) {
 };
 
 
+var tiling = function(net) {
+  return $.div(null,
+               $.p(null, makeLine('tiling', [])),
+               makeTable(['tiling', 'dual',
+                          'vertices', 'edges', 'faces', 'tiles',
+                          'D-symbol'],
+                         [[ net.tiling, net.dual,
+                            net.numberOfVertices, net.numberOfEdges,
+                            net.numberOfFaces, net.numberOfTiles,
+                            net.sizeOfDSymbol ]]));
+};
+
+
 var Net = React.createClass({
   render: function() {
     var net = this.props.net;
@@ -358,7 +371,7 @@ var Net = React.createClass({
                  cell(net),
                  vertices(net),
                  edges(net),
-                 $.pre(null, JSON.stringify(net, null, 4)));
+                 tiling(net));
   }
 });
 
