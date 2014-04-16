@@ -1,16 +1,12 @@
 *, *:before, *:after {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html {
     font-size: 13px;
     font-family: arial, sans-serif;
-}
-
-.error, .error * {
-    color: red;
 }
 
 fieldset p {
@@ -26,34 +22,47 @@ fieldset br {
     display: none;
 }
 
+.error, .error * {
+    color: red;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.plainList {
+    padding: 0;
+    list-style: none;
+}
+
 .fragmentBox {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 .fragment {
 }
 
 .columnBox {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: none;
-  justify-content: flex-start;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: none;
+    justify-content: flex-start;
 }
 
 .column {
-  margin-right: 20px;
+    margin-right: 20px;
 }
 
 .fixed {
-  flex-grow: 0;
-  flex-shrink: 0;
+    flex-grow: 0;
+    flex-shrink: 0;
 }

@@ -233,9 +233,21 @@ var SearchForm = React.createClass({
 
 var Net = React.createClass({
   render: function() {
+    var net = this.props.net;
+    var refs = [];
+
+    for (title in { names: 0, 'key words': 0, references: 0 }) {
+      key = title.replace(' ', '');
+      if (net[key].length > 0)
+        refs.push($.li({ key: key },
+                      $.span({ className: 'bold' }, title + ': '),
+                      $.span(null, net[key].join(', '))));
+    }
+
     return $.div(null,
-                 $.h2(null, this.props.net.symbol),
-                 $.pre(null, JSON.stringify(this.props.net, null, 4)));
+                 $.h2(null, net.symbol),
+                 $.ul({ className: 'plainList' }, refs),
+                 $.pre(null, JSON.stringify(net, null, 4)));
   }
 });
 
