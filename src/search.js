@@ -105,6 +105,13 @@ var matches = function(item, query) {
 };
 
 
+var cmp = function(a, b) {
+  return (a == b) ? 0 : (a < b) ? -1 : 1;
+};
+
+
 module.exports = function(data, query) {
-  return data.filter(function(item) { return matches(item, query); });
+  return data
+    .filter(function(item) { return matches(item, query); })
+    .sort(function(a, b) { return cmp(a.symbol, b.symbol); });
 };
