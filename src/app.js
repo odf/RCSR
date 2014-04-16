@@ -231,11 +231,63 @@ var SearchForm = React.createClass({
 });
 
 
+var Link = React.createClass({
+  handleClick: function(event) {
+    event.preventDefault();
+    if (this.props.onClick)
+      this.props.onClick(this.props.href);
+  },
+  componentDidMount: function() {
+    this.getDOMNode().addEventListener('click', this.handleClick);
+  },
+  componentWillUnmount: function() {
+    this.getDOMNode().removeEventListener('click', this.handleClick);
+  },
+  render: function() {
+    return $.a({ className: this.props.className,
+                 href: this.props.href },
+               this.props.children);
+  }
+});
+
+
+var Results = React.createClass({
+  getInitialState: function() {
+    return {
+      selected: '--none--'
+    }
+  },
+  select: function(symbol) {
+    this.setState({ selected: symbol });
+  },
+  render: function() {
+    if (this.state.selected != '--none--') {
+      return $.div(null,
+                   Link({ href: '--none--',
+                          onClick: this.select },
+                       'Show all results'),
+                   $.p(null, this.state.selected));
+    } else {
+      var resultList = (this.props.results || []).map(function(net) {
+        return $.li({ className: 'fragment',
+                      style: { width: '5em' },
+                      key: net.symbol },
+                    Link({ href: net.symbol,
+                           onClick: this.select },
+                         net.symbol));
+      }.bind(this));
+
+      return $.ul({ className: 'fragmentBox' }, resultList);
+    }
+  }
+});
+
+
 var Application = React.createClass({
   getInitialState: function() {
     return {
-      data: null,
-      results: null
+      data    : null,
+      results : null
     }
   },
   handleUpload: function(data) {
@@ -251,21 +303,14 @@ var Application = React.createClass({
         reset: true
       });
   },
+  select: function(symbol) {
+    this.setState({ selected: symbol });
+  },
   render: function() {
     var page;
     var values = this.state.reset ? {} : null;
 
     if (this.state.data) {
-      var resultList = [];
-
-      if (this.state.results)
-        resultList = this.state.results.map(function(net) {
-          return $.li({ className: 'fragment',
-                        style: { width: '5em' },
-                        key: net.symbol },
-                      net.symbol);
-        });
-
       page = $.div(null,
                    $.ul({ className: 'columnBox' },
                         $.li({ className: 'column fixed' },
@@ -273,9 +318,8 @@ var Application = React.createClass({
                                onSubmit: this.onFormSubmit,
                                values: values
                              })),
-                        $.li({ className: 'fragment' },
-                             $.ul({ className: 'fragmentBox' },
-                                  resultList))));
+                        $.li({ className: 'column' },
+                             Results({ results: this.state.results }))));
     } else {
       page = $.div(null,
                    $.h2(null, 'Locate 3Dall.txt'),
