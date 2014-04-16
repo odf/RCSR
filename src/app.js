@@ -260,18 +260,22 @@ var Application = React.createClass({
 
       if (this.state.results)
         resultList = this.state.results.map(function(net) {
-          return $.p({ key: net.symbol }, net.symbol);
+          return $.li({ className: 'fragment',
+                        style: { width: '5em' },
+                        key: net.symbol },
+                      net.symbol);
         });
 
       page = $.div(null,
-                   $.ul({ className: 'flexContainer' },
-                        $.li({ className: 'flexItem' },
+                   $.ul({ className: 'columnBox' },
+                        $.li({ className: 'column fixed' },
                              SearchForm({
                                onSubmit: this.onFormSubmit,
                                values: values
                              })),
-                        $.li({ className: 'flexItem' },
-                             resultList)));
+                        $.li({ className: 'fragment' },
+                             $.ul({ className: 'fragmentBox' },
+                                  resultList))));
     } else {
       page = $.div(null,
                    $.h2(null, 'Locate 3Dall.txt'),

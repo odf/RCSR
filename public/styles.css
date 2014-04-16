@@ -26,7 +26,7 @@ fieldset br {
     display: none;
 }
 
-.flexContainer {
+.fragmentBox {
   padding: 0;
   margin: 0;
   list-style: none;
@@ -36,6 +36,24 @@ fieldset br {
   justify-content: flex-start;
 }
 
-.flexItem {
+.fragment {
+}
+
+.columnBox {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: none;
+  justify-content: flex-start;
+}
+
+.column {
   margin-right: 20px;
+}
+
+.fixed {
+  flex-grow: 0;
+  flex-shrink: 0;
 }
