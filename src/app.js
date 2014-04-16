@@ -71,7 +71,7 @@ var makeBoundsProperties = function(names) {
 
 
 var schema = {
-  title: "Search for nets",
+  title: "Search nets",
   type: "object",
   required: [],
   properties: {
@@ -231,6 +231,15 @@ var SearchForm = React.createClass({
 });
 
 
+var Net = React.createClass({
+  render: function() {
+    return $.div(null,
+                 $.h2(null, this.props.net.symbol),
+                 $.pre(null, JSON.stringify(this.props.net, null, 4)));
+  }
+});
+
+
 var Link = React.createClass({
   handleClick: function(event) {
     event.preventDefault();
@@ -261,12 +270,17 @@ var Results = React.createClass({
     this.setState({ selected: symbol });
   },
   render: function() {
+    var results = this.props.results;
+
     if (this.state.selected != '--none--') {
+      var s = this.state.selected;
+      var net = results.filter(function(net) { return net.symbol == s; })[0];
+
       return $.div(null,
                    Link({ href: '--none--',
                           onClick: this.select },
-                       'Show all results'),
-                   $.p(null, this.state.selected));
+                       'All results'),
+                   Net({ net: net }));
     } else {
       var resultList = (this.props.results || []).map(function(net) {
         return $.li({ className: 'fragment',
