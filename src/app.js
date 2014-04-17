@@ -402,7 +402,8 @@ var Link = React.createClass({
 var Results = React.createClass({
   getInitialState: function() {
     return {
-      selected: -1
+      selected: -1,
+      symbolsOnly: true
     }
   },
   componentWillReceiveProps: function() {
@@ -430,7 +431,7 @@ var Results = React.createClass({
                         link(i-1, laquo + ' Previous'),
                         link(i+1, 'Next ' + raquo)),
                    Net({ net: net }));
-    } else {
+    } else if (this.state.symbolsOnly) {
       var resultList = (this.props.results || []).map(function(net, i) {
         return $.li({ className: 'fragment',
                       style: { width: '5em' },
@@ -439,6 +440,22 @@ var Results = React.createClass({
       }.bind(this));
 
       return $.ul({ className: 'plainList' }, resultList);
+    } else {
+      if (this.props.results && this.props.results.length > 0)
+        return makeTable(['symbol', 'embed type', 'space group',
+                          'number of vertices', 'genus', 'td10'],
+                         (this.props.results || []).map(function(net, i) {
+                           return [
+                             net.symbol,
+                             net.embedType,
+                             net.spacegroupSymbol,
+                             net.numberOfVertices,
+                             net.genus,
+                             net.td10
+                           ];
+                         }));
+      else
+        return $.span();
     }
   }
 });
