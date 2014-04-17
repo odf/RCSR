@@ -11,6 +11,9 @@ var search   = require('./search');
 
 var $ = React.DOM;
 
+var laquo = '\u00ab';
+var raquo = '\u00bb';
+
 
 var loadFile = function(f) {
   var result = cc.defer();
@@ -399,35 +402,40 @@ var Link = React.createClass({
 var Results = React.createClass({
   getInitialState: function() {
     return {
-      selected: '--none--'
+      selected: -1
     }
   },
   componentWillReceiveProps: function() {
-    this.select('--none--');
+    this.select(-1);
   },
   select: function(symbol) {
     this.setState({ selected: symbol });
   },
   render: function() {
     var results = this.props.results;
+    var i = this.state.selected;
+    var net;
 
-    if (this.state.selected != '--none--') {
-      var s = this.state.selected;
-      var net = results.filter(function(net) { return net.symbol == s; })[0];
+    var link = function(i, text) {
+      return $.li({ className: 'fragment column' },
+                  Link({ href: i, onClick: this.select }, text));
+    }.bind(this);
+
+    if (i >= 0) {
+      net = this.props.results[i];
 
       return $.div(null,
-                   Link({ href: '--none--',
-                          onClick: this.select },
-                       'All results'),
+                   $.ul({ className: 'plainList' },
+                        link(-1, 'All Results'),
+                        link(i-1, laquo + ' Previous'),
+                        link(i+1, 'Next ' + raquo)),
                    Net({ net: net }));
     } else {
-      var resultList = (this.props.results || []).map(function(net) {
+      var resultList = (this.props.results || []).map(function(net, i) {
         return $.li({ className: 'fragment',
                       style: { width: '5em' },
                       key: net.symbol },
-                    Link({ href: net.symbol,
-                           onClick: this.select },
-                         net.symbol));
+                    Link({ href: i, onClick: this.select }, net.symbol));
       }.bind(this));
 
       return $.ul({ className: 'plainList' }, resultList);
