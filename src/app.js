@@ -402,6 +402,9 @@ var Results = React.createClass({
       selected: '--none--'
     }
   },
+  componentWillReceiveProps: function() {
+    this.select('--none--');
+  },
   select: function(symbol) {
     this.setState({ selected: symbol });
   },
