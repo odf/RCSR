@@ -46,23 +46,11 @@ th, td {
     list-style: none;
 }
 
-.fragmentBox {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-}
-
 .fragment {
+    display: inline-block;
 }
 
 .columnBox {
-    padding: 0;
-    margin: 0;
-    list-style: none;
     display: flex;
     flex-direction: row;
     flex-wrap: none;

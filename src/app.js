@@ -430,7 +430,7 @@ var Results = React.createClass({
                          net.symbol));
       }.bind(this));
 
-      return $.ul({ className: 'fragmentBox' }, resultList);
+      return $.ul({ className: 'plainList' }, resultList);
     }
   }
 });
@@ -465,7 +465,7 @@ var Application = React.createClass({
 
     if (this.state.data) {
       page = $.div(null,
-                   $.ul({ className: 'columnBox' },
+                   $.ul({ className: 'plainList columnBox' },
                         $.li({ className: 'column fixed' },
                              SearchForm({
                                onSubmit: this.onFormSubmit,
