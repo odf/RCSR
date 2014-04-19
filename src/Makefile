@@ -6,7 +6,8 @@ MAKEDEPEND= \
 		sort | \
 		sed "s|^$$PWD/||" | \
 		grep -v '^\(\/\|\sapp.js\)' | \
-		sed 's/\(.*\)/$$(BUILD)\/app.js: \1\n\1:\n/' > deps.mk
+		sed 's/\(.*\)/$$(BUILD)\/app.js: \1%\1:%/' | \
+		tr '%' '\n' > deps.mk
 
 $(BUILD)/app.js:	app.js
 	@$(MAKEDEPEND)
