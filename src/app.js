@@ -248,8 +248,8 @@ var makeTable = function(headers, values) {
                            return $.th({ key: i }, s);
                          }))),
                  $.tbody(null,
-                         values.map(function(row) {
-                           return $.tr(null, row.map(function(s, i) {
+                         values.map(function(row, i) {
+                           return $.tr({ key: i }, row.map(function(s, i) {
                              return $.td({ key: i }, s);
                            }));
                          })));
@@ -409,11 +409,20 @@ var Results = React.createClass({
   componentWillReceiveProps: function() {
     this.select(-1);
   },
-  select: function(symbol) {
-    this.setState({ selected: symbol });
+  select: function(choice) {
+    var mods;
+
+    if (choice == 'details')
+      mods = { selected: -1, symbolsOnly: false };
+    else if (choice == 'symbols')
+      mods = { selected: -1, symbolsOnly: true };
+    else
+      mods = { selected: choice };
+
+    this.setState(mods);
   },
   render: function() {
-    var results = this.props.results;
+    var results = this.props.results || [];
     var i = this.state.selected;
     var net;
 
@@ -422,8 +431,10 @@ var Results = React.createClass({
                   Link({ href: i, onClick: this.select }, text));
     }.bind(this);
 
-    if (i >= 0) {
-      net = this.props.results[i];
+    if (results.length < 1) {
+      return $.div();
+    } else if (i >= 0) {
+      net = results[i];
 
       return $.div(null,
                    $.ul({ className: 'plainList' },
@@ -432,30 +443,38 @@ var Results = React.createClass({
                         link(i+1, 'Next ' + raquo)),
                    Net({ net: net }));
     } else if (this.state.symbolsOnly) {
-      var resultList = (this.props.results || []).map(function(net, i) {
+      var resultList = results.map(function(net, i) {
         return $.li({ className: 'fragment',
                       style: { width: '5em' },
                       key: net.symbol },
                     Link({ href: i, onClick: this.select }, net.symbol));
       }.bind(this));
 
-      return $.ul({ className: 'plainList' }, resultList);
+      return $.div(null,
+                   $.ul({ className: 'plainList' },
+                        link('details', 'More Details')),
+                   $.p(null, 'Found ' + results.length + ' matching nets'),
+                   $.div(null,
+                         $.ul({ className: 'plainList' }, resultList)));
     } else {
-      if (this.props.results && this.props.results.length > 0)
-        return makeTable(['symbol', 'embed type', 'space group',
-                          'number of vertices', 'genus', 'td10'],
-                         (this.props.results || []).map(function(net, i) {
-                           return [
-                             net.symbol,
-                             net.embedType,
-                             net.spacegroupSymbol,
-                             net.numberOfVertices,
-                             net.genus,
-                             net.td10
-                           ];
-                         }));
-      else
-        return $.span();
+      return $.div(null,
+                   $.ul({ className: 'plainList' },
+                        link('symbols', 'Symbols Only')),
+                   $.p(null, 'Found ' + results.length + ' matching nets'),
+                   makeTable(['symbol', 'embed type', 'space group',
+                              'number of vertices', 'genus', 'td10'],
+                             results.map(function(net, i) {
+                               return [
+                                 Link({ href: i, onClick: this.select },
+                                      net.symbol),
+                                 net.embedType,
+                                 net.spacegroupSymbol,
+                                 net.numberOfVertices,
+                                 net.genus,
+                                 net.td10
+                               ];
+                             }.bind(this))
+                            ));
     }
   }
 });
