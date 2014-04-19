@@ -431,24 +431,30 @@ var Results = React.createClass({
   },
   render: function() {
     var results = this.props.results || [];
+    var n = results.length;
     var i = this.state.selected;
     var net;
 
+    var item = function(content) {
+      return $.li({ className: 'fragment column' }, content);
+    };
+
     var link = function(i, text) {
-      return $.li({ className: 'fragment column' },
-                  Link({ href: i, onClick: this.select }, text));
+      return Link({ href: i, onClick: this.select }, text);
     }.bind(this);
 
-    if (results.length < 1) {
-      return $.div();
+    if (n < 1) {
+      return $.p(null, 'Found 0 matching nets');
     } else if (i >= 0) {
       net = results[i];
 
       return $.div(null,
                    $.ul({ className: 'plainList' },
-                        link(-1, 'All Results'),
-                        link(i-1, laquo + ' Previous'),
-                        link(i+1, 'Next ' + raquo)),
+                        item(link(-1, 'All Results')),
+                        item(i > 0
+                             ? link(i-1, laquo + ' Previous') : 'Previous'),
+                        item(i < n-1
+                             ? link(i+1, 'Next ' + raquo) : 'Next')),
                    Net({ net: net }));
     } else if (this.state.symbolsOnly) {
       var resultList = results.map(function(net, i) {
