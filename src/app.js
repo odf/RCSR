@@ -363,12 +363,20 @@ var tiling = function(net) {
 };
 
 
+var imgBase = 'http://rcsr.anu.edu.au/webimgs/NetPicsThumbs/';
+
+var thumbnail = function(net) {
+  return $.img({ src: imgBase + net.symbol + 'T.jpg', alt: '' })
+};
+
+
 var Net = React.createClass({
   render: function() {
     var net = this.props.net;
 
     return $.div(null,
                  $.h2(null, net.symbol),
+                 $.p(null, thumbnail(net)),
                  $.ul({ className: 'plainList' }, references(net)),
                  properties(net),
                  cell(net),
@@ -461,10 +469,11 @@ var Results = React.createClass({
                    $.ul({ className: 'plainList' },
                         link('symbols', 'Symbols Only')),
                    $.p(null, 'Found ' + results.length + ' matching nets'),
-                   makeTable(['symbol', 'embed type', 'space group',
+                   makeTable(['pic', 'symbol', 'embed type', 'space group',
                               'number of vertices', 'genus', 'td10'],
                              results.map(function(net, i) {
                                return [
+                                 thumbnail(net),
                                  Link({ href: i, onClick: this.select },
                                       net.symbol),
                                  net.embedType,
