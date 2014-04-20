@@ -430,9 +430,11 @@ var Results = React.createClass({
     this.setState(mods);
   },
   render: function() {
+    var maxDetails = 50;
     var results = this.props.results || [];
     var n = results.length;
     var i = this.state.selected;
+    var msg = 'Found ' + n + ' nets matching your search';
     var net;
 
     var item = function(content) {
@@ -444,9 +446,10 @@ var Results = React.createClass({
     }.bind(this);
 
     if (n < 1) {
-      return $.p(null, 'Found 0 matching nets');
+      return $.p(null, msg + '.');
     } else if (i >= 0) {
       net = results[i];
+      msg = 'Showing net ' + (i+1) + ' of ' + n + ' matching your search.';
 
       return $.div(null,
                    $.ul({ className: 'plainList' },
@@ -455,6 +458,7 @@ var Results = React.createClass({
                              ? link(i-1, laquo + ' Previous') : 'Previous'),
                         item(i < n-1
                              ? link(i+1, 'Next ' + raquo) : 'Next')),
+                   $.p(null, msg),
                    Net({ net: net }));
     } else if (this.state.symbolsOnly) {
       var resultList = results.map(function(net, i) {
@@ -467,17 +471,22 @@ var Results = React.createClass({
       return $.div(null,
                    $.ul({ className: 'plainList' },
                         link('details', 'More Details')),
-                   $.p(null, 'Found ' + results.length + ' matching nets'),
+                   $.p(null, msg + '.'),
                    $.div(null,
                          $.ul({ className: 'plainList' }, resultList)));
     } else {
+      if (n > maxDetails) {
+        n = maxDetails;
+        msg = msg + ', showing first ' + maxDetails + '.';
+      }
+
       return $.div(null,
                    $.ul({ className: 'plainList' },
                         link('symbols', 'Symbols Only')),
-                   $.p(null, 'Found ' + results.length + ' matching nets'),
+                   $.p(null, msg),
                    makeTable(['pic', 'symbol', 'embed type', 'space group',
                               'number of vertices', 'genus', 'td10'],
-                             results.map(function(net, i) {
+                             results.slice(0, n).map(function(net, i) {
                                return [
                                  thumbnail(net),
                                  Link({ href: i, onClick: this.select },
