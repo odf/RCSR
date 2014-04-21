@@ -407,20 +407,31 @@ var Link = React.createClass({
 });
 
 
+var maxDetails = 20;
+
+
 var Results = React.createClass({
   getInitialState: function() {
     return {
       selected: -1,
+      detailsOffset: 0,
       symbolsOnly: true
     }
   },
   componentWillReceiveProps: function() {
-    this.select(-1);
+    this.setState({
+      selected: -1,
+      detailsOffset: 0
+    });
   },
   select: function(choice) {
     var mods;
 
-    if (choice == 'details')
+    if (choice == 'forward')
+      mods = { detailsOffset: this.state.detailsOffset + maxDetails };
+    else if (choice == 'backward')
+      mods = { detailsOffset: this.state.detailsOffset - maxDetails };
+    else if (choice == 'details')
       mods = { selected: -1, symbolsOnly: false };
     else if (choice == 'symbols')
       mods = { selected: -1, symbolsOnly: true };
@@ -430,10 +441,11 @@ var Results = React.createClass({
     this.setState(mods);
   },
   render: function() {
-    var maxDetails = 50;
     var results = this.props.results || [];
     var n = results.length;
     var i = this.state.selected;
+    var begin = this.state.detailsOffset;
+    var end = Math.min(n, begin + maxDetails);
     var msg = 'Found ' + n + ' nets matching your search';
     var net;
 
@@ -475,21 +487,26 @@ var Results = React.createClass({
                    $.div(null,
                          $.ul({ className: 'plainList' }, resultList)));
     } else {
-      if (n > maxDetails) {
-        n = maxDetails;
-        msg = msg + ', showing first ' + maxDetails + '.';
-      }
+      if (begin > 0 || end < n)
+        msg = msg + ', showing ' + (begin+1) + ' through ' + end;
+      msg = msg + '.'
 
       return $.div(null,
                    $.ul({ className: 'plainList' },
-                        link('symbols', 'Symbols Only')),
+                        item(link('symbols', 'Symbols Only')),
+                        item(begin > 0
+                             ? link("backward", laquo + ' Previous') 
+                             : 'Previous'),
+                        item(end < n
+                             ? link("forward", 'Next ' + raquo)
+                             : 'Next')),
                    $.p(null, msg),
                    makeTable(['pic', 'symbol', 'embed type', 'space group',
                               'number of vertices', 'genus', 'td10'],
-                             results.slice(0, n).map(function(net, i) {
+                             results.slice(begin, end).map(function(net, i) {
                                return [
                                  thumbnail(net),
-                                 Link({ href: i, onClick: this.select },
+                                 Link({ href: i + begin, onClick: this.select },
                                       net.symbol),
                                  net.embedType,
                                  net.spacegroupSymbol,
