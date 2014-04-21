@@ -363,11 +363,27 @@ var tiling = function(net) {
 };
 
 
-var imgBase = 'http://rcsr.anu.edu.au/webimgs/NetPicsThumbs/';
+var NetImage = React.createClass({
+  getInitialState: function() {
+    return { full: false };
+  },
+  toggle: function() {
+    if (this.props.mayEnlarge)
+      this.setState({ full: !this.state.full });
+  },
+  render: function() {
+    var base = 'http://rcsr.anu.edu.au/webimgs/';
+    var symbol = this.props.symbol;
+    var src = base + (this.state.full
+                      ? 'NetPics/' + symbol + '.jpg'
+                      : 'NetPicsThumbs/' + symbol + 'T.jpg');
 
-var thumbnail = function(net) {
-  return $.img({ src: imgBase + net.symbol + 'T.jpg', alt: '' })
-};
+    if (this.props.mayEnlarge)
+      return Link({ onClick: this.toggle }, $.img({ src: src, alt: '' }));
+    else
+      return $.img({ src: src, alt: '', onClick: this.toggle });
+  }
+});
 
 
 var Net = React.createClass({
@@ -376,7 +392,7 @@ var Net = React.createClass({
 
     return $.div(null,
                  $.h2(null, net.symbol),
-                 $.p(null, thumbnail(net)),
+                 $.p(null, NetImage({ symbol: net.symbol, mayEnlarge: true })),
                  $.ul({ className: 'plainList' }, references(net)),
                  properties(net),
                  cell(net),
@@ -505,7 +521,7 @@ var Results = React.createClass({
                               'number of vertices', 'genus', 'td10'],
                              results.slice(begin, end).map(function(net, i) {
                                return [
-                                 thumbnail(net),
+                                 NetImage({ symbol: net.symbol }),
                                  Link({ href: i + begin, onClick: this.select },
                                       net.symbol),
                                  net.embedType,
