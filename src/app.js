@@ -73,6 +73,24 @@ var makeBoundsProperties = function(names) {
 };
 
 
+var keywords = [
+  "bipartite",
+  "chiral",
+  "clathrate",
+  "good",
+  "polar",
+  "quasiregular net",
+  "quasisimple tiling",
+  "regular net",
+  "self dual net",
+  "semiregular net",
+  "simple net",
+  "uniform net",
+  "uniform tiling",
+  "zeolite net"
+];
+
+
 var schema = {
   title: "Search nets",
   type: "object",
@@ -97,22 +115,7 @@ var schema = {
     keywords: {
       description: "Keywords",
       type: "object",
-      properties: makeBooleanProperties([
-        "bipartite",
-        "chiral",
-        "clathrate",
-        "good",
-        "polar",
-        "quasiregular net",
-        "quasisimple tiling",
-        "regular net",
-        "self dual net",
-        "semiregular net",
-        "simple net",
-        "uniform net",
-        "uniform tiling",
-        "zeolite net"
-      ])
+      properties: makeBooleanProperties(keywords)
     },
     modifiers: {
       description: "Modifiers",
@@ -263,11 +266,19 @@ var makeIndexed = function(text, index) {
 
 var references = function(net) {
   var refs = [];
+  var key, title;
 
-  for (title in { names: 0, 'key words': 0, references: 0 }) {
-    key = title.replace(' ', '');
-    if (net[key].length > 0)
-      refs.push($.li({ key: key }, makeLine(title, net[key])));
+  for (key in { names: 0, keywords: 0, references: 0 }) {
+    title = key;
+    val = net[key];
+
+    if (key == 'keywords') {
+      title = 'key words';
+      val = val.filter(function(x) { return keywords.indexOf(x) >= 0; });
+    }
+
+    if (val.length > 0)
+      refs.push($.li({ key: key }, makeLine(title, val)));
   }
 
   return refs;
