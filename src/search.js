@@ -37,10 +37,17 @@ var rangeMatcher = function(key) {
   return function(item, range) {
     var value = item[key];
 
-    if (range.from && value < range.from)
-      return false;
-    if (range.to && value > range.to)
-      return false;
+    if (range.exclusive) {
+      if (range.from != null && value <= range.from)
+        return false;
+      if (range.to != null && value >= range.to)
+        return false;
+    } else {
+      if (range.from != null && value < range.from)
+        return false;
+      if (range.to != null && value > range.to)
+        return false;
+    }
 
     return true;
   };

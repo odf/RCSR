@@ -189,13 +189,23 @@ var conversions = {
             to  : parseFloat(tmp[1])
           };
         } else if (text.match(/^<=/))
-          result[key] = { to: parseFloat(text.slice(2)) };
+          result[key] = {
+            to: parseFloat(text.slice(2))
+          };
         else if (text.match(/^</))
-          result[key] = { to: parseFloat(text.slice(1)) };
+          result[key] = {
+            to: parseFloat(text.slice(1)),
+            exclusive: true
+          };
         else if (text.match(/^>=/))
-          result[key] = { from: parseFloat(text.slice(2)) };
+          result[key] = {
+            from: parseFloat(text.slice(2))
+          };
         else if (text.match(/^>/))
-          result[key] = { from: parseFloat(text.slice(1)) };
+          result[key] = {
+            from: parseFloat(text.slice(1)),
+            exclusive: true
+          };
         else {
           tmp = parseFloat(text);
           result[key] = { from: tmp, to: tmp };
