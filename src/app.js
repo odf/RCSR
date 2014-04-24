@@ -290,7 +290,7 @@ var f = function(val) {
 };
 
 var a = function(val) {
-  return val.toFixed((val == 90 || val == 120) ? 1 : 4);
+  return val.toFixed((val == 90 || val == 120) ? 1 : 3);
 };
 
 
