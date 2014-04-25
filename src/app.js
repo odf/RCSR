@@ -143,7 +143,6 @@ var schema = {
         "kinds of tile",
         "space group number",
         "smallest ring",
-        "coordination",
         "order",
         "Dsize"
       ])
