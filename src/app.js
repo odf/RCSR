@@ -320,6 +320,10 @@ var cell = function(net) {
 
 
 var vertices = function(net) {
+  var showVertexSymbol = net.vertices.every(function(v) {
+    return v.coordinationNumber <= 6;
+  });
+
   return $.div(null,
                $.p(null, makeLine('vertices', [net.vertices.length])),
                makeTable(['vertex', 'cn', 'x', 'y', 'z', 'symbolic',
@@ -341,12 +345,12 @@ var vertices = function(net) {
                                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
                                    .map(makeIndexed.bind(null, 'cs')),
                                    makeIndexed('cum', 10),
-                                   'vertex symbol'),
+                                   (showVertexSymbol ? 'vertex symbol' : [])),
                          net.vertices.map(function(v) {
                            return [].concat(v.name,
                                             v.coordinationSequence,
                                             v.cum10,
-                                            v.symbol);
+                                            (showVertexSymbol ? v.symbol : []));
                          })));
 };
 
