@@ -2426,14 +2426,14 @@ E1   2
   2
 E2   2
   0.1667 0.3333 0.3333
-  x, 1/3, 1/3
-  18 g
-  2
+  1/6, 1/3, 1/3
+  9 e
+  2/m
 E3   2
   0.1667 0.3333 0.8333
-  x, 1/3, 5/6
-  18 g
-  2
+  1/6, 1/3, 5/6
+  9 d
+  2/m
   3
   2
   26
@@ -12211,7 +12211,7 @@ cfc
 1b
  0 !number of other symbols
  1 !number of names
-carbon 4C
+carbon 4H
  0 !number of other names
  2 !number of keywords
 uniform net
@@ -27809,7 +27809,8 @@ Al2O3
  2 !number of other names
 sapphire
 alpha alumina
- 1 !number of keywords
+ 2 !number of keywords
+bipartite
 heterocoord 46
  1 !number of references
 J. Solid State Chem. 152, 3-20 (2000)
@@ -27857,7 +27858,8 @@ pto
  1 !number of names
 Pt3O4
  0 !number of other names
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 good
 heterocoord 34
  1 !number of references
@@ -27902,7 +27904,8 @@ qom
 MOF-177
  1 !number of other names
 hexagonal pyrite
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 uniform net
 heterocoord 36
  1 !number of references
@@ -27990,7 +27993,8 @@ bor
  1 !number of names
 boracite
  0 !number of other names
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 good
 heterocoord 34
  1 !number of references
@@ -28035,7 +28039,8 @@ ctn
   C3N4
 S surface
  0 !number of other names
- 4 !number of keywords
+ 5 !number of keywords
+bipartite
 good
 uniform net
 heterocoord 34
@@ -28084,7 +28089,8 @@ pyr-d
 pyrite
 C(Y) surface
  0 !number of other names
- 3 !number of keywords
+ 4 !number of keywords
+bipartite
 heterocoord 36
 self dual net
 uniform net
@@ -28173,7 +28179,8 @@ stp
  0 !number of other symbols
  0 !number of names
  0 !number of other names
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 good
 heterocoord 46
  1 !number of references
@@ -28216,7 +28223,8 @@ iac
  0 !number of other symbols
  0 !number of names
  0 !number of other names
- 1 !number of keywords
+ 2 !number of keywords
+bipartite
 heterocoord 46
  1 !number of references
 Acta Cryst. A62, 350-355 (2006)
@@ -28302,7 +28310,8 @@ tbo
  1 !number of names
 twisted boracite
  0 !number of other names
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 good
 heterocoord 34
  1 !number of references
@@ -28346,7 +28355,8 @@ rtl
  1 !number of names
 rutile
  0 !number of other names
- 1 !number of keywords
+ 2 !number of keywords
+bipartite
 heterocoord 36
  2 !number of references
 J. Solid State Chem. 152, 3-20 (2000)
@@ -28395,7 +28405,8 @@ brk
  1 !number of names
 brookite
  0 !number of other names
- 1 !number of keywords
+ 2 !number of keywords
+bipartite
 heterocoord 36
  0 !number of references
 Pbca             61
@@ -28470,7 +28481,8 @@ ant
  1 !number of names
 anatase
  0 !number of other names
- 1 !number of keywords
+ 2 !number of keywords
+bipartite
 heterocoord 36
  0 !number of references
 I4(1)/amd       141
@@ -28517,7 +28529,8 @@ sln
  1 !number of names
 beta silicon nitride
  0 !number of other names
- 1 !number of keywords
+ 2 !number of keywords
+bipartite
 heterocoord 34
  0 !number of references
 P6(3)/m         176
@@ -28577,7 +28590,8 @@ apo
  1 !number of names
 alpha PbO2
  0 !number of other names
- 1 !number of keywords
+ 2 !number of keywords
+bipartite
 heterocoord 36
  0 !number of references
 Pbcn             60
@@ -29036,7 +29050,8 @@ sit
  0 !number of other symbols
  0 !number of names
  0 !number of other names
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 heterocoord 36
 polar
  0 !number of references
@@ -29504,7 +29519,8 @@ alw
  1 !number of names
 Al2(WO4)3
  0 !number of other names
- 1 !number of keywords
+ 2 !number of keywords
+bipartite
 heterocoord 46
  0 !number of references
 Pbcn             60
@@ -29924,7 +29940,8 @@ bix
  1 !number of names
 bixbyite
  0 !number of other names
- 1 !number of keywords
+ 2 !number of keywords
+bipartite
 heterocoord 46
  1 !number of references
 Chem. Rev.114, 1343 92014)
@@ -29991,7 +30008,8 @@ hea
 heazlewoodite
 Ni3S2
  0 !number of other names
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 heterocoord 46
 chiral
  0 !number of references
@@ -32183,7 +32201,8 @@ she
  0 !number of other symbols
  0 !number of names
  0 !number of other names
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 heterocoord 46
 good
  1 !number of references
@@ -32226,7 +32245,8 @@ soc
  0 !number of other symbols
  0 !number of names
  0 !number of other names
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 heterocoord 46
 good
  1 !number of references
@@ -32269,7 +32289,8 @@ ibd
  0 !number of other symbols
  0 !number of names
  0 !number of other names
- 1 !number of keywords
+ 2 !number of keywords
+bipartite
 heterocoord 46
  1 !number of references
 Acta Cryst. A62, 350-355 (2006)
@@ -32311,7 +32332,8 @@ ifi
  0 !number of other symbols
  0 !number of names
  0 !number of other names
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 heterocoord 46
 chiral
  1 !number of references
@@ -32855,7 +32877,8 @@ toc
  0 !number of other symbols
  0 !number of names
  0 !number of other names
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 heterocoord 46
 good
  1 !number of references
@@ -32899,7 +32922,8 @@ gar-a
  1 !number of names
    augmented garnet
  0 !number of other names
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 heterocoord
 good
  0 !number of references
@@ -33488,7 +33512,8 @@ fsi
  0 !number of other symbols
  0 !number of names
  0 !number of other names
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 heterocoord 46
 isohedral tiling
  0 !number of references
@@ -36713,7 +36738,8 @@ nch
    9/3/a1
  0 !number of other names
  0 !number of keywords
- 0 !number of references
+ 1 !number of references
+Acta Cryst. A58, 509 (2002)
 P-1               2
    1.0000  1.0000  1.6740  90.000 104.679  98.689
  1
@@ -37868,13 +37894,13 @@ Pm-3m           221
 V1  8
   0.0000 0.0000 0.0000
   0, 0, 0
-   2 a
+   1 a
   m-3m
   48
 V2  8
   0.5000 0.5000 0.5000
   0, 0, 0
-   2 b
+   1 b
   m-3m
   48
  1
@@ -37900,7 +37926,8 @@ the
  0 !number of other symbols
  0 !number of names
  0 !number of other names
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 heterocoord
 good
  0 !number of references
@@ -37942,7 +37969,8 @@ scu
  0 !number of other symbols
  0 !number of names
  0 !number of other names
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 heterocoord
 good
  2 !number of references
@@ -37986,7 +38014,8 @@ shp
  0 !number of other symbols
  0 !number of names
  0 !number of other names
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 heterocoord
 good
  1 !number of references
@@ -37997,7 +38026,7 @@ P6/mmm           191
 V1  4
   0.5000 0.0000 0.5000
   1/2, 0, 1/2
-   2 g
+   3 g
   mmm
   8
 V2  12
@@ -38031,7 +38060,8 @@ ftw
    Cu3Au
 C(P) = Neovius surface
  0 !number of other names
- 4 !number of keywords
+ 5 !number of keywords
+bipartite
 heterocoord
 uniform net
 self dual net
@@ -38078,7 +38108,8 @@ twf
  0 !number of other symbols
  0 !number of names
  0 !number of other names
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 heterocoord
 good
  1 !number of references
@@ -38123,7 +38154,8 @@ flu
  1 !number of names
   fluorite
  0 !number of other names
- 3 !number of keywords
+ 4 !number of keywords
+bipartite
 heterocoord
 isohedral tiling
 good
@@ -40851,7 +40883,8 @@ lng
  1 !number of names
 langbeinite
  0 !number of other names
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 chiral
 heterocoord 46
  0 !number of references
@@ -42640,7 +42673,8 @@ cys
  0 !number of other symbols
  0 !number of names
  0 !number of other names
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 chiral
 heterocoord 36
  0 !number of references
@@ -48318,7 +48352,8 @@ dme
  0 !number of other symbols
  0 !number of names
  0 !number of other names
- 3 !number of keywords
+ 4 !number of keywords
+bipartite
 heterocoord 34
 good
 isohedral tiling
@@ -62307,8 +62342,9 @@ start
 ntb
 1b
  0 !number of other symbols
- 1 !number of names
+ 2 !number of names
 (9,3)b
+hof-derived
  0 !number of other names
  2 !number of keywords
 uniform net
@@ -64712,7 +64748,7 @@ E6   2
 start
  1220
 sda
-unk
+2
  0 !number of other symbols
  0 !number of names
  0 !number of other names
@@ -67940,7 +67976,8 @@ tsx
  0 !number of other symbols
  0 !number of names
  0 !number of other names
- 1 !number of keywords
+ 2 !number of keywords
+bipartite
 heterocoord 36
  0 !number of references
 I-42m            121
@@ -68074,7 +68111,8 @@ spn
  0 !number of other symbols
  0 !number of names
  0 !number of other names
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 heterocoord 36
 good
  2 !number of references
@@ -70489,7 +70527,8 @@ ttt
  0 !number of other symbols
  0 !number of names
  0 !number of other names
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 heterocoord
 good
  1 !number of references
@@ -70532,7 +70571,8 @@ ith
  0 !number of other symbols
  0 !number of names
  0 !number of other names
- 1 !number of keywords
+ 2 !number of keywords
+bipartite
 heterocoord
  1 !number of references
 Acta Cryst. A62, 350-355 (2006)
@@ -75449,7 +75489,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord
   2     !number of references
 Acta cryst. A63, 344 (2007)
@@ -75610,7 +75651,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord
   1     !number of references
 Acta cryst. A63, 344 (2007)
@@ -76041,7 +76083,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord
   2     !number of references
 Acta cryst. A63, 344 (2007)
@@ -80749,7 +80792,8 @@ xmz
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord
   1     !number of references
 Crystal Growth Design, 7, 980-983 (2007)
@@ -82401,7 +82445,8 @@ gfy
   1     !number of names
 UCl3
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord
   2     !number of references
 Nature Materials (2007)
@@ -83690,7 +83735,7 @@ P6/mmm            191
 V1  6
  0.0000 0.0000 0.0000
  0, 0, 0
- 24 a
+ 1 a
  6/mmm
  24
 V2  6
@@ -84405,7 +84450,8 @@ start
   1     !number of names
 hexagonal anatase
   0     !number of other names
-  2     !number of keywords
+  3     !number of keywords
+bipartite
 chiral
 heterocoord 36
   0     !number of references
@@ -84452,7 +84498,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord 36
   0     !number of references
 P4(2)/mnm       136
@@ -85899,7 +85946,8 @@ start
   2     !number of keywords
 simple tiling
 clathrate
-  0     !number of references
+  1     !number of references
+Acta Cryst. A64, 430 (2008)
 P-1               2
   2.8872  2.8941  8.4447  94.721  95.267  91.631
  24
@@ -86397,15 +86445,15 @@ P6(2)22            180
    0.9428  0.9428  1.7321  90.000  90.000 120.000
  1
 V1  4
-  0.0000 0.0000 0.0000
-   0, 0, 0
-   3 a
+  0.5000 0.0000 0.0000
+   1/2, 0, 0
+   3 c
    222
    4
  1
 E1   2
-  0.2500 0.0000 0.5
-   x, 0, 1/2
+  0.0000 0.2500 0.1667
+   0, x, y, 1/6
    6 h
    2
   0
@@ -87137,9 +87185,9 @@ I-43m           217
 V1  12
  0.0000 0.0000 0.5000
  0, 0, 1/2
-  12 d
- -4
- 4
+  6 b
+ -42m
+ 8
 V2  15
  0.1843 0.1843 0.1843
  x, x, x
@@ -87187,15 +87235,15 @@ start
  tfi
 1b
   0     !number of other symbols
-  1     !number of names
+  2     !number of names
+glitter
 pts-derived
   0     !number of other names
   2     !number of keywords
 heterocoord 34
 good
-  3     !number of references
-JACS 116, 456 (1994)
-Chem. Rev. (2014)
+  2     !number of references
+JACS 116, 11456 (1994)
 Chem. Rev.114, 1343 92014)
 P4(2)/mmc       131
   1.8017  1.8017  3.7366  90.000  90.000  90.000
@@ -87240,7 +87288,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  3     !number of keywords
+  4     !number of keywords
+bipartite
 heterocoord 34
 isohedral tiling
 good
@@ -89128,7 +89177,8 @@ mcn
  0 !number of other symbols
  0 !number of names
  0 !number of other names
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 heterocoord 36
 isohedral tiling
  0 !number of references
@@ -91925,7 +91975,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord 36
   0     !number of references
 P4(2)/ncm             138                                         
@@ -91976,7 +92027,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  2     !number of keywords
+  3     !number of keywords
+bipartite
 heterocoord 36
 polar
   1      !number of references
@@ -92417,13 +92469,13 @@ heterocoord
 Pmmm         47                                         
  1.0000  1.0000  1.7320  90.000  90.000  90.000            
   2
-V1  4
+V1  8
  0.0000 0.0000 0.0000                                       
  0, 0, 0                                                          
  1 a                                                       
  mmm                                                          
  8                                                          
-V2  4
+V2  6
  0.0000 0.5000 0.5000                                       
  0, 1/2, 1/2                                                    
  1  g                                                      
@@ -93180,7 +93232,7 @@ E2   2
 E3   2                                                      
  0.1667 0.3334 0.5833                                       
  x, 2x, z                                                          
- 16 h                                                       
+ 18 h                                                       
  m                                                          
  0                                                          
  0                                                          
@@ -93891,7 +93943,7 @@ good
 Fmmm      69
 1.5820  1.3410  1.0354  90.000  90.000   90.000
 1
-V1  12  
+V1  10  
 0.0000 0.0000 0.0000  
 0, 0, 0  
 4 a  
@@ -94395,8 +94447,8 @@ E1   2
 -6m2
 E2   2  
 0.1667  0.5833  0.1164  
-x, y, z 
-24 r 
+2y, y, z 
+12 o 
 1
 3  
 3 
@@ -94462,14 +94514,14 @@ E4   2
 6 l  
 mmm2
 E5   2 
-0.0000  0.0000  0.1125
-0, 0, z
-2 e  
-6mm
+0.0000  0.5000  0.1125
+0, 1/2, z
+6 i  
+2mm
 E6   2 
 0.3333  0.6667  0.5000
-1/3, 2/3, 0
-2 c  
+1/3, 2/3, 1/2
+2 d  
 -6m2
 0  
 0 
@@ -94497,12 +94549,12 @@ heterocoord
 Pm-3m     221
 3.0055  3.0055  3.0055  90.000  90.000  90.000
 3
-V1  14  
+V1  12  
 0.5000  0.5000  0.5000  
 1/2, 1/2, 1/2  
-2  
+1 b  
 m-3m  
-88
+48
 V2  3  
 0.3070 0.3070 0.5000  
 x, x, 1/2  
@@ -94819,9 +94871,9 @@ Im-3m     229
 V1  12  
 0.0000  0.0000  0.5000  
 0, 0, 1/2  
-12 d  
--4m2  
-8
+6 b  
+4/mmm  
+16
 V2  6  
 0.2500 0.2500 0.2500  
 1/4, 1/4, 1/4  
@@ -94941,9 +94993,9 @@ E2   2
 4/mmm
 E3   2  
 0.0000  0.5000  0.2500  
-0, 1/2, z 
-8 g 
-mm2
+0, 1/2, 1/4 
+4 d 
+-4m2
 2  
 1 
 9  
@@ -95307,9 +95359,9 @@ x, x, z
 m
 E2   2  
 0.0000 0.1250 0.3750  
-0, y, z 
-96 j 
-m
+0, y, 1/2-y 
+48 i 
+mm2
 3  
 3 
 10  
@@ -95452,10 +95504,10 @@ x, 2x, 1/4
 6 h  
 mm2
 E2   2  
-0.1000 0.1000 0.8750  
-x, y, z 
-24 l 
-1
+0.2000 0.1000 0.1250  
+2y, y, z 
+12 k 
+m
 E3   2  
 0.0000 0.0000 0.2500  
 0, 0, 1/4 
@@ -95480,7 +95532,7 @@ xay
 0 !number of other names
 0 !number of keywords
 0 !number of references
-P-43m     216
+P-43m     215
 1.4142 1.4142 1.4142  90.000  90.000 90.000
 1
 V1  9  
@@ -95493,7 +95545,7 @@ x, x, x
 E1   2 
 0.2500 0.0000 0.0000
 x, 0, 0
-8 f  
+6 f  
 mm2
 E2   2  
 0.2500 0.5000 0.0000  
@@ -95531,9 +95583,9 @@ V1  12
 V2  8  
 0.0000 0.0000 0.5000 
 0, 0, 1/2  
-12 d  
--4m2  
-8    
+6 b  
+4/mmm  
+16    
 2
 E1   2 
 0.1250 0.1250 0.3750
@@ -95709,9 +95761,9 @@ x, x, 0
 mm2
 E3   2  
 0.1491 0.2500 0.25000  
-x, y, y 
-96 k 
-m
+x, 1/4, 1/4 
+48 g 
+mm2
 3  
 2 
 6  
@@ -95815,9 +95867,9 @@ x, 0, 0
 mm2
 E3   2  
 0.0000 0.5000 0.2500  
-x, 1/2+x, 1/4 
-16 k 
-mm2
+0, 1/2, 1/4 
+14 d 
+-4m2
 2  
 1 
 9  
@@ -95868,9 +95920,9 @@ x, x, z
 m
 E2   2  
 0.0000  0.1111 0.1111  
-x, y, y 
-96 k 
-m
+0, y, y 
+48 h 
+mm2
 E3   2  
 0.0726 0.1377 0.1377  
 x, y, y 
@@ -95943,7 +95995,7 @@ mm2
 E2   2  
 0.0562 0.1812 0.1812  
 x, y, y
-48 k 
+96 k 
 m
 3  
 3 
@@ -96417,7 +96469,7 @@ good
 F-43m     216
 2.1133 2.1133 2.1133  90.000  90.000  90.000
 3
-V1  3  
+V1  6  
 0.0000 0.0000 0.5000 
 0, 0, 1/2  
 4 b  
@@ -96695,9 +96747,9 @@ E1   2
 222
 E2   2  
 0.1250 0.1250 0.3750
-x, x, z
-24 k 
-m
+x, x, 1/2-x
+8 e 
+3m
 2  
 2 
 10  
@@ -97548,7 +97600,7 @@ V7  4
  0, y, z                                                          
  12 n                                                       
  m                                                          
- 1                                                          
+ 2                                                          
 V8  4
  0.3333 0.6667 0.1672                                       
  1/3, 2/3, z                                                          
@@ -97569,10 +97621,10 @@ V10  4
  2                                                          
 V11  4
  0.0000 0.5000 0.4557                                       
- 0, 0, z                                                          
- 2 e                                                       
- 6mm                                                          
- 12                                                          
+ 0, 1/2, z                                                          
+ 6 i                                                       
+ mm2                                                          
+ 4                                                          
  17
 E1   2                                                      
  0.8549 0.1451 0.0000                                       
@@ -98671,7 +98723,8 @@ sab
  0 !number of other symbols
  0 !number of names
  0 !number of other names
- 2 !number of keywords
+ 3 !number of keywords
+bipartite
 heterocoord 36
 polar
  1 !number of references
@@ -99148,7 +99201,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  2     !number of keywords
+  3     !number of keywords
+bipartite
 isohedral tiling
 heterocoord 34
   1     !number of references
@@ -100105,7 +100159,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord 46
   0     !number of references
 Pmmm             47                                         
@@ -100502,7 +100557,7 @@ E6   2
 E7   2                                                      
  0.3507 0.6493 0.0000                                       
  x, 1-x, 0                                                          
- 1 k                                                       
+ 12 k                                                       
  m                                                          
  0                                                          
  0                                                          
@@ -101114,7 +101169,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord 36
   0     !number of references
 Imma             74                                         
@@ -102981,7 +103037,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  2     !number of keywords
+  3     !number of keywords
+bipartite
 heterocoord 34
 good
   1     !number of references
@@ -104162,7 +104219,7 @@ E1   2
 E2   2
   0.0000 0.5000 0.0000
   1/2, 0, 0
-  2  a
+  4  a
   -1
   0
   0
@@ -104435,7 +104492,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord 36
   0     !number of references
 P4/n            85                                         
@@ -105774,7 +105832,8 @@ start
   1     !number of names
 sqc5590
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord 34
   1     !number of references
 Chem. Eur. J. 17, 13007 (2011)
@@ -106164,7 +106223,8 @@ start
 mgc-d
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord 36
   1     !number of references
 uniform net
@@ -106844,7 +106904,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord 34
   0     !number of references
  Immm             71                                         
@@ -107136,9 +107197,9 @@ V3  4
   1                                                          
  E8   2                                                      
   0.2794 0.5589 0.1756                                       
-  x, y, z                                                          
-  24 r                                                       
-  1                                                          
+  x, 2x, z                                                          
+  12 o                                                       
+  m                                                          
  E9   2                                                      
   0.2255 0.5589 0.0000                                       
   x, y, 0                                                          
@@ -107195,14 +107256,14 @@ V4  4
  12
  E1   2                                                      
   0.2537 0.6268 0.1793                                       
-  x, y, z                                                          
-  24 r                                                       
-  1                                                          
+  x, 2x, z                                                          
+  12 o                                                       
+  m                                                          
  E2   2                                                      
   0.2935 0.5870 0.1793                                       
-  x, y, z                                                          
-  24 r                                                       
-  1                                                          
+  x, 2x, z                                                          
+  12 o                                                       
+  m                                                          
  E3   2                                                      
   0.2537 0.5870 0.0000                                       
   x, y, 0                                                          
@@ -107820,10 +107881,11 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord 34
   1     !number of references
-J. Wu, Angew. Chem.51 (2012)
+Angew. Chem.51 (2012)
  P-62c           190                                         
    2.9541 2.9541 1.6306  90.000  90.000  120.000            
   3
@@ -108084,7 +108146,8 @@ tpt
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord 46
   0     !number of references
 P6/mcc             192                                         
@@ -108126,7 +108189,8 @@ fon
   1     !number of names
 MOF-519
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord
   0     !number of references
 P4(2)/nmc             137                                         
@@ -109178,7 +109242,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord
   0     !number of references
  P6(3)/mmc           194                                         
@@ -109270,7 +109335,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord
   0     !number of references
  Im-3m           229                                         
@@ -110462,7 +110528,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord 34
   0     !number of references
  I4/mmm          139                                         
@@ -110862,9 +110929,9 @@ V3  12
   mm2 
 E3   2                                                      
  0.1250 0.1250 0.3750                                       
-  x, y, z                                                          
-  96 l                                                       
-  1                                                                                                                    
+  x, x, z                                                          
+  48 k                                                       
+  m                                                                                                                    
   3                                                          
   2                                                          
   18
@@ -110948,9 +111015,9 @@ V1  4
   2
  E1   2                                                      
   0.1667 0.1667 0.8333                                       
- x, y, z                                                          
-  18 i                                                       
-  1                                                          
+ 1/x, x, 5/6                                                          
+  9 e                                                       
+  2                                                          
  E2   2                                                      
  0.1667 0.6667 0.1667 
 x, 2/3, 1/6                                                         
@@ -111035,7 +111102,7 @@ V1  3
 V2  4
   0.5000 0.0000 0.0000                                       
   1/2, 0, 0                                                    
-  12 d                                                      
+  2 d                                                      
  -1
  2                                                                                                                    
   3
@@ -111694,7 +111761,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord
   0     !number of references
  I4/mmm         139                                         
@@ -114466,7 +114534,7 @@ V4  4
 7                                                          
  E1   2                                                      
   0.0000 0.4492 0.4492                                       
-  1/2, y, y                                                          
+  0, y, y                                                          
    12 i                                                       
   mm2                                                          
  E2   2                                                      
@@ -114476,7 +114544,7 @@ V4  4
   m                                                          
  E3   2                                                      
   0.0000 0.1364 0.5000                                       
-  1/2, y, 1/2                                                          
+  0, y, 1/2                                                          
    12 h                                                        
   mm2                                                          
  E4   2                                                      
@@ -114486,9 +114554,9 @@ V4  4
   m                                                         
  E5   2                                                      
   0.0585 0.0585 0.2451                                       
-  x, y, z                                                          
-  48 n                                                       
-  1                                                          
+  x, x, z                                                          
+  24 m                                                       
+  m                                                          
  E6   2                                                      
   0.0000 0.1811 0.1811                                       
   0, y, y                                                          
@@ -114704,7 +114772,8 @@ eea
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord 36
   0     !number of references
 R-3m            166                                         
@@ -114776,7 +114845,7 @@ E1   2
 E2   2                                                      
  0.0000 0.2500 0.5747                                       
  0, 1/4, z                                                          
-18 e
+ 8 e
 2                                                       
 E3   2                                                      
  0.4267 0.1315 0.0005                                       
@@ -116768,7 +116837,8 @@ mhq-z
  0 !number of other symbols
  0 !number of names
  0 !number of other names
- 3 !number of keywords
+ 4 !number of keywords
+bipartite
 uniform net
 chiral
 heterocoord 34
@@ -116885,7 +116955,7 @@ V1  4
  1
 E1   2
   0.2500 0.0500 0.4500
-  1/4, y, 1/2+y
+  1/4, y, 1/2-y
   24  i
   2
   0
@@ -116954,7 +117024,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord 34
   0     !number of references
  P4(2)/mcm       132                                         
@@ -117250,7 +117321,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord 36
   0     !number of references
  Imma             74                                         
@@ -117301,7 +117373,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord 36
   0     !number of references
  I4/mmm            139                                         
@@ -117425,13 +117498,13 @@ E5   2
 E6   2
   0.4169 0.0000 0.2500
   x, 0, 1/4
-  6 a
-  32
+  18 e
+  2
 E7   2
   0.1390 0.0000 0.2500
   x, 0, 1/4
-  2 a
-  32
+  18 e
+  2
 E8   2
   0.2106 0.9582 0.2181
   x, y, z
@@ -117950,7 +118023,7 @@ toc-derived
 heterocoord
   1     !number of references
 Chem. Rev.114, 1343 92014)
- P4(2)32   224                                         
+ P4(2)32   208                                         
 3.7712  3.7712  3.7712 90.0000 90.0000 90.0000            
   3
 V1  3
@@ -117968,9 +118041,9 @@ V2  3
 V3  4
   0.0000 0.0000 0.5000                                       
   0, 0, 1/2                                                          
-  2 a                                                       
-  23                                                          
-  12                                                           
+  6 d                                                       
+  222                                                         
+  4                                                           
   2
  E1   2                                                      
   0.1562 0.2500 0.3438                                       
@@ -118015,10 +118088,10 @@ V1  12
  m-3m                                                          
   48                                                          
 V2  3
-  0.2929 0.2929 0.2929                                       
-  x, x, x                                                          
- 8 g                                                       
-3m                                                          
+  0.0000 0.2929 0.2929                                       
+  0, y, y                                                          
+ 12 j                                                       
+mm2                                                          
 6                                                            
   2
  E1   2                                                      
@@ -118562,7 +118635,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord 34
   1     !number of references
 Acta Cryst. A69, 535 (2013)
@@ -120655,8 +120729,9 @@ start
   1     !number of names
 scu-derived
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
 heterocoord 34
+bipartite
   0     !number of references
  P4/mmm          123                                         
    3.3334  3.3334  1.4906  90.000  90.000  90.000            
@@ -121278,7 +121353,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord 34
   0     !number of references
  I4/mmm          139                                         
@@ -122817,7 +122893,8 @@ gez
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord
   0     !number of references
  R-3m            166                                         
@@ -123695,7 +123772,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord 34
   0     !number of references
  Pm-3m           221                                         
@@ -125263,7 +125341,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  2     !number of keywords
+  3     !number of keywords
+bipartite
 heterocoord 34
 good
   1     !number of references
@@ -125474,10 +125553,10 @@ V4  4
   8                                                          
   3
  E1   2                                                      
-  0.0000 0.0000 0.0000                                       
-  0, 0, 0                                                          
-   1 a                                                       
-  mmm                                                          
+  0.2500 0.0000 0.0.0644                                       
+  x, 0, z                                                          
+   4 w                                                       
+  m                                                          
  E2   2                                                      
   0.0000 0.2500 0.2216                                       
   0, y, z                                                          
@@ -126185,10 +126264,10 @@ V2  3
    12 o                                                       
   m                                                          
   2
-V3  5
+V3  4
   0.0000 0.3584 0.5000                                       
   0, y 1/2                                                          
-   12 k                                                       
+   6 k                                                       
   mm2                                                          
   4                                                          
   2
@@ -126314,7 +126393,8 @@ start
   0     !number of other symbols
   0     !number of names
   0     !number of other names
-  1     !number of keywords
+  2     !number of keywords
+bipartite
 heterocoord 36
   0     !number of references
  Fd-3m           227                                         
@@ -127020,7 +127100,7 @@ V4  3
   mm2                                                          
  E3   2                                                      
   0.4006 0.0000 0.0649                                       
-  $x, 0, z                                                          
+  x, 0, z                                                          
   12 j                                                       
   m                                                          
  E4   2                                                      
@@ -127056,6 +127136,984 @@ V4  3
 3.12.12 
 3.12.12 
 3.12.12 
+   3
+start
+2166
+zrc                                                        
+4
+  0     !number of other symbols
+  1     !number of names
+zircon
+  0     !number of other names
+  1     !number of keywords
+heterocoord
+  0     !number of references
+ I41/amd             141                                         
+  3.3332   3.3332   2.9827  90.0000  90.0000  90.0000           
+  3
+V1  3
+  0.0000 0.0503 0.6250                                       
+  0, y, z                                                    
+  16 h                                                     
+  m                                                          
+  2                                                          
+V2  4
+  0.5000 0.2500 0.6250                                       
+  1/2, 1/4, 6/8                                                    
+   4 a                                                   
+  -4m2                                                          
+  8
+V3  8
+  0.5000 0.2500 0.1250                                       
+  1/2, 1/4, 1/8                                                   
+   4 b                                                     
+  -4m2                                                          
+  8                                                               
+  3
+ E1   2                                                      
+  0.0000 0.1502 0.7500                                       
+  0, y, z                                                          
+ 16 h                                                       
+  m                                                          
+ E2   2                                                      
+  0.0000 0.1502 0.5000                                       
+  0, y, z                                                    
+  16 h                                                     
+  m 
+E3   2
+0.0.0000 0.9002 0.6250
+0, y, z                                                                                         
+ 16 h                                                         
+m                                                          
+  4
+  2
+  40
+  [4^2.8^2] + 2[4.8^3]                                                        
+  unk                                                        
+     3 15 18 61 47 134 91 237 150 369 1126   
+     4  6 36 34 92 62 180 122 300 182 1019
+     8 10 36 30 96 70 184 118 300 186 1039    
+unk 
+unk
+unk 
+ 4
+start
+ 2167
+  zrc-a                                                      
+ 1b
+  0     !number of other symbols
+  0     !number of names
+  0     !number of other names
+  1     !number of keywords
+heterocoord
+  0     !number of references
+ I4(1)/amd       141                                         
+   7.4052  7.4052  7.1627  90.000  90.000  90.000            
+  6
+V1  4
+  0.0000 0.3175 0.3256                                       
+  0, y, z                                                          
+  16 h                                                       
+  m                                                          
+  2                                                          
+V2  3
+  0.0000 0.0888 0.2251                                       
+  0, y, z                                                          
+  16 h                                                       
+  m                                                          
+  2                                                           
+V3  3
+  0.0000 0.5279 0.1549                                       
+  0, y, z                                                          
+  16 h                                                       
+  m                                                          
+  2                                                           
+V4  6
+  0.0000 0.6630 0.1537                                       
+  0, y, z                                                          
+  16 h                                                       
+  m                                                          
+  2                                                           
+V5  5
+  0.0000 0.6825 0.0156                                       
+  0, y, z                                                          
+  16 h                                                       
+  m                                                          
+  2                                                            
+V6  3
+  0.0000 0.0892 0.0855                                       
+  0, y, z                                                          
+  16 h                                                       
+  m                                                          
+  2 
+12 
+ E1   2                                                      
+  0.0000 0.2500 0.3256                                       
+  0, 1/4, z                                                          
+   8 e                                                       
+  mm2                                                          
+ E2   2                                                      
+  0.9662 0.2837 0.3750                                       
+  x, 1/4-x, 3/8                                                          
+  16 g                                                       
+  2                                                          
+ E3   2                                                      
+  0.0000 0.3644 0.2754                                       
+  0, y, z                                                          
+  16 h                                                       
+  m                                                                                                                   
+ E4   2                                                      
+  0.0000 0.0305 0.1900                                       
+  0, y, z                                                          
+  16 h                                                       
+  m                                                          
+ E5   2                                                      
+  0.0000 0.0890 0.1553                                       
+  0, y, z                                                          
+  16 h                                                       
+  m                                                          
+ E6   2                                                      
+  0.0000 0.5955 0.1543                                       
+  0, y, z                                                          
+  16 h                                                       
+  m                                                          
+ E7   2                                                      
+  0.0000 0.4693 0.1202                                       
+  0, y, z                                                          
+  16 h                                                       
+  m                                                          
+ E8   2                                                      
+  0.0435 0.7065 0.1250                                       
+  x, 3/4-x, 1/8                                                          
+  16 g                                                       
+  2                                                          
+ E9   2                                                      
+  0.0000 0.6727 0.0846                                       
+  0, y, z                                                          
+  16 h                                                       
+  m                                                          
+ E10  2                                                      
+  0.0338 0.7065 0.1941                                       
+  x, y, z                                                    
+  32  i                                                      
+  1                                                          
+ E11  2                                                      
+  0.0000 0.7500 0.0156                                       
+  0, 3/4, z                                                          
+   8 e                                                       
+  mm2                                                          
+ E12  2                                                      
+  0.0000 0.6359 0.9650                                       
+  0, y, z                                                          
+  16 k                                                       
+  m                                                          
+  0                                                          
+  0                                                          
+  0
+  unk                                                        
+  unk                                                        
+     4    5    8   14   32   45   60   78   96  113  456     
+     3    5   12   19   23   42   67   82   86  113  453     
+     3    7   14   21   25   39   66   85   86  127  474     
+     6    9   14   20   33   42   60   79  108  124  496     
+     5    9   13   20   33   46   58   80  102  118  485     
+     3    6   15   19   26   41   66   83   89  114  463     
+3.8.3.16(7).3.16(7) 
+3.8.16(10) 
+3.8.16(10) 
+3.3.3.3.3.4.4.4(2).5.5.8.16(3).16(3).16(5).16(5) 
+3.3.3.3.4.5(2).8.8.16(5).16(5) 
+3.8.8 
+   3
+start
+2168
+  cfd                                                        
+ 1b
+  0     !number of other symbols
+  1     !number of names
+carbon 6H
+  0     !number of other names
+  2     !number of keywords
+good
+uniform net
+  0     !number of references
+ P6(3)/mmc       194                                         
+   1.6330  1.6330  8.0001  90.000  90.000 120.000            
+  3
+V1  4
+  0.0000 0.0000 0.1875                                       
+  0, o, z                                                         
+   4 e                                                       
+  3m                                                          
+  6                                                          
+V2  4
+  0.6667 0.3333 0.0208                                       
+  2/3, 1/3, z                                                          
+   4 f                                                       
+  3m                                                          
+  6                                                          
+V3  4
+  0.6667 0.3333 0.1458                                       
+  2/3, 1/3, z                                                          
+   4 f                                                       
+  3m                                                          
+  6                                                          
+  4
+ E1   2                                                      
+  0.0000 0.0000 0.2500                                       
+  0, 0, 1/4                                                          
+   2 b                                                       
+  -6m2                                                          
+ E2   2                                                      
+  0.3333 0.1667 0.1667                                       
+  2y, y, z                                                          
+  12 j                                                       
+  m                                                          
+ E3   2                                                      
+  0.0000 0.5000 0.0000                                       
+  0, 1/2, 0                                                          
+   6 g                                                       
+  2/m                                                          
+ E4   2                                                      
+  0.6667 0.3333 0.0833                                       
+  2/3, 1/3, z                                                          
+   4 f                                                       
+  3m                                                          
+  4                                                          
+  4                                                          
+  24
+  [6^3] + 4[6^4] + [6^5]                                                        
+  unk                                                        
+     4   12   24   42   64   92  127  168  213  264 1011     
+     4   12   24   43   67   96  130  169  213  264 1023     
+     4   12   25   43   66   96  129  169  214  264 1023     
+6(2).6(2).6(2).6(2).6(2).6(2) 
+6(2).6(2).6(2).6(2).6(2).6(2) 
+6(2).6(2).6(2).6(2).6(2).6(2) 
+   6
+start
+ 2169
+  cfe                                                        
+1b
+  0     !number of other symbols
+  1     !number of names
+carbon 9R
+  0     !number of other names
+  2     !number of keywords
+uniform net
+good
+  0     !number of references
+ R-3m            166                                         
+   1.6329  1.6329 12.0009  90.000  90.000 120.000            
+  3
+V1  4
+  0.0000 0.0000 0.0417                                       
+  0, 0, z                                                          
+   6 c                                                       
+  3m                                                          
+  6                                                          
+V2  4
+  0.0000 0.0000 0.1806                                       
+  0, 0, z                                                          
+   6 c                                                       
+  3m                                                          
+  6                                                          
+V3  4
+  0.0000 0.0000 0.2639                                       
+  0, 0, z                                                          
+   6 c                                                       
+  3m                                                          
+  6                                                          
+  4
+ E1   2                                                      
+  0.0000 0.0000 0.0000                                       
+  0, 0, 0                                                          
+   3 a                                                       
+  -3m                                                          
+ E2   2                                                      
+  0.3333 0.1667 0.0556                                       
+  2y, y, z                                                          
+  18 h                                                       
+  m                                                          
+ E3   2                                                      
+  0.3333 0.1667 0.1667                                       
+  1/3, 1/6, 1/6                                                          
+   9 d                                                       
+  2/m                                                          
+ E4   2                                                      
+  0.0000 0.0000 0.2223                                       
+  0, 0, z                                                          
+   6 c                                                       
+  3m                                                          
+  4                                                          
+  3                                                          
+  24
+  [6^3] + [6^4] + [6^5]                                                        
+  unk                                                        
+     4   12   25   44   67   96  129  168  213  264 1023     
+     4   12   25   43   66   96  130  169  213  262 1021     
+     4   12   24   43   67   96  129  169  212  262 1019     
+6(2).6(2).6(2).6(2).6(2).6(2) 
+6(2).6(2).6(2).6(2).6(2).6(2) 
+6(2).6(2).6(2).6(2).6(2).6(2) 
+   6
+start
+2170
+  czz                                                        
+ 1a
+  0     !number of other symbols
+  0     !number of names
+  0     !number of other names
+  1     !number of keywords
+heterocoord 36
+  1     !number of references
+Cryst. Growth Des. Feng (2014)
+ I-43d           220                                         
+   3.4286  3.4286  3.4286  90.000  90.000  90.000            
+  2
+V1  6
+  0.0000 0.2500 0.8750                                       
+  0, 1/4, 7/8                                                          
+  12 b                                                       
+  -4                                                          
+  4                                                          
+V2  3
+  0.0000 0.2500 0.1667                                       
+  $0, 1/4, z                                                          
+  24 d                                                       
+  2                                                          
+  2                                                          
+  2
+ E1   2                                                      
+  0.0000 0.2500 0.0208                                       
+  0, 1/4, z                                                          
+  24 d                                                       
+  2                                                          
+ E2   2                                                      
+  0.1250 0.2083 0.9375                                       
+  x, y, z                                                    
+  48  e                                                      
+  1                                                          
+  2                                                          
+  2                                                          
+  32
+  3[6^4] + 4[6^5]                                                        
+  ctn-x                                                        
+     6   12   44   48  138  110  282  192  466  302 1601     
+     3   15   22   73   69  188  141  354  233  558 1657     
+6.6.6.6.6.6.6.6.6(2).6(2).6(2).6(2).10(4).10(4).* 
+6(2).6(3).6(3) 
+   6
+start
+ 2171
+  czz-a                                                      
+1b
+  0     !number of other symbols
+  0     !number of names
+  0     !number of other names
+  2     !number of keywords
+heterocoord
+good
+  0     !number of references
+ I-43d           220                                         
+   7.4603  7.4603  7.4603  90.000  90.000  90.000            
+  4
+V1  5
+  0.2500 0.7802 0.0000                                       
+  1/4, y, 0                                                          
+  24 d                                                       
+  2                                                          
+  2                                                          
+V2  5
+  0.1250 0.4063 0.2360                                       
+  x, y, z                                                    
+  48  e                                                      
+  1                                                          
+  1                                                          
+V3  3
+  0.1038 0.0000 0.2500                                       
+  x, 0, 1/4                                                          
+  24 d                                                       
+  2                                                          
+  2                                                          
+V4  3
+  0.0420 0.3023 0.2199                                       
+  x, y, z                                                    
+  48  e                                                      
+  1                                                          
+  1                                                          
+  7
+ E1   2                                                      
+  0.2570 0.8276 0.9532                                       
+  x, y, z                                                    
+  48  e                                                      
+  1                                                          
+ E2   2                                                      
+  0.2968 0.8276 0.0070                                       
+  x, y, z                                                    
+  48  e                                                      
+  1                                                          
+ E3   2                                                      
+  0.2500 0.7132 0.0000                                       
+  1/4, y, 0                                                          
+  24 d                                                       
+  2                                                          
+ E4   2                                                      
+  0.1250 0.4601 0.1962                                       
+  x, y, z                                                    
+  48  e                                                      
+  1                                                          
+ E5   2                                                      
+  0.0835 0.3543 0.2279                                       
+  x, y, z                                                    
+  48  e                                                      
+  1                                                          
+ E6   2                                                      
+  0.1618 0.0210 0.2761                                       
+  x, y, z                                                    
+  48  e                                                      
+  1                                                          
+ E7   2                                                      
+  0.0000 0.2500 0.2199                                       
+  0, 1/4, z                                                          
+  24 d                                                       
+  2                                                          
+  0                                                          
+  0                                                          
+  0
+  unk                                                        
+  unk                                                        
+     5    7   11   18   44   60   66   88  158  197  655     
+     5    7   11   18   44   61   64   89  151  203  654     
+     3    6   13   19   28   48   78  102  109  159  566     
+     3    6   13   19   28   49   79  100  112  154  564     
+3.3.3.3.4.4.12.12.12(2).12(2) 
+3.3.3.3.4.4.12.12.12.12(2) 
+3.12(3).12(3) 
+3.12(2).12(3) 
+   3
+start
+ 2172
+  hof                                                        
+1b
+  0     !number of other symbols
+  0     !number of names
+  0     !number of other names
+  3     !number of keywords
+heterocoord 34
+good
+uniform net
+  0     !number of references
+ I4/mmm          139                                         
+   3.6040  3.6040  1.6724  90.000  90.000  90.000            
+  2
+V1  4
+  0.0000 0.0000 0.0000                                       
+  0, 0, 0                                                          
+   2 a                                                       
+  4/mmm                                                          
+  16                                                          
+V2  3
+  0.1962 0.1962 0.0000                                       
+  x, x, 0                                                          
+   8 h                                                       
+  mm2                                                          
+  4                                                          
+  2
+ E1   2                                                      
+  0.9019 0.9019 0.0000                                       
+  x, x, 0                                                          
+   8 h                                                       
+  mm2                                                          
+ E2   2                                                      
+  0.2500 0.2500 0.2500                                       
+  1/4, 1/4, 1/4                                                          
+   8 f                                                       
+  2/m                                                          
+  2                                                          
+  2                                                          
+  14
+ [8^4] + 2[8^2.12^2]                                                        
+  unk                                                        
+     4    8   16   34   52   58  100  130  128  202  733     
+     3    7   16   25   43   70   83  113  160  173  694     
+8(2).8(2).8(2).8(2).8(2).8(2) 
+8(3).8(3).8(3) 
+   8
+start
+ 2173
+  tph-a                                                      
+1b
+  0     !number of other symbols
+  0     !number of names
+  0     !number of other names
+  1     !number of keywords
+heterocoord
+  0     !number of references
+ I-43d           220                                         
+   7.1663  7.1663  7.1663  90.000  90.000  90.000            
+  4
+V1  5
+  0.1597 0.2736 0.2142                                       
+  x, y, z                                                    
+  48  e                                                      
+  1                                                          
+  1                                                          
+V2  5
+  0.0923 0.1516 0.2062                                       
+  x, y, z                                                    
+  48  e                                                      
+  1                                                          
+  1                                                          
+V3  5
+  0.0156 0.4316 0.2364                                       
+  x, y, z                                                    
+  48  e                                                      
+  1                                                          
+  1                                                          
+V4  6
+  0.1537 0.4118 0.2324                                       
+  x, y, z                                                    
+  48  e                                                      
+  1                                                          
+  1                                                          
+ 11
+ E1   2                                                      
+  0.1870 0.2166 0.2439                                       
+  x, y, z                                                    
+  48  e                                                      
+  1                                                          
+ E2   2                                                      
+  0.1260 0.2126 0.2102                                       
+  x, y, z                                                    
+  48  e                                                      
+  1                                                          
+ E3   2                                                      
+  0.1556 0.2399 0.1532                                       
+  x, y, z                                                    
+  48  e                                                      
+  1                                                          
+ E4   2                                                      
+  0.1567 0.3427 0.2233                                       
+  x, y, z                                                    
+  48  e                                                      
+  1                                                          
+ E5   2                                                      
+  0.1493 0.1219 0.1789                                       
+  x, y, z                                                    
+  48  e                                                      
+  1                                                          
+ E6   2                                                      
+  0.0384 0.1100 0.2213                                       
+  x, y, z                                                    
+  48  e                                                      
+  1                                                          
+ E7   2                                                      
+  0.0156 0.5000 0.2500                                       
+  x, 0, 1/4                                                          
+  24 d                                                       
+  2                                                          
+ E8   2                                                      
+  0.0846 0.4217 0.2344                                       
+  x, y, z                                                    
+  48  e                                                      
+  1                                                          
+ E9   2                                                      
+  0.0560 0.4746 0.1991                                       
+  x, y, z                                                    
+  48  e                                                      
+  1                                                          
+ E10  2                                                      
+  0.0560 0.4570 0.2873                                       
+  x, y, z                                                    
+  48  e                                                      
+  1                                                          
+ E11  2                                                      
+  0.1250 0.4647 0.1971                                       
+  x, y, z                                                    
+  48  e                                                      
+  1                                                          
+  0                                                          
+  0                                                          
+  0
+  unk                                                        
+  unk                                                        
+     5   10   26   47   63  106  143  174  226  316 1117     
+     5    9   26   45   65  109  138  172  244  290 1104     
+     5   11   24   44   68  102  137  186  246  273 1097     
+     6   11   27   45   69  102  149  179  250  280 1119     
+3.3.3.3.4.4.8.8(2).8(2).8(2) 
+3.3.3.3.4.4.8.8(2).8(2).8(2) 
+3.3.3.3.4.5(2).8.8(2).8(2).8(2) 
+3.3.3.3.3.4.4.4(2).5.5.8.8.8.8(2).8(2) 
+   3
+start
+2174
+  qzh                                                        
+ 1b
+  0     !number of other symbols
+  1     !number of names
+bor-related
+  0     !number of other names
+  2     !number of keywords
+heterocoord 34
+good
+  0     !number of references
+ P-43m           215                                         
+   5.2780  5.2780  5.2780  90.000  90.000  90.000            
+  3
+V1  4
+  0.1442 0.1442 0.7218                                       
+  x, x, z                                                          
+  12 i                                                       
+  m                                                          
+  2                                                          
+V2  4
+  0.0670 0.0670 0.5670                                       
+  x, x, z                                                          
+  12 i                                                       
+  m                                                          
+  2                                                          
+V3  3
+  0.2781 0.2781 0.7219                                       
+  x, x, 1-x                                                          
+   4 e                                                       
+  3m                                                          
+  6                                                          
+  5
+ E1   2                                                      
+  0.1442 0.2112 0.7888                                       
+  x, x, z                                                          
+  12 i                                                       
+  m                                                          
+ E2   2                                                      
+  0.1056 0.1056 0.6444                                       
+  x, x, z                                                          
+  12 i                                                      
+  m                                                          
+ E3   2                                                      
+  0.2112 0.2112 0.7219                                       
+  x, x, z                                                          
+  12 i                                                       
+  m                                                          
+ E4   2                                                      
+  0.0000 0.0000 0.5670                                       
+  0, 0, z                                                          
+   6 f                                                       
+  mm2                                                         
+ E5   2                                                      
+  0.0000 0.0670 0.5000                                       
+  0, y, 1/2                                                          
+  12 h                                                       
+  2                                                          
+  0                                                          
+  0                                                          
+  0
+  unk                                                        
+  unk                                                        
+     4    5    9   15   24   28   42   64   76   89  357     
+     4    6   11   12   24   34   50   50   84  108  384     
+     3    3    9    9   27   18   42   42   90   57  301     
+3.12.3.12.3.* 
+3.12(2).3.16.3.16 
+3.3.3 
+   3
+start
+ 2175
+flt                                                        
+1b
+  0     !number of other symbols
+  1     !number of names
+flu-derived
+  0     !number of other names
+  1     !number of keywords
+heterocoord
+  0     !number of references
+ I4/mmm          139                                         
+   1.8013 1.8013 3.7381 90.000 90.000 90.00            
+  2
+V1  8
+  0.0000 0.0000 0.0000                                       
+  0, 0, 0                                                          
+   2 a                                                       
+  4/mmm                                                          
+  16                                                          
+V2  3
+  0.50000 .00000 0.1162                                       
+  1/2, 0, z                                                          
+   8 g                                                       
+  mm2                                                          
+  4                                                          
+  2
+ E1   2                                                      
+  0.0000 0.2500 0.4419                                       
+  0,y, z                                                          
+   16 n                                                       
+  m                                                          
+ E2   2                                                      
+  0.50000 .0000 0.2500                                       
+  1/2, 0, 1/4                                                          
+   4 d                                                       
+  -4m2                                                          
+  0                                                          
+  0                                                          
+  0
+ unk                                                        
+  unk                                                        
+     8 12 32 56 80 110 168 200 248 332 1247    
+     3 15 28 51 81 118 149 207 260 309 1222    
+unk 
+unk 
+ 3
+start
+ 2176
+  flt-a                                                      
+ 1b
+  0     !number of other symbols
+  0     !number of names
+  0     !number of other names
+  1     !number of keywords
+heterocoord 34
+  0     !number of references
+ I4/mmm          139                                         
+   4.2290  4.2290  9.1455  90.000  90.000  90.000            
+  3
+V1  3
+  0.0000 0.5000 0.1953                                       
+  0, 1/2, z                                                          
+   8 h                                                       
+  mm2                                                          
+  4                                                          
+V2  3
+  0.0000 0.3818 0.1006                                       
+  0, y, z                                                          
+  16 n                                                       
+  m                                                          
+  2                                                          
+V3  4
+  0.0000 0.1672 0.0547                                       
+  0, y, z                                                          
+  16 n                                                       
+  m                                                          
+  2                                                          
+  6
+ E1   2                                                      
+  0.0000 0.5000 0.2500                                       
+  0, 1/2, 1/4                                                          
+   4 d                                                       
+  -4m2                                                          
+ E2   2                                                      
+  0.0000 0.4409 0.1479                                       
+  0, y, z                                                          
+  16 n                                                       
+  m                                                          
+ E3   2                                                      
+  0.0000 0.5000 0.1006                                       
+  0, 1/2, z                                                          
+   8 $g                                                       
+  mm2                                                         
+ E4   2                                                      
+  0.0000 0.2745 0.0776                                       
+  0, y, z                                                          
+  16 n                                                       
+  m                                                          
+ E5   2                                                      
+  0.0836 0.0836 0.0547                                       
+  0, y, z                                                          
+  16 n                                                       
+  m                                                          
+ E6   2                                                      
+  0.0000 0.1672 0.0000                                       
+  0, y, 0                                                          
+   8 i                                                       
+  mm2                                                          
+  0                                                          
+  0                                                          
+  0
+  unk                                                        
+  unk                                                        
+     3    4    8   18   29   36   45   68   82  110  404     
+     3    5   11   17   26   39   47   72   85  110  416     
+     4    8   12   17   25   38   58   77   85   95  420     
+3.12(2).12(2) 
+3.8.12(2) 
+4.8.4.12.4.12 
+   3
+start
+2177
+ mmn                                                        
+2
+  0     !number of other symbols
+  1     !number of names
+mmm-related
+  0     !number of other names
+  1     !number of keywords
+heterocoord
+  0     !number of references
+ P4/nmm           129                                         
+   3.975   3.975   1.000  90.000  90.000  90.000            
+  3
+V1  3
+  0.2500 0.5250 0.5528                                       
+  1/4, x, z                                                          
+  8 i                                                       
+  m                                                          
+  2                                                          
+V2  6
+  0.5000 0.0000 0.5000                                       
+  1/2, 0, 1/2                                                          
+  4 e                                                       
+  2/m                                                          
+  4                                                          
+V3  4
+  0.7500 0.2500 0.0000                                       
+  3/4. 1/4, 0                                                          
+   2 a                                                       
+  -4m2                                                          
+  8                                                          
+  3
+ E1   2                                                      
+  0.6375 0.2500 0.7764                                       
+  x, 11/4, z                                                          
+  8 i                                                       
+  m                                                          
+ E2   2                                                      
+  0.5000 0.0000 0.0000                                       
+  1/2. 0. 0                                                          
+  4 d                                                      
+  2/m                                                          
+ E3   2                                                      
+  0.3750 0.9875 0.5264                                       
+  x, x, z                                                          
+  16 k                                                       
+  1                                                                                                                  
+  0                                                          
+  0                                                          
+  0
+  unk                                                        
+  unk                                                        
+     3 13 29 61  98 148 199 270 334 426 1582     
+     6 18 38 66 106 154 214 270 354 426 1653     
+     4  8 28 62 106 142 206 278 362 398 1595     
+5.5.6(3) 
+ 5.5.5.5.6.6.6.6.6(2).6(2).8.8.*.*.*
+5.5.5.5.6().6(2) 
+   5
+start
+2178
+  mmn-a                                                      
+1b
+  0     !number of other symbols
+  0     !number of names
+  0     !number of other names
+  2     !number of keywords
+heterocoord
+good
+  0     !number of references
+ P4/nmm          129                                         
+   8.8253  8.8253  2.4141  90.000  90.000  90.000            
+  5
+V1  3
+  0.1933 0.5041 0.5100                                       
+  x, y, z                                                    
+  16  k                                                      
+  1                                                          
+  1                                                          
+V2  3
+  0.0935 0.7500 0.3421                                       
+  x, 3/4, z                                                          
+   8 i                                                       
+  m                                                          
+  2                                                          
+V3  4
+  0.1933 0.7500 0.1464                                       
+  x, 3/4, z                                                          
+   8 i                                                       
+  m                                                          
+  2                                                          
+V4  5
+  0.0801 0.5000 0.5022                                       
+  x, y, z                                                    
+  16  k                                                      
+  1                                                          
+  1                                                          
+V5  5
+  0.0006 0.0006 0.2071                                       
+  x, x, z                                                          
+   8 i                                                       
+  m                                                         
+  2                                                          
+ 11
+ E1   2                                                      
+  0.2500 0.5041 0.5100                                       
+  1/4, y, z                                                          
+   8 i                                                       
+  m                                                          
+ E2   2                                                      
+  0.2217 0.5488 0.5839                                       
+  x, y, z                                                    
+  16  k                                                      
+  1                                                          
+ E3   2                                                      
+  0.1367 0.5021 0.5061                                       
+  x, y, z                                                    
+  16  k                                                      
+  1                                                          
+ E4   2                                                      
+  0.1434 0.7500 0.2442                                       
+  x, 3/4, z                                                          
+   8 i                                                       
+  m                                                          
+ E5   2                                                      
+  0.2500 0.7500 0.1464                                       
+  1/4, 3/4, z                                                          
+   4 f                                                       
+  mm2                                                          
+ E6   2                                                      
+  0.2217 0.7783 0.0000                                       
+  x, 1-x, 0                                                          
+   8 g                                                       
+  2                                                          
+ E7   2                                                      
+  0.0400 0.4600 0.5022                                       
+  x, 1-x, z                                                          
+   8 i                                                       
+  m                                                          
+ E8   2                                                      
+  0.0400 0.5400 0.5000                                       
+  x, 1/2+x, 1/2                                                          
+   8 h                                                       
+  2                                                          
+ E9   2                                                      
+  0.0404 0.4997 0.3546                                       
+  x, y, z                                                    
+  16  k                                                      
+  1                                                          
+ E10  2                                                      
+  0.0398 0.5003 0.6476                                       
+  x, y, z                                                    
+  16  k                                                      
+  1                                                          
+ E11  2                                                      
+  0.0000 0.0000 0.0000                                       
+  0, 0, 0                                                          
+   4 d                                                       
+  2/m                                                          
+  0                                                          
+  0                                                          
+  0
+  unk                                                        
+  unk                                                        
+     3    6   12   21   34   47   68   98  119  146  555     
+     3    5   11   16   30   44   60   89  124  135  518     
+     4    5    8   14   32   40   64   87  121  169  545     
+     5    7   15   23   41   54   77   91  131  153  598     
+     5    9   14   21   43   60   73   89  130  155  600     
+3.10.12(3) 
+3.10.10 
+3.10.3.10.3.12(2) 
+3.3.3.3.4.4.10.12.12(2).16 
+3.3.3.3.4.4.10.10.12.12 
    3
 start
  -1
