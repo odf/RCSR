@@ -375,15 +375,18 @@ var edges = function(net) {
 
 
 var tiling = function(net) {
-  return $.div(null,
-               $.p(null, makeLine('tiling', [])),
-               makeTable(['tiling', 'dual',
-                          'vertices', 'edges', 'faces', 'tiles',
-                          'D-symbol'],
-                         [[ net.tiling, net.dual,
-                            net.numberOfVertices, net.numberOfEdges,
-                            net.numberOfFaces, net.numberOfTiles,
-                            net.sizeOfDSymbol ]]));
+  if (net.numberOfFaces > 0)
+    return $.div(null,
+                 $.p(null, makeLine('tiling', [])),
+                 makeTable(['tiling', 'dual',
+                            'vertices', 'edges', 'faces', 'tiles',
+                            'D-symbol'],
+                           [[ net.tiling, net.dual,
+                              net.numberOfVertices, net.numberOfEdges,
+                              net.numberOfFaces, net.numberOfTiles,
+                              net.sizeOfDSymbol ]]));
+  else
+    return $.div();
 };
 
 
