@@ -74,7 +74,7 @@ var matcher = {
   modifiers: function(item, values) {
     if (item.symbol.match(/-a/) && !values.include_a)
       return false;
-    if (values.exclude_b_c && item.symbol.match(/-[bc]/))
+    if (values.exclude_a_b_c && item.symbol.match(/-[abc]/))
       return false;
     return true;
   },
