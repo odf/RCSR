@@ -43,6 +43,11 @@ var cleanupLine = function(line) {
 };
 
 
+var fixName = function(name) {
+  return name == 'unk' ? '-' : name;
+};
+
+
 var parseVertexOrEdge = function(lines, startIndex, isVertex) {
   var i = startIndex;
   var result = {};
@@ -136,8 +141,8 @@ var parseStructure = function(lines, startIndex) {
   if (result.serialNumber < 0)
     return null;
 
-  result.symbol       = lines[++i];
-  result.embedType    = lines[++i];
+  result.symbol    = lines[++i];
+  result.embedType = fixName(lines[++i]);
   ++i;
 
   for (key in { 
@@ -173,8 +178,8 @@ var parseStructure = function(lines, startIndex) {
   result.numberOfFaces = parseInt(lines[i]);
   result.numberOfTiles = parseInt(lines[++i]);
   result.sizeOfDSymbol = parseInt(lines[++i]);
-  result.tiling        = lines[++i];
-  result.dual          = lines[++i];
+  result.tiling        = fixName(lines[++i]);
+  result.dual          = fixName(lines[++i]);
 
   for (k = 0; k < result.numberOfVertices; ++k) {
     tmp = lines[++i].split(/\s+/).map(function(s) { return parseInt(s); });
@@ -183,7 +188,7 @@ var parseStructure = function(lines, startIndex) {
   }
 
   for (k = 0; k < result.numberOfVertices; ++k)
-    result.vertices[k].symbol = lines[++i];
+    result.vertices[k].symbol = fixName(lines[++i]);
 
   result.smallestRingSize = parseInt(lines[++i]);
 
