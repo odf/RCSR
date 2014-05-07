@@ -463,9 +463,10 @@ var Results = React.createClass({
       symbolsOnly: true
     }
   },
-  componentWillReceiveProps: function() {
+  componentWillReceiveProps: function(props) {
+    var n = (props.results || []).length == 1 ? 0 : -1;
     this.setState({
-      selected: -1,
+      selected: n,
       detailsOffset: 0
     });
   },
@@ -510,7 +511,8 @@ var Results = React.createClass({
 
       return $.div(null,
                    $.ul({ className: 'plainList' },
-                        item(link(-1, 'All Results')),
+                        item(n > 1
+                             ? link(-1, 'All Results') : 'All Results'),
                         item(i > 0
                              ? link(i-1, laquo + ' Previous') : 'Previous'),
                         item(i < n-1
@@ -585,9 +587,6 @@ var Application = React.createClass({
       this.setState({
         reset: true
       });
-  },
-  select: function(symbol) {
-    this.setState({ selected: symbol });
   },
   render: function() {
     var page;
