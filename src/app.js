@@ -84,7 +84,7 @@ var keywords = [
   "regular net",
   "self dual net",
   "semiregular net",
-  "simple net",
+  "simple tiling",
   "uniform net",
   "uniform tiling",
   "zeolite net"
