@@ -56,9 +56,7 @@ var rangeMatcher = function(key) {
 
 var matcher = {
   symbol: function(item, value) {
-    var s = value.text.toLowerCase()
-    var m = value.mode || 'is';
-    return search(s, m, [item.symbol]) || search(s, m, item.otherSymbols);
+    return true;
   },
   names: function(item, value) {
     var s = value.text.toLowerCase()
@@ -72,8 +70,6 @@ var matcher = {
     return true;
   },
   modifiers: function(item, values) {
-    if (item.symbol.match(/-a/) && !values.include_a)
-      return false;
     if (values.exclude_a_b_c && item.symbol.match(/-[abc]/))
       return false;
     return true;
@@ -112,13 +108,42 @@ var matches = function(item, query) {
 };
 
 
+var filteredBySymbol = function(data, query) {
+  var spec = query.symbol;
+  var s, m, matches;
+
+  var check = function(s, m) {
+    return function(item) {
+      return search(s, m, [item.symbol]) || search(s, m, item.otherSymbols);
+    };
+  }
+
+  if (spec && spec.text) {
+    s = spec.text.toLowerCase()
+    m = spec.mode || 'is';
+
+    matches = data.filter(check(s, m));
+
+    if (m == 'is') {
+      if (query.modifiers && query.modifiers.include_a)
+        matches = matches.concat(data.filter(check(s + '-a', m)));
+      if (matches.length == 0)
+        matches = matches.concat(data.filter(check(s + '-z', m)));
+    }
+  } else
+    matches = data;
+
+  return matches;
+};
+
+
 var cmp = function(a, b) {
   return (a == b) ? 0 : (a < b) ? -1 : 1;
 };
 
 
 module.exports = function(data, query) {
-  return data
+  return filteredBySymbol(data, query)
     .filter(function(item) { return matches(item, query); })
     .sort(function(a, b) { return cmp(a.symbol, b.symbol); });
 };
