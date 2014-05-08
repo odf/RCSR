@@ -238,6 +238,7 @@ var SearchForm = React.createClass({
   render: function() {
     return Form({
       buttons: ['Search', 'Clear'],
+      extraButtons: true,
       onSubmit: this.props.onSubmit,
       enterKeySubmits: 'Search',
       schema: schema,
