@@ -130,9 +130,14 @@ var schema = {
       ])
     },
     coordination: {
-      title: "Coordination",
-      type: "string",
-      pattern: "^[1-9][0-9]*(,[1-9][0-9]*)*$"
+      description: "Coordination",
+      type: "object",
+      properties: {
+        spec: {
+          type: "string",
+          pattern: "^[1-9][0-9]*(,[1-9][0-9]*)*$"
+        }
+      }
     },
     bounds: {
       description: "Bounds",
@@ -176,8 +181,8 @@ var conversions = {
       obj['exclude augmented (-a), binary (-b) and catenated pair (-c)']
     };
   },
-  coordination: function(text) {
-    return text.split(/,/).map(function(s) {
+  coordination: function(obj) {
+    return obj.spec.split(/,/).map(function(s) {
       return parseInt(s);
     });
   },
