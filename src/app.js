@@ -9,6 +9,8 @@ var parse    = require('./parse-3dall');
 var search   = require('./search');
 
 
+window.React = React; // wakes up the React Developer Tools
+
 var $ = React.DOM;
 
 var laquo = '\u00ab';
@@ -29,6 +31,8 @@ var loadFile = function(f) {
 
 
 var Uploader = React.createClass({
+  displayName: 'Uploader',
+
   preventSubmit: function(event) {
     event.preventDefault();
   },
@@ -235,6 +239,8 @@ var makeQuery = function(inputs) {
 
 
 var SearchForm = React.createClass({
+  displayName: 'SearchForm',
+
   render: function() {
     return Form({
       buttons: ['Search', 'Clear'],
@@ -394,6 +400,8 @@ var tiling = function(net) {
 
 
 var NetImage = React.createClass({
+  displayName: 'NetImage',
+
   getInitialState: function() {
     return { full: false };
   },
@@ -417,6 +425,8 @@ var NetImage = React.createClass({
 
 
 var Net = React.createClass({
+  displayName: 'Net',
+
   render: function() {
     var net = this.props.net;
 
@@ -434,6 +444,8 @@ var Net = React.createClass({
 
 
 var Link = React.createClass({
+  displayName: 'Link',
+
   handleClick: function(event) {
     event.preventDefault();
     if (this.props.onClick)
@@ -457,6 +469,8 @@ var maxDetails = 20;
 
 
 var Results = React.createClass({
+  displayName: 'Results',
+
   getInitialState: function() {
     return {
       selected: -1,
@@ -570,6 +584,8 @@ var Results = React.createClass({
 
 
 var Application = React.createClass({
+  displayName: 'Application',
+
   getInitialState: function() {
     return {
       data    : null,
