@@ -72,3 +72,11 @@ a:link {
     flex-grow: 0;
     flex-shrink: 0;
 }
+
+.form-subsection {
+    margin: 1em 0;
+}
+
+.form-section-title {
+    font-weight: bold;
+}
