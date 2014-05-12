@@ -127,7 +127,12 @@ var schema = {
       properties: makeBooleanProperties([
         "include augmented (-a)",
         "exclude augmented (-a), binary (-b) and catenated pair (-c)"
-      ])
+      ]),
+      "x-hints": {
+        form: {
+          classes: 'checkbox-left'
+        }
+      }
     },
     coordination: {
       title: "Coordination",

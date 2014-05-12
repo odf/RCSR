@@ -80,5 +80,15 @@ a:link {
 
 .form-element label {
     display: inline-block;
-    width: 12em;
+    width: 10em;
+}
+
+.checkbox-left input {
+    float: right;
+}
+
+.checkbox-left label {
+    float: right;
+    width: 18em;
+    margin-left: 5px;
 }
