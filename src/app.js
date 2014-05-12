@@ -106,6 +106,11 @@ var schema = {
       properties: {
         mode: { enum: ["is", "contains", "begins with"] },
         text: { type: "string" }
+      },
+      "x-hints": {
+        form: {
+          classes: [ "inline", "flush" ]
+        }
       }
     },
     names: {
@@ -114,12 +119,22 @@ var schema = {
       properties: {
         mode: { enum: ["is", "contains", "begins with"] },
         text: { type: "string" }
+      },
+      "x-hints": {
+        form: {
+          classes: [ "inline", "flush" ]
+        }
       }
     },
     keywords: {
       title: "Keywords",
       type: "object",
-      properties: makeBooleanProperties(keywords)
+      properties: makeBooleanProperties(keywords),
+      "x-hints": {
+        form: {
+          classes: ["inline", "narrow", "checkbox-left"]
+        }
+      }
     },
     modifiers: {
       title: "Modifiers",
@@ -130,7 +145,7 @@ var schema = {
       ]),
       "x-hints": {
         form: {
-          classes: 'checkbox-left'
+          classes: ["wide", "checkbox-left"]
         }
       }
     },

@@ -89,6 +89,25 @@ a:link {
 
 .checkbox-left label {
     float: right;
-    width: 18em;
     margin-left: 5px;
+}
+
+.inline {
+    width: 24em;
+}
+
+.inline .form-element {
+    display: inline;
+}
+
+.flush label {
+    width: auto;
+}
+
+.wide label {
+    width: 18em;
+}
+
+.narrow label {
+    width: 8em;
 }
