@@ -101,7 +101,7 @@ var schema = {
   required: [],
   properties: {
     symbol: {
-      description: "Symbol",
+      title: "Symbol",
       type: "object",
       properties: {
         mode: { enum: ["is", "contains", "begins with"] },
@@ -109,7 +109,7 @@ var schema = {
       }
     },
     names: {
-      description: "Names",
+      title: "Names",
       type: "object",
       properties: {
         mode: { enum: ["is", "contains", "begins with"] },
@@ -117,12 +117,12 @@ var schema = {
       }
     },
     keywords: {
-      description: "Keywords",
+      title: "Keywords",
       type: "object",
       properties: makeBooleanProperties(keywords)
     },
     modifiers: {
-      description: "Modifiers",
+      title: "Modifiers",
       type: "object",
       properties: makeBooleanProperties([
         "include augmented (-a)",
@@ -130,7 +130,7 @@ var schema = {
       ])
     },
     coordination: {
-      description: "Coordination",
+      title: "Coordination",
       type: "object",
       properties: {
         spec: {
@@ -140,7 +140,7 @@ var schema = {
       }
     },
     bounds: {
-      description: "Bounds",
+      title: "Bounds",
       type: "object",
       properties: makeBoundsProperties([
         "density",
