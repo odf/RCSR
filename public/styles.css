@@ -22,6 +22,10 @@ th, td {
     padding: 3px;
 }
 
+input[type=text] {
+    width: 16em;
+}
+
 a:link {
     color: #0810f0;
     text-decoration: none;
@@ -93,7 +97,7 @@ a:link {
 }
 
 .inline {
-    width: 24em;
+    width: 30em;
 }
 
 .inline .form-element {
@@ -105,7 +109,7 @@ a:link {
 }
 
 .wide label {
-    width: 18em;
+    width: 28em;
 }
 
 .narrow label {
