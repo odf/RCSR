@@ -82,18 +82,22 @@ a:link {
     padding: 5px 0;
 }
 
+.form-element {
+    position: relative;
+}
+
 .form-element label {
     display: inline-block;
     width: 10em;
 }
 
 .checkbox-left input {
-    float: right;
+    position: absolute;
+    left: 0;
 }
 
 .checkbox-left label {
-    float: right;
-    margin-left: 5px;
+    margin-left: 2em;
 }
 
 .inline {
@@ -101,7 +105,7 @@ a:link {
 }
 
 .inline .form-element {
-    display: inline;
+    display: inline-block;
 }
 
 .flush label {
