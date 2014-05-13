@@ -490,7 +490,7 @@ var Link = React.createClass({
 });
 
 
-var maxDetails = 20;
+var maxDetails = 12;
 
 
 var Results = React.createClass({
@@ -500,7 +500,7 @@ var Results = React.createClass({
     return {
       selected: -1,
       detailsOffset: 0,
-      symbolsOnly: true
+      symbolsOnly: false
     }
   },
   componentWillReceiveProps: function(props) {
