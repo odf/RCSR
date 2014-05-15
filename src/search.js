@@ -28,7 +28,7 @@ var matchText = {
 
 var search = function(pattern, mode, list) {
   return list.some(function(text) {
-    return matchText[mode](text, pattern);
+    return matchText[mode](text.toLowerCase(), pattern);
   });
 };
 
