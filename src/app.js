@@ -589,7 +589,7 @@ var Results = React.createClass({
                              : 'Next')),
                    $.p(null, msg),
                    makeTable(['pic', 'symbol', 'embed type', 'space group',
-                              'number of vertices', 'genus', 'td10'],
+                              'vertices', 'edges', 'genus'],
                              results.slice(begin, end).map(function(net, i) {
                                return [
                                  NetImage({ symbol: net.symbol }),
@@ -598,8 +598,8 @@ var Results = React.createClass({
                                  net.embedType,
                                  net.spacegroupSymbol,
                                  net.numberOfVertices,
-                                 net.genus,
-                                 net.td10
+                                 net.numberOfEdges,
+                                 net.genus
                                ];
                              }.bind(this))
                             ));
