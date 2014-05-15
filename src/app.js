@@ -1,6 +1,8 @@
 'use strict';
 
 var React    = require('react');
+var agent    = require('superagent');
+
 var cc       = require('ceci-core');
 var validate = require('plexus-validate');
 var Form     = require('plexus-form');
@@ -644,6 +646,20 @@ var Application = React.createClass({
                              })),
                         $.li({ className: 'column' },
                              Results({ results: this.state.results }))));
+    } else if (this.props.server) {
+      page = $.p(null, 'Loading data...');
+      agent
+        .get('/api/netdata')
+        .set('Accept', 'text/plain')
+        .end(function(res){
+          if (res.ok) {
+            this.setState({
+              data: parse(res.text)
+            });
+          } else {
+            alert('Oh no! error ' + res.text);
+          }
+        }.bind(this));
     } else {
       page = $.div(null,
                    $.h2(null, 'Locate 3Dall.txt'),
@@ -656,6 +672,6 @@ var Application = React.createClass({
   }
 });
 
-var app = Application();
+var app = Application({ server: true });
 
 React.renderComponent(app, document.getElementById('react-main'));

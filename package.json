@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "express": "~3.4.8",
+    "superagent": "~0.16.0",
     "react": "~0.9.0",
     "ceci-core": "~0.2.0",
     "plexus-validate": "~0.0.2",
