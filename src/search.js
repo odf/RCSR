@@ -124,16 +124,31 @@ var filteredBySymbol = function(data, query) {
 
     matches = data.filter(check(s, m));
 
-    if (m == 'is') {
-      if (query.modifiers && query.modifiers.include_a)
-        matches = matches.concat(data.filter(check(s + '-a', m)));
-      if (matches.length == 0)
-        matches = matches.concat(data.filter(check(s + '-z', m)));
-    }
+    if (m == 'is' && matches.length == 0)
+      matches = matches.concat(data.filter(check(s + '-z', m)));
   } else
     matches = data;
 
   return matches;
+};
+
+
+var withAugmented = function(results, data, query) {
+  var symbols = {};
+  var out = [];
+  var i, s;
+
+  for (i in results) {
+    s = results[i].symbol;
+    symbols[s] = true;
+    symbols[s + '-a'] = true;
+  }
+
+  for (i in data)
+    if (symbols[data[i].symbol])
+      out.push(data[i]);
+
+  return out;
 };
 
 
@@ -143,7 +158,12 @@ var cmp = function(a, b) {
 
 
 module.exports = function(data, query) {
-  return filteredBySymbol(data, query)
+  var results = filteredBySymbol(data, query)
     .filter(function(item) { return matches(item, query); })
     .sort(function(a, b) { return cmp(a.symbol, b.symbol); });
+
+  if (query.modifiers && query.modifiers.include_a)
+    return withAugmented(results, data, query);
+  else
+    return results;
 };
