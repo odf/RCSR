@@ -143,7 +143,8 @@ var schema = {
       type: "object",
       properties: makeBooleanProperties([
         "include augmented (-a)",
-        "exclude augmented (-a), binary (-b) and catenated pair (-c)"
+        "exclude augmented (-a)",
+        "exclude binary (-b) and catenated pair (-c)"
       ]),
       "x-hints": {
         form: {
@@ -197,10 +198,9 @@ var conversions = {
   },
   modifiers: function(obj) {
     return {
-      include_a    :
-      obj['include augmented (-a)'],
-      exclude_a_b_c:
-      obj['exclude augmented (-a), binary (-b) and catenated pair (-c)']
+      include_a  : obj['include augmented (-a)'],
+      exclude_a  : obj['exclude augmented (-a)'],
+      exclude_b_c: obj['exclude binary (-b) and catenated pair (-c)']
     };
   },
   coordination: function(obj) {

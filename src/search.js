@@ -70,7 +70,9 @@ var matcher = {
     return true;
   },
   modifiers: function(item, values) {
-    if (values.exclude_a_b_c && item.symbol.match(/-[abc]/))
+    if (values.exclude_a && item.symbol.match(/-a$/))
+      return false;
+    if (values.exclude_b_c && item.symbol.match(/-[bc]$/))
       return false;
     return true;
   },
@@ -159,11 +161,11 @@ var cmp = function(a, b) {
 
 module.exports = function(data, query) {
   var results = filteredBySymbol(data, query)
-    .filter(function(item) { return matches(item, query); })
-    .sort(function(a, b) { return cmp(a.symbol, b.symbol); });
+    .filter(function(item) { return matches(item, query); });
 
   if (query.modifiers && query.modifiers.include_a)
-    return withAugmented(results, data, query);
-  else
-    return results;
+    results = withAugmented(results, data, query);
+
+  return results
+    .sort(function(a, b) { return cmp(a.symbol, b.symbol); });
 };
