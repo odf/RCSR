@@ -649,7 +649,7 @@ var Application = React.createClass({
     } else if (this.props.server) {
       page = $.p(null, 'Loading data...');
       agent
-        .get('/api/netdata')
+        .get('public/3dall.txt')
         .set('Accept', 'text/plain')
         .end(function(res){
           if (res.ok) {
