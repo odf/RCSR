@@ -9,7 +9,7 @@ var app = express();
 app.use(express.compress());
 
 app.get('/', function(req, res) {
-  res.sendfile('index.html', { root: home });
+  res.sendfile('index.html');
 });
 
 app.get('/public/*', function(req, res) {

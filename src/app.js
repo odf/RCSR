@@ -32,12 +32,14 @@ var loadFile = function(f) {
 };
 
 
+var preventSubmit = function(event) {
+  event.preventDefault();
+};
+
+
 var Uploader = React.createClass({
   displayName: 'Uploader',
 
-  preventSubmit: function(event) {
-    event.preventDefault();
-  },
   loadFile: function(event) {
     var files = event.target.files;
 
@@ -48,11 +50,24 @@ var Uploader = React.createClass({
     }
   },
   render: function() {
-    return $.form({ onSubmit: this.preventSubmit },
+    return $.form({ onSubmit: preventSubmit },
                   $.fieldset(null,
                              $.legend(null, 'Select a file'),
                              $.input({ type: 'file',
                                        onChange: this.loadFile })));
+  }
+});
+
+
+var Button = React.createClass({
+  displayName: 'Button',
+
+  render: function() {
+    return $.form({ onSubmit: preventSubmit },
+                  $.input({ type   : 'submit',
+                            key    : this.props.value,
+                            value  : this.props.value,
+                            onClick: this.props.submit }));
   }
 });
 
@@ -615,12 +630,16 @@ var Application = React.createClass({
 
   getInitialState: function() {
     return {
-      data    : null,
-      results : null
+      useServerData: false,
+      data         : null,
+      results      : null
     }
   },
   handleUpload: function(data) {
     this.setState({ data: parse(data) });
+  },
+  useBuiltin: function() {
+    this.setState({ useServerData: true });
   },
   onFormSubmit: function(inputs, value) {
     if (value == 'Search')
@@ -646,7 +665,7 @@ var Application = React.createClass({
                              })),
                         $.li({ className: 'column' },
                              Results({ results: this.state.results }))));
-    } else if (this.props.server) {
+    } else if (this.state.useServerData) {
       page = $.p(null, 'Loading data...');
       agent
         .get('public/3dall.txt')
@@ -663,7 +682,10 @@ var Application = React.createClass({
     } else {
       page = $.div(null,
                    $.h2(null, 'Locate 3Dall.txt'),
-                   Uploader({ handleData: this.handleUpload }));
+                   Uploader({ handleData: this.handleUpload }),
+                   $.h3(null, 'or'),
+                   Button({ value: 'Use built-in data',
+                            submit: this.useBuiltin }));
     }
 
     return $.div(null,
@@ -672,6 +694,6 @@ var Application = React.createClass({
   }
 });
 
-var app = Application({ server: true });
+var app = Application();
 
 React.renderComponent(app, document.getElementById('react-main'));
