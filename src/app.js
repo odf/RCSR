@@ -657,6 +657,10 @@ var Application = React.createClass({
 
     if (this.state.data) {
       page = $.div(null,
+                   $.p(null,
+                       (this.state.useServerData
+                        ? '(Using built-in data)'
+                        : '(Using your data)')),
                    $.ul({ className: 'plainList columnBox' },
                         $.li({ className: 'column fixed' },
                              SearchForm({
