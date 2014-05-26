@@ -452,7 +452,7 @@ var NetImage = React.createClass({
       this.setState({ full: !this.state.full });
   },
   render: function() {
-    var base = 'http://rcsr.anu.edu.au/webimgs/';
+    var base = 'http://rcsr.net/webimgs/';
     var symbol = this.props.symbol;
     var src = base + (this.state.full
                       ? 'NetPics/' + symbol + '.jpg'
