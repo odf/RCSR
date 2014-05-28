@@ -630,16 +630,10 @@ var Application = React.createClass({
 
   getInitialState: function() {
     return {
-      useServerData: false,
-      data         : null,
-      results      : null
+      loading: false,
+      data   : null,
+      results: null
     }
-  },
-  handleUpload: function(data) {
-    this.setState({ data: parse(data) });
-  },
-  useBuiltin: function() {
-    this.setState({ useServerData: true });
   },
   onFormSubmit: function(inputs, value) {
     if (value == 'Search')
@@ -654,6 +648,23 @@ var Application = React.createClass({
   render: function() {
     var page;
     var values = this.state.reset ? {} : null;
+    var useData = function(data) {
+      this.setState({ data: parse(data) });
+    }.bind(this);
+    var loading = function(val) {
+      this.setState({ loading: val });
+    }.bind(this);
+
+    var load = function() {
+      cc.go(function*() {
+        var res;
+        loading(true);
+        res = yield cc.nbind(agent.get)('public/3dall.txt');
+        if (res.ok)
+          useData(res.text);
+        loading(false);
+      }).then(null, function(ex) { alert(ex); });
+    };
 
     if (this.state.data) {
       page = $.div(null,
@@ -669,31 +680,18 @@ var Application = React.createClass({
                              })),
                         $.li({ className: 'column' },
                              Results({ results: this.state.results }))));
-    } else if (this.state.useServerData) {
-      page = $.p(null, 'Loading data...');
-      agent
-        .get('public/3dall.txt')
-        .set('Accept', 'text/plain')
-        .end(function(res){
-          if (res.ok) {
-            this.setState({
-              data: parse(res.text)
-            });
-          } else {
-            alert('Oh no! error ' + res.text);
-          }
-        }.bind(this));
     } else {
       page = $.div(null,
                    $.h2(null, 'Locate 3Dall.txt'),
-                   Uploader({ handleData: this.handleUpload }),
+                   Uploader({ handleData: useData }),
                    $.h3(null, 'or'),
                    Button({ value: 'Use built-in data',
-                            submit: this.useBuiltin }));
+                            submit: load }));
     }
 
     return $.div(null,
                  $.h1(null, 'RCSR'),
+                 this.state.loading ? $.p(null, "Loading...") : null,
                  page);
   }
 });
