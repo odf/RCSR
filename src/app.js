@@ -652,7 +652,7 @@ var Application = React.createClass({
       this.setState({ data: parse(data) });
     }.bind(this);
     var loading = function(val) {
-      this.setState({ loading: val });
+      this.setState({ loading: val, usingServerData: true });
     }.bind(this);
 
     var load = function() {
@@ -669,7 +669,7 @@ var Application = React.createClass({
     if (this.state.data) {
       page = $.div(null,
                    $.p(null,
-                       (this.state.useServerData
+                       (this.state.usingServerData
                         ? '(Using built-in data)'
                         : '(Using your data)')),
                    $.ul({ className: 'plainList columnBox' },
