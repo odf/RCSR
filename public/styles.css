@@ -31,6 +31,36 @@ a:link {
     text-decoration: none;
 }
 
+.logoText {
+    font-size: 22.8px;
+    font-family: verdana, arial, sans-serif;
+    vertical-align: 40%;
+    margin: 5px;
+}
+
+.navBar {
+    font-family: verdana, arial, sans-serif;
+    background-color: #7F9AC7;
+    padding: 5px;
+    border-bottom: 4px solid #cdf;
+    border-top: 4px solid #cdf;
+    margin: 0 -8px;
+}
+
+.navBar * {
+    display: inline;
+    color: #F7F4EB;
+}
+
+.pageLinks {
+    list-style: none;
+}
+
+.pageLinks a:link {
+    margin: 5px;
+    text-decoration: underline;
+}
+
 .error, .error * {
     color: red;
 }

@@ -731,7 +731,20 @@ var Application = React.createClass({
     var component = resolveRoute(this.props.path);
 
     return $.div({ key: this.props.path },
-                 $.h1(null, 'RCSR' + this.props.path),
+                 $.div(null,
+                       $.img({ src: '/public/images/rcsr_logo.gif' }),
+                       $.span({ className: 'logoText' }, 'RCSR')),
+                 $.div({ className: 'navBar' },
+                       $.span({ className: 'tagline' },
+                              'Reticular Chemistry Structure Resource'),
+                       $.ul({ className: 'pageLinks' },
+                            $.li(null, $.a({ href: '/nets' }, 'Nets')),
+                            $.li(null, '|'),
+                            $.li(null, $.a({ href: '/layers' }, 'Layers')),
+                            $.li(null, '|'),
+                            $.li(null, $.a({ href: '/polyhedra' }, 'Polyhedra'))
+                           )),
+                 $.h1(null, this.props.path),
                  component ? component() : "not found");
   }
 });
