@@ -326,7 +326,7 @@ var makeIndexed = function(text, index) {
 
 var references = function(net) {
   var refs = [];
-  var key, title;
+  var key, title, val;
 
   for (key in { names: 0, keywords: 0, references: 0 }) {
     title = key;
