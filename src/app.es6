@@ -625,8 +625,8 @@ var Results = React.createClass({
 });
 
 
-var Application = React.createClass({
-  displayName: 'Application',
+var Nets = React.createClass({
+  displayName: 'Nets',
 
   getInitialState: function() {
     return {
@@ -690,12 +690,52 @@ var Application = React.createClass({
     }
 
     return $.div(null,
-                 $.h1(null, 'RCSR'),
                  this.state.loading ? $.p(null, "Loading...") : null,
                  page);
   }
 });
 
-var app = Application();
 
-React.renderComponent(app, document.getElementById('react-main'));
+var Layers = React.createClass({
+  displayName: 'Layers',
+
+  render: function() {
+    return $.div(null, "coming soon")
+  }
+});
+
+
+var Polyhedra = React.createClass({
+  displayName: 'Polyhedra',
+
+  render: function() {
+    return $.div(null, "coming soon");
+  }
+});
+
+
+var resolveRoute = function(path) {
+  if (path == '/nets')
+    return Nets;
+  else if (path == '/layers')
+    return Layers;
+  else if (path == '/polyhedra')
+    return Polyhedra;
+};
+
+
+var Application = React.createClass({
+  displayName: 'Application',
+
+  render: function() {
+    var component = resolveRoute(this.props.path);
+
+    return $.div({ key: this.props.path },
+                 $.h1(null, 'RCSR' + this.props.path),
+                 component ? component() : "not found");
+  }
+});
+
+
+React.renderComponent(Application({ path: document.location.pathname }),
+                      document.getElementById('react-main'));

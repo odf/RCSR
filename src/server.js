@@ -9,14 +9,26 @@ var app = express();
 app.use(express.compress());
 
 app.get('/', function(req, res) {
-  res.sendfile('index.html');
+  res.sendfile('index.html', { root: home });
+});
+
+app.get('/nets', function(req, res) {
+  res.sendfile('app.html', { root: home });
+});
+
+app.get('/layers', function(req, res) {
+  res.sendfile('app.html', { root: home });
+});
+
+app.get('/polyhedra', function(req, res) {
+  res.sendfile('app.html', { root: home });
 });
 
 app.get('/public/*', function(req, res) {
   res.sendfile(req.params[0], { root: home });
 });
 
-app.get('/public', function(req, res) {
+app.get('*', function(req, res) {
   res.send(404);
 });
 
