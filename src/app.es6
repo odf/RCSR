@@ -625,6 +625,36 @@ var Results = React.createClass({
 });
 
 
+var Home = React.createClass({
+  displayName: 'Home',
+
+  render: function() {
+    var greeting = 'Welcome to the Reticular Chemistry Structure Resource';
+
+    return $.div({ className: 'homePage' },
+                 $.h1({ className: 'center' }, greeting),
+                 $.img({ className: 'center', 
+                         src: '/public/images/CRC_sphere_pic.jpg' }),
+                 $.h2({ className: 'center' },
+                      'Department of Chemistry and Biochemistry',
+                      $.br(),
+                      'University of California, Los Angeles'),
+                 $.h2({ className: 'center' },
+                      'Department of Chemistry and Biochemistry',
+                      $.br(),
+                      'Arizona State University'),
+                 $.h2({ className: 'center' },
+                      'Department of Applied Mathematics',
+                      $.br(),
+                      'Australian National University'),
+                 $.h2({ className: 'center' },
+                      'NCI Vizlab',
+                      $.br(),
+                      'Australian National University'));
+  }
+});
+
+
 var Nets = React.createClass({
   displayName: 'Nets',
 
@@ -721,6 +751,8 @@ var resolveRoute = function(path) {
     return Layers;
   else if (path == '/polyhedra')
     return Polyhedra;
+  else
+    return Home;
 };
 
 
@@ -738,13 +770,14 @@ var Application = React.createClass({
                        $.span({ className: 'tagline' },
                               'Reticular Chemistry Structure Resource'),
                        $.ul({ className: 'pageLinks' },
+                            $.li(null, $.a({ href: '/' }, 'Home')),
+                            $.li(null, '|'),
                             $.li(null, $.a({ href: '/nets' }, 'Nets')),
                             $.li(null, '|'),
                             $.li(null, $.a({ href: '/layers' }, 'Layers')),
                             $.li(null, '|'),
                             $.li(null, $.a({ href: '/polyhedra' }, 'Polyhedra'))
                            )),
-                 $.h1(null, this.props.path),
                  component ? component() : "not found");
   }
 });

@@ -35,6 +35,22 @@ a:link {
     text-decoration: none;
 }
 
+.homePage h1, .homePage h2 {
+    font-family: verdana, arial, sans-serif;
+    font-weight: normal;
+    margin: 50px 0;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1.center, h2.center, h3.center, h4.center, p.center {
+    text-align: center;
+}
+
 .logoText {
     font-size: 22.8px;
     font-family: verdana, arial, sans-serif;
