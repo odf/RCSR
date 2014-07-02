@@ -686,6 +686,7 @@ var Nets = React.createClass({
   render: function() {
     return $.div(null,
                  $.h1(null, 'Search Nets'),
+                 this.props.info ? $.p(null, '(' + this.props.info + ')') : null,
                  $.ul({ className: 'plainList columnBox' },
                       $.li({ className: 'column fixed' },
                            SearchForm({
@@ -694,79 +695,6 @@ var Nets = React.createClass({
                            })),
                       $.li({ className: 'column' },
                            Results({ results: this.state.results }))));
-  }
-});
-
-
-var Admin = React.createClass({
-  displayName: 'Admin',
-
-  getInitialState: function() {
-    return {
-      loading: false,
-      data   : null,
-      results: null
-    }
-  },
-  onFormSubmit: function(inputs, value) {
-    if (value == 'Search')
-      this.setState({
-        results: search(this.state.data, makeQuery(inputs)),
-        reset  : false });
-    else
-      this.setState({
-        reset: true
-      });
-  },
-  render: function() {
-    var page;
-    var values = this.state.reset ? {} : null;
-    var useData = function(data) {
-      if (this.isMounted())
-        this.setState({ data: parse(data) });
-    }.bind(this);
-    var loading = function(val) {
-      if (this.isMounted())
-        this.setState({ loading: val, usingServerData: true });
-    }.bind(this);
-
-    var load = function() {
-      cc.go(function*() {
-        var res;
-        loading(true);
-        res = yield cc.nbind(agent.get)('public/3dall.txt');
-        if (res.ok)
-          useData(res.text);
-        loading(false);
-      }).then(null, function(ex) { alert(ex); });
-    };
-
-    if (this.state.data) {
-      page = $.div(null,
-                   $.p(null,
-                       (this.state.usingServerData
-                        ? '(Using built-in data)'
-                        : '(Using your data)')),
-                   $.ul({ className: 'plainList columnBox' },
-                        $.li({ className: 'column fixed' },
-                             SearchForm({
-                               onSubmit: this.onFormSubmit,
-                               values: values
-                             })),
-                        $.li({ className: 'column' },
-                             Results({ results: this.state.results }))));
-    } else {
-      page = $.div(null,
-                   $.h2(null, 'Locate 3Dall.txt'),
-                   Uploader({ handleData: useData }),
-                   $.h3(null, 'or'),
-                   Button({ value: 'Use built-in data',
-                            submit: load }));
-    }
-
-    return $.div(null,
-                 this.state.loading ? $.p(null, "Loading...") : null,
-                 page);
   }
 });
 
@@ -808,9 +736,48 @@ var Loader = React.createClass({
   },
   render: function() {
     if (this.state.data)
-      return this.props.component({ data: this.state.data });
+      return this.props.component({ data: this.state.data,
+                                    info: this.props.info });
     else
       return $.div(null, $.p(null, "Loading data..."));
+  }
+});
+
+
+var Admin = React.createClass({
+  displayName: 'Admin',
+
+  getInitialState: function() {
+    return {
+      deferred: null,
+      info: null
+    }
+  },
+  render: function() {
+    if (this.state.deferred)
+      return Loader({
+        component: Nets,
+        deferred : this.state.deferred,
+        info     : this.state.info
+      });
+    else
+      return $.div(null,
+                   $.h2(null, 'Locate 3Dall.txt'),
+                   Uploader({
+                     handleData: function(data) {
+                       this.setState({
+                         deferred: parse(data),
+                         info    : 'user-defined data'
+                       });
+                     }.bind(this)
+                   }),
+                   $.h3(null, 'or'),
+                   Button({
+                     value: 'Use built-in data',
+                     submit: function() {
+                       this.setState({ deferred: builtinNetData() });
+                     }.bind(this)
+                   }));
   }
 });
 
@@ -850,7 +817,9 @@ var Application = React.createClass({
                             $.li(null, '|'),
                             $.li(null, $.a({ href: '/layers' }, 'Layers')),
                             $.li(null, '|'),
-                            $.li(null, $.a({ href: '/polyhedra' }, 'Polyhedra'))
+                            $.li(null, $.a({ href: '/polyhedra' }, 'Polyhedra')),
+                            $.li(null, '|'),
+                            $.li(null, $.a({ href: '/admin' }, 'Admin'))
                            )),
                  resolveRoute(this.props.path));
   }
