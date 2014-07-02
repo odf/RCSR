@@ -35,9 +35,12 @@ a:link {
     text-decoration: none;
 }
 
-.homePage h1, .homePage h2 {
+h1, h2 {
     font-family: verdana, arial, sans-serif;
     font-weight: normal;
+}
+
+.homePage h1, .homePage h2 {
     margin: 50px 0;
 }
 

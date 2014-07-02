@@ -24,6 +24,10 @@ app.get('/polyhedra', function(req, res) {
   res.sendfile('app.html', { root: home });
 });
 
+app.get('/admin', function(req, res) {
+  res.sendfile('app.html', { root: home });
+});
+
 app.get('/public/*', function(req, res) {
   res.sendfile(req.params[0], { root: home });
 });

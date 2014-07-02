@@ -42,11 +42,12 @@ var Uploader = React.createClass({
 
   loadFile: function(event) {
     var files = event.target.files;
+    var handleData = this.props.handleData;
 
     if (files[0]) {
       cc.go(function*() {
-        this.props.handleData(yield loadFile(files[0]));
-      }.bind(this)).then(null, function(ex) { throw ex; });
+        handleData(yield loadFile(files[0]));
+      }).then(null, function(ex) { throw ex; });
     }
   },
   render: function() {
@@ -660,6 +661,58 @@ var Nets = React.createClass({
 
   getInitialState: function() {
     return {
+      data   : null,
+      results: null
+    }
+  },
+  componentDidMount: function() {
+    var component = this;
+
+    cc.go(function*() {
+      var res = yield cc.nbind(agent.get)('public/3dall.txt');
+      if (res.ok && component.isMounted())
+        component.setState({ data: parse(res.text) });
+    }).then(null, function(ex) {
+      alert(ex + '\n' + ex.stack);
+    });
+  },
+  onFormSubmit: function(inputs, value) {
+    if (value == 'Search')
+      this.setState({
+        results: search(this.state.data, makeQuery(inputs)),
+        reset  : false });
+    else
+      this.setState({
+        reset: true
+      });
+  },
+  render: function() {
+    var page;
+    var values = this.state.reset ? {} : null;
+
+    if (this.state.data) {
+      return $.div(null,
+                   $.h1(null, 'Search Nets'),
+                   $.ul({ className: 'plainList columnBox' },
+                        $.li({ className: 'column fixed' },
+                             SearchForm({
+                               onSubmit: this.onFormSubmit,
+                               values: values
+                             })),
+                        $.li({ className: 'column' },
+                             Results({ results: this.state.results }))));
+    } else {
+      return $.div(null, $.p(null, "Loading data..."));
+    }
+  }
+});
+
+
+var Admin = React.createClass({
+  displayName: 'Admin',
+
+  getInitialState: function() {
+    return {
       loading: false,
       data   : null,
       results: null
@@ -679,10 +732,12 @@ var Nets = React.createClass({
     var page;
     var values = this.state.reset ? {} : null;
     var useData = function(data) {
-      this.setState({ data: parse(data) });
+      if (this.isMounted())
+        this.setState({ data: parse(data) });
     }.bind(this);
     var loading = function(val) {
-      this.setState({ loading: val, usingServerData: true });
+      if (this.isMounted())
+        this.setState({ loading: val, usingServerData: true });
     }.bind(this);
 
     var load = function() {
@@ -751,6 +806,8 @@ var resolveRoute = function(path) {
     return Layers;
   else if (path == '/polyhedra')
     return Polyhedra;
+  else if (path == '/admin')
+    return Admin;
   else
     return Home;
 };
