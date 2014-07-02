@@ -11,6 +11,10 @@ html {
     background-color: #fdfdfc;
 }
 
+body {
+    margin: 12px;
+}
+
 table {
     border-collapse: collapse;
     margin: 12px 0;
@@ -41,10 +45,11 @@ a:link {
 .navBar {
     font-family: verdana, arial, sans-serif;
     background-color: #7F9AC7;
-    padding: 5px;
+    padding: 5px 12px;
     border-bottom: 4px solid #cdf;
     border-top: 4px solid #cdf;
-    margin: 0 -8px;
+    margin: 0 -12px;
+    position: relative;
 }
 
 .navBar * {
@@ -54,11 +59,19 @@ a:link {
 
 .pageLinks {
     list-style: none;
+    position: absolute;
+    margin: 0;
+    bottom: 20%;
+    right: 10%;
 }
 
 .pageLinks a:link {
     margin: 5px;
     text-decoration: underline;
+}
+
+.pageLinks a:hover {
+    color: white;
 }
 
 .error, .error * {
