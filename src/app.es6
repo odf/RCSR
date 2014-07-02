@@ -656,30 +656,27 @@ var Home = React.createClass({
 });
 
 
+var builtinNetData = function() {
+  return cc.go(function*() {
+    var res = yield cc.nbind(agent.get)('public/3dall.txt');
+    if (res.ok)
+      return parse(res.text);
+  });
+};
+
+
 var Nets = React.createClass({
   displayName: 'Nets',
 
   getInitialState: function() {
     return {
-      data   : null,
       results: null
     }
-  },
-  componentDidMount: function() {
-    var component = this;
-
-    cc.go(function*() {
-      var res = yield cc.nbind(agent.get)('public/3dall.txt');
-      if (res.ok && component.isMounted())
-        component.setState({ data: parse(res.text) });
-    }).then(null, function(ex) {
-      alert(ex + '\n' + ex.stack);
-    });
   },
   onFormSubmit: function(inputs, value) {
     if (value == 'Search')
       this.setState({
-        results: search(this.state.data, makeQuery(inputs)),
+        results: search(this.props.data, makeQuery(inputs)),
         reset  : false });
     else
       this.setState({
@@ -687,23 +684,16 @@ var Nets = React.createClass({
       });
   },
   render: function() {
-    var page;
-    var values = this.state.reset ? {} : null;
-
-    if (this.state.data) {
-      return $.div(null,
-                   $.h1(null, 'Search Nets'),
-                   $.ul({ className: 'plainList columnBox' },
-                        $.li({ className: 'column fixed' },
-                             SearchForm({
-                               onSubmit: this.onFormSubmit,
-                               values: values
-                             })),
-                        $.li({ className: 'column' },
-                             Results({ results: this.state.results }))));
-    } else {
-      return $.div(null, $.p(null, "Loading data..."));
-    }
+    return $.div(null,
+                 $.h1(null, 'Search Nets'),
+                 $.ul({ className: 'plainList columnBox' },
+                      $.li({ className: 'column fixed' },
+                           SearchForm({
+                             onSubmit: this.onFormSubmit,
+                             values  : this.state.reset ? {} : null
+                           })),
+                      $.li({ className: 'column' },
+                           Results({ results: this.state.results }))));
   }
 });
 
@@ -799,17 +789,46 @@ var Polyhedra = React.createClass({
 });
 
 
+var Loader = React.createClass({
+  displayName: 'Loader',
+
+  getInitialState: function() {
+    return {
+      data: null
+    }
+  },
+  componentDidMount: function() {
+    cc.go(function*() {
+      var data = yield this.props.deferred;
+      if (this.isMounted())
+        this.setState({ data: data });
+    }.bind(this)).then(null, function(ex) {
+      alert(ex + '\n' + ex.stack);
+    });
+  },
+  render: function() {
+    if (this.state.data)
+      return this.props.component({ data: this.state.data });
+    else
+      return $.div(null, $.p(null, "Loading data..."));
+  }
+});
+
+
 var resolveRoute = function(path) {
   if (path == '/nets')
-    return Nets;
+    return Loader({
+      component: Nets,
+      deferred: builtinNetData()
+    });
   else if (path == '/layers')
-    return Layers;
+    return Layers();
   else if (path == '/polyhedra')
-    return Polyhedra;
+    return Polyhedra();
   else if (path == '/admin')
-    return Admin;
+    return Admin();
   else
-    return Home;
+    return Home();
 };
 
 
@@ -817,8 +836,6 @@ var Application = React.createClass({
   displayName: 'Application',
 
   render: function() {
-    var component = resolveRoute(this.props.path);
-
     return $.div({ key: this.props.path },
                  $.div(null,
                        $.img({ src: '/public/images/rcsr_logo.gif' }),
@@ -835,7 +852,7 @@ var Application = React.createClass({
                             $.li(null, '|'),
                             $.li(null, $.a({ href: '/polyhedra' }, 'Polyhedra'))
                            )),
-                 component ? component() : "not found");
+                 resolveRoute(this.props.path));
   }
 });
 
