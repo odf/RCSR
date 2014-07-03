@@ -7,6 +7,8 @@ var cc        = require('ceci-core');
 
 var parseNets = require('./parse-3dall');
 var Nets      = require('./Nets');
+var Layers    = require('./Layers');
+var Polyhedra = require('./Polyhedra');
 
 
 window.React = React; // wakes up the React Developer Tools
@@ -92,24 +94,6 @@ var builtinNetData = function() {
       return parseNets(res.text);
   });
 };
-
-
-var Layers = React.createClass({
-  displayName: 'Layers',
-
-  render: function() {
-    return $.div(null, "coming soon")
-  }
-});
-
-
-var Polyhedra = React.createClass({
-  displayName: 'Polyhedra',
-
-  render: function() {
-    return $.div(null, "coming soon");
-  }
-});
 
 
 var Loader = React.createClass({
