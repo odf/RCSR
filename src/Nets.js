@@ -5,7 +5,6 @@ var React    = require('react');
 var validate = require('plexus-validate');
 var Form     = require('plexus-form');
 
-var parse    = require('./parse-3dall');
 var search   = require('./search');
 
 

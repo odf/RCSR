@@ -1,16 +1,12 @@
 'use strict';
 
-var React    = require('react');
-var agent    = require('superagent');
+var React     = require('react');
+var agent     = require('superagent');
 
-var cc       = require('ceci-core');
-var validate = require('plexus-validate');
-var Form     = require('plexus-form');
+var cc        = require('ceci-core');
 
-var parse    = require('./parse-3dall');
-var search   = require('./search');
-
-var Nets     = require('./Nets');
+var parseNets = require('./parse-3dall');
+var Nets      = require('./Nets');
 
 
 window.React = React; // wakes up the React Developer Tools
@@ -93,7 +89,7 @@ var builtinNetData = function() {
   return cc.go(function*() {
     var res = yield cc.nbind(agent.get)('public/3dall.txt');
     if (res.ok)
-      return parse(res.text);
+      return parseNets(res.text);
   });
 };
 
@@ -165,7 +161,7 @@ var Admin = React.createClass({
                    Uploader({
                      handleData: function(data) {
                        this.setState({
-                         deferred: parse(data),
+                         deferred: parseNets(data),
                          info    : 'user-defined data'
                        });
                      }.bind(this)
