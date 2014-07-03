@@ -1,0 +1,47 @@
+start
+number
+symbol
+nos  !number of other symbols
+nos lines 
+nn  !number of names
+nn lines
+non  ! number of other names
+non lines
+nk  ! number of keywords
+nk lines
+point symmetry
+space group
+face symbol
+knds of vertex, kinds of edge, kinds of face (nkv, nke, nkf)
+number vertices (nv), number edges (ne), number faces (nf)
+number of vertex symbols (nvs)
+next two lines nvs times
+vertex symbol, coordination
+x, y, z
+number of face symbols (nfs)
+next two lines nfs times
+face symbol, number of edges
+x, y, z
+
+
+search by symbol, name, keyword
+
+keywords:
+
+archimedean
+cage
+catalan
+cubic
+delthedron
+icosahedral
+regular 
+simple
+simplicial
+space filling
+
+search by attributes (from to)
+number of vertices
+number of faces
+kinds of vertex
+kinds of edge
+kinds of face

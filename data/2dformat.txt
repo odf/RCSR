@@ -1,0 +1,44 @@
+start
+number
+symbol
+no   ! number of other symbols
+no lines 
+nn   ! number of names
+nn lines
+non  ! number of other names
+non lines
+nk   ! number of keywords
+nk lines
+2-periodic group
+3-periodic group group
+a b c alpha beta gamma 
+number of kinds of vertex (nkv) (then next five lines nkv times)
+vertexname coordination
+x, y, x
+symbolic
+cs1 cs2 cs3 cs4 cs5 cs6 cs7 cs8 cs9 cs10 cum
+vertexsymbol
+................................................................
+
+last two lines are 
+start
+-1
+................................................................
+
+search by symbol, name, keywords
+
+keywords:
+regular 
+archimedean
+isohedral
+plane
+layer
+
+search by attributes (from to)
+kinds of vertex
+coordinatiom
+TD10
+
+Note TD 10 and coordination treated as in 3D (nets) case.
+
+
