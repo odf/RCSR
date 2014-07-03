@@ -3,7 +3,7 @@
 var fs = require('fs');
 var cc = require('ceci-core');
 
-var parse  = require('./src/parse-3dall');
+var parse  = require('./src/parse-' + (process.argv[3] || '3') + 'dall');
 
 var fileContents = function(path) {
   return cc.nbind(fs.readFile, fs)(path, { encoding: 'utf8' });
