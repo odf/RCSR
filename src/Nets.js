@@ -5,7 +5,7 @@ var React    = require('react');
 var validate = require('plexus-validate');
 var Form     = require('plexus-form');
 
-var search   = require('./search');
+var search   = require('./search-nets');
 
 
 var $ = React.DOM;
