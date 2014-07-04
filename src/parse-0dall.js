@@ -42,7 +42,7 @@ var parseVertex = function(lines, startIndex) {
   var result = {};
   var tmp = lines[startIndex].split(/\s+/);
 
-  result.symbol = tmp[0];
+  result.name = tmp[0];
   result.coordination = parseInteger(tmp[1]);
 
   result.coordinates = lines[startIndex+1].split(/\s+/).map(parseFloat);
@@ -55,7 +55,7 @@ var parseFace = function(lines, startIndex) {
   var result = {};
   var tmp = lines[startIndex].split(/\s+/);
 
-  result.symbol = tmp[0];
+  result.name = tmp[0];
   result.numberOfEdges = parseInteger(tmp[1]);
 
   result.coordinates = lines[startIndex+1].split(/\s+/).map(parseFloat);

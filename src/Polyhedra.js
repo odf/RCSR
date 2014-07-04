@@ -50,11 +50,11 @@ var makeBoundsProperties = function(names) {
 
 
 var keywords = [
-  "archimedean",
+  "Archimedean",
   "cage",
-  "catalan",
+  "Catalan",
   "cubic",
-  "delthedron",
+  "deltahedron",
   "icosahedral",
   "regular ",
   "simple",
@@ -207,6 +207,13 @@ var SearchForm = React.createClass({
 });
 
 
+var makeLine = function(title, values) {
+  return $.span(null,
+                $.span({ className: 'bold' }, title + ': '),
+                $.span(null, values.join(', ')))
+};
+
+
 var makeTable = function(headers, values) {
   return $.table(null,
                  $.thead(null,
@@ -218,6 +225,88 @@ var makeTable = function(headers, values) {
                            return $.tr({ key: i }, row.map(function(s, i) {
                              return $.td({ key: i }, s);
                            }));
+                         })));
+};
+
+
+var references = function(poly) {
+  var refs = [];
+  var key, title, val;
+
+  for (key in { names: 0, keywords: 0 }) {
+    title = key;
+    val = poly[key];
+
+    if (key == 'keywords') {
+      title = 'key words';
+      val = val.filter(function(x) { return keywords.indexOf(x) >= 0; });
+    }
+
+    if (val.length > 0)
+      refs.push($.li({ key: key }, makeLine(title, val)));
+  }
+
+  return refs;
+};
+
+
+var properties = function(poly) {
+  return makeTable(['symmetry', 'face symbol', 'space group'],
+                   [[ poly.pointSymmetry,
+                      poly.faceSymbol,
+                      poly.spacegroupSymbol ]]);
+};
+
+
+var kinds = function(poly) {
+  return makeTable(['kinds of vertex', 'kinds of edge', 'kinds of face'],
+                   [[ poly.kindsOfVertex,
+                      poly.kindsOfEdge,
+                      poly.kindsOfFace ]]);
+};
+
+
+var numbers = function(poly) {
+  return makeTable(['number of vertices', 'number of edges', 'number of faces'],
+                   [[ poly.numberOfVertices,
+                      poly.numberOfEdges,
+                      poly.numberOfFaces ]]);
+};
+
+
+var f = function(val) {
+  return val.toFixed(4);
+};
+
+
+var vertices = function(poly) {
+  return $.div(null,
+               $.p(null, makeLine('vertices', [poly.vertices.length])),
+               makeTable(['vertex', 'coordination', 'x', 'y', 'z'],
+                         poly.vertices.map(function(v) {
+                           return [
+                             v.name,
+                             v.coordination,
+                             f(v.coordinates[0]),
+                             f(v.coordinates[1]),
+                             f(v.coordinates[2])
+                           ];
+                         })));
+};
+
+
+var faces = function(poly) {
+  return $.div(null,
+               $.p(null, makeLine('faces', [poly.faces.length])),
+               makeTable(['vertex', 'coordination', 'x', 'y', 'z'],
+                         poly.faces.map(function(face) {
+                           return [
+                             face.name,
+                             face.numberOfEdges,
+                             f(face.coordinates[0]),
+                             f(face.coordinates[1]),
+                             f(face.coordinates[2])
+                           ];
                          })));
 };
 
@@ -243,6 +332,29 @@ var PolyhedronImage = React.createClass({
       return Link({ onClick: this.toggle }, $.img({ src: src, alt: '' }));
     else
       return $.img({ src: src, alt: '', onClick: this.toggle });
+  }
+});
+
+
+var Polyhedron = React.createClass({
+  displayName: 'Polyhedron',
+
+  render: function() {
+    var poly = this.props.polyhedron;
+
+    return $.div(null,
+                 $.h2(null, poly.symbol),
+                 $.p(null, PolyhedronImage({
+                   symbol: poly.symbol,
+                   mayEnlarge: true
+                 })),
+                 $.ul({ className: 'plainList' }, references(poly)),
+                 properties(poly),
+                 kinds(poly),
+                 numbers(poly),
+                 vertices(poly),
+                 faces(poly)
+                );
   }
 });
 
