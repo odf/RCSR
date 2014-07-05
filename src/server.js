@@ -24,7 +24,7 @@ app.get('/polyhedra', function(req, res) {
   res.sendfile('app.html', { root: home });
 });
 
-app.get('/admin', function(req, res) {
+app.get('/testing', function(req, res) {
   res.sendfile('app.html', { root: home });
 });
 

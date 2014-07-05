@@ -115,8 +115,8 @@ var Loader = React.createClass({
 });
 
 
-var Admin = React.createClass({
-  displayName: 'Admin',
+var Testing = React.createClass({
+  displayName: 'Testing',
 
   getInitialState: function() {
     return {
@@ -140,13 +140,6 @@ var Admin = React.createClass({
                          deferred: parseNets(data),
                          info    : 'user-defined data'
                        });
-                     }.bind(this)
-                   }),
-                   $.h3(null, 'or'),
-                   Button({
-                     value: 'Use built-in data',
-                     submit: function() {
-                       this.setState({ deferred: builtinNetData() });
                      }.bind(this)
                    }));
   }
@@ -184,8 +177,8 @@ var resolveRoute = function(path) {
       component: Polyhedra,
       deferred: builtinPolyData()
     });
-  else if (path == '/admin')
-    return Admin();
+  else if (path == '/testing')
+    return Testing();
   else
     return Home();
 };
@@ -211,7 +204,7 @@ var Application = React.createClass({
                             $.li(null, '|'),
                             $.li(null, $.a({ href: '/polyhedra' }, 'Polyhedra')),
                             $.li(null, '|'),
-                            $.li(null, $.a({ href: '/admin' }, 'Admin'))
+                            $.li(null, $.a({ href: '/testing' }, 'Testing'))
                            )),
                  resolveRoute(this.props.path));
   }
