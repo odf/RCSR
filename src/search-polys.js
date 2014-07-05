@@ -46,8 +46,9 @@ var matcher = {
     return search(s, m, item.names) || search(s, m, item.otherNames);
   },
   keywords: function(item, values) {
+    var keywords = item.keywords.map(function(s) { return s.toLowerCase(); });
     for (var i in values)
-      if (item.keywords.indexOf(values[i].toLowerCase()) < 0)
+      if (keywords.indexOf(values[i].toLowerCase()) < 0)
         return false;
     return true;
   },

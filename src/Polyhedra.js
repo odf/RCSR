@@ -56,10 +56,10 @@ var keywords = [
   "cubic",
   "deltahedron",
   "icosahedral",
-  "regular ",
+  "regular",
   "simple",
   "simplicial",
-  "space filling"
+  "spacefilling"
 ];
 
 
