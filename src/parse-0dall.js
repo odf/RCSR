@@ -129,7 +129,11 @@ var parseStructure = function(lines, startIndex) {
 };
 
 
-var checkStructure = function(net) {
+var checkStructure = function(poly) {
+  var chi = poly.numberOfFaces - poly.numberOfEdges + poly.numberOfVertices;
+  if (chi != 2)
+    console.log("WARNING: " + poly.symbol +
+                " - Euler characteristic is " + chi);
 };
 
 
