@@ -251,9 +251,10 @@ var references = function(poly) {
 
 
 var properties = function(poly) {
-  return makeTable(['symmetry', 'face symbol', 'space group'],
+  return makeTable(['symmetry', 'face symbol', 'dual', 'space group'],
                    [[ poly.pointSymmetry,
                       poly.faceSymbol,
+                      poly.dual,
                       poly.spacegroupSymbol ]]);
 };
 

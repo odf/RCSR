@@ -1,6 +1,7 @@
 start
 1
 snc
+unk
 0     !number of other symbols
 2     !number of names
 snub cube
@@ -27,8 +28,8 @@ F3 3
 start
 2
 ico
-1     !number of other symbols
-dod-d
+dod
+0     !number of other symbols
 3     !number of names
 icosahedon
 3^5
@@ -55,8 +56,8 @@ F1b 3
 start
 3
 dod
-1     !number of other symbols
-ico-d
+ico
+0     !number of other symbols
 2     !number of names
 dodecahedron
 5^3
@@ -81,8 +82,8 @@ F1 5
 start
 4
 rdo
-1     !number of other symbols
-cbo-d
+cbo
+0     !number of other symbols
 1     !number of names
 rhombic dodecahedron
 0     !number of other names
@@ -106,6 +107,7 @@ F1 4
 start
 5
 ada
+unk
 0     !number of other symbols
 2     !number of names
 adamantane cage
@@ -131,6 +133,7 @@ F1 6
 start
 6
 tid
+unk
 1     !number of other symbols
 ido-a
 2     !number of names
@@ -171,6 +174,7 @@ F3b 4
 start
 7
 pbc
+unk
 0     !number of other symbols
 1     !number of names
 BaCd11 polyhedron
@@ -206,6 +210,7 @@ F6 3
 start
 8
 tmp
+unk
 0     !number of other symbols
 1     !number of names
 ThMn12 polyhedron
@@ -235,8 +240,8 @@ F4 3
 start
 9
 cub
-1     !number of other symbols
-oct-d
+oct
+0     !number of other symbols
 2     !number of names
 cube
 4^3
@@ -259,8 +264,8 @@ F1 4
 start
 10
 oct
-1     !number of other symbols
-cub-d
+cub
+0     !number of other symbols
 2     !number of names
 octahedron
 3^4
@@ -284,8 +289,8 @@ F1 4
 start
 11
 tet
-1     !number of other symbols
-tet-d
+tet
+0     !number of other symbols
 2     !number of names
 tetrahedron
 3^3
@@ -310,8 +315,8 @@ F1 3
 start
 12
 cuo
-1     !number of other symbols
-rdo-d
+rdo
+0     !number of other symbols
 2     !number of names
 cuboctahedron
 3.4.3.4
@@ -335,6 +340,7 @@ F2 3
 start
 13
 tro
+unk
 1     !number of other symbols
 oct-a
 4     !number of names
@@ -364,6 +370,7 @@ F2 6
 start
 14
 tte
+unk
 1     !number of other symbols
 tet-a
 2     !number of names
@@ -390,6 +397,7 @@ F2 3
 start
 15
 tcu
+unk
 1     !number of other symbols
 cub-a
 2     !number of names
@@ -416,6 +424,7 @@ F2 3
 start
 16
 rco
+unk
 0     !number of other symbols
 2     !number of names
 rhombicuboctahedron
@@ -442,6 +451,7 @@ F3 4
 start
 17
 fac
+unk
 0     !number of other symbols
 2     !number of names
 faujasite cage
@@ -472,6 +482,7 @@ F4
 start
 18
 tcz
+unk
 1     !number of other symbols
 oct-a
 3     !number of names
@@ -501,6 +512,7 @@ F3 4
 start
 19
 hxt
+unk
 0     !number of other symbols
 2     !number of names
 hxg tile
@@ -528,6 +540,7 @@ F2 4
 start
 20
 ido
+unk
 0     !number of other symbols
 2     !number of names
 icosidodecahedron
@@ -556,6 +569,7 @@ F2  5
 start
 21
 tdo
+unk
 1     !number of other symbols
 dod-a
 2     !number of names
@@ -588,6 +602,7 @@ F2  10
 start
 22
 tic
+unk
 1     !number of other symbols
 ico-a
 3     !number of names
@@ -622,6 +637,7 @@ F2  5
 start
 23
 ric
+unk
 0     !number of other symbols
 2     !number of names
 rhombiicosidodecahedron
@@ -656,6 +672,7 @@ F3  5
 start
 24
 snd
+unk
 0     !number of other symbols
 2     !number of names
 snub dodecahedron
@@ -702,6 +719,7 @@ F3  5
 start
 25
 hxb
+unk
 0     !number of other symbols
 3     !number of names
 hexagonal barrel
@@ -742,6 +760,7 @@ F3b 5
 start
 26
 tbl
+unk
 0     !number of other symbols
 2     !number of names
 tennis ball
@@ -777,6 +796,7 @@ F4  5
 start
 27
 ods
+unk
 0     !number of other symbols
 2     !number of names
 octadecasil
@@ -802,6 +822,7 @@ F2  6
 start
 28
 sap
+unk
 0     !number of other symbols
 2     !number of names
 square antiprism
@@ -824,6 +845,7 @@ F2  3
 start
 29
 csa
+unk
 0     !number of other symbols
 1     !number of names
 capped square antiprism 
@@ -849,6 +871,7 @@ F2  3
 start
 30
 tct
+unk
 0     !number of other symbols
 1     !number of names
 tricapped trigonal prismprism 
@@ -886,6 +909,7 @@ F3c 3
 start
 31
 bds
+unk
 0     !number of other symbols
 1     !number of names
 bisdisphenoid 
@@ -911,6 +935,7 @@ F2 3
 start
 32
 zap-d
+zap
 0     !number of other symbols
 0     !number of names
 0     !number of other names
@@ -956,6 +981,7 @@ F3b 5
 start
 33
 mcp
+unk
 0     !number of other symbols
 1     !number of names
 Frank-Kasper 16
@@ -982,6 +1008,7 @@ F3  3
 start 
 34
 hap
+unk
 0     !number of other symbols
 2     !number of names
 hexagonal antiprism
@@ -1012,6 +1039,7 @@ F2c 3
 start 
 35
 fkf
+unk
 0     !number of other symbols
 1     !number of names
 Frank-Kasper 14
@@ -1032,13 +1060,11 @@ V1c 5
 V2  6
 0.0000 0.0000 1.0379
 6
-F1  6
-0.0000 0.0000 0.4278
-F2a 3
+F1a 3
 0.6440 0.6440 0.1436
-F2b 3
+F1b 3
 0.8797 0.2357 -0.1436
-F2c 3
+F1c 3
 0.2357 0.8797 -0.1436
 F2a 3
 0.4083 0.4083 0.6318
@@ -1049,6 +1075,7 @@ F2c 3
 start 
 36
 mcp-d
+mcp
 0     !number of other symbols
 0     !number of names
 0     !number of other names
@@ -1074,8 +1101,8 @@ F2 5
 start
 37
 trc
-1     !number of other symbols
-ido-d
+ido
+0     !number of other symbols
 1     !number of names
 rhombic triacontahedron
 0     !number of other names
@@ -1102,6 +1129,7 @@ F1b 4
 start
 38
 trc-a
+unk
 0     !number of other symbols
 1     !number of names
 augmented rhombic triacontahedron
@@ -1140,6 +1168,7 @@ F3b  8
 start
 39
 rdo-a
+unk
 0     !number of other symbols
 1     !number of names
 augmented rhombic dodecahedron
@@ -1165,6 +1194,7 @@ F3 8
 start
 40
 snc-d
+snc
 0     !number of other symbols
 2     !number of names
 snub cube dual
@@ -1190,6 +1220,7 @@ F1 5
 start
 41
 bsp
+unk
 0     !number of other symbols
 1     !number of names
 beta tin dual polyhedron
@@ -1223,6 +1254,7 @@ F4 10
 start
 42
 trp
+unk
 0     !number of other symbols
 1     !number of names
 trigonal prism
@@ -1250,6 +1282,7 @@ F2b 4
 start
 43
 spy
+unk
 0     !number of other symbols
 1     !number of names
 square pyramid
@@ -1273,6 +1306,7 @@ F2 4
 start
 44
 tbp
+unk
 0     !number of other symbols
 1     !number of names
 trigonal bipyramid
@@ -1299,6 +1333,7 @@ F1b 3
 start
 45
 tsz
+unk
 1     !number of other symbols
 rco-a
 1     !number of names
@@ -1329,6 +1364,7 @@ F4 8
 start
 46
 tcz-a
+unk
 0     !number of other symbols
 1     !number of names
 ftm (rho-a) polyhedron
@@ -1360,6 +1396,7 @@ F4 16
 start
 47
 tro-a
+unk
 0     !number of other symbols
 1     !number of names
 augmented truncated octahedron

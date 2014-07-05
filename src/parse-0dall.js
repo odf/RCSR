@@ -11,6 +11,11 @@ var cleanupLine = function(line) {
 };
 
 
+var fixName = function(name) {
+  return name == 'unk' ? '-' : name;
+};
+
+
 var parseInteger = function(s) {
   return parseInt(s);
 };
@@ -83,9 +88,10 @@ var parseStructure = function(lines, startIndex) {
     return null;
 
   result.symbol = lines[++i];
+  result.dual   = fixName(lines[++i]);
   ++i;
 
-  for (key in { 
+  for (key in {
     otherSymbols: 0,
     names       : 0,
     otherNames  : 0,
