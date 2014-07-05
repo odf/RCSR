@@ -299,7 +299,7 @@ var vertices = function(poly) {
 var faces = function(poly) {
   return $.div(null,
                $.p(null, makeLine('faces', [poly.faces.length])),
-               makeTable(['vertex', 'coordination', 'x', 'y', 'z'],
+               makeTable(['face', 'number of edges', 'x', 'y', 'z'],
                          poly.faces.map(function(face) {
                            return [
                              face.name,
