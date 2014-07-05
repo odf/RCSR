@@ -115,29 +115,61 @@ var Loader = React.createClass({
 });
 
 
+var parsers = {
+  "Nets"     : parseNets,
+  "Layers"   : null,
+  "Polyhedra": parsePolys
+};
+
+
+var components = {
+  "Nets"     : Nets,
+  "Layers"   : Layers,
+  "Polyhedra": Polyhedra
+};
+
+
 var Testing = React.createClass({
   displayName: 'Testing',
 
   getInitialState: function() {
     return {
+      type    : "Nets",
       deferred: null,
-      info: null
+      info    : null
     }
+  },
+  handleChange: function(event) {
+    this.setState({ type: event.target.value });
   },
   render: function() {
     if (this.state.deferred)
       return Loader({
-        component: Nets,
+        component: components[this.state.type],
         deferred : this.state.deferred,
         info     : this.state.info
       });
     else
       return $.div(null,
-                   $.h2(null, 'Locate 3Dall.txt'),
+                   $.h2(null, 'Locate data file'),
+                   $.form({ onChange: this.handleChange },
+                          $.p(null,
+                              $.input({ type: "radio", name: "type",
+                                        value: "Nets",
+                                        defaultChecked: true }),
+                              $.label(null, "Nets")),
+                          $.p(null,
+                              $.input({ type: "radio", name: "type",
+                                        value: "Layers" }),
+                              $.label(null, "Layers")),
+                          $.p(null,
+                              $.input({ type: "radio", name: "type",
+                                        value: "Polyhedra" }),
+                              $.label(null, "Polyhedra"))),
                    Uploader({
                      handleData: function(data) {
                        this.setState({
-                         deferred: parseNets(data),
+                         deferred: parsers[this.state.type](data),
                          info    : 'user-defined data'
                        });
                      }.bind(this)
