@@ -223,7 +223,7 @@ var Application = React.createClass({
     return $.div({ key: this.props.path },
                  $.div(null,
                        $.img({ src: '/public/images/rcsr_logo.gif' }),
-                       $.span({ className: 'logoText' }, 'RCSR')),
+                       $.span({ className: 'logoText' }, 'RCSR (beta)')),
                  $.div({ className: 'navBar' },
                        $.span({ className: 'tagline' },
                               'Reticular Chemistry Structure Resource'),
@@ -238,6 +238,11 @@ var Application = React.createClass({
                             $.li(null, '|'),
                             $.li(null, $.a({ href: '/testing' }, 'Testing'))
                            )),
+                 $.p({ className: 'disclaimer' },
+                     'This site is work in progress. ',
+                     'In case of difficulties, please visit ',
+                     $.a({ href: 'http://rcsr.anu.edu.au' },
+                         'http://rcsr.anu.edu.au' )),
                  resolveRoute(this.props.path));
   }
 });
