@@ -585,7 +585,7 @@ var Nets = React.createClass({
 
   getInitialState: function() {
     return {
-      results: null
+      results: search(this.props.data, {})
     }
   },
   onFormSubmit: function(inputs, value) {
