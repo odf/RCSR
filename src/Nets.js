@@ -407,7 +407,7 @@ var NetImage = React.createClass({
       this.setState({ full: !this.state.full });
   },
   render: function() {
-    var base = 'http://rcsr.net/webimgs/';
+    var base = 'http://rcsr.net/public/images/';
     var symbol = this.props.symbol;
     var src = base + (this.state.full
                       ? 'NetPics/' + symbol + '.jpg'
