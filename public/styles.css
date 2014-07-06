@@ -90,6 +90,7 @@ h1.center, h2.center, h3.center, h4.center, p.center {
 
 .pageLinks a:link {
     margin: 5px;
+    color: #F7F4EB;
     text-decoration: underline;
 }
 
