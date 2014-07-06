@@ -26,6 +26,10 @@ th, td {
     padding: 3px;
 }
 
+input {
+    font-family: arial, sans-serif;
+}
+
 input[type=text] {
     width: 16em;
 }
