@@ -117,7 +117,12 @@ var parseStructure = function(lines, startIndex) {
 
   result.cell = parseCell(lines[++i]);
 
-  tmp = parseSection(lines, ++i, parseVertex);
+  tmp = lines[++i].split(/\s+/).map(parseInteger);
+  result.kindsOfVertex = tmp[0];
+  result.kindsOfEdge   = tmp[1];
+  result.kindsOfFace   = tmp[2];
+
+  tmp = parseSection(lines, i, parseVertex);
   result.vertices = tmp.result;
   i = tmp.nextLine;
 

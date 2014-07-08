@@ -1,15 +1,16 @@
 'use strict';
 
-var React      = require('react');
-var agent      = require('superagent');
-var cc         = require('ceci-core');
+var React       = require('react');
+var agent       = require('superagent');
+var cc          = require('ceci-core');
 
-var parseNets  = require('./parse/nets');
-var parsePolys = require('./parse/polys');
+var parseNets   = require('./parse/nets');
+var parseLayers = require('./parse/layers');
+var parsePolys  = require('./parse/polys');
 
-var Nets       = require('./view/nets');
-var Layers     = require('./view/layers');
-var Polyhedra  = require('./view/polys');
+var Nets        = require('./view/nets');
+var Layers      = require('./view/layers');
+var Polyhedra   = require('./view/polys');
 
 
 window.React = React; // wakes up the React Developer Tools
@@ -117,7 +118,7 @@ var Loader = React.createClass({
 
 var parsers = {
   "Nets"     : parseNets,
-  "Layers"   : null,
+  "Layers"   : parseLayers,
   "Polyhedra": parsePolys
 };
 
@@ -187,6 +188,15 @@ var builtinNetData = function() {
 };
 
 
+var builtinLayerData = function() {
+  return cc.go(function*() {
+    var res = yield cc.nbind(agent.get)('public/2dall.txt');
+    if (res.ok)
+      return parseLayers(res.text);
+  });
+};
+
+
 var builtinPolyData = function() {
   return cc.go(function*() {
     var res = yield cc.nbind(agent.get)('public/0dall.txt');
@@ -203,7 +213,10 @@ var resolveRoute = function(path) {
       deferred: builtinNetData()
     });
   else if (path == '/layers')
-    return Layers();
+    return Loader({
+      component: Layers,
+      deferred: builtinLayerData()
+    });
   else if (path == '/polyhedra')
     return Loader({
       component: Polyhedra,
