@@ -8,32 +8,12 @@ var app = express();
 
 app.use(express.compress());
 
-app.get('/', function(req, res) {
-  res.sendfile('app.html', { root: home });
-});
-
-app.get('/nets', function(req, res) {
-  res.sendfile('app.html', { root: home });
-});
-
-app.get('/layers', function(req, res) {
-  res.sendfile('app.html', { root: home });
-});
-
-app.get('/polyhedra', function(req, res) {
-  res.sendfile('app.html', { root: home });
-});
-
-app.get('/testing', function(req, res) {
-  res.sendfile('app.html', { root: home });
-});
-
 app.get('/public/*', function(req, res) {
   res.sendfile(req.params[0], { root: home });
 });
 
 app.get('*', function(req, res) {
-  res.send(404);
+  res.sendfile('app.html', { root: home });
 });
 
 app.listen(3000);
