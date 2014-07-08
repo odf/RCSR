@@ -4,12 +4,12 @@ var React      = require('react');
 var agent      = require('superagent');
 var cc         = require('ceci-core');
 
-var parseNets  = require('./parse-3dall');
-var parsePolys = require('./parse-0dall');
+var parseNets  = require('./parse/nets');
+var parsePolys = require('./parse/polys');
 
-var Nets       = require('./Nets');
-var Layers     = require('./Layers');
-var Polyhedra  = require('./Polyhedra');
+var Nets       = require('./view/nets');
+var Layers     = require('./view/layers');
+var Polyhedra  = require('./view/polys');
 
 
 window.React = React; // wakes up the React Developer Tools
