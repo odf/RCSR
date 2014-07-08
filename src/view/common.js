@@ -180,7 +180,7 @@ common.formatReferences = function(net, kinds, keywords) {
 };
 
 
-common.Link = React.createClass({
+var Link = React.createClass({
   displayName: 'Link',
 
   handleClick: function(event) {
@@ -220,9 +220,121 @@ common.StructureImage = React.createClass({
                       : this.props.prefix + 'PicsThumbs/' + symbol + 'T.jpg');
 
     if (this.props.mayEnlarge)
-      return common.Link({ onClick: this.toggle },
-                         $.img({ src: src, alt: '' }));
+      return Link({ onClick: this.toggle },
+                  $.img({ src: src, alt: '' }));
     else
       return $.img({ src: src, alt: '', onClick: this.toggle });
+  }
+});
+
+
+var maxDetails = 12;
+
+
+common.Results = React.createClass({
+  displayName: 'Results',
+
+  getInitialState: function() {
+    return {
+      selected: -1,
+      detailsOffset: 0,
+      symbolsOnly: false
+    }
+  },
+  componentWillReceiveProps: function(props) {
+    var n = (props.results || []).length == 1 ? 0 : -1;
+    this.setState({
+      selected: n,
+      detailsOffset: 0
+    });
+  },
+  select: function(choice) {
+    var mods;
+
+    if (choice == 'forward')
+      mods = { detailsOffset: this.state.detailsOffset + maxDetails };
+    else if (choice == 'backward')
+      mods = { detailsOffset: this.state.detailsOffset - maxDetails };
+    else if (choice == 'details')
+      mods = { selected: -1, symbolsOnly: false };
+    else if (choice == 'symbols')
+      mods = { selected: -1, symbolsOnly: true };
+    else
+      mods = { selected: choice };
+
+    this.setState(mods);
+  },
+  render: function() {
+    var type = this.props.type;
+    var typePlural = this.props.typePlural || type + 's';
+    var results = this.props.results || [];
+    var n = results.length;
+    var i = this.state.selected;
+    var begin = this.state.detailsOffset;
+    var end = Math.min(n, begin + maxDetails);
+    var msg = 'Found ' + n + ' ' + typePlural + ' matching your search';
+    var structure;
+
+    var item = function(content) {
+      return $.li({ className: 'fragment column' }, content);
+    };
+
+    var link = function(i, text) {
+      return Link({ href: i, onClick: this.select }, text);
+    }.bind(this);
+
+    if (n < 1) {
+      return $.p(null, msg + '.');
+    } else if (i >= 0) {
+      structure = results[i];
+      msg = 'Showing ' + type + ' ' + (i+1) +
+        ' of ' + n + ' matching your search.';
+
+      return $.div(null,
+                   $.ul({ className: 'plainList' },
+                        item(n > 1
+                             ? link(-1, 'All Results') : 'All Results'),
+                        item(i > 0
+                             ? link(i-1, laquo + ' Previous') : 'Previous'),
+                        item(i < n-1
+                             ? link(i+1, 'Next ' + raquo) : 'Next')),
+                   $.p(null, msg),
+                   this.props.display({ structure: structure }));
+    } else if (this.state.symbolsOnly) {
+      var resultList = results.map(function(structure, i) {
+        return $.li({ className: 'fragment',
+                      style: { width: '5em' },
+                      key: structure.symbol },
+                    Link({ href: i, onClick: this.select },
+                         structure.symbol));
+      }.bind(this));
+
+      return $.div(null,
+                   $.ul({ className: 'plainList' },
+                        link('details', 'More Details')),
+                   $.p(null, msg + '.'),
+                   $.div(null,
+                         $.ul({ className: 'plainList' }, resultList)));
+    } else {
+      if (begin > 0 || end < n)
+        msg = msg + ', showing ' + (begin+1) + ' through ' + end;
+      msg = msg + '.'
+
+      return $.div(null,
+                   $.ul({ className: 'plainList' },
+                        item(link('symbols', 'Symbols Only')),
+                        item(begin > 0
+                             ? link("backward", laquo + ' Previous') 
+                             : 'Previous'),
+                        item(end < n
+                             ? link("forward", 'Next ' + raquo)
+                             : 'Next')),
+                   $.p(null, msg),
+                   this.props.table(results.slice(begin, end),
+                                    function(i) {
+                                      var n = i + begin;
+                                      return link(n, results[n].symbol);
+                                    }));
+    }
   }
 });

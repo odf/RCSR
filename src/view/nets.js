@@ -11,9 +11,6 @@ var search   = require('../search/nets');
 
 var $ = React.DOM;
 
-var laquo = '\u00ab';
-var raquo = '\u00bb';
-
 
 var keywords = [
   "bipartite",
@@ -224,7 +221,7 @@ var Net = React.createClass({
   displayName: 'Net',
 
   render: function() {
-    var net = this.props.net;
+    var net = this.props.structure;
     var refKinds = ['names', 'keywords', 'references'];
 
     return $.div(null,
@@ -244,126 +241,26 @@ var Net = React.createClass({
 });
 
 
-var maxDetails = 12;
-
-
-var Results = React.createClass({
-  displayName: 'Results',
-
-  getInitialState: function() {
-    return {
-      selected: -1,
-      detailsOffset: 0,
-      symbolsOnly: false
-    }
-  },
-  componentWillReceiveProps: function(props) {
-    var n = (props.results || []).length == 1 ? 0 : -1;
-    this.setState({
-      selected: n,
-      detailsOffset: 0
-    });
-  },
-  select: function(choice) {
-    var mods;
-
-    if (choice == 'forward')
-      mods = { detailsOffset: this.state.detailsOffset + maxDetails };
-    else if (choice == 'backward')
-      mods = { detailsOffset: this.state.detailsOffset - maxDetails };
-    else if (choice == 'details')
-      mods = { selected: -1, symbolsOnly: false };
-    else if (choice == 'symbols')
-      mods = { selected: -1, symbolsOnly: true };
-    else
-      mods = { selected: choice };
-
-    this.setState(mods);
-  },
-  render: function() {
-    var results = this.props.results || [];
-    var n = results.length;
-    var i = this.state.selected;
-    var begin = this.state.detailsOffset;
-    var end = Math.min(n, begin + maxDetails);
-    var msg = 'Found ' + n + ' nets matching your search';
-    var net;
-
-    var item = function(content) {
-      return $.li({ className: 'fragment column' }, content);
-    };
-
-    var link = function(i, text) {
-      return common.Link({ href: i, onClick: this.select }, text);
-    }.bind(this);
-
-    if (n < 1) {
-      return $.p(null, msg + '.');
-    } else if (i >= 0) {
-      net = results[i];
-      msg = 'Showing net ' + (i+1) + ' of ' + n + ' matching your search.';
-
-      return $.div(null,
-                   $.ul({ className: 'plainList' },
-                        item(n > 1
-                             ? link(-1, 'All Results') : 'All Results'),
-                        item(i > 0
-                             ? link(i-1, laquo + ' Previous') : 'Previous'),
-                        item(i < n-1
-                             ? link(i+1, 'Next ' + raquo) : 'Next')),
-                   $.p(null, msg),
-                   Net({ net: net }));
-    } else if (this.state.symbolsOnly) {
-      var resultList = results.map(function(net, i) {
-        return $.li({ className: 'fragment',
-                      style: { width: '5em' },
-                      key: net.symbol },
-                    common.Link({ href: i, onClick: this.select }, net.symbol));
-      }.bind(this));
-
-      return $.div(null,
-                   $.ul({ className: 'plainList' },
-                        link('details', 'More Details')),
-                   $.p(null, msg + '.'),
-                   $.div(null,
-                         $.ul({ className: 'plainList' }, resultList)));
-    } else {
-      if (begin > 0 || end < n)
-        msg = msg + ', showing ' + (begin+1) + ' through ' + end;
-      msg = msg + '.'
-
-      return $.div(null,
-                   $.ul({ className: 'plainList' },
-                        item(link('symbols', 'Symbols Only')),
-                        item(begin > 0
-                             ? link("backward", laquo + ' Previous') 
-                             : 'Previous'),
-                        item(end < n
-                             ? link("forward", 'Next ' + raquo)
-                             : 'Next')),
-                   $.p(null, msg),
-                   common.makeTable(
-                     ['pic', 'symbol', 'embed type', 'space group', 'vertices',
-                      'edges', 'genus'],
-                     results.slice(begin, end).map(function(net, i) {
-                       return [
-                         common.StructureImage({
-                           prefix: 'Net',
-                           symbol: net.symbol
-                         }),
-                         common.Link({ href: i + begin, onClick: this.select },
-                                     net.symbol),
-                         net.embedType,
-                         net.spacegroupSymbol,
-                         net.numberOfVertices,
-                         net.numberOfEdges,
-                         net.genus
-                       ];
-                     }.bind(this))
-                   ));
-    }
-  }
-});
+var netTable = function(items, link) {
+  return common.makeTable(
+    ['pic', 'symbol', 'embed type', 'space group', 'vertices',
+     'edges', 'genus'],
+    items.map(function(net, i) {
+      return [
+        common.StructureImage({
+          prefix: 'Net',
+          symbol: net.symbol
+        }),
+        link(i),
+        net.embedType,
+        net.spacegroupSymbol,
+        net.numberOfVertices,
+        net.numberOfEdges,
+        net.genus
+      ];
+    })
+  );
+};
 
 
 var Nets = React.createClass({
@@ -396,7 +293,12 @@ var Nets = React.createClass({
                              values  : this.state.reset ? {} : null
                            })),
                       $.li({ className: 'column' },
-                           Results({ results: this.state.results }))));
+                           common.Results({
+                             type: 'net',
+                             display: Net,
+                             table: netTable,
+                             results: this.state.results
+                           }))));
   }
 });
 
