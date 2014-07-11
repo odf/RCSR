@@ -72,7 +72,7 @@ var matcher = {
   modifiers: function(item, values) {
     if (values.exclude_a && item.symbol.match(/-a$/))
       return false;
-    if (values.exclude_b_c && item.symbol.match(/-[bc]$/))
+    if (values.exclude_b_c && item.symbol.match(/-[bc]/))
       return false;
     return true;
   },

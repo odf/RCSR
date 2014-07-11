@@ -8,6 +8,7 @@ var Form     = require('plexus-form');
 var common   = require('./common');
 var search   = require('../search/nets');
 
+var hellip   = '\u2026';
 
 var $ = React.DOM;
 
@@ -77,7 +78,7 @@ var schema = {
       properties: common.makeBooleanProperties([
         "include augmented (-a)",
         "exclude augmented (-a)",
-        "exclude binary (-b) and catenated pair (-c)"
+        "exclude binary (-b...) and catenated (-c...)"
       ]),
       "x-hints": {
         form: {

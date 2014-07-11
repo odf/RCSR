@@ -54,7 +54,7 @@ var conversions = {
     return {
       include_a  : obj['include augmented (-a)'],
       exclude_a  : obj['exclude augmented (-a)'],
-      exclude_b_c: obj['exclude binary (-b) and catenated pair (-c)']
+      exclude_b_c: obj['exclude binary (-b...) and catenated (-c...)']
     };
   },
   coordination: function(obj) {
