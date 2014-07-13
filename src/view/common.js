@@ -212,6 +212,10 @@ common.StructureImage = React.createClass({
     if (this.props.mayEnlarge)
       this.setState({ full: !this.state.full });
   },
+  handleError: function(event) {
+    this.setState({ error: true });
+    event.preventDefault();
+  },
   render: function() {
     var base = 'http://rcsr.net/public/images/';
     var symbol = this.props.symbol;
@@ -219,11 +223,14 @@ common.StructureImage = React.createClass({
                       ? this.props.prefix + 'Pics/' + symbol + '.jpg'
                       : this.props.prefix + 'PicsThumbs/' + symbol + 'T.jpg');
 
+    var img = $.img({ src: src, alt: '', onError: this.handleError });
+
+    if (this.state.error)
+      return $.span({ className: 'thumbnail' }, '(no image)');
     if (this.props.mayEnlarge)
-      return Link({ onClick: this.toggle },
-                  $.img({ src: src, alt: '' }));
+      return Link({ onClick: this.toggle }, img);
     else
-      return $.img({ src: src, alt: '', onClick: this.toggle });
+      return $.span({ className: 'thumbnail' }, img);
   }
 });
 
@@ -290,7 +297,7 @@ common.Results = React.createClass({
       msg = 'Showing ' + type + ' ' + (i+1) +
         ' of ' + n + ' matching your search.';
 
-      return $.div(null,
+      return $.div({ key: i },
                    $.ul({ className: 'plainList' },
                         item(n > 1
                              ? link(-1, 'All Results') : 'All Results'),
@@ -320,7 +327,7 @@ common.Results = React.createClass({
         msg = msg + ', showing ' + (begin+1) + ' through ' + end;
       msg = msg + '.'
 
-      return $.div(null,
+      return $.div({ key: begin },
                    $.ul({ className: 'plainList' },
                         item(link('symbols', 'Symbols Only')),
                         item(begin > 0

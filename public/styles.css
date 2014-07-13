@@ -197,3 +197,10 @@ h1.center, h2.center, h3.center, h4.center, p.center {
 .narrow label {
     width: 8em;
 }
+
+.thumbnail {
+    display: inline-block;
+    height: 72px;
+    width: 72px;
+    color: gray;
+}
