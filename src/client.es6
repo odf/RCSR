@@ -70,10 +70,6 @@ var Home = React.createClass({
                  $.img({ className: 'center', 
                          src: '/public/images/CRC_sphere_pic.jpg' }),
                  $.h2({ className: 'center' },
-                      'Department of Chemistry',
-                      $.br(),
-                      'University of California, Berkeley'),
-                 $.h2({ className: 'center' },
                       'Department of Chemistry and Biochemistry',
                       $.br(),
                       'Arizona State University'),
@@ -84,7 +80,11 @@ var Home = React.createClass({
                  $.h2({ className: 'center' },
                       'NCI Vizlab',
                       $.br(),
-                      'Australian National University'));
+                      'Australian National University'),
+                 $.h2({ className: 'center' },
+                      'Department of Chemistry',
+                      $.br(),
+                      'University of California, Berkeley'));
   }
 });
 
