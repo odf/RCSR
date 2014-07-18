@@ -45,7 +45,8 @@ var schema = {
       },
       "x-hints": {
         form: {
-          classes: [ "inline", "flush" ]
+          classes: [ "inline", "flush" ],
+          helpURL: "/help/symbol.html"
         }
       }
     },
@@ -58,7 +59,8 @@ var schema = {
       },
       "x-hints": {
         form: {
-          classes: [ "inline", "flush" ]
+          classes: [ "inline", "flush" ],
+          helpURL: "/help/names.html"
         }
       }
     },
@@ -68,7 +70,8 @@ var schema = {
       properties: common.makeBooleanProperties(keywords),
       "x-hints": {
         form: {
-          classes: ["inline", "narrow", "checkbox-left"]
+          classes: ["inline", "narrow", "checkbox-left"],
+          helpURL: "/help/keywords.html"
         }
       }
     },
@@ -94,23 +97,28 @@ var schema = {
           type: "string",
           pattern: "^[1-9][0-9]*(,[1-9][0-9]*)*$"
         }
+      },
+      "x-hints": {
+        form: {
+          helpURL: "/help/coordination.html"
+        }
       }
     },
     bounds: {
       title: "Bounds",
       type: "object",
       properties: common.makeBoundsProperties([
-        "density",
-        "td10",
-        "genus",
-        "kinds of vertex",
-        "kinds of edge",
-        "kinds of face",
-        "kinds of tile",
+        ["density"],
+        ["td10"],
+        ["genus"],
+        ["kinds of vertex"],
+        ["kinds of edge"],
+        ["kinds of face"],
+        ["kinds of tile"],
         "space group number",
-        "smallest ring",
-        "order",
-        "Dsize"
+        ["smallest ring"],
+        ["order"],
+        ["Dsize"]
       ])
     }
   }

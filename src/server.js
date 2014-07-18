@@ -12,6 +12,10 @@ app.get('/public/*', function(req, res) {
   res.sendfile(req.params[0], { root: home });
 });
 
+app.get('/help/*', function(req, res) {
+  res.sendfile(req.params[0], { root: home + '/help' });
+});
+
 app.get('*', function(req, res) {
   res.sendfile('app.html', { root: home });
 });

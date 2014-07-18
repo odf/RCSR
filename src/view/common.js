@@ -23,14 +23,31 @@ common.makeBooleanProperties = function(names) {
 };
 
 
-common.makeBoundsProperties = function(names) {
+common.makeBoundsProperties = function(specs) {
   var result = {};
-  names.forEach(function(name) {
+  specs.forEach(function(spec) {
+    var name, url;
+
+    if (typeof spec == 'string')
+      name = spec;
+    else {
+      name = spec[0];
+      url  = spec[1] || '/help/' + name.replace(/\s+/g, '_') + '.html';
+    }
+
     result[name] = {
       title: name,
       type: 'string',
       pattern: /^(([<>]?=?\d+(\.\d+)?)|(\d+(\.\d+)?-\d+(\.\d+)?))$/
     };
+
+    if (url) {
+      result[name]['x-hints'] = {
+        form: {
+          helpURL: url
+        }
+      };
+    }
   });
   return result;
 };
@@ -119,6 +136,55 @@ common.makeQuery = function(inputs) {
 };
 
 
+function helpLink(path, schema) {
+  var sch = schema;
+  var url;
+
+  path.forEach(function(key) {
+    sch = sch.properties[key];
+  });
+  url = ((sch['x-hints'] || {}).form || {}).helpURL;
+
+  return $.a({
+    className: 'help-link' + (url ? '' : ' invisible'),
+    href     : url,
+    target   : '_blank'
+  }, '?');
+};
+
+
+var makeFieldWrapper = function(schema) {
+  return React.createClass({
+    render: function() {
+      var classes = (this.props.classes || []).concat('form-element').join(' ');
+
+      return $.div({ className: classes, key: this.props.key },
+                   $.label({ htmlFor: this.props.key },
+                           this.props.title),
+                   helpLink(this.props.path, schema),
+                   this.props.children);
+    }
+  });
+};
+
+
+var makeSectionWrapper = function(schema) {
+  return React.createClass({
+    render: function() {
+      var classes = (this.props.classes || []).concat(
+        'form-section',
+        this.props.path.length > 0 ? 'form-subsection' : []).join(' ');
+
+      return $.fieldset({ className: classes, key: this.props.key },
+                        $.legend({ className: 'form-section-title' },
+                                 this.props.title,
+                                 helpLink(this.props.path, schema)),
+                        this.props.children);
+    }
+  });
+};
+
+
 common.SearchForm = React.createClass({
   displayName: 'SearchForm',
 
@@ -128,6 +194,8 @@ common.SearchForm = React.createClass({
       extraButtons: true,
       onSubmit: this.props.onSubmit,
       enterKeySubmits: 'Search',
+      fieldWrapper: makeFieldWrapper(this.props.schema),
+      sectionWrapper: makeSectionWrapper(this.props.schema),
       schema: this.props.schema,
       validate: validate,
       values: this.props.values

@@ -113,6 +113,10 @@ h1.center, h2.center, h3.center, h4.center, p.center {
     font-weight: bold;
 }
 
+.invisible {
+    visibility: hidden;
+}
+
 .plainList {
     padding: 0;
     list-style: none;
@@ -154,6 +158,15 @@ h1.center, h2.center, h3.center, h4.center, p.center {
 
 .form-section-title {
     font-weight: bold;
+}
+
+.form-section-title .help-link {
+    font-weight: normal;
+    margin-left: 5px;
+}
+
+.form-section-title .help-link.invisible {
+    display: none;
 }
 
 .form-subsection .form-section-title {

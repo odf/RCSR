@@ -16,7 +16,7 @@
     "react": "~0.10.0",
     "ceci-core": "~0.2.0",
     "plexus-validate": "~0.0.2",
-    "plexus-form": "~0.0.13"
+    "plexus-form": "~0.0.15"
   },
   "scripts": {
     "build": "webpack"
