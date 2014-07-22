@@ -13,7 +13,9 @@
 
     .red  { color: red; }
     .blue { color: blue; }
+    ol    { padding-left: 40px; }
     li    { margin: 1ex 0; }
+    .unlist { margin-left: -40px; }
 
   span.c21 {color:#000088;text-decoration:none;text-underline:none}
   span.c20 {color: #000020; font-weight: bold}
@@ -123,13 +125,14 @@
     The origin of this project was a National Science Foundation small grant
     for exploratory research (SGER) DMR-0243082 to <span class="blue">Omar
     Yaghi</span> and <span class="blue">Michael O'Keeffe</span> who collected
-    the data. The current realization is implemented
-    by <span class="blue">Olaf Delgado-Friedrichs</span> based on prior work
-    by <span class="blue">Stuart Ramsden</span>. Software and other support is
-    being generously provided by <span class="blue">Vladislav
-    Blatov</span>, <span class="blue">Olaf Delgado-Friedrichs, Stephen
-    Hyde</span> and <span class="blue">Davide M. Proserpio</span> who have
-    corrected numerous errors and contributed in many other ways.
+    the data. <span class="blue">Maxim Peskov</span> prepared the tiling
+    data. The current realization is implemented by <span class="blue">Olaf
+    Delgado-Friedrichs</span> based on prior work by <span class="blue">Stuart
+    Ramsden</span>. Software and other support is being generously provided
+    by <span class="blue">Vladislav Blatov</span>, <span class="blue">Olaf
+    Delgado-Friedrichs, Stephen Hyde</span> and <span class="blue">Davide
+    M. Proserpio</span> who have corrected numerous errors and contributed in
+    many other ways.
   </p>
 
   <p>
@@ -261,252 +264,234 @@
     </li>
   </ol>
 
-    <p><span class='c7'>Collisions</span></p>
+  <h2>Collisions</h2>
 
-    <p><span class='c8'>In computing
-    properties of nets, for example in the program
-    <b>Systre</b></span><span class='c8'>, it is convenient to use
-    center-of-mass (barycentric) coordinates (all vertices assigned
-    the same mass - see reference [4]). For some exceptional
-    structures one may find that two vertices then have identical
-    coordinates. Such structures are identified by an asterisk in
-    embed type (e.g. *1b). <b>Systre</b></span> <span class=
-    'c8'>won't recognize these structures.
-    <b>Systre</b></span><span class='c8'>can be obtained from
-    gavrog.org.</span></p>
+  <p>
+    In computing properties of nets, for example in the program
+    <b>Systre</b>, it is convenient to use center-of-mass (barycentric)
+    coordinates (all vertices assigned the same mass - see reference [4]). For
+    some exceptional structures one may find that two vertices then have
+    identical coordinates. Such structures are identified by an asterisk in
+    embed type (e.g. *1b). <b>Systre</b> won't recognize these structures.
+    <b>Systre</b> can be obtained
+    from <a href="http://gavrog.org">gavrog.org</a>.
+  </p>
 
-    <p><span class='c7'>Density</span></p>
+  <h2>Density</h2>
 
-    <p><span class='c8'>The density is the
-    number of vertices per unit volume for the given embedding. For
-    structures of embed, type 1 or 2 (all edges of equal length and
-    no shorter intervertex distance shorter) on can calculate the
-    space-filling fraction of equal spheres in contact for that
-    structure by multiplying the density by pi/6.</span></p>
+  <p>
+    The density is the number of vertices per unit volume for the given
+    embedding. For structures of embed, type 1 or 2 (all edges of equal length
+    and no shorter intervertex distance shorter) on can calculate the
+    space-filling fraction of equal spheres in contact for that structure by
+    multiplying the density by &pi;/6.
+  </p>
 
-    <p><span class='c7'>Genus</span></p>
+  <h2>Genus</h2>
 
-    <p><span class='c8'>A net can be
-    considered a periodic surface of genus <i>g</i></span>
-    <span class='c8'>if one imagines the edges inflated to have
-    finite width. If there are <i>e</i></span> <span class=
-    'c8'>edges and <i>v</i></span> <span class='c8'>vertices in the
-    primitive cell then <i>g</i></span> <span class='c8'>= 1 +
-    <i>e</i></span> <span class='c8'>-<i>v</i></span><span class=
-    'c8'>. See the pop-up for 'density' on the search
-    page.</span></p>
+  <p>
+    A net can be considered a periodic surface of genus <i>g</i> if one
+    imagines the edges inflated to have finite width. If there are <i>e</i>
+    edges and <i>v</i> vertices in the primitive cell then <i>g</i> = 1
+    + <i>e</i> - <i>v</i>. See the pop-up for 'density' on the search page.
+  </p>
 
-    <p><span class=
-    'c8'><![if !supportEmptyParas]> <![endif]></span></p>
+  <h2>Tiling data</h2>
 
-    <p><span class='c7'>Tiling data</span></p>
+  <p>
+    Data for tilings are for the so-called "natural" tilings (reference [2]
+    and [13]).  The D-symbols are what were originally called "Delaney"
+    symbols by Dress and "Delaney-Dress" symbols by subsequent workers. The
+    economical one-line encoding is due to Delgado-Friedrichs so "D-symbol"
+    seems appropriate. The size of the D-symbol is what is known as "flag
+    transitivity" to mathematicians. One may use the search to find the only
+    regular tiling (D-symbol size = 1) and all natural tilings with size up to
+    4. Regular <i>nets</i> are defined independently of tilings but are the
+    only structures with natural tilings that have one kind of vertex, edge,
+    face and tile (transitivity 1111 - see reference [2]).
+  </p>
 
-    <p><span class='c8'>Data for tilings are
-    for the so-called "natural" tilings (reference [2] and [13]).
-    The D-symbols are what were originally called "Delaney" symbols
-    by Dress and "Delaney-Dress" symbols by subsequent workers. The
-    economical one-line encoding is due to Delgado-Friedrichs so
-    "D-symbol" seems appropriate. The size of the D-symbol is what
-    is known as "flag transitivity" to mathematicians. One may use
-    the search to find the only regular tiling (D-symbol size = 1)
-    and all natural tilings with size up to 4. Regular
-    <i>nets</i></span> <span class='c9'>are defined independently
-    of tilings but are the only structures with natural tilings
-    that have one kind of vertex, edge, face and tile (transitivity
-    1111 - see reference [2]).</span></p>
+  <p>
+    Most of the tiling data come from TOPOS (see "links") and were prepared by
+    Maxim Peskov.
+  </p>
 
-    <p><span class='c8'>Most of the tiling
-    data come from TOPOS (see "links") and were prepared by Maxim
-    Peskov.</span></p>
+  <h2>Layers and polyhedra</h2>
 
-    <p><span class=
-    'c8'><![if !supportEmptyParas]> <![endif]></span></p>
+  <p>
+    <i>Layers</i> are three dimensional 2-periodic structures and their
+    symmetries are layer groups. Strictly 2-dimensional 2-periodic structures
+    have symmetries that are plane groups.  Structures that are not
+    2-dimensional have the keyword "layer" We give also a 3-dimensional space
+    group which can be used for entering the structure in a crystal-drawing
+    program such as CrystalMaker. Where possible, coordinates are given for
+    unit edge length.
+  </p>
 
-    <p><span class='c7'>Layers and
-    polyhedra</span></p>
+  <p>
+    Notice that for 2-dimensional structures, vertex symbols denote the
+    polygons meeting at that vertex in cyclic order (compare 3^3.4^2 and
+    3^2.4.3.4); for layers vertex symbols are the same as for nets.
+  </p>
 
-    <p><span class='c18'>Layers</span>
-    <span class='c8'>are three dimensional 2-periodic structures
-    and their symmetries are layer groups. Strictly 2-dimensional
-    2-periodic structures have symmetries that are plane groups.
-    Structures that are not 2-dimensional have the keyword "layer"
-    We give also a 3-dimensional space group which can be used for
-    entering the structure in a crystal-drawing program such as
-    CrystalMaker. Where possible, coordinates are given for unit
-    edge length.</span></p>
+  <p>
+    See reference [12] below for an account of plane nets in crystal
+    chemistry. For nets named OKHnn, nn is the net number of that
+    work.
+  </p>
 
-    <p><span class='c8'>Notice that for
-    2-dimensional structures, vertex symbols denote the polygons
-    meeting at that vertex in cyclic order (compare 3^3.4^2 and
-    3^2.4.3.4); for layers vertex symbols are the same as for
-    nets.</span></p>
+  <p>
+    <i>Polyhedra</i> are 0-periodic, but of course 3-dimensional.  We use the
+    term to include generalized polyhedra ("cages") such as the adamantane
+    cage (see <b>ada</b>). The coordinates of the vertices are cartesian
+    coordinates but can be used with the given space group to again draw as if
+    it were part of a crystal structure. To do this set the unit cell of the
+    given space group to <i>d d d</i> 90.0 90.0 90.0 with <i>d</i> some
+    convenient number (say 10.0) and divide the given coordinates by <i>d</i>
+    and use them as crystal coordinates. One will then get the polyhedron
+    centered on 0, 0, 0.
+  </p>
 
-    <p><span class='c8'>See reference [12]
-    below for an account of plane nets in crystal chemistry. For
-    nets named OKHnn, nn is the net number of that work.</span></p>
+  <p>
+    Notice that for polyhedra with non-crystallographic symmetries more than
+    one set of coordinates may be given for a single vertex type - see
+    e.g. <b>dod</b> with icosahedral symmetry but described with <i>m</i>-3
+    symmetry - the single vertex type splits into V1a and V1b.  Hexagonal
+    polyhedra are described using an orthorhombic space group - see
+    e.g. <b>hxb</b>. A square antiprism is another example of a polyhedron
+    with non-crystallographic symmetry - see <b>sap</b>.
+  </p>
 
-    <p><span class='c18'>Polyhedra</span>
-    <span class='c8'>are 0-periodic, but of course 3-dimensional.
-    We use the term to include generalized polyhedra ("cages") such
-    as the adamantane cage (see <b>ada</b></span><span class=
-    'c8'>). The coordinates of the vertices are cartesian
-    coordinates but can be used with the given space group to again
-    draw as if it were part of a crystal structure. To do this set
-    the unit cell of the given space group to <i>d</i></span>
-    <span class='c18'>d d</span><span class='c8'>90.0 90.0 90.0
-    with <i>d</i></span> <span class='c8'>some convenient number
-    (say 10.0) and divide the given coordinates by <i>d</i></span>
-    <span class='c8'>and use them as crystal coordinates. One will
-    then get the polyhedron centered on 0, 0, 0.</span></p>
+  <p>
+    For convenience the coordinates of the centers of faces are also
+    given.
+  </p>
 
-    <p><span class='c8'>Notice that for
-    polyhedra with non-crystallographic symmetries more than one
-    set of coordinates may be given for a single vertex type - see
-    e.g. <b>dod</b></span> <span class='c8'>with icosahedral
-    symmetry but described with <i>m</i></span><span class='c8'>-3
-    symmetry - the single vertex type splits into V1a and V1b.
-    Hexagonal polyhedra are described using an orthorhombic space
-    group - see e.g. <b>hxb</b></span><span class='c8'>. A square
-    antiprism is another example of a polyhedron with
-    non-crystallographic symmetry - see
-    <b>sap</b></span><span class='c8'>.</span></p>
+  <p>
+    In the strict definition adopted by many mathematicians
+    <i>polyhedra</i> have a planar 3-connected graph and can be realized as a
+    strictly convex solid. We refer to structures that do not have this
+    property as <i>cages</i> for the purpose of the database (generally
+    elsewhere the term "cage" includes polyhedra as in "sodalite cage" or
+    "faujasite cage", but these structures are polyhedra <i>sensu
+    stricto</i>).
+  </p>
 
-    <p><span class='c8'>For convenience the
-    coordinates of the centers of faces are also given.</span></p>
+  <p>
+    Notice that generally we give vertices for equal edge; some polyhedra do
+    not then have planar faces (see e.g. the faujasite cage
+    <b>fac</b> which is given as it appears in the crystal structure). For
+    <i>Archimedean</i> polyhedra (one kind of vertex) and the full symmetry
+    the requirement of equal edges uniquely defines the embedding; for their
+    duals (<i>Catalan</i> polyhedra with one kind of face) there are generally
+    more degrees of freedom and there appears to be no definitive embedding
+    agreed upon - the most pleasing have unequal edges. [Exceptions
+    are <b>rdo</b> and <b>trc</b> which are the duals of the two quasiregular
+    (one kind of edge) Archimedean polyhedra <b>cbo</b> and <b>ido</b>]
+  </p>
 
-    <p><span class='c8'>In the strict
-    definition adopted by many mathematicians
-    <i>polyhedra</i></span> <span class='c8'>have a planar
-    3-connected graph and can be realized as a strictly convex
-    solid. We refer to structures that do not have this property as
-    <i>cages</i></span> <span class='c8'>for the purpose of the
-    database (generally elsewhere the term "cage" includes
-    polyhedra as in "sodalite cage" or "faujasite cage", but these
-    structures are polyhedra <i>sensu
-    stricto</i></span><span class='c8'>).</span></p>
+  <p>
+    <i>Simple</i> polyhedra have exactly three faces meeting at a
+    vertex; <i>simplicial</i> polyhedra have all triangular faces. The dual of
+    a simple polyhedron is simplicial and <i>vice versa</i>.
+  </p>
 
-    <p><span class='c8'>Notice that generally
-    we give vertices for equal edge; some polyhedra do not then
-    have planar faces (see e.g. the faujasite cage
-    <b>fac</b></span> <span class='c8'>which is given as it appears
-    in the crystal structure). For
-    <i>Archimedean</i></span><span class='c8'>polyhedra (one kind
-    of vertex) and the full symmetry the requirement of equal edges
-    uniquely defines the embedding; for their duals
-    (<i>Catalan</i></span> <span class='c8'>polyhedra with one kind
-    of face) there are generally more degrees of freedom and there
-    appears to be no definitive embedding agreed upon - the most
-    pleasing have unequal edges. [Exceptions are <b>rdo</b></span>
-    <span class='c8'>and <b>trc</b></span> <span class='c9'>which
-    are the duals of the two quasiregular (one kind of edge)
-    Archimedean polyhedra <b>cbo</b></span> <span class='c8'>and
-    <b>ido</b></span><span class='c8'>]</span></p>
+  <h2>References</h2>
 
-    <p><span class='c18'>Simple</span>
-    <span class='c8'>polyhedra have exactly three faces meeting at
-    a vertex; <i>simplicial</i></span><span class='c8'>polyhedra
-    have all triangular faces. The dual of a simple polyhedron is
-    simplicial and <i>vice versa</i></span><span class=
-    'c8'>.</span></p>
+  <p>
+    References give in the database are to descriptions of nets, and not,
+    except incidentally, to occurrences in crystals. [references to
+    occurrences will be added later]
+  </p>
 
-    <p><span class=
-    'c8'><![if !supportEmptyParas]> <![endif]></span></p>
+  <p>
+    Some of our work relevant to 3-periodic nets and tilings:
+  </p>
 
-    <p><span class='c7'>References</span></p>
+  <ol type='1'>
+    <li>
+      <i>Crystal Structures I: Patterns and Symmetry</i>. M.  O'Keeffe,
+      B. G. Hyde. Min Soc. Amer., Washington D.C.  (available at
+      <a href="http://www.public.asu.edu/~rosebudx/okeeffe.htm">
+      http://www.public.asu.edu/~rosebudx/okeeffe.htm</a>)
+    </li>
 
-    <p><span class='c8'>References give in the
-    database are to descriptions of nets, and not, except
-    incidentally, to occurrences in crystals. [references to
-    occurrences will be added later]</span></p>
+    <li>
+      <i>Three-periodic nets and tilings: regular nets</i>.  O.
+      Delgado-Friedrichs, M. O'Keeffe, O. M. Yaghi, Acta Crystallogr.  A 59,
+      22-27 (2003).
+    </li>
 
-    <p><span class='c8'>Some of our work
-    relevant to 3-periodic nets and tilings:</span></p>
+    <li>
+      <i>Reticular synthesis and the design of new materials.</i> O. M. Yaghi,
+      M. O'Keeffe, N. W. Ockwig, H. K. Chae, M. Eddadoudi, J. Kim. Nature
+      <b>423</b>, 705-714 (2003).
+    </li>
 
-    <p class="main c19"><span class='c9'>1. <i>Crystal Structures
-    I: Patterns and Symmetry</i></span><span class='c8'>. M.
-    O'Keeffe, B. G. Hyde. Min Soc. Amer., Washington D.C.
-    (available at
-    http://www.public.asu.edu/~rosebudx/okeeffe.htm)</span></p>
+    <li>
+      <i>Identification and symmetry computation for crystal nets</i>.
+      O. Delgado-Friedrichs, M. O'Keeffe, Acta Crystallogr. A 59 351-360
+      (2003). (This gives an informal account of how <b>Systre</b> works)
+    </li>
 
-    <p><span class='c8'>2. <i>Three-periodic
-    nets and tilings: regular nets</i></span><span class='c8'>. O.
-    Delgado-Friedrichs, M. O'Keeffe, O. M. Yaghi, Acta Crystallogr.
-    A 59, 22-27 (2003).</span></p>
+    <li>
+      <i>Three-periodic nets and tilings: semiregular nets</i>. O.
+      Delgado-Friedrichs, M. O'Keeffe, O. M. Yaghi, Acta Crystallogr.
+      <b>A 59</b>, 515-525 (2003).
+    </li>
 
-    <p class="main c19"><span class='c9'>3. <i>Reticular synthesis
-    and the design<span class="c17"> </span> of new
-    materials.</i></span><span class='c8'>O. M. Yaghi, M. O'Keeffe,
-    N. W. Ockwig, H. K. Chae, M. Eddadoudi, J. Kim. Nature
-    <b>423</b></span><span class='c8'>, 705-714<span class="c17">
-    </span> (2003).</span></p>
+    <li>
+      <i>Three-periodic nets and tilings: minimal nets</i>. C.  Bonneau,
+      O. Delgado-Friedrichs, M. O'Keeffe, O. M. Yaghi, Acta Crystallogr. <b>A
+      60</b>, 517-520 (2004).
+    </li>
 
-    <p class="main c19"><span class='c9'>4. <i>Identification and
-    symmetry computation for crystal nets</i></span><span class=
-    'c8'>. O. Delgado-Friedrichs, M. O'Keeffe, Acta Crystallogr. A
-    59 351-360 (2003). (This gives an informal account of how
-    <b>Systre</b></span> <span class='c8'>works)</span></p>
+    <li>
+      <i>Crystal nets as graphs: terminology and definitions.</i>
+      O. Delgado-Friedrichs, M. O'Keeffe, J. Solid State Chem.
+      <b>178</b>, 2480-2485 (2005).
+    </li>
 
-    <p class="main c19"><span class='c9'>5. <i>Three-periodic nets
-    and tilings: semiregular nets</i></span><span class='c8'>. O.
-    Delgado-Friedrichs, M. O'Keeffe, O. M. Yaghi, Acta Crystallogr.
-    <b>A 59</b></span><span class='c8'>, 515-525 (2003).</span></p>
+    <li>
+      <i>Reticular chemistry: occurrence and taxonomy of nets and grammar for
+    the design of frameworks.</i> N. W. Ockwig, O. Delgado-Friedrichs,
+    M. O'Keeffe &amp; O. M. Yaghi. Accts.
+    Chem. Res. <b>38</b></span><span class='c8'>, 176-182 (2005).</span></p>
 
-    <p class="main c19"><span class='c9'>6. <i>Three-periodic nets
-    and tilings: minimal nets</i></span><span class='c8'>. C.
-    Bonneau, O. Delgado-Friedrichs, M. O'Keeffe, O. M. Yaghi, Acta
-    Crystallogr. <b>A 60</b></span><span class='c8'>, 517-520
-    (2004).</span></p>
-
-    <p class="main c19"><span class='c9'>7. <i>Crystal nets as
-    graphs: terminology and definitions.</i></span> <span class=
-    'c8'>O. Delgado-Friedrichs, M. O'Keeffe, J. Solid State Chem.
-    <b>178</b></span><span class='c8'>, 2480-2485
-    (2005).</span></p>
-
-    <p><span class='c8'>8. <i>Reticular
-    chemistry: occurrence and taxonomy of nets and grammar for the
-    design of frameworks.</i></span> <span class='c8'>N. W. Ockwig,
-    O. Delgado-Friedrichs, M. O'Keeffe &amp; O. M. Yaghi. Accts.
-    Chem. Res. <b>38</b></span><span class='c8'>, 176-182
-    (2005).</span></p>
-
-    <p class="main c19"><span class='c9'>9.<i>Three-periodic nets
+    <li><i>Three-periodic nets
     and tilings: face transitive tilings and edge transitive
     nets</i></span><span class='c8'>. O. Delgado-Friedrichs &amp;
     M. O'Keeffe. Acta Crystallogr. <b>A63</b></span><span class=
     'c8'>, 344-357 (2007).</span></p>
 
-    <p class="main c19"><span class='c9'>10. <i>What do we know
-    about 3-periodic nets?</i></span> <span class='c8'>O.
+    <li> <i>What do we know
+    about 3-periodic nets?</i> O.
     Delgado-Friedrichs, M. D. Foster, M. O'Keeffe, D. M.
     Proserpio,<span class="c17"> </span> M. M. J. Treacy &amp; O.
     M. Yaghi, J. Solid State Chem. <b>178</b></span><span class=
     'c8'>,<span class="c17"> </span> 2533-2554 (2005).</span></p>
 
-    <p class="main c19"><span class='c9'>11. <i>Taxonomy of
+    <li> <i>Taxonomy of
     periodic nets and the design of materials.</i></span>
     <span class='c8'>O. Delgado-Friedrichs, </span><span class=
     'c8'>M. O'Keeffe &amp; O. M. Yaghi, Phys. Chem. Chem. Phys.
     <b>9</b></span><span class='c8'>, 1035-1943 (2007).</span></p>
 
-    <p class="main c19"><span class='c9'>12. <i>Plane nets in
+    <li> <i>Plane nets in
     crystal chemistry</i></span><span class='c8'>. M. O'Keeffe
     &amp; B. G. Hyde. Phil. Trans. Roy. Soc.
     <b>A295</b></span><span class='c8'>, 553-623 (1980).</span></p>
 
-    <p class="main c19"><span class='c9'>13. <i>Three-periodic nets
+    <li> <i>Three-periodic nets
     and tilings: natural tilings for nets</i></span><span class=
     'c8'>. V. A. Blatov, O. Delgado-Friedrichs, M. O'Keeffe &amp;
     D. M. Proserpio, Acta Crystallogr. <b>A
     63</b></span><span class='c8'>, 418-425 (2007).</span></p>
 
-    <p class="main c19"><span class='c9'><![if !supportEmptyParas]>
-    <![endif]></span></p>
-
-    <p class="main c19"><span class='c9'>A recent book that uses
+    <p class="unlist"><span class='c9'>A recent book that uses
     the RCSR system:</span></p>
 
-    <p class="main c19"><span class='c9'>14. <i>Molecule-Based
+    <li> <i>Molecule-Based
     materials. The Structural Network
     Approach</i></span><span class='c8'>. L. &Ouml;hrstrom &amp; K.
     Larsson. Elsevier (2005).</span></p>
@@ -514,22 +499,22 @@
     <p class="main c19"><span class='c9'><![if !supportEmptyParas]>
     <![endif]></span></p>
 
-    <p class="main c19"><span class='c9'>The classics (note that
+    <p class="unlist"><span class='c9'>The classics (note that
     "three-dimensional" here means "three-periodic"):</span></p>
 
-    <p class="main c19"><span class='c9'>15. <i>Three-dimensional
+    <li> <i>Three-dimensional
     nets and polyhedra</i></span><span class='c8'>. A. F. Wells.
     Wiley (1977).</span></p>
 
-    <p class="main c19"><span class='c9'>16. <i>Further studies of
-    three-dimensional nets.</i></span> <span class='c8'>A. F.
+    <li> <i>Further studies of
+    three-dimensional nets.</i> A. F.
     Wells. ACA Monograph <b>8</b></span><span class='c8'>. American
     Crystallographic Association (1979).</span></p>
 
     <p class="main c19"><span class='c9'><![if !supportEmptyParas]>
     <![endif]></span></p>
 
-    <p class="main c19"><span class='c9'>17. An enormously valuable
+    <li> An enormously valuable
     set of data on homogenous sphere packings come from Werner
     Fischer and Elke Koch and collaborators (3-coordinated: E. Koch
     and W. Fischer, <i>Z. Kristallogr.</i></span> <span class=
