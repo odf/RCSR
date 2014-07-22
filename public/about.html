@@ -9,12 +9,15 @@
   <link rel="stylesheet" href="/public/styles.css" />
 
   <style type="text/css">
-    .main         { font-size: 16px }
-    .main ol      { padding-left: 40px; }
-    .main li      { margin: 1ex 0; }
-    .main .red    { color: red; }
-    .main .blue   { color: blue; }
-    .main .unlist { margin-left: -40px; }
+    .main            { font-size: 16px; max-width: 50em; }
+    .main ol         { padding-left: 40px; }
+    .main li         { margin: 1ex 0; }
+    .main .highlight { border: 1px solid lightgray;
+                       background: lightyellow;
+                       font-size: 100%;
+                       padding: 0 1em; }
+    .main .person    { font-variant: small-caps; }
+    .main .unlist    { margin-left: -40px; }
   </style>
 </head>
 
@@ -39,36 +42,41 @@
     <a href="http://rcsr.anu.edu.au">http://rcsr.anu.edu.au</a>
   </p>
 
-  <div class='main'>
+  <div class='main center'>
   <h1 class="center">RCSR</h1>
 
-  <p class="red">
-    Suggestions, corrections, additions to <b>mokeeffe@asu.edu</b>
-  </p>
+  <div class="highlight">
+    <p>
+      Suggestions, corrections, additions to
+      <a href='mailto:mokeefe@asu.edu'>mokeeffe@asu.edu</a>
+    </p>
 
-  <p class="red">
-    In case of technical problems, please
-    contact <b>olaf.delgado@gmail.com</b>
-  </p>
+    <p>
+      For technical support please contact
+      <a href='mailto:olaf.delgado@gmail.com'>olaf.delgado@gmail.com</a>
+    </p>
+  </div>
 
   <p>You are looking at a
     <b>R</b>eticular <b>C</b>hemistry <b>S</b>tructure <b>R</b>esource
     constructed especially to be useful in the design of new structures of
-    crystalline materials and in the analysis of old ones (cf. The discussion
+    crystalline materials and in the analysis of old ones (cf. the discussion
     of reticular chemistry by Yaghi, O. M. et
-    al. Nature <b>2003</b>, <i>423</i>, 705-714). <span class="blue">It is
-    worth quickly reading through this page once</span>, as in the spirit of
-    modern software design we leave the user to discover how it really works.
+    al. Nature <b>2003</b>, <i>423</i>, 705-714). <em>It is worth quickly
+    reading through this page once</em>, as in the spirit of modern software
+    design we leave the user to discover how it really works.
   </p>
 
-  <p class="red">
-    To reference the database please cite:
-  </p>
+  <div class="highlight">
+    <p>
+      To reference the database please cite:
+    </p>
 
-  <p class="red">
-    O'Keeffe, M.; Peskov, M. A.; Ramsden, S. J.; Yaghi, O. M. <i>Accts. Chem.
-    Res.</i> <b>2008</b>, <i>41</i>, 1782-1789.
-  </p>
+    <p>
+      O'Keeffe, M.; Peskov, M. A.; Ramsden, S. J.; Yaghi, O. M. <i>Accts. Chem.
+        Res.</i> <b>2008</b>, <i>41</i>, 1782-1789.
+    </p>
+  </div>
 
   <p>
     The most important part is a searchable database of 3-periodic nets. These
@@ -81,21 +89,21 @@
 
   <p>
     Clicking the "nets" link leads to a search page where searches can be done
-    by <i>symbol</i>(every structure in this database has a unique symbol),
-    by <i>name</i> (some structures have names) by <i>keyword</i> and
-    by <i>properties</i>. The terms are all explained in popups accessed by
+    by <i>symbol</i> (every structure in this database has a unique symbol),
+    by <i>name</i> (some structures have names), by <i>keyword</i> and
+    by <i>properties</i>. The terms are all explained in pages accessed by
     clicking the appropriate link on the search page. As well as
     crystallographic data, vertex symbols and coordination sequences are
     given. For an explanation of these see reference [1] below. Tilings are
     generally given as natural tilings [2] with face symbols
     [<i>N<sup>n</sup></i>.<i>M<sup>m</sup></i>...] that indicate that the tile
     has <i>n N-</i>sided faces, <i>m M</i>-sided faces etc. For other terms
-    see the popups on the search page.
+    see the links on the search page.
   </p>
 
   <p>
     Other databases are of 2-periodic structures ("layers") and of
-    "polyhedra". At present we have a fewer entries for these. Users familiar
+    "polyhedra". At present we have fewer entries for these. Users familiar
     with the "nets" search should find these self-explanatory, but read on
     after "embeddings" on how to use the coordinate data for polyhedra and
     some other notes.
@@ -104,14 +112,14 @@
   <p>
     The symbol is either a three-letter symbol <b>pqr</b> or a three letter
     symbol with an extension as in <b>pqr-a</b>. It is not necessary to know
-    the meanings of the extensions but it can be useful and clicking on the
-    "symbol" on the "nets" search page will provide an explanation of the
+    the meanings of the extensions but it can be useful, and clicking on the
+    "symbol" link on the "nets" search page will provide an explanation of the
     extensions.
   </p>
 
   <p>
     Much of the data (structures with embed type not 1) have been entered by
-    hand, so there doubtless errors, please let us know if you identify
+    hand, so there doubtlessly are errors; please let us know if you identify
     any.
   </p>
 
@@ -134,14 +142,14 @@
 
   <p>
     The origin of this project was a National Science Foundation small grant
-    for exploratory research (SGER) DMR-0243082 to <span class="blue">Omar
-    Yaghi</span> and <span class="blue">Michael O'Keeffe</span> who collected
-    the data. <span class="blue">Maxim Peskov</span> prepared the tiling
-    data. The current realization is implemented by <span class="blue">Olaf
-    Delgado-Friedrichs</span> based on prior work by <span class="blue">Stuart
-    Ramsden</span>. Software and other support is being generously provided
-    by <span class="blue">Vladislav Blatov</span>, <span class="blue">Olaf
-    Delgado-Friedrichs, Stephen Hyde</span> and <span class="blue">Davide
+    for exploratory research (SGER) DMR-0243082 to <span class="person">Omar
+    Yaghi</span> and <span class="person">Michael O'Keeffe</span> who
+    collected the data. <span class="person">Maxim Peskov</span> prepared the
+    tiling data. The current realization is implemented
+    by <span class="person">Olaf Delgado-Friedrichs</span> based on prior work
+    by <span class="person">Stuart Ramsden</span>. Software and other support
+    is being generously provided by <span class="person">Vladislav
+    Blatov</span>, Stephen Hyde</span> and <span class="person">Davide
     M. Proserpio</span> who have corrected numerous errors and contributed in
     many other ways.
   </p>
@@ -153,7 +161,7 @@
 
   <p>
     See the references at the end for
-    the <span class="blue">Fischer-Koch</span> sphere packings.
+    the <span class="person">Fischer-Koch</span> sphere packings.
   </p>
 
   <h2>
