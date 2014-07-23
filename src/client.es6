@@ -256,7 +256,10 @@ var Application = React.createClass({
                            )),
                  $.p({ className: 'disclaimer' },
                      'This site is work in progress. ',
-                     'In case of difficulties, please visit ',
+                     'In case of difficulties, please contact ',
+                     $.a({ href: 'mailto:support@rcsr.net' },
+                         'support@rcsr.net'),
+                     ' or try our old site ',
                      $.a({ href: 'http://rcsr.anu.edu.au' },
                          'http://rcsr.anu.edu.au' )),
                  resolveRoute(this.props.path));
