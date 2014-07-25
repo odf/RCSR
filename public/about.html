@@ -62,9 +62,7 @@
     constructed especially to be useful in the design of new structures of
     crystalline materials and in the analysis of old ones (cf. the discussion
     of reticular chemistry by Yaghi, O. M. et
-    al. Nature <b>2003</b>, <i>423</i>, 705-714). <em>It is worth quickly
-    reading through this page once</em>, as in the spirit of modern software
-    design we leave the user to discover how it really works.
+    al. Nature <b>2003</b>, <i>423</i>, 705-714).
   </p>
 
   <div class="highlight">
@@ -91,7 +89,8 @@
     Clicking the "nets" link leads to a search page where searches can be done
     by <i>symbol</i> (every structure in this database has a unique symbol),
     by <i>name</i> (some structures have names), by <i>keyword</i> and
-    by <i>properties</i>. The terms are all explained in pages accessed by
+    by <i>properties</i>. Searches are not cases sensitive.
+    The terms are all explained in pages accessed by
     clicking the appropriate link on the search page. As well as
     crystallographic data, vertex symbols and coordination sequences are
     given. For an explanation of these see reference [1] below. Tilings are
@@ -144,9 +143,10 @@
     The origin of this project was a National Science Foundation small grant
     for exploratory research (SGER) DMR-0243082 to <span class="person">Omar
     Yaghi</span> and <span class="person">Michael O'Keeffe</span> who
-    collected the data. <span class="person">Maxim Peskov</span> prepared the
-    tiling data. The current realization is implemented
-    by <span class="person">Olaf Delgado-Friedrichs</span> based on prior work
+    collected the data. <span class="person">Maxim Peskov</span> prepared much
+    of the tiling data. The current realization is
+    by <span class="person">Olaf Delgado-Friedrichs</span> based on an earlier
+    version 
     by <span class="person">Stuart Ramsden</span>. Software and other support
     is being generously provided by <span class="person">Vladislav
     Blatov</span>, Stephen Hyde</span> and <span class="person">Davide
@@ -170,7 +170,10 @@
 
   <p>
     Usually in describing a net, parameters are given appropriate to a
-    maximum-symmetry embedding. Ideally also the shortest distances are all
+    maximum-symmetry embedding. For space groups with two origins in the
+    International Tables we always use the second one (origin at a center od
+    symmetry).
+    Ideally also the shortest distances are all
     equal (for convenience unity in the units of the lattice parameters) and
     correspond to the edges of the net. This ideal situation is not always
     possible however, as can seen by considering a generic infinite net
@@ -260,7 +263,7 @@
     </li>
 
     <li>
-      There may be no embedding with shortest distances corresponding to
+      There is no embedding with shortest distances corresponding to
       edges. This is in fact the case for the vast majority of nets. Until
       recently they were not recognized in crystal chemistry, as normally
       bonds (corresponding to edges of nets) are formed to nearest neighbors,
@@ -328,11 +331,6 @@
     4. Regular <i>nets</i> are defined independently of tilings but are the
     only structures with natural tilings that have one kind of vertex, edge,
     face and tile (transitivity 1111 - see reference [2]).
-  </p>
-
-  <p>
-    Most of the tiling data come from TOPOS (see "links") and were prepared by
-    Maxim Peskov.
   </p>
 
   <h2>Layers and polyhedra</h2>
@@ -545,7 +543,8 @@
       379-399 (2006).  Orthorhombic: H. Sowa, E. Koch &amp; W,
       Fischer, <i>Acta Cryst.</i> A<b>63</b>, 354-364 (2007). Triclinic:
       W. Fischer &amp; E. Koch, <i>Acta Cryst.</i>  A<b>58</b>, 509-513
-      (2003)). These papers give references to earlier work.
+      (2003)). The latest paper (by H. Sowa) is in Acta cryst. A70,
+      2014. These papers give references to earlier work.
     </li>
   </ol>
   </div>
