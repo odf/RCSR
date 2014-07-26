@@ -156,7 +156,9 @@ function helpLink(path, schema) {
 var makeFieldWrapper = function(schema) {
   return React.createClass({
     render: function() {
-      var classes = (this.props.classes || []).concat('form-element').join(' ');
+      var classes = (this.props.classes || []).concat(
+        'form-element',
+        this.props.errors ? 'error' : []).join(' ');
 
       return $.div({ className: classes, key: this.props.key },
                    $.label({ htmlFor: this.props.key },
