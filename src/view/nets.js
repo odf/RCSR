@@ -90,17 +90,18 @@ var schema = {
       }
     },
     coordination: {
-      title: "Coordination",
       type: "object",
       properties: {
         spec: {
+          title: "Coordination",
           type: "string",
-          pattern: "^[1-9][0-9]*(,[1-9][0-9]*)*$"
-        }
-      },
-      "x-hints": {
-        form: {
-          helpURL: "/help/coordination.html"
+          pattern: "^[1-9][0-9]*(,[1-9][0-9]*)*$",
+          "x-hints": {
+            form: {
+              classes: ["important"],
+              helpURL: "/help/coordination.html"
+            }
+          }
         }
       }
     },
