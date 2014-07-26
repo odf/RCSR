@@ -119,7 +119,12 @@ var schema = {
         ["smallest ring"],
         ["order"],
         ["Dsize"]
-      ])
+      ]),
+      "x-hints": {
+        form: {
+          helpURL: "/help/bounds.html"
+        }
+      }
     }
   }
 };
