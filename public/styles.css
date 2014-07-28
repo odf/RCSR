@@ -15,6 +15,12 @@ body {
     margin: 12px;
 }
 
+verb {
+    border: 1px solid lightgray;
+    background-color: #F0F0F0;
+    padding: 0 3px 0 2px;
+}
+
 table {
     border-collapse: collapse;
     margin: 12px 0;
@@ -220,4 +226,36 @@ h1.center, h2.center, h3.center, h4.center, p.center {
     height: 72px;
     width: 72px;
     color: gray;
+}
+
+.article {
+    font-size: 16px;
+    max-width: 50em;
+}
+
+.article ol {
+    padding-left: 40px;
+}
+
+.article li {
+    margin: 1ex 0;
+}
+
+.highlight {
+    border: 1px solid lightgray;
+    background: lightyellow;
+    font-size: 100%;
+    padding: 0 1em;
+}
+
+.person {
+    font-variant: small-caps;
+}
+
+.unlist {
+    margin-left: -40px;
+}
+
+.help {
+    font-size: 16px; max-width: 25em;
 }
