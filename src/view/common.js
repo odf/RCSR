@@ -38,7 +38,7 @@ common.makeBoundsProperties = function(specs) {
     result[name] = {
       title: name,
       type: 'string',
-      pattern: /^(([<>]?=?\d+(\.\d+)?)|(\d+(\.\d+)?-\d+(\.\d+)?))$/
+      pattern: /^((([<>]=?[ ]*)?\d+(\.\d+)?)|(\d+(\.\d+)?[ ]*-[ ]*\d+(\.\d+)?))$/
     };
 
     if (url) {
@@ -75,7 +75,7 @@ var conversions = {
     };
   },
   coordination: function(obj) {
-    return obj.spec.split(/,/).map(function(s) {
+    return obj.spec.split(/[,; ][ ]*/).map(function(s) {
       return parseInt(s);
     });
   },
