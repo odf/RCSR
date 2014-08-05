@@ -23,13 +23,17 @@ verb {
 
 table {
     border-collapse: collapse;
-    margin: 12px 0;
+    margin: 1em 0 2em;
 }
 
 th, td {
-    text-align: left;
-    border: 1px solid gray;
-    padding: 3px;
+    text-align: center;
+    border: 2px solid #cdf;
+    padding: 3px 5px;
+}
+
+th {
+    background-color: #cdf;
 }
 
 input {
