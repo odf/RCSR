@@ -259,3 +259,8 @@ h1.center, h2.center, h3.center, h4.center, p.center {
 .help {
     font-size: 16px; max-width: 25em;
 }
+
+dt {
+    margin-top: 1ex;
+    font-weight: bold;
+}
