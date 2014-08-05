@@ -123,6 +123,10 @@ h1.center, h2.center, h3.center, h4.center, p.center {
     visibility: hidden;
 }
 
+.borderless {
+    border: none;
+}
+
 .plainList {
     padding: 0;
     list-style: none;
