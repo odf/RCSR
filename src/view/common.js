@@ -357,7 +357,8 @@ common.Results = React.createClass({
     };
 
     var link = function(i, text) {
-      return Link({ href: i, onClick: this.select }, text);
+      return Link({ key: 'link_' + text.replace(/\s+/g, '_') + '_' + i,
+                    href: i, onClick: this.select }, text);
     }.bind(this);
 
     if (n < 1) {
