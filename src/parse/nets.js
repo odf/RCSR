@@ -224,18 +224,26 @@ var checkStructure = function(net) {
 
 
 module.exports = function(text) {
-  var lines = splitIntoLines(text).map(cleanupLine);
+  var lines  = splitIntoLines(text).map(cleanupLine);
   var lineNo = 0;
+  var seen   = {};
   var result = [];
-  var i, tmp;
+  var i, tmp, symbol;
 
   for (;;) {
     tmp = parseStructure(lines, lineNo);
     if (tmp == null)
       break;
     checkStructure(tmp.result);
-    result.push(tmp.result);
+    symbol = tmp.result.symbol;
+
+    if (seen[symbol])
+      console.log("WARNING: " + symbol + " appears more then once.");
+    else
+      result.push(tmp.result);
+
     lineNo = tmp.nextLine;
+    seen[symbol] = true;
   }
 
   return result;
