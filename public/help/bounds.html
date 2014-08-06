@@ -14,9 +14,11 @@
     <h2>bounds</h2>
 
     <p>
-      This section takes numerical input, which can be a single number, a
-      range which is specified by two numbers separated by a dash, or a less
-      than or greater than symbol followed by a number.
+      This section takes numerical input, which can be a single number or a
+      range. Ranges are specified as two numbers separated by a dash, or as
+      one of the symbols <code>&lt;</code> (less than), <code>&lt;=</code>
+      (less or equal), <code>&gt;</code> (greater than) and <code>&gt;=</code>
+      (greater or equal) followed by a number.
     </p>
 
     <p><em>Examples</em>:</p>
@@ -27,24 +29,24 @@
       </thead>
       <tbody>
         <tr>
-          <td>2</td>
+          <td><code>2</code></td>
           <td>the value (e.g. kinds of vertex) is exactly 2</td>
         </tr>
         <tr>
-          <td>1-2</td>
+          <td><code>1-2</code></td>
           <td>the value is between 1 and 2 (inclusive)</td>
         </tr>
         <tr>
-          <td>1.0-1.2</td>
+          <td><code>1.0-1.2</code></td>
           <td>the value (e.g. density) is between 1.0 and 1.2 (inclusive)</td>
         </tr>
         <tr>
-          <td><5</td>
+          <td><code>&lt; 5</code></td>
           <td>the value is strictly smaller than 5</td>
         </tr>
         <tr>
-          <td>>0.8</td>
-          <td>the value is strictly larger than 0.8</td>
+          <td><code>&gt;= 0.8</code></td>
+          <td>the value is at least 0.8</td>
         </tr>
       </tbody>
     </table>
