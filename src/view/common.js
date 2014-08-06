@@ -357,8 +357,7 @@ common.Results = React.createClass({
     };
 
     var link = function(i, text) {
-      return Link({ key: 'link_' + text.replace(/\s+/g, '_') + '_' + i,
-                    href: i, onClick: this.select }, text);
+      return Link({ href: i, onClick: this.select }, text);
     }.bind(this);
 
     if (n < 1) {
@@ -368,8 +367,8 @@ common.Results = React.createClass({
       msg = 'Showing ' + type + ' ' + (i+1) +
         ' of ' + n + ' matching your search.';
 
-      return $.div({ key: i },
-                   $.ul({ className: 'plainList' },
+      return $.div(null,
+                   $.ul({ className: 'plainList', key: 'no_' + i },
                         item(n > 1
                              ? link(-1, 'All Results') : 'All Results'),
                         item(i > 0
@@ -388,7 +387,7 @@ common.Results = React.createClass({
       }.bind(this));
 
       return $.div(null,
-                   $.ul({ className: 'plainList' },
+                   $.ul({ className: 'plainList', key: 'all' },
                         link('details', 'More Details')),
                    $.p(null, msg + '.'),
                    $.div(null,
@@ -398,8 +397,8 @@ common.Results = React.createClass({
         msg = msg + ', showing ' + (begin+1) + ' through ' + end;
       msg = msg + '.'
 
-      return $.div({ key: begin },
-                   $.ul({ className: 'plainList' },
+      return $.div(null,
+                   $.ul({ className: 'plainList', key: 'from_' + begin },
                         item(link('symbols', 'Symbols Only')),
                         item(begin > 0
                              ? link("backward", laquo + ' Previous') 
