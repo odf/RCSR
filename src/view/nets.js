@@ -116,7 +116,7 @@ var schema = {
         ["kinds of edge"],
         ["kinds of face"],
         ["kinds of tile"],
-        "space group number",
+        ["space group number", "/help/spacegroup.html"],
         ["smallest ring"],
         ["order"],
         ["Dsize"]
