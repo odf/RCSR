@@ -236,7 +236,7 @@ var Net = React.createClass({
   displayName: 'Net',
 
   render: function() {
-    var net = this.props.structure;
+    var net = this.props.structure || this.props.data;
     var refKinds = ['names', 'keywords', 'references'];
 
     return $.div(null,
@@ -318,4 +318,8 @@ var Nets = React.createClass({
 });
 
 
-module.exports = Nets;
+module.exports = {
+  search: Nets,
+  single: Net
+};
+

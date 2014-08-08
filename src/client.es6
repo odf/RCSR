@@ -179,18 +179,24 @@ var Testing = React.createClass({
 });
 
 
-var builtinNetData = function() {
+var builtinNetData = function(symbol) {
   return cc.go(function*() {
-    var res = yield cc.nbind(agent.get)('public/3dall.txt');
-    if (res.ok)
-      return parseNets(res.text);
+    var data;
+    var res = yield cc.nbind(agent.get)('/public/3dall.txt');
+    if (res.ok) {
+      data = parseNets(res.text);
+      if (symbol)
+        return data.filter(function(net) { return net.symbol == symbol; })[0];
+      else
+        return data;
+    }
   });
 };
 
 
 var builtinLayerData = function() {
   return cc.go(function*() {
-    var res = yield cc.nbind(agent.get)('public/2dall.txt');
+    var res = yield cc.nbind(agent.get)('/public/2dall.txt');
     if (res.ok)
       return parseLayers(res.text);
   });
@@ -199,7 +205,7 @@ var builtinLayerData = function() {
 
 var builtinPolyData = function() {
   return cc.go(function*() {
-    var res = yield cc.nbind(agent.get)('public/0dall.txt');
+    var res = yield cc.nbind(agent.get)('/public/0dall.txt');
     if (res.ok)
       return parsePolys(res.text);
   });
@@ -207,9 +213,14 @@ var builtinPolyData = function() {
 
 
 var resolveRoute = function(path) {
-  if (path == '/nets')
+  if (path.match(/^\/nets\//))
     return Loader({
-      component: Nets,
+      component: Nets.single,
+      deferred: builtinNetData(path.replace(/^\/nets\//, ''))
+    });
+  else if (path == '/nets')
+    return Loader({
+      component: Nets.search,
       deferred: builtinNetData()
     });
   else if (path == '/layers')
