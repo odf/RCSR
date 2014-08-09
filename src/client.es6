@@ -266,13 +266,13 @@ var Application = React.createClass({
                             $.li(null, $.a({ href: '/testing' }, 'Testing'))
                            )),
                  $.p({ className: 'disclaimer' },
-                     'This site is work in progress. ',
-                     'In case of difficulties, please contact ',
+                     'This site is work in progress and will replace ',
+                     $.a({ href: 'http://rcsr.anu.edu.au' },
+                         'http://rcsr.anu.edu.au' ),
+                     '. In case of difficulties, please contact ',
                      $.a({ href: 'mailto:support@rcsr.net' },
                          'support@rcsr.net'),
-                     ' or try our old site ',
-                     $.a({ href: 'http://rcsr.anu.edu.au' },
-                         'http://rcsr.anu.edu.au' )),
+                     ''),
                  resolveRoute(this.props.path));
   }
 });
