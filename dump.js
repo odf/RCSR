@@ -1,15 +1,24 @@
 'use strict';
 
 var fs = require('fs');
-var cc = require('ceci-core');
 
-var parse  = require('./src/parse/' + (process.argv[3] || 'nets'));
+var path = process.argv[2];
+var type = process.argv[3] || 'nets';
+var json = path.match(/\.json$/);
 
-var fileContents = function(path) {
-  return cc.nbind(fs.readFile, fs)(path, { encoding: 'utf8' });
-};
+var parse  = require('./src/parse/' + type);
 
-cc.top(cc.go(function*() {
-  var data = parse(yield fileContents(process.argv[2]));
-  console.log(JSON.stringify(data, null, 4));
-}));
+fs.readFile(path, { encoding: 'utf8' }, function(err, text) {
+  var data, start, end;
+
+  if (err)
+    throw new Error(err);
+  else {
+    start = process.hrtime();
+    data = json ? JSON.parse(text) : parse(text);
+    end = process.hrtime(start);
+
+    console.log(JSON.stringify(data, null, 4));
+    console.warn("Parsed in " + (end[0] + end[1] / 1000000000) + " seconds");
+  }
+});
