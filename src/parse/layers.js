@@ -89,8 +89,8 @@ var parseStructure = function(lines, startIndex) {
   if (i == lines.length)
     return null;
   else if (i > startIndex)
-    console.log('warning: unrecognized content between lines '
-                + startIndex + ' and ' + (i-1));
+    console.error('warning: unrecognized content between lines '
+                  + startIndex + ' and ' + (i-1));
 
   result.serialNumber = parseInt(lines[++i]);
 

@@ -79,8 +79,8 @@ var parseStructure = function(lines, startIndex) {
   if (i == lines.length)
     return null;
   else if (i > startIndex)
-    console.log('warning: unrecognized content between lines '
-                + startIndex + ' and ' + (i-1));
+    console.error('warning: unrecognized content between lines '
+                  + startIndex + ' and ' + (i-1));
 
   result.serialNumber = parseInt(lines[++i]);
 
@@ -132,8 +132,8 @@ var parseStructure = function(lines, startIndex) {
 var checkStructure = function(poly) {
   var chi = poly.numberOfFaces - poly.numberOfEdges + poly.numberOfVertices;
   if (chi != 2)
-    console.log("WARNING: " + poly.symbol +
-                " - Euler characteristic is " + chi);
+    console.error("WARNING: " + poly.symbol +
+                  " - Euler characteristic is " + chi);
 };
 
 

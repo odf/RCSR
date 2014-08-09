@@ -133,8 +133,8 @@ var parseStructure = function(lines, startIndex) {
   if (i == lines.length)
     return null;
   else if (i > startIndex)
-    console.log('warning: unrecognized content between lines '
-                + startIndex + ' and ' + (i-1));
+    console.error('warning: unrecognized content between lines '
+                  + startIndex + ' and ' + (i-1));
 
   result.serialNumber = parseInt(lines[++i]);
 
@@ -218,8 +218,8 @@ var checkStructure = function(net) {
     return sum + vert.multiplicity * vert.coordinationNumber;
   }, 0);
   if (a != b)
-    console.log("WARNING: " + net.symbol + " - edge numbers inconsistent ("
-                + a + " vs " + b + ")");
+    console.error("WARNING: " + net.symbol + " - edge numbers inconsistent ("
+                  + a + " vs " + b + ")");
 };
 
 
@@ -238,7 +238,7 @@ module.exports = function(text) {
     symbol = tmp.result.symbol;
 
     if (seen[symbol])
-      console.log("WARNING: " + symbol + " appears more then once.");
+      console.error("WARNING: " + symbol + " appears more then once.");
     else
       result.push(tmp.result);
 
