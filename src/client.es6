@@ -181,15 +181,24 @@ var Testing = React.createClass({
 
 var builtinNetData = function(symbol) {
   return cc.go(function*() {
-    var data;
-    var res = yield cc.nbind(agent.get)('/public/3dall.txt');
-    if (res.ok) {
-      data = parseNets(res.text);
+    var data, res;
+
+    res = yield cc.nbind(agent.get)('/public/3dall.json');
+    if (res.ok)
+      data = JSON.parse(res.text);
+    else {
+      res = yield cc.nbind(agent.get)('/public/3dall.txt');
+      if (res.ok)
+        data = parseNets(res.text);
+    }
+
+    if (data) {
       if (symbol)
         return data.filter(function(net) { return net.symbol == symbol; })[0];
       else
         return data;
-    }
+    } else
+      alert('Could not read data for RCSR nets');
   });
 };
 
