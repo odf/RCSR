@@ -94,14 +94,20 @@ var Loader = React.createClass({
 
   getInitialState: function() {
     return {
+      showMessage: false,
       data: null
     }
   },
   componentDidMount: function() {
     cc.go(function*() {
+      yield cc.sleep(500);
+      if (this.isMounted() && !this.state.data)
+        this.setState({ showMessage: true });
+    }.bind(this));
+    cc.go(function*() {
       var data = yield this.props.deferred;
       if (this.isMounted())
-        this.setState({ data: data });
+        this.setState({ data: data, showMessage: false });
     }.bind(this)).then(null, function(ex) {
       alert(ex + '\n' + ex.stack);
     });
@@ -110,8 +116,10 @@ var Loader = React.createClass({
     if (this.state.data)
       return this.props.component({ data: this.state.data,
                                     info: this.props.info });
-    else
+    else if (this.state.showMessage)
       return $.div(null, $.p(null, "Loading data..."));
+    else
+      return $.div();
   }
 });
 
