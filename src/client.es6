@@ -187,45 +187,62 @@ var Testing = React.createClass({
 });
 
 
-var builtinNetData = function(symbol) {
+var builtinData = function(type, jsonPath, txtPath, parse, symbol) {
   return cc.go(function*() {
     var data, res;
 
-    res = yield cc.nbind(agent.get)('/public/3dall.json');
+    res = yield cc.nbind(agent.get)(jsonPath);
     if (res.ok)
       data = JSON.parse(res.text);
     else {
-      res = yield cc.nbind(agent.get)('/public/3dall.txt');
+      res = yield cc.nbind(agent.get)(txtPath);
       if (res.ok)
-        data = parseNets(res.text);
+        data = parse(res.text);
     }
 
     if (data) {
       if (symbol)
-        return data.filter(function(net) { return net.symbol == symbol; })[0];
+        return data.filter(function(item) {
+          return item.symbol == symbol;
+        })[0];
       else
         return data;
     } else
-      alert('Could not read data for RCSR nets');
+      alert('Could not read data for RCSR ' + type);
   });
 };
 
 
-var builtinLayerData = function() {
-  return cc.go(function*() {
-    var res = yield cc.nbind(agent.get)('/public/2dall.txt');
-    if (res.ok)
-      return parseLayers(res.text);
-  });
+var builtinNetData = function(symbol) {
+  return builtinData(
+    'nets',
+    '/public/3dall.json',
+    '/public/3dall.txt',
+    parseNets,
+    symbol
+  );
 };
 
 
-var builtinPolyData = function() {
-  return cc.go(function*() {
-    var res = yield cc.nbind(agent.get)('/public/0dall.txt');
-    if (res.ok)
-      return parsePolys(res.text);
-  });
+var builtinLayerData = function(symbol) {
+  return builtinData(
+    'layers',
+    '/public/2dall.json',
+    '/public/2dall.txt',
+    parseLayers,
+    symbol
+  );
+};
+
+
+var builtinPolyData = function(symbol) {
+  return builtinData(
+    'polyhedra',
+    '/public/0dall.json',
+    '/public/0dall.txt',
+    parsePolys,
+    symbol
+  );
 };
 
 
@@ -240,14 +257,24 @@ var resolveRoute = function(path) {
       component: Nets.search,
       deferred: builtinNetData()
     });
+  else if (path.match(/^\/layers\//))
+    return Loader({
+      component: Layers.single,
+      deferred: builtinLayerData(path.replace(/^\/layers\//, ''))
+    });
   else if (path == '/layers')
     return Loader({
-      component: Layers,
+      component: Layers.search,
       deferred: builtinLayerData()
+    });
+  else if (path.match(/^\/polyhedra\//))
+    return Loader({
+      component: Polyhedra.single,
+      deferred: builtinPolyData(path.replace(/^\/polyhedra\//, ''))
     });
   else if (path == '/polyhedra')
     return Loader({
-      component: Polyhedra,
+      component: Polyhedra.search,
       deferred: builtinPolyData()
     });
   else if (path == '/testing')

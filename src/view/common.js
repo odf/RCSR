@@ -379,7 +379,7 @@ common.Results = React.createClass({
                         item(i < n-1
                              ? link(i+1, 'Next ' + raquo) : 'Next')),
                    $.p(null, msg),
-                   this.props.display({ structure: structure }));
+                   this.props.display({ data: structure }));
     } else if (this.state.symbolsOnly) {
       var resultList = results.map(function(structure, i) {
         return $.li({ className: 'fragment',

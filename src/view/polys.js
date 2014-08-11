@@ -150,7 +150,7 @@ var Polyhedron = React.createClass({
   displayName: 'Polyhedron',
 
   render: function() {
-    var poly = this.props.structure;
+    var poly = this.props.data;
     var refKinds = ['names', 'keywords'];
 
     return $.div(null,
@@ -240,4 +240,8 @@ var Polyhedra = React.createClass({
 });
 
 
-module.exports = Polyhedra;
+module.exports = {
+  search: Polyhedra,
+  single: Polyhedron
+};
+

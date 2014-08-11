@@ -236,7 +236,7 @@ var Net = React.createClass({
   displayName: 'Net',
 
   render: function() {
-    var net = this.props.structure || this.props.data;
+    var net = this.props.data;
     var refKinds = ['names', 'keywords', 'references'];
 
     return $.div(null,

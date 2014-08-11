@@ -154,7 +154,7 @@ var Layer = React.createClass({
   displayName: 'Layer',
 
   render: function() {
-    var layer = this.props.structure;
+    var layer = this.props.data;
     var refKinds = ['names', 'keywords'];
 
     return $.div(null,
@@ -235,4 +235,8 @@ var Layers = React.createClass({
 });
 
 
-module.exports = Layers;
+module.exports = {
+  search: Layers,
+  single: Layer
+};
+
