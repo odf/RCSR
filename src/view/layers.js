@@ -154,7 +154,9 @@ var Layer = React.createClass({
   displayName: 'Layer',
 
   render: function() {
-    var layer = this.props.data;
+    var layer    = this.props.data;
+    var path     = '/layers/' + layer.symbol;
+    var url      = 'http://rcsr.net' + path;
     var refKinds = ['names', 'keywords'];
 
     return $.div(null,
@@ -163,6 +165,7 @@ var Layer = React.createClass({
                    prefix: 'Layer',
                    symbol: layer.symbol,
                    mayEnlarge: true })),
+                 $.p(null, 'RCSR reference: ', $.a({ href: path }, url)),
                  $.ul({ className: 'plainList' },
                       common.formatReferences(layer, refKinds, keywords)),
                  properties(layer),

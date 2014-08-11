@@ -236,7 +236,9 @@ var Net = React.createClass({
   displayName: 'Net',
 
   render: function() {
-    var net = this.props.data;
+    var net      = this.props.data;
+    var path     = '/nets/' + net.symbol;
+    var url      = 'http://rcsr.net' + path;
     var refKinds = ['names', 'keywords', 'references'];
 
     return $.div(null,
@@ -245,6 +247,7 @@ var Net = React.createClass({
                    prefix: 'Net',
                    symbol: net.symbol,
                    mayEnlarge: true })),
+                 $.p(null, 'RCSR reference: ', $.a({ href: path }, url)),
                  $.ul({ className: 'plainList' },
                       common.formatReferences(net, refKinds, keywords)),
                  properties(net),

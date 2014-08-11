@@ -150,7 +150,9 @@ var Polyhedron = React.createClass({
   displayName: 'Polyhedron',
 
   render: function() {
-    var poly = this.props.data;
+    var poly     = this.props.data;
+    var path     = '/polyhedra/' + poly.symbol;
+    var url      = 'http://rcsr.net' + path;
     var refKinds = ['names', 'keywords'];
 
     return $.div(null,
@@ -160,6 +162,7 @@ var Polyhedron = React.createClass({
                    symbol: poly.symbol,
                    mayEnlarge: true
                  })),
+                 $.p(null, 'RCSR reference: ', $.a({ href: path }, url)),
                  $.ul({ className: 'plainList' },
                       common.formatReferences(poly, refKinds, keywords)),
                  properties(poly),
