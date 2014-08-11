@@ -286,6 +286,9 @@ common.StructureImage = React.createClass({
     this.setState({ error: true });
     event.preventDefault();
   },
+  componentWillReceiveProps: function() {
+    this.setState({ error: false });
+  },
   render: function() {
     var base = 'http://rcsr.net/public/images/';
     var symbol = this.props.symbol;
