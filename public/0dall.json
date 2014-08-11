@@ -1,0 +1,3756 @@
+[
+    {
+        "serialNumber": 1,
+        "symbol": "snc",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "snub cube",
+            "3^4.4"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "Archimedean",
+            "cubic"
+        ],
+        "pointSymmetry": "432 (O)",
+        "spacegroupSymbol": "P432",
+        "faceSymbol": "[3^32.4^6]",
+        "kindsOfVertex": 1,
+        "kindsOfEdge": 3,
+        "kindsOfFace": 3,
+        "numberOfVertices": 24,
+        "numberOfEdges": 60,
+        "numberOfFaces": 38,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 5,
+                "coordinates": [
+                    0.3378,
+                    0.6212,
+                    1.1426
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    1.1426,
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.7005,
+                    0.7005,
+                    0.7005
+                ]
+            },
+            {
+                "name": "F3",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.9688,
+                    0.7005,
+                    0.2071
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 2,
+        "symbol": "ico",
+        "dual": "dod",
+        "otherSymbols": [],
+        "names": [
+            "icosahedon",
+            "3^5",
+            "Frank-Kasper 12"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "regular",
+            "simplicial",
+            "icosahedral",
+            "deltahedron"
+        ],
+        "pointSymmetry": "m-3-5 (Ih)",
+        "spacegroupSymbol": "Pm-3",
+        "faceSymbol": "[3^20]",
+        "kindsOfVertex": 1,
+        "kindsOfEdge": 1,
+        "kindsOfFace": 1,
+        "numberOfVertices": 12,
+        "numberOfEdges": 30,
+        "numberOfFaces": 20,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 5,
+                "coordinates": [
+                    0,
+                    0.5,
+                    0.809
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1a",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.4363,
+                    0.4363,
+                    0.4363
+                ]
+            },
+            {
+                "name": "F1b",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0,
+                    0.7058,
+                    0.2696
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 3,
+        "symbol": "dod",
+        "dual": "ico",
+        "otherSymbols": [],
+        "names": [
+            "dodecahedron",
+            "5^3"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "regular",
+            "simple",
+            "icosahedral"
+        ],
+        "pointSymmetry": "m-3-5 (Ih)",
+        "spacegroupSymbol": "Pm-3",
+        "faceSymbol": "[5^12]",
+        "kindsOfVertex": 1,
+        "kindsOfEdge": 1,
+        "kindsOfFace": 1,
+        "numberOfVertices": 20,
+        "numberOfEdges": 30,
+        "numberOfFaces": 12,
+        "vertices": [
+            {
+                "name": "V1a",
+                "coordination": 3,
+                "coordinates": [
+                    0.809,
+                    0.809,
+                    0.809
+                ]
+            },
+            {
+                "name": "V1b",
+                "coordination": 3,
+                "coordinates": [
+                    1.309,
+                    0.5,
+                    0
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 5,
+                "coordinates": [
+                    0,
+                    0.5852,
+                    0.9742
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 4,
+        "symbol": "rdo",
+        "dual": "cbo",
+        "otherSymbols": [],
+        "names": [
+            "rhombic dodecahedron"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "Catalan",
+            "cubic",
+            "spacefilling"
+        ],
+        "pointSymmetry": "m-3m (Oh)",
+        "spacegroupSymbol": "Pm-3m",
+        "faceSymbol": "[4^12]",
+        "kindsOfVertex": 2,
+        "kindsOfEdge": 1,
+        "kindsOfFace": 1,
+        "numberOfVertices": 14,
+        "numberOfEdges": 24,
+        "numberOfFaces": 12,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 4,
+                "coordinates": [
+                    1.1547,
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "V2",
+                "coordination": 3,
+                "coordinates": [
+                    0.5774,
+                    0.5774,
+                    0.5774
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    0.5774,
+                    0.5774,
+                    0
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 5,
+        "symbol": "ada",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "adamantane cage",
+            "diamond tile"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "cage",
+            "spacefilling",
+            "cubic"
+        ],
+        "pointSymmetry": "-43m (Td)",
+        "spacegroupSymbol": "P-43m",
+        "faceSymbol": "[6^4]",
+        "kindsOfVertex": 2,
+        "kindsOfEdge": 1,
+        "kindsOfFace": 1,
+        "numberOfVertices": 10,
+        "numberOfEdges": 12,
+        "numberOfFaces": 4,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 2,
+                "coordinates": [
+                    1.1547,
+                    1.1547,
+                    0
+                ]
+            },
+            {
+                "name": "V2",
+                "coordination": 3,
+                "coordinates": [
+                    0.5773,
+                    0.5773,
+                    0.5773
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 6,
+                "coordinates": [
+                    -0.2887,
+                    -0.2887,
+                    -0.2887
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 6,
+        "symbol": "tid",
+        "dual": "-",
+        "otherSymbols": [
+            "ido-a"
+        ],
+        "names": [
+            "4.6.10",
+            "truncated icosidodecahedron"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "simple",
+            "Archimedean",
+            "icosahedral"
+        ],
+        "pointSymmetry": "m-3-5 (Ih)",
+        "spacegroupSymbol": "Pm-3",
+        "faceSymbol": "[4^30.6^20.10^12]",
+        "kindsOfVertex": 1,
+        "kindsOfEdge": 3,
+        "kindsOfFace": 3,
+        "numberOfVertices": 120,
+        "numberOfEdges": 180,
+        "numberOfFaces": 62,
+        "vertices": [
+            {
+                "name": "V1a",
+                "coordination": 3,
+                "coordinates": [
+                    0.5,
+                    0.5,
+                    3.7361
+                ]
+            },
+            {
+                "name": "V1b",
+                "coordination": 3,
+                "coordinates": [
+                    1.309,
+                    1,
+                    3.4271
+                ]
+            },
+            {
+                "name": "V1c",
+                "coordination": 3,
+                "coordinates": [
+                    1.618,
+                    1.809,
+                    2.9271
+                ]
+            },
+            {
+                "name": "V1d",
+                "coordination": 3,
+                "coordinates": [
+                    2.4271,
+                    1.309,
+                    2.618
+                ]
+            },
+            {
+                "name": "V1e",
+                "coordination": 3,
+                "coordinates": [
+                    0.5,
+                    3.118,
+                    2.118
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 10,
+                "coordinates": [
+                    0,
+                    1.809,
+                    2.9271
+                ]
+            },
+            {
+                "name": "F2a",
+                "numberOfEdges": 6,
+                "coordinates": [
+                    0,
+                    3.4271,
+                    1.309
+                ]
+            },
+            {
+                "name": "F2b",
+                "numberOfEdges": 6,
+                "coordinates": [
+                    2.118,
+                    2.118,
+                    2.118
+                ]
+            },
+            {
+                "name": "F3a",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    0,
+                    0,
+                    3.7361
+                ]
+            },
+            {
+                "name": "F3b",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    3.023,
+                    1.868,
+                    1.155
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 7,
+        "symbol": "pbc",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "BaCd11 polyhedron"
+        ],
+        "otherNames": [],
+        "keywords": [],
+        "pointSymmetry": "-4m2 (D2d)",
+        "spacegroupSymbol": "P-4m2",
+        "faceSymbol": "[3^32.4^4]",
+        "kindsOfVertex": 4,
+        "kindsOfEdge": 9,
+        "kindsOfFace": 6,
+        "numberOfVertices": 22,
+        "numberOfEdges": 56,
+        "numberOfFaces": 36,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 5,
+                "coordinates": [
+                    0,
+                    0,
+                    1.275
+                ]
+            },
+            {
+                "name": "V2",
+                "coordination": 5,
+                "coordinates": [
+                    0,
+                    0.974,
+                    0.954
+                ]
+            },
+            {
+                "name": "V3",
+                "coordination": 5,
+                "coordinates": [
+                    0.482,
+                    1.174,
+                    0.152
+                ]
+            },
+            {
+                "name": "V4",
+                "coordination": 6,
+                "coordinates": [
+                    0.773,
+                    0.483,
+                    0.79
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    0.974,
+                    0,
+                    0.319
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.418,
+                    0.877,
+                    0.632
+                ]
+            },
+            {
+                "name": "F3",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.515,
+                    0,
+                    0.952
+                ]
+            },
+            {
+                "name": "F4",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.258,
+                    0.486,
+                    1.006
+                ]
+            },
+            {
+                "name": "F5",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.81,
+                    0.713,
+                    0.263
+                ]
+            },
+            {
+                "name": "F6",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0,
+                    1.107,
+                    0.419
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 8,
+        "symbol": "tmp",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "ThMn12 polyhedron"
+        ],
+        "otherNames": [],
+        "keywords": [],
+        "pointSymmetry": "4/mmm (D4h)",
+        "spacegroupSymbol": "P4/mmm",
+        "faceSymbol": "[3^32.4^2]",
+        "kindsOfVertex": 3,
+        "kindsOfEdge": 5,
+        "kindsOfFace": 4,
+        "numberOfVertices": 20,
+        "numberOfEdges": 52,
+        "numberOfFaces": 34,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 5,
+                "coordinates": [
+                    0.835,
+                    0.835,
+                    0.44
+                ]
+            },
+            {
+                "name": "V2",
+                "coordination": 6,
+                "coordinates": [
+                    1.236,
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "V3",
+                "coordination": 5,
+                "coordinates": [
+                    0.724,
+                    0,
+                    0.881
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    0,
+                    0,
+                    0.881
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.52,
+                    0.52,
+                    0.734
+                ]
+            },
+            {
+                "name": "F3",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.278,
+                    0.932,
+                    0.44
+                ]
+            },
+            {
+                "name": "F4",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.969,
+                    0.557,
+                    0
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 9,
+        "symbol": "cub",
+        "dual": "oct",
+        "otherSymbols": [],
+        "names": [
+            "cube",
+            "4^3"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "regular",
+            "simple",
+            "cubic"
+        ],
+        "pointSymmetry": "m-3m (Oh)",
+        "spacegroupSymbol": "Pm-3m",
+        "faceSymbol": "[4^6]",
+        "kindsOfVertex": 1,
+        "kindsOfEdge": 1,
+        "kindsOfFace": 1,
+        "numberOfVertices": 8,
+        "numberOfEdges": 12,
+        "numberOfFaces": 6,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 3,
+                "coordinates": [
+                    0.5,
+                    0.5,
+                    0.5
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    0.5,
+                    0,
+                    0.5
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 10,
+        "symbol": "oct",
+        "dual": "cub",
+        "otherSymbols": [],
+        "names": [
+            "octahedron",
+            "3^4"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "regular",
+            "simplicial",
+            "cubic",
+            "deltahedron"
+        ],
+        "pointSymmetry": "m-3m (Oh)",
+        "spacegroupSymbol": "Pm-3m",
+        "faceSymbol": "[3^8]",
+        "kindsOfVertex": 1,
+        "kindsOfEdge": 1,
+        "kindsOfFace": 1,
+        "numberOfVertices": 6,
+        "numberOfEdges": 12,
+        "numberOfFaces": 8,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 4,
+                "coordinates": [
+                    0.7071,
+                    0,
+                    0
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    0.2357,
+                    0.2357,
+                    0.2357
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 11,
+        "symbol": "tet",
+        "dual": "tet",
+        "otherSymbols": [],
+        "names": [
+            "tetrahedron",
+            "3^3"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "regular",
+            "simplicial",
+            "simple",
+            "cubic",
+            "deltahedron"
+        ],
+        "pointSymmetry": "-43m (Td)",
+        "spacegroupSymbol": "P-43m",
+        "faceSymbol": "[3^4]",
+        "kindsOfVertex": 1,
+        "kindsOfEdge": 1,
+        "kindsOfFace": 1,
+        "numberOfVertices": 4,
+        "numberOfEdges": 6,
+        "numberOfFaces": 4,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 3,
+                "coordinates": [
+                    0.3536,
+                    0.3536,
+                    0.3536
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.1178,
+                    0.1178,
+                    -0.1178
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 12,
+        "symbol": "cuo",
+        "dual": "rdo",
+        "otherSymbols": [],
+        "names": [
+            "cuboctahedron",
+            "3.4.3.4"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "Archimedean",
+            "cubic"
+        ],
+        "pointSymmetry": "m-3m (Oh)",
+        "spacegroupSymbol": "Pm-3m",
+        "faceSymbol": "[3^8.4^6]",
+        "kindsOfVertex": 1,
+        "kindsOfEdge": 1,
+        "kindsOfFace": 2,
+        "numberOfVertices": 12,
+        "numberOfEdges": 24,
+        "numberOfFaces": 14,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 4,
+                "coordinates": [
+                    0.7071,
+                    0.7071,
+                    0
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    0.7071,
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.4714,
+                    0.4714,
+                    0.4714
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 13,
+        "symbol": "tro",
+        "dual": "-",
+        "otherSymbols": [
+            "oct-a"
+        ],
+        "names": [
+            "truncated octahedron",
+            "Kelvin polyhedron",
+            "sodalite cage",
+            "4.6^2"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "Archimedean",
+            "simple",
+            "spacefilling",
+            "cubic"
+        ],
+        "pointSymmetry": "m-3m (Oh)",
+        "spacegroupSymbol": "Pm-3m",
+        "faceSymbol": "[4^6.6^8]",
+        "kindsOfVertex": 1,
+        "kindsOfEdge": 2,
+        "kindsOfFace": 2,
+        "numberOfVertices": 24,
+        "numberOfEdges": 36,
+        "numberOfFaces": 14,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 4,
+                "coordinates": [
+                    0,
+                    0.7071,
+                    1.4142
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    1.4142,
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 6,
+                "coordinates": [
+                    0.7071,
+                    0.7071,
+                    0.7071
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 14,
+        "symbol": "tte",
+        "dual": "-",
+        "otherSymbols": [
+            "tet-a"
+        ],
+        "names": [
+            "truncated tetrahedron",
+            "3.6^2"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "Archimedean",
+            "simple",
+            "cubic"
+        ],
+        "pointSymmetry": "-43m (Td)",
+        "spacegroupSymbol": "P-43m",
+        "faceSymbol": "[3^4.6^4]",
+        "kindsOfVertex": 1,
+        "kindsOfEdge": 2,
+        "kindsOfFace": 2,
+        "numberOfVertices": 12,
+        "numberOfEdges": 18,
+        "numberOfFaces": 8,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 4,
+                "coordinates": [
+                    0.3536,
+                    0.3536,
+                    1.0607
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 6,
+                "coordinates": [
+                    0.3536,
+                    0.3536,
+                    -0.3536
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.5893,
+                    0.5893,
+                    0.5893
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 15,
+        "symbol": "tcu",
+        "dual": "-",
+        "otherSymbols": [
+            "cub-a"
+        ],
+        "names": [
+            "truncated cube",
+            "3.8^2"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "Archimedean",
+            "simple",
+            "cubic"
+        ],
+        "pointSymmetry": "m-3m (Oh)",
+        "spacegroupSymbol": "Pm-3m",
+        "faceSymbol": "[3^8.8^6]",
+        "kindsOfVertex": 1,
+        "kindsOfEdge": 2,
+        "kindsOfFace": 2,
+        "numberOfVertices": 24,
+        "numberOfEdges": 36,
+        "numberOfFaces": 14,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 4,
+                "coordinates": [
+                    0.5,
+                    1.2071,
+                    1.2071
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 8,
+                "coordinates": [
+                    1.2071,
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.9714,
+                    0.9714,
+                    0.9714
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 16,
+        "symbol": "rco",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "rhombicuboctahedron",
+            "3.4^3"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "Archimedean",
+            "cubic"
+        ],
+        "pointSymmetry": "m-3m (Oh)",
+        "spacegroupSymbol": "Pm-3m",
+        "faceSymbol": "[3^8.4^18]",
+        "kindsOfVertex": 1,
+        "kindsOfEdge": 2,
+        "kindsOfFace": 3,
+        "numberOfVertices": 24,
+        "numberOfEdges": 48,
+        "numberOfFaces": 26,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 4,
+                "coordinates": [
+                    0.5,
+                    0.5,
+                    1.2071
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.7357,
+                    0.7357,
+                    0.7357
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    1.2071,
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "F3",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    0.8535,
+                    0.8535,
+                    0
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 17,
+        "symbol": "fac",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "faujasite cage",
+            "supercage"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "simple",
+            "cubic"
+        ],
+        "pointSymmetry": "-43m (Td)",
+        "spacegroupSymbol": "P-43m",
+        "faceSymbol": "[4^18.6^4.12^4]",
+        "kindsOfVertex": 2,
+        "kindsOfEdge": 5,
+        "kindsOfFace": 4,
+        "numberOfVertices": 48,
+        "numberOfEdges": 72,
+        "numberOfFaces": 26,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 3,
+                "coordinates": [
+                    0,
+                    0.708,
+                    2.57
+                ]
+            },
+            {
+                "name": "V2",
+                "coordination": 3,
+                "coordinates": [
+                    0.578,
+                    1.285,
+                    2.012
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    2.57,
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    0.643,
+                    0.643,
+                    2.291
+                ]
+            },
+            {
+                "name": "F3",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    1.292,
+                    1.292,
+                    1.292
+                ]
+            },
+            {
+                "name": "F4",
+                "numberOfEdges": null,
+                "coordinates": [
+                    1,
+                    1,
+                    1
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 18,
+        "symbol": "tcz",
+        "dual": "-",
+        "otherSymbols": [
+            "oct-a"
+        ],
+        "names": [
+            "truncated cuboctahedron",
+            "4.6.8",
+            "alpha cage"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "Archimedean",
+            "simple",
+            "cubic"
+        ],
+        "pointSymmetry": "m-3m (Oh)",
+        "spacegroupSymbol": "Pm-3m",
+        "faceSymbol": "[4^12.6^8.8^6]",
+        "kindsOfVertex": 1,
+        "kindsOfEdge": 3,
+        "kindsOfFace": 3,
+        "numberOfVertices": 48,
+        "numberOfEdges": 72,
+        "numberOfFaces": 26,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 4,
+                "coordinates": [
+                    0.5,
+                    1.2071,
+                    1.9142
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 6,
+                "coordinates": [
+                    1.2071,
+                    1.2071,
+                    1.2071
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 8,
+                "coordinates": [
+                    1.9142,
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "F3",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    1.5607,
+                    1.5607,
+                    0
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 19,
+        "symbol": "hxt",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "hxg tile",
+            "Schoen's decahedron"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "cage",
+            "spacefilling",
+            "cubic"
+        ],
+        "pointSymmetry": "-43m (Td)",
+        "spacegroupSymbol": "P-43m",
+        "faceSymbol": "[4^6.6^4]",
+        "kindsOfVertex": 1,
+        "kindsOfEdge": 1,
+        "kindsOfFace": 2,
+        "numberOfVertices": 16,
+        "numberOfEdges": 24,
+        "numberOfFaces": 10,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 2,
+                "coordinates": [
+                    0.3536,
+                    0.3536,
+                    1.0607
+                ]
+            },
+            {
+                "name": "V2",
+                "coordination": 6,
+                "coordinates": [
+                    0.3536,
+                    0.3536,
+                    -0.3536
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 6,
+                "coordinates": [
+                    0.3536,
+                    0.3536,
+                    0.3536
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    0.7071,
+                    0,
+                    0
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 20,
+        "symbol": "ido",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "icosidodecahedron",
+            "3.5.3.5"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "Archimedean",
+            "icosahedral"
+        ],
+        "pointSymmetry": "m-3-5 (Ih)",
+        "spacegroupSymbol": "Pm-3",
+        "faceSymbol": "[3^20.5^12]",
+        "kindsOfVertex": 1,
+        "kindsOfEdge": 1,
+        "kindsOfFace": 2,
+        "numberOfVertices": 30,
+        "numberOfEdges": 60,
+        "numberOfFaces": 32,
+        "vertices": [
+            {
+                "name": "V1a",
+                "coordination": 4,
+                "coordinates": [
+                    0,
+                    0,
+                    1.618
+                ]
+            },
+            {
+                "name": "V1b",
+                "coordination": 4,
+                "coordinates": [
+                    0.809,
+                    0.5,
+                    1.309
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1a",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.5393,
+                    0,
+                    1.412
+                ]
+            },
+            {
+                "name": "F1b",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.8727,
+                    0.8727,
+                    0.8727
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 5,
+                "coordinates": [
+                    1.1718,
+                    0,
+                    0.7236
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 21,
+        "symbol": "tdo",
+        "dual": "-",
+        "otherSymbols": [
+            "dod-a"
+        ],
+        "names": [
+            "truncated dodecahedron",
+            "3.10^2"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "Archimedean",
+            "icosahedral",
+            "simple"
+        ],
+        "pointSymmetry": "m-3-5 (Ih)",
+        "spacegroupSymbol": "Pm-3",
+        "faceSymbol": "[3^20.10^12]",
+        "kindsOfVertex": 1,
+        "kindsOfEdge": 2,
+        "kindsOfFace": 2,
+        "numberOfVertices": 60,
+        "numberOfEdges": 90,
+        "numberOfFaces": 32,
+        "vertices": [
+            {
+                "name": "V1a",
+                "coordination": 3,
+                "coordinates": [
+                    0,
+                    2.9271,
+                    0.5
+                ]
+            },
+            {
+                "name": "V1b",
+                "coordination": 3,
+                "coordinates": [
+                    2.118,
+                    1.618,
+                    1.309
+                ]
+            },
+            {
+                "name": "V1c",
+                "coordination": 3,
+                "coordinates": [
+                    1.309,
+                    0.5,
+                    2.618
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1a",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    1.0393,
+                    0,
+                    2.721
+                ]
+            },
+            {
+                "name": "F1b",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    1.6817,
+                    1.6817,
+                    1.6817
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 10,
+                "coordinates": [
+                    0,
+                    1.309,
+                    2.118
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 22,
+        "symbol": "tic",
+        "dual": "-",
+        "otherSymbols": [
+            "ico-a"
+        ],
+        "names": [
+            "truncated icosahedron",
+            "5.6^2",
+            "C60"
+        ],
+        "otherNames": [
+            "Buckminsterfullerene"
+        ],
+        "keywords": [
+            "Archimedean",
+            "icosahedral",
+            "simple"
+        ],
+        "pointSymmetry": "m-3-5 (Ih)",
+        "spacegroupSymbol": "Pm-3",
+        "faceSymbol": "[5^12.6^20]",
+        "kindsOfVertex": 1,
+        "kindsOfEdge": 2,
+        "kindsOfFace": 2,
+        "numberOfVertices": 60,
+        "numberOfEdges": 90,
+        "numberOfFaces": 32,
+        "vertices": [
+            {
+                "name": "V1a",
+                "coordination": 3,
+                "coordinates": [
+                    0,
+                    0.5,
+                    2.4271
+                ]
+            },
+            {
+                "name": "V1b",
+                "coordination": 3,
+                "coordinates": [
+                    0.809,
+                    1,
+                    2.1181
+                ]
+            },
+            {
+                "name": "V1c",
+                "coordination": 3,
+                "coordinates": [
+                    0.5,
+                    1.809,
+                    1.618
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1a",
+                "numberOfEdges": 6,
+                "coordinates": [
+                    0,
+                    2.1181,
+                    0.809
+                ]
+            },
+            {
+                "name": "F1b",
+                "numberOfEdges": 6,
+                "coordinates": [
+                    1.309,
+                    1.309,
+                    1.309
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 5,
+                "coordinates": [
+                    0,
+                    1.2236,
+                    1.9799
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 23,
+        "symbol": "ric",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "rhombiicosidodecahedron",
+            "3.4.5.4"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "Archimedean",
+            "icosahedral"
+        ],
+        "pointSymmetry": "m-3-5 (Ih)",
+        "spacegroupSymbol": "Pm-3",
+        "faceSymbol": "[3^20.4^30.5^12]",
+        "kindsOfVertex": 1,
+        "kindsOfEdge": 2,
+        "kindsOfFace": 3,
+        "numberOfVertices": 60,
+        "numberOfEdges": 120,
+        "numberOfFaces": 62,
+        "vertices": [
+            {
+                "name": "V1a",
+                "coordination": 4,
+                "coordinates": [
+                    0,
+                    1.809,
+                    1.309
+                ]
+            },
+            {
+                "name": "V1b",
+                "coordination": 4,
+                "coordinates": [
+                    0.5,
+                    0.5,
+                    2.118
+                ]
+            },
+            {
+                "name": "V1c",
+                "coordination": 4,
+                "coordinates": [
+                    0.809,
+                    1.309,
+                    1.618
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1a",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    2.015,
+                    0.7697,
+                    0
+                ]
+            },
+            {
+                "name": "F1b",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    1.2453,
+                    1.2453,
+                    1.2453
+                ]
+            },
+            {
+                "name": "F2a",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    0,
+                    0,
+                    2.118
+                ]
+            },
+            {
+                "name": "F2b",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    0.6545,
+                    1.7135,
+                    1.059
+                ]
+            },
+            {
+                "name": "F3",
+                "numberOfEdges": 5,
+                "coordinates": [
+                    0,
+                    1.0854,
+                    1.7532
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 24,
+        "symbol": "snd",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "snub dodecahedron",
+            "3^4.5"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "Archimedean",
+            "icosahedral"
+        ],
+        "pointSymmetry": "235 (I)",
+        "spacegroupSymbol": "P23",
+        "faceSymbol": "[3^80.5^12]",
+        "kindsOfVertex": 1,
+        "kindsOfEdge": 3,
+        "kindsOfFace": 3,
+        "numberOfVertices": 60,
+        "numberOfEdges": 150,
+        "numberOfFaces": 92,
+        "vertices": [
+            {
+                "name": "V1a",
+                "coordination": 5,
+                "coordinates": [
+                    0.3309,
+                    0.3748,
+                    2.097
+                ]
+            },
+            {
+                "name": "V1b",
+                "coordination": 5,
+                "coordinates": [
+                    0.8475,
+                    1.1031,
+                    1.6469
+                ]
+            },
+            {
+                "name": "V1c",
+                "coordination": 5,
+                "coordinates": [
+                    0.1929,
+                    1.7461,
+                    1.2495
+                ]
+            },
+            {
+                "name": "V1d",
+                "coordination": 5,
+                "coordinates": [
+                    -0.7283,
+                    1.4152,
+                    1.454
+                ]
+            },
+            {
+                "name": "V1e",
+                "coordination": 5,
+                "coordinates": [
+                    -0.643,
+                    0.5677,
+                    1.9778
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1a",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    1.1992,
+                    1.1992,
+                    1.1992
+                ]
+            },
+            {
+                "name": "F1b",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    1.9403,
+                    0.7411,
+                    0
+                ]
+            },
+            {
+                "name": "F1c",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    -1.1992,
+                    1.1992,
+                    1.1992
+                ]
+            },
+            {
+                "name": "F2a",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    1.4987,
+                    1.248,
+                    0.7145
+                ]
+            },
+            {
+                "name": "F2b",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    1.83,
+                    0.8093,
+                    0.5569
+                ]
+            },
+            {
+                "name": "F2c",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    1.713,
+                    1.1155,
+                    -0.3677
+                ]
+            },
+            {
+                "name": "F2d",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    1.6157,
+                    0.9418,
+                    -0.9418
+                ]
+            },
+            {
+                "name": "F2e",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.1892,
+                    2.0573,
+                    0.2143
+                ]
+            },
+            {
+                "name": "F3",
+                "numberOfEdges": 5,
+                "coordinates": [
+                    1.0414,
+                    1.685,
+                    0
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 25,
+        "symbol": "hxb",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "hexagonal barrel",
+            "CaCu5 polyhedron",
+            "DOH cage"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "simple"
+        ],
+        "pointSymmetry": "6/mmm (D6h)",
+        "spacegroupSymbol": "Pmmm",
+        "faceSymbol": "[5^12.6^8]",
+        "kindsOfVertex": 3,
+        "kindsOfEdge": 4,
+        "kindsOfFace": 3,
+        "numberOfVertices": 36,
+        "numberOfEdges": 54,
+        "numberOfFaces": 20,
+        "vertices": [
+            {
+                "name": "V1a",
+                "coordination": 3,
+                "coordinates": [
+                    1,
+                    0,
+                    1.686
+                ]
+            },
+            {
+                "name": "V1b",
+                "coordination": 3,
+                "coordinates": [
+                    0.5,
+                    0.866,
+                    1.686
+                ]
+            },
+            {
+                "name": "V2a",
+                "coordination": 3,
+                "coordinates": [
+                    1.609,
+                    0,
+                    0.994
+                ]
+            },
+            {
+                "name": "V2b",
+                "coordination": 3,
+                "coordinates": [
+                    0.804,
+                    1.394,
+                    0.994
+                ]
+            },
+            {
+                "name": "V3a",
+                "coordination": 3,
+                "coordinates": [
+                    1.491,
+                    0.861,
+                    0.5
+                ]
+            },
+            {
+                "name": "V3b",
+                "coordination": 3,
+                "coordinates": [
+                    0,
+                    1.722,
+                    0.5
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 6,
+                "coordinates": [
+                    0,
+                    0,
+                    1.686
+                ]
+            },
+            {
+                "name": "F2a",
+                "numberOfEdges": 6,
+                "coordinates": [
+                    1.53,
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "F2b",
+                "numberOfEdges": 6,
+                "coordinates": [
+                    0.765,
+                    1.325,
+                    0
+                ]
+            },
+            {
+                "name": "F3a",
+                "numberOfEdges": 5,
+                "coordinates": [
+                    1.081,
+                    0.624,
+                    1.172
+                ]
+            },
+            {
+                "name": "F3b",
+                "numberOfEdges": 5,
+                "coordinates": [
+                    0,
+                    1.248,
+                    1.172
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 26,
+        "symbol": "tbl",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "tennis ball",
+            "SGT cage"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "simple"
+        ],
+        "pointSymmetry": "-4m2 (D2d)",
+        "spacegroupSymbol": "P-4m2",
+        "faceSymbol": "[5^12.6^8]",
+        "kindsOfVertex": 5,
+        "kindsOfEdge": 9,
+        "kindsOfFace": 4,
+        "numberOfVertices": 36,
+        "numberOfEdges": 54,
+        "numberOfFaces": 20,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 3,
+                "coordinates": [
+                    0,
+                    0.45,
+                    1.849
+                ]
+            },
+            {
+                "name": "V2",
+                "coordination": 3,
+                "coordinates": [
+                    0.75,
+                    0.84,
+                    1.401
+                ]
+            },
+            {
+                "name": "V3",
+                "coordination": 3,
+                "coordinates": [
+                    1.5,
+                    0.45,
+                    0.952
+                ]
+            },
+            {
+                "name": "V4",
+                "coordination": 3,
+                "coordinates": [
+                    1.5,
+                    0.87,
+                    0.056
+                ]
+            },
+            {
+                "name": "V5",
+                "coordination": 3,
+                "coordinates": [
+                    0.45,
+                    1.5,
+                    0.84
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 6,
+                "coordinates": [
+                    0.75,
+                    0,
+                    1.4
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 6,
+                "coordinates": [
+                    1.5,
+                    0,
+                    0.06
+                ]
+            },
+            {
+                "name": "F3",
+                "numberOfEdges": 5,
+                "coordinates": [
+                    1.014,
+                    1.032,
+                    0.639
+                ]
+            },
+            {
+                "name": "F4",
+                "numberOfEdges": 5,
+                "coordinates": [
+                    0,
+                    1.026,
+                    1.266
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 27,
+        "symbol": "ods",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "octadecasil",
+            "AST cage"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "simple"
+        ],
+        "pointSymmetry": "m3m (Oh)",
+        "spacegroupSymbol": "Pm3m",
+        "faceSymbol": "[4^6.6^12]",
+        "kindsOfVertex": 2,
+        "kindsOfEdge": 2,
+        "kindsOfFace": 2,
+        "numberOfVertices": 32,
+        "numberOfEdges": 48,
+        "numberOfFaces": 18,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 3,
+                "coordinates": [
+                    0.5,
+                    0.5,
+                    1.655
+                ]
+            },
+            {
+                "name": "V2",
+                "coordination": 3,
+                "coordinates": [
+                    1.0775,
+                    1.0775,
+                    1.0775
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    0,
+                    0,
+                    1.655
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 6,
+                "coordinates": [
+                    1.0775,
+                    1.0775,
+                    0
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 28,
+        "symbol": "sap",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "square antiprism",
+            "3^3.4"
+        ],
+        "otherNames": [],
+        "keywords": [],
+        "pointSymmetry": "-8m2 (D4d)",
+        "spacegroupSymbol": "P422",
+        "faceSymbol": "[3^8.4^2]",
+        "kindsOfVertex": 1,
+        "kindsOfEdge": 2,
+        "kindsOfFace": 2,
+        "numberOfVertices": 8,
+        "numberOfEdges": 16,
+        "numberOfFaces": 10,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 4,
+                "coordinates": [
+                    0.6533,
+                    0.2706,
+                    0.4204
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    0,
+                    0,
+                    0.4204
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.5257,
+                    0.2178,
+                    -0.1401
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 29,
+        "symbol": "csa",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "capped square antiprism"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "deltahedron",
+            "simplicial"
+        ],
+        "pointSymmetry": "-8m2 (D4d)",
+        "spacegroupSymbol": "P422",
+        "faceSymbol": "[3^16]",
+        "kindsOfVertex": 2,
+        "kindsOfEdge": 3,
+        "kindsOfFace": 2,
+        "numberOfVertices": 10,
+        "numberOfEdges": 24,
+        "numberOfFaces": 16,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 4,
+                "coordinates": [
+                    0,
+                    0,
+                    1.1275
+                ]
+            },
+            {
+                "name": "V2",
+                "coordination": 5,
+                "coordinates": [
+                    0.6533,
+                    0.2706,
+                    0.4204
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.1276,
+                    0.308,
+                    0.6561
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.5257,
+                    0.2178,
+                    -0.1401
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 30,
+        "symbol": "tct",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "tricapped trigonal prismprism"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "deltahedron",
+            "simplicial"
+        ],
+        "pointSymmetry": "-6m2 (D3h)",
+        "spacegroupSymbol": "Pmm2",
+        "faceSymbol": "[3^14]",
+        "kindsOfVertex": 2,
+        "kindsOfEdge": 3,
+        "kindsOfFace": 3,
+        "numberOfVertices": 9,
+        "numberOfEdges": 21,
+        "numberOfFaces": 14,
+        "vertices": [
+            {
+                "name": "V1a",
+                "coordination": 4,
+                "coordinates": [
+                    0.5,
+                    0,
+                    0.5774
+                ]
+            },
+            {
+                "name": "V1b",
+                "coordination": 4,
+                "coordinates": [
+                    0.5,
+                    0.5,
+                    -0.2887
+                ]
+            },
+            {
+                "name": "V2a",
+                "coordination": 5,
+                "coordinates": [
+                    0,
+                    0,
+                    -0.9958
+                ]
+            },
+            {
+                "name": "V2b",
+                "coordination": 5,
+                "coordinates": [
+                    0,
+                    0.8624,
+                    0.4979
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.5,
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "F2a",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.3333,
+                    0,
+                    -0.5244
+                ]
+            },
+            {
+                "name": "F2b",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.3333,
+                    0.4541,
+                    0.2622
+                ]
+            },
+            {
+                "name": "F3a",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0,
+                    0.3333,
+                    -0.5244
+                ]
+            },
+            {
+                "name": "F3b",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0,
+                    0.6208,
+                    -0.0265
+                ]
+            },
+            {
+                "name": "F3c",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0,
+                    0.2875,
+                    0.5509
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 31,
+        "symbol": "bds",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "bisdisphenoid"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "deltahedron",
+            "simplicial"
+        ],
+        "pointSymmetry": "-4m2 (D2d)",
+        "spacegroupSymbol": "P-4m2",
+        "faceSymbol": "[3^12]",
+        "kindsOfVertex": 2,
+        "kindsOfEdge": 4,
+        "kindsOfFace": 2,
+        "numberOfVertices": 8,
+        "numberOfEdges": 18,
+        "numberOfFaces": 12,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 4,
+                "coordinates": [
+                    0.5,
+                    0,
+                    0.7839
+                ]
+            },
+            {
+                "name": "V2",
+                "coordination": 5,
+                "coordinates": [
+                    0,
+                    0.6446,
+                    0.2056
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0,
+                    0.2147,
+                    0.5911
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.3815,
+                    0.2147,
+                    0.2613
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 32,
+        "symbol": "zap-d",
+        "dual": "zap",
+        "otherSymbols": [],
+        "names": [],
+        "otherNames": [],
+        "keywords": [
+            "simple"
+        ],
+        "pointSymmetry": "-6m2 (D3h)",
+        "spacegroupSymbol": "Pmm2",
+        "faceSymbol": "[5^12.6^3]",
+        "kindsOfVertex": 4,
+        "kindsOfEdge": 6,
+        "kindsOfFace": 3,
+        "numberOfVertices": 26,
+        "numberOfEdges": 39,
+        "numberOfFaces": 15,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 3,
+                "coordinates": [
+                    1.624,
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "V2a",
+                "coordination": 3,
+                "coordinates": [
+                    1.356,
+                    0.809,
+                    -0.0467
+                ]
+            },
+            {
+                "name": "V2b",
+                "coordination": 3,
+                "coordinates": [
+                    1.356,
+                    0,
+                    0.934
+                ]
+            },
+            {
+                "name": "V3a",
+                "coordination": 3,
+                "coordinates": [
+                    0,
+                    0.5,
+                    1.655
+                ]
+            },
+            {
+                "name": "V3b",
+                "coordination": 3,
+                "coordinates": [
+                    0,
+                    1.623,
+                    -0.36
+                ]
+            },
+            {
+                "name": "V3c",
+                "coordination": 3,
+                "coordinates": [
+                    0,
+                    1.123,
+                    -1.226
+                ]
+            },
+            {
+                "name": "V4a",
+                "coordination": 3,
+                "coordinates": [
+                    0.782,
+                    0.811,
+                    1.046
+                ]
+            },
+            {
+                "name": "V4b",
+                "coordination": 3,
+                "coordinates": [
+                    0.782,
+                    1.311,
+                    0.179
+                ]
+            },
+            {
+                "name": "V4c",
+                "coordination": 3,
+                "coordinates": [
+                    0.782,
+                    0.5,
+                    -1.226
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1a",
+                "numberOfEdges": 6,
+                "coordinates": [
+                    0,
+                    0,
+                    -1.226
+                ]
+            },
+            {
+                "name": "F1b",
+                "numberOfEdges": 6,
+                "coordinates": [
+                    0,
+                    1.0612,
+                    0.6242
+                ]
+            },
+            {
+                "name": "F2a",
+                "numberOfEdges": 5,
+                "coordinates": [
+                    0.584,
+                    0,
+                    1.2672
+                ]
+            },
+            {
+                "name": "F2b",
+                "numberOfEdges": 5,
+                "coordinates": [
+                    0.584,
+                    1.0732,
+                    -0.62
+                ]
+            },
+            {
+                "name": "F3a",
+                "numberOfEdges": 5,
+                "coordinates": [
+                    1.18,
+                    0.5862,
+                    0.3384
+                ]
+            },
+            {
+                "name": "F3b",
+                "numberOfEdges": 5,
+                "coordinates": [
+                    1.18,
+                    0,
+                    -0.6772
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 33,
+        "symbol": "mcp",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "Frank-Kasper 16"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "simplicial"
+        ],
+        "pointSymmetry": "-43m (Td)",
+        "spacegroupSymbol": "P-43m",
+        "faceSymbol": "[3^28]",
+        "kindsOfVertex": 2,
+        "kindsOfEdge": 3,
+        "kindsOfFace": 3,
+        "numberOfVertices": 16,
+        "numberOfEdges": 42,
+        "numberOfFaces": 28,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 6,
+                "coordinates": [
+                    0.7071,
+                    0.7071,
+                    0.7071
+                ]
+            },
+            {
+                "name": "V2",
+                "coordination": 5,
+                "coordinates": [
+                    0.3536,
+                    0.3536,
+                    -1.0607
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0,
+                    0.7069,
+                    0.7069
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.5892,
+                    0.5892,
+                    -0.5892
+                ]
+            },
+            {
+                "name": "F3",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.2362,
+                    0.9425,
+                    0.2362
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 34,
+        "symbol": "hap",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "hexagonal antiprism",
+            "3^3.6"
+        ],
+        "otherNames": [],
+        "keywords": [],
+        "pointSymmetry": "-12m2 (D6d)",
+        "spacegroupSymbol": "P222",
+        "faceSymbol": "[3^12.6^2]",
+        "kindsOfVertex": 1,
+        "kindsOfEdge": 2,
+        "kindsOfFace": 2,
+        "numberOfVertices": 12,
+        "numberOfEdges": 24,
+        "numberOfFaces": 14,
+        "vertices": [
+            {
+                "name": "V1a",
+                "coordination": 4,
+                "coordinates": [
+                    0.9659,
+                    0.2588,
+                    0.4278
+                ]
+            },
+            {
+                "name": "V1b",
+                "coordination": 4,
+                "coordinates": [
+                    0.2588,
+                    0.9659,
+                    0.4278
+                ]
+            },
+            {
+                "name": "V1c",
+                "coordination": 4,
+                "coordinates": [
+                    0.7071,
+                    0.7071,
+                    -0.4278
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 6,
+                "coordinates": [
+                    0,
+                    0,
+                    0.4278
+                ]
+            },
+            {
+                "name": "F2a",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.644,
+                    0.644,
+                    0.1436
+                ]
+            },
+            {
+                "name": "F2b",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.8797,
+                    0.2357,
+                    -0.1436
+                ]
+            },
+            {
+                "name": "F2c",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.2357,
+                    0.8797,
+                    -0.1436
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 35,
+        "symbol": "fkf",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "Frank-Kasper 14"
+        ],
+        "otherNames": [],
+        "keywords": [],
+        "pointSymmetry": "-12m2 (D6d)",
+        "spacegroupSymbol": "P222",
+        "faceSymbol": "[3^24]",
+        "kindsOfVertex": 2,
+        "kindsOfEdge": 3,
+        "kindsOfFace": 2,
+        "numberOfVertices": 14,
+        "numberOfEdges": 36,
+        "numberOfFaces": 24,
+        "vertices": [
+            {
+                "name": "V1a",
+                "coordination": 5,
+                "coordinates": [
+                    0.9659,
+                    0.2588,
+                    0.4278
+                ]
+            },
+            {
+                "name": "V1b",
+                "coordination": 5,
+                "coordinates": [
+                    0.2588,
+                    0.9659,
+                    0.4278
+                ]
+            },
+            {
+                "name": "V1c",
+                "coordination": 5,
+                "coordinates": [
+                    0.7071,
+                    0.7071,
+                    -0.4278
+                ]
+            },
+            {
+                "name": "V2",
+                "coordination": 6,
+                "coordinates": [
+                    0,
+                    0,
+                    1.0379
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1a",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.644,
+                    0.644,
+                    0.1436
+                ]
+            },
+            {
+                "name": "F1b",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.8797,
+                    0.2357,
+                    -0.1436
+                ]
+            },
+            {
+                "name": "F1c",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.2357,
+                    0.8797,
+                    -0.1436
+                ]
+            },
+            {
+                "name": "F2a",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.4083,
+                    0.4083,
+                    0.6318
+                ]
+            },
+            {
+                "name": "F2b",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.5577,
+                    -0.1494,
+                    0.6318
+                ]
+            },
+            {
+                "name": "F2c",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    -0.1494,
+                    0.5577,
+                    0.6318
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 36,
+        "symbol": "mcp-d",
+        "dual": "mcp",
+        "otherSymbols": [],
+        "names": [],
+        "otherNames": [],
+        "keywords": [
+            "simple"
+        ],
+        "pointSymmetry": "-43m (Td)",
+        "spacegroupSymbol": "P-43m",
+        "faceSymbol": "[5^12.6^4]",
+        "kindsOfVertex": 2,
+        "kindsOfEdge": 3,
+        "kindsOfFace": 2,
+        "numberOfVertices": 28,
+        "numberOfEdges": 42,
+        "numberOfFaces": 16,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 3,
+                "coordinates": [
+                    0.974,
+                    -0.974,
+                    0.974
+                ]
+            },
+            {
+                "name": "V2",
+                "coordination": 3,
+                "coordinates": [
+                    0.354,
+                    0.354,
+                    1.557
+                ]
+            },
+            {
+                "name": "V3",
+                "coordination": 3,
+                "coordinates": [
+                    1.198,
+                    -0.025,
+                    1.198
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 6,
+                "coordinates": [
+                    0.7727,
+                    0.7727,
+                    0.7727
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 5,
+                "coordinates": [
+                    1.2968,
+                    -0.4394,
+                    0.4394
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 37,
+        "symbol": "trc",
+        "dual": "ido",
+        "otherSymbols": [],
+        "names": [
+            "rhombic triacontahedron"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "Catalan",
+            "icosahedral"
+        ],
+        "pointSymmetry": "m-3-5 (Ih)",
+        "spacegroupSymbol": "Pm-3",
+        "faceSymbol": "[4^30]",
+        "kindsOfVertex": 2,
+        "kindsOfEdge": 1,
+        "kindsOfFace": 1,
+        "numberOfVertices": 32,
+        "numberOfEdges": 60,
+        "numberOfFaces": 30,
+        "vertices": [
+            {
+                "name": "V1a",
+                "coordination": 3,
+                "coordinates": [
+                    0.8507,
+                    0.8507,
+                    0.8507
+                ]
+            },
+            {
+                "name": "V1b",
+                "coordination": 3,
+                "coordinates": [
+                    0.5258,
+                    0,
+                    1.3764
+                ]
+            },
+            {
+                "name": "V2",
+                "coordination": 5,
+                "coordinates": [
+                    0,
+                    0.8507,
+                    1.3764
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1a",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    0.4253,
+                    1.1136,
+                    0.6882
+                ]
+            },
+            {
+                "name": "F1b",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    0.3836,
+                    1.3764,
+                    0
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 38,
+        "symbol": "trc-a",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "augmented rhombic triacontahedron"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "icosahedral"
+        ],
+        "pointSymmetry": "m-3-5 (Ih)",
+        "spacegroupSymbol": "Pm-3",
+        "faceSymbol": "[3^20.5^12.8^30]",
+        "kindsOfVertex": 2,
+        "kindsOfEdge": 3,
+        "kindsOfFace": 3,
+        "numberOfVertices": 120,
+        "numberOfEdges": 180,
+        "numberOfFaces": 62,
+        "vertices": [
+            {
+                "name": "V1a",
+                "coordination": 3,
+                "coordinates": [
+                    2.1597,
+                    2.4687,
+                    1.6597
+                ]
+            },
+            {
+                "name": "V1b",
+                "coordination": 3,
+                "coordinates": [
+                    0.5,
+                    3.4945,
+                    1.0257
+                ]
+            },
+            {
+                "name": "V1c",
+                "coordination": 3,
+                "coordinates": [
+                    1.8348,
+                    0,
+                    3.1854
+                ]
+            },
+            {
+                "name": "V2a",
+                "coordination": 3,
+                "coordinates": [
+                    2.1597,
+                    2.9944,
+                    0.809
+                ]
+            },
+            {
+                "name": "V2b",
+                "coordination": 3,
+                "coordinates": [
+                    1.3506,
+                    3.4944,
+                    0.5
+                ]
+            },
+            {
+                "name": "V2c",
+                "coordination": 3,
+                "coordinates": [
+                    2.6854,
+                    0,
+                    2.6597
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 5,
+                "coordinates": [
+                    1.9371,
+                    3.1326,
+                    0
+                ]
+            },
+            {
+                "name": "F2a",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    1.0798,
+                    2.8271,
+                    1.7472
+                ]
+            },
+            {
+                "name": "F2b",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    3.4944,
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "F3a",
+                "numberOfEdges": 5,
+                "coordinates": [
+                    1.2954,
+                    0,
+                    3.3915
+                ]
+            },
+            {
+                "name": "F3b",
+                "numberOfEdges": 8,
+                "coordinates": [
+                    2.096,
+                    2.096,
+                    2.096
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 39,
+        "symbol": "rdo-a",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "augmented rhombic dodecahedron"
+        ],
+        "otherNames": [],
+        "keywords": [],
+        "pointSymmetry": "m-3m (Oh)",
+        "spacegroupSymbol": "Pm-3m",
+        "faceSymbol": "[3^8.4^6.8^12]",
+        "kindsOfVertex": 2,
+        "kindsOfEdge": 3,
+        "kindsOfFace": 3,
+        "numberOfVertices": 48,
+        "numberOfEdges": 72,
+        "numberOfFaces": 26,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 3,
+                "coordinates": [
+                    0.5,
+                    0.5,
+                    2.362
+                ]
+            },
+            {
+                "name": "V2",
+                "coordination": 3,
+                "coordinates": [
+                    1.0766,
+                    1.0766,
+                    1.7845
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0,
+                    0,
+                    2.362
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    1.3132,
+                    1.3132,
+                    1.3132
+                ]
+            },
+            {
+                "name": "F3",
+                "numberOfEdges": 8,
+                "coordinates": [
+                    0,
+                    1.431,
+                    1.431
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 40,
+        "symbol": "snc-d",
+        "dual": "snc",
+        "otherSymbols": [],
+        "names": [
+            "snub cube dual",
+            "pentagonal icositetrahedron"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "Catalan"
+        ],
+        "pointSymmetry": "432 (O)",
+        "spacegroupSymbol": "P432",
+        "faceSymbol": "[5^24]",
+        "kindsOfVertex": 3,
+        "kindsOfEdge": 3,
+        "kindsOfFace": 1,
+        "numberOfVertices": 38,
+        "numberOfEdges": 60,
+        "numberOfFaces": 24,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 3,
+                "coordinates": [
+                    0.8524,
+                    0.8524,
+                    0.8524
+                ]
+            },
+            {
+                "name": "V2",
+                "coordination": 3,
+                "coordinates": [
+                    0.2028,
+                    1.1377,
+                    0.9188
+                ]
+            },
+            {
+                "name": "V3",
+                "coordination": 4,
+                "coordinates": [
+                    0,
+                    0,
+                    1.4764
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 5,
+                "coordinates": [
+                    1.1046,
+                    0.3544,
+                    0.6225
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 41,
+        "symbol": "bsp",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "beta tin dual polyhedron"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "spacefilling",
+            "simple"
+        ],
+        "pointSymmetry": "-4m2 (D2d)",
+        "spacegroupSymbol": "P-4m2",
+        "faceSymbol": "[3^8.4^2.6^4.10^4]",
+        "kindsOfVertex": 4,
+        "kindsOfEdge": 5,
+        "kindsOfFace": 4,
+        "numberOfVertices": 32,
+        "numberOfEdges": 48,
+        "numberOfFaces": 18,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 3,
+                "coordinates": [
+                    0.5,
+                    0.5,
+                    1.79
+                ]
+            },
+            {
+                "name": "V2",
+                "coordination": 3,
+                "coordinates": [
+                    1.27,
+                    0.95,
+                    1.343
+                ]
+            },
+            {
+                "name": "V3",
+                "coordination": 3,
+                "coordinates": [
+                    2.04,
+                    0.5,
+                    0.885
+                ]
+            },
+            {
+                "name": "V4",
+                "coordination": 3,
+                "coordinates": [
+                    1.575,
+                    1.27,
+                    0.448
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    1.6283,
+                    -0.9083,
+                    0.892
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    0,
+                    0,
+                    1.79
+                ]
+            },
+            {
+                "name": "F3",
+                "numberOfEdges": 6,
+                "coordinates": [
+                    1.27,
+                    0,
+                    1.3393
+                ]
+            },
+            {
+                "name": "F4",
+                "numberOfEdges": 10,
+                "coordinates": [
+                    0,
+                    1.268,
+                    0.4496
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 42,
+        "symbol": "trp",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "trigonal prism"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "spacefilling",
+            "simple"
+        ],
+        "pointSymmetry": "-6m2 (D3h)",
+        "spacegroupSymbol": "Pmm2",
+        "faceSymbol": "[3^2.4^3]",
+        "kindsOfVertex": 1,
+        "kindsOfEdge": 2,
+        "kindsOfFace": 2,
+        "numberOfVertices": 6,
+        "numberOfEdges": 9,
+        "numberOfFaces": 5,
+        "vertices": [
+            {
+                "name": "V1a",
+                "coordination": 3,
+                "coordinates": [
+                    0.5,
+                    0,
+                    0.5774
+                ]
+            },
+            {
+                "name": "V1b",
+                "coordination": 3,
+                "coordinates": [
+                    0.5,
+                    0.5,
+                    -0.2887
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.5,
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "F2a",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    0,
+                    0.25,
+                    0.1443
+                ]
+            },
+            {
+                "name": "F2b",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    0,
+                    0,
+                    -0.2887
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 43,
+        "symbol": "spy",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "square pyramid"
+        ],
+        "otherNames": [],
+        "keywords": [],
+        "pointSymmetry": "4mm (C4v)",
+        "spacegroupSymbol": "P4mm",
+        "faceSymbol": "[3^4.4]",
+        "kindsOfVertex": 2,
+        "kindsOfEdge": 2,
+        "kindsOfFace": 2,
+        "numberOfVertices": 5,
+        "numberOfEdges": 8,
+        "numberOfFaces": 5,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 4,
+                "coordinates": [
+                    0,
+                    0,
+                    0.7071
+                ]
+            },
+            {
+                "name": "V2",
+                "coordination": 3,
+                "coordinates": [
+                    0.5,
+                    0.5,
+                    0
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    0,
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    0.3333,
+                    0,
+                    0.2357
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 44,
+        "symbol": "tbp",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "trigonal bipyramid"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "deltahedron"
+        ],
+        "pointSymmetry": "-6m2 (D3h)",
+        "spacegroupSymbol": "Pmm2",
+        "faceSymbol": "[3^6]",
+        "kindsOfVertex": 2,
+        "kindsOfEdge": 2,
+        "kindsOfFace": 1,
+        "numberOfVertices": 5,
+        "numberOfEdges": 9,
+        "numberOfFaces": 6,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 3,
+                "coordinates": [
+                    0,
+                    0,
+                    0.5774
+                ]
+            },
+            {
+                "name": "V2a",
+                "coordination": 4,
+                "coordinates": [
+                    0,
+                    0.5,
+                    -0.2887
+                ]
+            },
+            {
+                "name": "V2b",
+                "coordination": 4,
+                "coordinates": [
+                    0.6548,
+                    0,
+                    0
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1a",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.2182,
+                    0,
+                    -0.1835
+                ]
+            },
+            {
+                "name": "F1b",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    0.2182,
+                    0.1667,
+                    0.0962
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 45,
+        "symbol": "tsz",
+        "dual": "-",
+        "otherSymbols": [
+            "rco-a"
+        ],
+        "names": [
+            "tschortnerite cage"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "cubic",
+            "simple"
+        ],
+        "pointSymmetry": "m-3m (Oh)",
+        "spacegroupSymbol": "Pm-3m",
+        "faceSymbol": "[4^24.6^8.8^18]",
+        "kindsOfVertex": 2,
+        "kindsOfEdge": 5,
+        "kindsOfFace": 4,
+        "numberOfVertices": 96,
+        "numberOfEdges": 144,
+        "numberOfFaces": 50,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 3,
+                "coordinates": [
+                    1.077,
+                    1.786,
+                    2.492
+                ]
+            },
+            {
+                "name": "V2",
+                "coordination": 5,
+                "coordinates": [
+                    0.5,
+                    1.217,
+                    3.069
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    1.145,
+                    1.145,
+                    2.781
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 6,
+                "coordinates": [
+                    1.785,
+                    1.785,
+                    1.785
+                ]
+            },
+            {
+                "name": "F3",
+                "numberOfEdges": 8,
+                "coordinates": [
+                    3.069,
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "F4",
+                "numberOfEdges": 8,
+                "coordinates": [
+                    0,
+                    2.141,
+                    2.141
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 46,
+        "symbol": "tcz-a",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "ftm (rho-a) polyhedron"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "simple",
+            "cubic"
+        ],
+        "pointSymmetry": "m-3m (Oh)",
+        "spacegroupSymbol": "Pm-3m",
+        "faceSymbol": "[3^48.8^12.12^8.16^6]",
+        "kindsOfVertex": 3,
+        "kindsOfEdge": 6,
+        "kindsOfFace": 4,
+        "numberOfVertices": 144,
+        "numberOfEdges": 216,
+        "numberOfFaces": 74,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 3,
+                "coordinates": [
+                    0.5,
+                    2.439,
+                    4.109
+                ]
+            },
+            {
+                "name": "V2",
+                "coordination": 3,
+                "coordinates": [
+                    1.462,
+                    2.169,
+                    4.071
+                ]
+            },
+            {
+                "name": "V3",
+                "coordination": 3,
+                "coordinates": [
+                    1.191,
+                    3.093,
+                    3.8
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 3,
+                "coordinates": [
+                    1.051,
+                    2.567,
+                    3.993
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 8,
+                "coordinates": [
+                    0,
+                    3.36,
+                    3.36
+                ]
+            },
+            {
+                "name": "F3",
+                "numberOfEdges": 12,
+                "coordinates": [
+                    2.631,
+                    2.631,
+                    2.631
+                ]
+            },
+            {
+                "name": "F4",
+                "numberOfEdges": 16,
+                "coordinates": [
+                    0,
+                    0,
+                    4.09
+                ]
+            }
+        ]
+    },
+    {
+        "serialNumber": 47,
+        "symbol": "tro-a",
+        "dual": "-",
+        "otherSymbols": [],
+        "names": [
+            "augmented truncated octahedron"
+        ],
+        "otherNames": [],
+        "keywords": [
+            "simple",
+            "cubic"
+        ],
+        "pointSymmetry": "m-3m (Oh)",
+        "spacegroupSymbol": "Pm-3m",
+        "faceSymbol": "[4^36.6^24.8^6.12^8]",
+        "kindsOfVertex": 3,
+        "kindsOfEdge": 5,
+        "kindsOfFace": 4,
+        "numberOfVertices": 144,
+        "numberOfEdges": 216,
+        "numberOfFaces": 74,
+        "vertices": [
+            {
+                "name": "V1",
+                "coordination": 3,
+                "coordinates": [
+                    0.5,
+                    1.207,
+                    4.139
+                ]
+            },
+            {
+                "name": "V2",
+                "coordination": 3,
+                "coordinates": [
+                    1.112,
+                    1.819,
+                    3.639
+                ]
+            },
+            {
+                "name": "V3",
+                "coordination": 3,
+                "coordinates": [
+                    0.5,
+                    2.319,
+                    3.026
+                ]
+            }
+        ],
+        "faces": [
+            {
+                "name": "F1",
+                "numberOfEdges": 4,
+                "coordinates": [
+                    0,
+                    1.782,
+                    3.601
+                ]
+            },
+            {
+                "name": "F2",
+                "numberOfEdges": 6,
+                "coordinates": [
+                    0,
+                    1.782,
+                    3.601
+                ]
+            },
+            {
+                "name": "F3",
+                "numberOfEdges": 8,
+                "coordinates": [
+                    0,
+                    0,
+                    4.139
+                ]
+            },
+            {
+                "name": "F4",
+                "numberOfEdges": 12,
+                "coordinates": [
+                    2.069,
+                    2.069,
+                    2.069
+                ]
+            }
+        ]
+    }
+]
