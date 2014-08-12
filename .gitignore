@@ -1,5 +1,4 @@
 node_modules/
 public/js/
-public/vendor/
-deps.mk
-assets/
+public/images/*Pics
+public/images/*PicsThumbs

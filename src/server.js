@@ -1,5 +1,6 @@
 'use strict';
 
+var fs = require('fs');
 var express = require('express');
 
 var home = process.argv[2];
@@ -18,6 +19,14 @@ app.use(function(req, res, next) {
   res.setHeader("Cache-Control", "public, max-age=" + cacheTime);
   res.setHeader("Expires", expires());
   next();
+});
+
+app.get('/public/images/:type/:name.jpg', function(req, res) {
+  var path = req.path.replace(/^\/public/, '');
+  if (fs.existsSync(home + path))
+    res.sendfile(path, { root: home });
+  else
+    res.sendfile('/images/placeholder.jpg', { root: home });
 });
 
 app.get('/public/*', function(req, res) {
