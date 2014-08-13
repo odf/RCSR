@@ -132,9 +132,9 @@ var parsers = {
 
 
 var components = {
-  "Nets"     : Nets,
-  "Layers"   : Layers,
-  "Polyhedra": Polyhedra
+  "Nets"     : Nets.search,
+  "Layers"   : Layers.search,
+  "Polyhedra": Polyhedra.search
 };
 
 
