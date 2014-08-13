@@ -250,8 +250,8 @@ common.formatReferences = function(net, kinds, keywords) {
 };
 
 
-var Link = React.createClass({
-  displayName: 'Link',
+var ActiveLink = React.createClass({
+  displayName: 'ActiveLink',
 
   handleClick: function(event) {
     event.preventDefault();
@@ -266,7 +266,7 @@ var Link = React.createClass({
   },
   render: function() {
     return $.a({ className: this.props.className,
-                 href: this.props.href },
+                 href: '#' + (this.props.href || '') },
                this.props.children);
   }
 });
@@ -301,7 +301,7 @@ common.StructureImage = React.createClass({
     if (this.state.error)
       return $.span({ className: 'thumbnail' }, '(no image)');
     if (this.props.mayEnlarge)
-      return Link({ onClick: this.toggle }, img);
+      return ActiveLink({ onClick: this.toggle }, img);
     else
       return $.span({ className: 'thumbnail' }, img);
   }
@@ -360,7 +360,7 @@ common.Results = React.createClass({
     };
 
     var link = function(i, text) {
-      return Link({ href: i, onClick: this.select }, text);
+      return ActiveLink({ href: i, onClick: this.select }, text);
     }.bind(this);
 
     if (n < 1) {
@@ -385,8 +385,7 @@ common.Results = React.createClass({
         return $.li({ className: 'fragment',
                       style: { width: '5em' },
                       key: structure.symbol },
-                    Link({ href: i, onClick: this.select },
-                         structure.symbol));
+                    link(i, structure.symbol));
       }.bind(this));
 
       return $.div(null,
