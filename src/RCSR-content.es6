@@ -4,81 +4,88 @@ var agent = require('superagent');
 var cc    = require('ceci-core');
 
 
-var request = cc.nbind(function(verb, url, data, cb) {
-  agent(verb, url)
-    .auth(process.env.RCSR_TOKEN, 'x-oauth-basic')
-    .set('User-Agent', 'nodejs')
-    .send(data)
-    .end(cb);
-});
-
-
-var baseURL = 'https://api.github.com/repos/odf/RCSR-content/contents/';
-
-
-var get = function(path) {
-  return cc.go(function*() {
-    var response, result;
-
-    response = yield request('GET', baseURL + path, null);
-    result = JSON.parse(response.text);
-
-    if (response.ok)
-      return {
-        ok     : response.ok,
-        status : response.status,
-        content: new Buffer(result.content, 'base64').toString('utf8'),
-        sha    : result.sha
-      };
-    else
-      return {
-        ok     : response.ok,
-        status : response.status,
-        message: result.message
-      }
+exports.agent = function(baseURL, token) {
+  var request = cc.nbind(function(verb, url, data, cb) {
+    agent(verb, url)
+      .auth(token, 'x-oauth-basic')
+      .set('User-Agent', 'nodejs')
+      .send(data)
+      .end(cb);
   });
-};
 
+  var get = function(path) {
+    return cc.go(function*() {
+      var response, result;
 
-var put = function(path, content, message) {
-  return cc.go(function*() {
-    var data, response, result;
+      response = yield request('GET', baseURL + path, null);
+      result = JSON.parse(response.text);
 
-    data = {
-      message: message || 'automated commit',
-      content: new Buffer(content).toString('base64'),
-      sha    : (yield get(path)).sha
-    };
-
-    response = yield request('PUT', baseURL + path, data);
-    result = JSON.parse(response.text);
-
-    if (response.ok)
-      return {
-        ok    : response.ok,
-        status: response.status,
-        sha   : result.content.sha,
-        commit: {
-          sha: result.commit.sha
+      if (response.ok)
+        return {
+          ok     : response.ok,
+          status : response.status,
+          content: new Buffer(result.content, 'base64').toString('utf8'),
+          sha    : result.sha
+        };
+      else
+        return {
+          ok     : response.ok,
+          status : response.status,
+          message: result.message
         }
+    });
+  };
+
+  var put = function(path, content, message) {
+    return cc.go(function*() {
+      var data, response, result;
+
+      data = {
+        message: message || 'automated commit',
+        content: new Buffer(content).toString('base64'),
+        sha    : (yield get(path)).sha
       };
-    else
-      return {
-        ok    : response.ok,
-        status: response.status,
-        message: result.message
-      };
-  });
+
+      response = yield request('PUT', baseURL + path, data);
+      result = JSON.parse(response.text);
+
+      if (response.ok)
+        return {
+          ok    : response.ok,
+          status: response.status,
+          sha   : result.content.sha,
+          commit: {
+            sha: result.commit.sha
+          }
+        };
+      else
+        return {
+          ok    : response.ok,
+          status: response.status,
+          message: result.message
+        };
+    });
+  };
+
+  return {
+    get: get,
+    put: put
+  }
 };
 
 
 var test = function() {
   cc.go(function*() {
-    var path, content, response;
+    var agent, path, content, response;
+
+    agent = exports.agent(
+      'https://api.github.com/repos/odf/RCSR-content/contents/',
+      process.env.RCSR_TOKEN
+    );
 
     path     = process.argv[2];
     content  = process.argv[3];
-    response = yield (content ? put(path, content) : get(path));
+    response = yield (content ? agent.put(path, content) : agent.get(path));
 
     if (response.ok)
       console.log(JSON.stringify(response, null, 4));
@@ -90,8 +97,3 @@ var test = function() {
 
 if (require.main == module)
   test();
-else
-  module.exports = {
-    get: get,
-    put: put
-  };
