@@ -68,7 +68,7 @@ var Home = React.createClass({
     return $.div({ className: 'homePage' },
                  $.h1({ className: 'center' }, greeting),
                  $.img({ className: 'center', 
-                         src: '/public/images/CRC_sphere_pic.jpg' }),
+                         src: '/images/CRC_sphere_pic.jpg' }),
                  $.h2({ className: 'center' },
                       'Department of Chemistry and Biochemistry',
                       $.br(),
@@ -216,8 +216,8 @@ var builtinData = function(type, jsonPath, txtPath, parse, symbol) {
 var builtinNetData = function(symbol) {
   return builtinData(
     'nets',
-    '/public/3dall.json',
-    '/public/3dall.txt',
+    '/data/3dall.json',
+    '/data/3dall.txt',
     parseNets,
     symbol
   );
@@ -227,8 +227,8 @@ var builtinNetData = function(symbol) {
 var builtinLayerData = function(symbol) {
   return builtinData(
     'layers',
-    '/public/2dall.json',
-    '/public/2dall.txt',
+    '/data/2dall.json',
+    '/data/2dall.txt',
     parseLayers,
     symbol
   );
@@ -238,8 +238,8 @@ var builtinLayerData = function(symbol) {
 var builtinPolyData = function(symbol) {
   return builtinData(
     'polyhedra',
-    '/public/0dall.json',
-    '/public/0dall.txt',
+    '/data/0dall.json',
+    '/data/0dall.txt',
     parsePolys,
     symbol
   );
@@ -290,7 +290,7 @@ var Application = React.createClass({
   render: function() {
     return $.div({ key: this.props.path },
                  $.div(null,
-                       $.img({ src: '/public/images/rcsr_logo.gif' }),
+                       $.img({ src: '/images/rcsr_logo.gif' }),
                        $.span({ className: 'logoText' }, 'RCSR (beta)')),
                  $.div({ className: 'navBar' },
                        $.span({ className: 'tagline' },
@@ -298,10 +298,10 @@ var Application = React.createClass({
                        $.ul({ className: 'pageLinks' },
                             $.li(null, $.a({ href: '/' }, 'Home')),
                             $.li(null, '|'),
-                            $.li(null, $.a({ href: '/public/about.html' },
+                            $.li(null, $.a({ href: '/about.html' },
                                            'About')),
                             $.li(null, '|'),
-                            $.li(null, $.a({ href: '/public/links.html' },
+                            $.li(null, $.a({ href: '/links.html' },
                                            'Links')),
                             $.li(null, '|'),
                             $.li(null, $.a({ href: '/nets' }, 'Nets')),

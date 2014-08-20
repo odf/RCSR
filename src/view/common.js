@@ -290,7 +290,7 @@ common.StructureImage = React.createClass({
     this.setState({ error: false });
   },
   render: function() {
-    var base = '/public/images/';
+    var base = '/images/';
     var symbol = this.props.symbol;
     var src = base + (this.state.full
                       ? this.props.prefix + 'Pics/' + symbol + '.jpg'

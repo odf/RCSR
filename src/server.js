@@ -21,20 +21,36 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get('/public/images/:type/:name.jpg', function(req, res) {
-  var path = req.path.replace(/^\/public/, '');
+app.get('/images/:type/:name.jpg', function(req, res) {
+  var path = req.path;
   if (fs.existsSync(home + path))
     res.sendfile(path, { root: home });
   else
     res.sendfile('/images/placeholder.jpg', { root: home });
 });
 
-app.get('/public/*', function(req, res) {
-  res.sendfile(req.params[0], { root: home });
+app.get('/:name.html', function(req, res) {
+  res.sendfile(req.path, { root: home });
+});
+
+app.get('/:name.css', function(req, res) {
+  res.sendfile(req.path, { root: home });
+});
+
+app.get('/images/*', function(req, res) {
+  res.sendfile(req.path, { root: home });
+});
+
+app.get('/js/*', function(req, res) {
+  res.sendfile(req.path, { root: home });
 });
 
 app.get('/help/*', function(req, res) {
-  res.sendfile(req.params[0], { root: home + '/help' });
+  res.sendfile(req.path, { root: home });
+});
+
+app.get('/data/*', function(req, res) {
+  res.sendfile(req.path, { root: home });
 });
 
 app.get('*', function(req, res) {
