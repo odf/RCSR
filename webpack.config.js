@@ -9,5 +9,8 @@ module.exports = {
     loaders: [
       { test: /\.es6\.js$/, loader: "regenerator" }
     ]
+  },
+  resolve: {
+    extensions: [ "", ".js", ".es6.js" ]
   }
 };
