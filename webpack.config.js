@@ -2,7 +2,7 @@ module.exports = {
   context: __dirname + "/src",
   entry: [ "regenerator/runtime/dev", "./client.es6.js" ],
   output: {
-    path: __dirname + "/public/js",
+    path: __dirname + "/content/public/js",
     filename: "app.js"
   },
   module: {

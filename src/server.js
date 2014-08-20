@@ -18,6 +18,10 @@ app.get('/images/:type/:name.jpg', function(req, res) {
     res.sendfile('/images/placeholder.jpg', { root: home });
 });
 
+app.get('/', function(req, res) {
+  res.sendfile('app.html', { root: home });
+});
+
 app.get('*', function(req, res) {
   var path = req.path;
   if (fs.existsSync(home + path))

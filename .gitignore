@@ -1,5 +1,4 @@
 node_modules/
-public/js/
-public/images/*Pics
-public/images/*PicsThumbs
+content
+content/
 github-token
