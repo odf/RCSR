@@ -5,8 +5,8 @@ var cc    = require('ceci-core');
 
 
 exports.agent = function(baseURL, token) {
-  var request = cc.nbind(function(verb, url, data, cb) {
-    agent(verb, url)
+  var request = cc.nbind(function(verb, path, data, cb) {
+    agent(verb, baseURL + path)
       .auth(token, 'x-oauth-basic')
       .set('User-Agent', 'nodejs')
       .send(data)
@@ -17,7 +17,7 @@ exports.agent = function(baseURL, token) {
     return cc.go(function*() {
       var response, result;
 
-      response = yield request('GET', baseURL + path, null);
+      response = yield request('GET', path, null);
       result = JSON.parse(response.text);
 
       if (response.ok)
@@ -46,7 +46,7 @@ exports.agent = function(baseURL, token) {
         sha    : (yield get(path)).sha
       };
 
-      response = yield request('PUT', baseURL + path, data);
+      response = yield request('PUT', path, data);
       result = JSON.parse(response.text);
 
       if (response.ok)
