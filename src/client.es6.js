@@ -4,6 +4,9 @@ var React       = require('react');
 var agent       = require('superagent');
 var cc          = require('ceci-core');
 
+var validate    = require('plexus-validate');
+var Form        = require('plexus-form');
+
 var parseNets   = require('./parse/nets');
 var parseLayers = require('./parse/layers');
 var parsePolys  = require('./parse/polys');
@@ -187,6 +190,53 @@ var Testing = React.createClass({
 });
 
 
+var adminSchema = {
+  title: "Admin Properties",
+  type: "object",
+  properties: {
+    active: { type: "boolean", title: "Use admin mode" },
+    name  : { type: "string",  title: "Your Name" },
+    token : { type: "string",  title: "Github access token" }
+  }
+};
+
+
+var Admin = React.createClass({
+  displayName: 'Admin',
+
+  getInitialState: function() {
+    return {
+      active: localStorage.getItem('RCSR-admin-active') == 'true',
+      name  : localStorage.getItem('RCSR-admin-name') || "",
+      token : localStorage.getItem('RCSR-admin-token') || ""
+    };
+  },
+
+  handleSubmit: function(inputs) {
+    localStorage.setItem('RCSR-admin-active', inputs.active);
+    localStorage.setItem('RCSR-admin-name'  , inputs.name || "");
+    localStorage.setItem('RCSR-admin-token' , inputs.token || "");
+
+    this.setState({
+      active: inputs.active,
+      name  : inputs.name || "",
+      token : inputs.token || ""
+    });
+  },
+
+  render: function() {
+    return Form({
+      buttons       : [],
+      onSubmit      : this.handleSubmit,
+      submitOnChange: true,
+      schema        : adminSchema,
+      validate      : validate,
+      values        : this.state
+    });
+  }
+});
+
+
 var builtinData = function(type, jsonPath, txtPath, parse, symbol) {
   return cc.go(function*() {
     var data, res;
@@ -279,6 +329,8 @@ var resolveRoute = function(path) {
     });
   else if (path == '/testing')
     return Testing();
+  else if (path == '/admin')
+    return Admin();
   else
     return Home();
 };
@@ -288,6 +340,10 @@ var Application = React.createClass({
   displayName: 'Application',
 
   render: function() {
+    var adminMode = localStorage.getItem('RCSR-admin-active') == 'true';
+    var user = localStorage.getItem('RCSR-admin-name');
+    user = user ? " - your name is " + user : "";
+
     return $.div({ key: this.props.path },
                  $.div(null,
                        $.img({ src: '/images/rcsr_logo.gif' }),
@@ -309,9 +365,13 @@ var Application = React.createClass({
                             $.li(null, $.a({ href: '/layers' }, 'Layers')),
                             $.li(null, '|'),
                             $.li(null, $.a({ href: '/polyhedra' }, 'Polyhedra')),
+                            //$.li(null, '|'),
+                            //$.li(null, $.a({ href: '/admin' }, 'Admin')),
                             $.li(null, '|'),
                             $.li(null, $.a({ href: '/testing' }, 'Testing'))
                            )),
+                 adminMode ? $.div({ className: "highlight" },
+                                   "In admin mode" + user) : null,
                  $.p({ className: 'disclaimer' },
                      'This site is work in progress and will replace ',
                      $.a({ href: 'http://rcsr.anu.edu.au' },
