@@ -196,8 +196,14 @@ var adminSchema = {
   properties: {
     active: { type: "boolean", title: "Use admin mode" },
     name  : { type: "string",  title: "Your Name" },
-    token : { type: "string",  title: "Github access token" }
-  }
+    token : { type : "string", title: "Github access token" }
+  },
+  "x-hints": { form: { classes: ['wideTextfields'] }}
+};
+
+
+var starrify = function(text) {
+  return text.split('').map(function() { return '*'; }).join('')
 };
 
 
@@ -205,34 +211,41 @@ var Admin = React.createClass({
   displayName: 'Admin',
 
   getInitialState: function() {
+    var token = localStorage.getItem('RCSR-admin-token');
+
     return {
       active: localStorage.getItem('RCSR-admin-active') == 'true',
       name  : localStorage.getItem('RCSR-admin-name') || "",
-      token : localStorage.getItem('RCSR-admin-token') || ""
+      token : starrify(token)
     };
   },
 
-  handleSubmit: function(inputs) {
-    localStorage.setItem('RCSR-admin-active', inputs.active);
-    localStorage.setItem('RCSR-admin-name'  , inputs.name || "");
-    localStorage.setItem('RCSR-admin-token' , inputs.token || "");
+  handleSubmit: function(inputs, button) {
+    if (button != 'Submit')
+      this.setState(this.getInitialState());
+    else {
+      localStorage.setItem('RCSR-admin-active', inputs.active);
+      localStorage.setItem('RCSR-admin-name'  , inputs.name || "");
 
-    this.setState({
-      active: inputs.active,
-      name  : inputs.name || "",
-      token : inputs.token || ""
-    });
+      if (inputs.token != starrify(inputs.token))
+        localStorage.setItem('RCSR-admin-token' , inputs.token);
+
+      this.setState({
+        active: inputs.active,
+        name  : inputs.name || "",
+        token : starrify(inputs.token)
+      });
+    }
   },
 
   render: function() {
-    return Form({
-      buttons       : [],
-      onSubmit      : this.handleSubmit,
-      submitOnChange: true,
-      schema        : adminSchema,
-      validate      : validate,
-      values        : this.state
-    });
+    return $.div(null,
+                 Form({
+                   onSubmit: this.handleSubmit,
+                   schema  : adminSchema,
+                   validate: validate,
+                   values  : this.state
+                 }));
   }
 });
 
@@ -329,9 +342,10 @@ var resolveRoute = function(path) {
     });
   else if (path == '/testing')
     return Testing();
-  else if (path == '/admin')
+  else if (path == '/admin') {
+    localStorage.setItem('RCSR-admin-known', true);
     return Admin();
-  else
+  } else
     return Home();
 };
 
@@ -340,9 +354,25 @@ var Application = React.createClass({
   displayName: 'Application',
 
   render: function() {
+    var adminKnown = localStorage.getItem('RCSR-admin-known') == 'true';
     var adminMode = localStorage.getItem('RCSR-admin-active') == 'true';
     var user = localStorage.getItem('RCSR-admin-name');
     user = user ? " - your name is " + user : "";
+
+    var links = [
+      [ 'Home', '/' ], [ '|' ],
+      [ 'About', '/about.html' ], [ '|' ],
+      [ 'Links', '/links.html' ], [ '|' ],
+      [ 'Nets', '/nets' ], [ '|' ],
+      [ 'Layers', '/layers' ], [ '|' ],
+      [ 'Polyhedra', '/polyhedra' ], [ '|' ],
+      [ 'Testing', '/testing' ]
+    ];
+
+    if (adminKnown || this.props.path == '/admin') {
+      links.push([ '|' ]);
+      links.push([ 'Admin', '/admin' ]);
+    }
 
     return $.div({ key: this.props.path },
                  $.div(null,
@@ -352,26 +382,15 @@ var Application = React.createClass({
                        $.span({ className: 'tagline' },
                               'Reticular Chemistry Structure Resource'),
                        $.ul({ className: 'pageLinks' },
-                            $.li(null, $.a({ href: '/' }, 'Home')),
-                            $.li(null, '|'),
-                            $.li(null, $.a({ href: '/about.html' },
-                                           'About')),
-                            $.li(null, '|'),
-                            $.li(null, $.a({ href: '/links.html' },
-                                           'Links')),
-                            $.li(null, '|'),
-                            $.li(null, $.a({ href: '/nets' }, 'Nets')),
-                            $.li(null, '|'),
-                            $.li(null, $.a({ href: '/layers' }, 'Layers')),
-                            $.li(null, '|'),
-                            $.li(null, $.a({ href: '/polyhedra' }, 'Polyhedra')),
-                            //$.li(null, '|'),
-                            //$.li(null, $.a({ href: '/admin' }, 'Admin')),
-                            $.li(null, '|'),
-                            $.li(null, $.a({ href: '/testing' }, 'Testing'))
-                           )),
-                 adminMode ? $.div({ className: "highlight" },
-                                   "In admin mode" + user) : null,
+                            links.map(function(item, i) {
+                              var name = item[0];
+                              var url = item[1];
+                              var t = url ? $.a({ href: url }, name) : name;
+                              return $.li({ key: i }, t);
+                            }))),
+                 (adminMode && this.props.path != '/admin' ?
+                  $.div({ className: "highlight" }, "In admin mode" + user) :
+                  null),
                  $.p({ className: 'disclaimer' },
                      'This site is work in progress and will replace ',
                      $.a({ href: 'http://rcsr.anu.edu.au' },
