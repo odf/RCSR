@@ -1,57 +1,6 @@
 'use strict';
 
-
-var asSet = function(a) {
-  var result = {};
-  for (var i in a)
-    result[a[i]] = 1;
-  return result;
-};
-
-
-var equalSets = function(a, b) {
-  var sa = asSet(a);
-  var sb = asSet(b);
-
-  return (a.every(function(x) { return sb[x] == 1; })
-          &&
-          b.every(function(x) { return sa[x] == 1; }));
-};
-
-
-var matchText = {
-  'is'         : function(s, p) { return s == p; },
-  'contains'   : function(s, p) { return s.match(p) != null; },
-  'begins with': function(s, p) { return s.match('^' + p) != null; }
-};
-
-
-var search = function(pattern, mode, list) {
-  return list.some(function(text) {
-    return matchText[mode](text.toLowerCase(), pattern);
-  });
-};
-
-
-var rangeMatcher = function(key) {
-  return function(item, range) {
-    var value = item[key];
-
-    if (range.exclusive) {
-      if (range.from != null && value <= range.from)
-        return false;
-      if (range.to != null && value >= range.to)
-        return false;
-    } else {
-      if (range.from != null && value < range.from)
-        return false;
-      if (range.to != null && value > range.to)
-        return false;
-    }
-
-    return true;
-  };
-};
+var common = require('./common');
 
 
 var matcher = {
@@ -61,7 +10,8 @@ var matcher = {
   names: function(item, value) {
     var s = value.text.toLowerCase()
     var m = value.mode || 'is';
-    return search(s, m, item.names) || search(s, m, item.otherNames);
+    return (common.search(s, m, item.names) ||
+            common.search(s, m, item.otherNames));
   },
   keywords: function(item, values) {
     for (var i in values)
@@ -78,19 +28,19 @@ var matcher = {
   },
   coordination: function(item, values) {
     var seen = item.vertices.map(function(v) { return v.coordinationNumber; });
-    return equalSets(values, seen);
+    return common.equalSets(values, seen);
   },
-  "density"           : rangeMatcher('density'),
-  "td10"              : rangeMatcher('td10'),
-  "genus"             : rangeMatcher('genus'),
-  "kinds of vertex"   : rangeMatcher('numberOfVertices'),
-  "kinds of edge"     : rangeMatcher('numberOfEdges'),
-  "kinds of face"     : rangeMatcher('numberOfFaces'),
-  "kinds of tile"     : rangeMatcher('numberOfTiles'),
-  "space group number": rangeMatcher('spacegroupNumber'),
-  "smallest ring"     : rangeMatcher('smallestRingSize'),
-  "order"             : rangeMatcher('averageVertexOrder'),
-  "Dsize"             : rangeMatcher('sizeOfDSymbol')
+  "density"           : common.rangeMatcher('density'),
+  "td10"              : common.rangeMatcher('td10'),
+  "genus"             : common.rangeMatcher('genus'),
+  "kinds of vertex"   : common.rangeMatcher('numberOfVertices'),
+  "kinds of edge"     : common.rangeMatcher('numberOfEdges'),
+  "kinds of face"     : common.rangeMatcher('numberOfFaces'),
+  "kinds of tile"     : common.rangeMatcher('numberOfTiles'),
+  "space group number": common.rangeMatcher('spacegroupNumber'),
+  "smallest ring"     : common.rangeMatcher('smallestRingSize'),
+  "order"             : common.rangeMatcher('averageVertexOrder'),
+  "Dsize"             : common.rangeMatcher('sizeOfDSymbol')
 };
 
 
@@ -116,7 +66,8 @@ var filteredBySymbol = function(data, query) {
 
   var check = function(s, m) {
     return function(item) {
-      return search(s, m, [item.symbol]) || search(s, m, item.otherSymbols);
+      return (common.search(s, m, [item.symbol]) ||
+              common.search(s, m, item.otherSymbols));
     };
   }
 

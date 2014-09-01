@@ -1,39 +1,6 @@
 'use strict';
 
-
-var matchText = {
-  'is'         : function(s, p) { return s == p; },
-  'contains'   : function(s, p) { return s.match(p) != null; },
-  'begins with': function(s, p) { return s.match('^' + p) != null; }
-};
-
-
-var search = function(pattern, mode, list) {
-  return list.some(function(text) {
-    return matchText[mode](text.toLowerCase(), pattern);
-  });
-};
-
-
-var rangeMatcher = function(key) {
-  return function(item, range) {
-    var value = item[key];
-
-    if (range.exclusive) {
-      if (range.from != null && value <= range.from)
-        return false;
-      if (range.to != null && value >= range.to)
-        return false;
-    } else {
-      if (range.from != null && value < range.from)
-        return false;
-      if (range.to != null && value > range.to)
-        return false;
-    }
-
-    return true;
-  };
-};
+var common = require('./common');
 
 
 var matcher = {
@@ -43,7 +10,8 @@ var matcher = {
   names: function(item, value) {
     var s = value.text.toLowerCase()
     var m = value.mode || 'is';
-    return search(s, m, item.names) || search(s, m, item.otherNames);
+    return (common.search(s, m, item.names) ||
+            common.search(s, m, item.otherNames));
   },
   keywords: function(item, values) {
     var keywords = item.keywords.map(function(s) { return s.toLowerCase(); });
@@ -52,11 +20,11 @@ var matcher = {
         return false;
     return true;
   },
-  "number of vertices": rangeMatcher('numberOfVertices'),
-  "number of faces"   : rangeMatcher('numberOfFaces'),
-  "kinds of vertex"   : rangeMatcher('kindsOfVertex'),
-  "kinds of edge"     : rangeMatcher('kindsOfEdge'),
-  "kinds of face"     : rangeMatcher('kindsOfFace')
+  "number of vertices": common.rangeMatcher('numberOfVertices'),
+  "number of faces"   : common.rangeMatcher('numberOfFaces'),
+  "kinds of vertex"   : common.rangeMatcher('kindsOfVertex'),
+  "kinds of edge"     : common.rangeMatcher('kindsOfEdge'),
+  "kinds of face"     : common.rangeMatcher('kindsOfFace')
 };
 
 
@@ -82,7 +50,8 @@ var filteredBySymbol = function(data, query) {
 
   var check = function(s, m) {
     return function(item) {
-      return search(s, m, [item.symbol]) || search(s, m, item.otherSymbols);
+      return (common.search(s, m, [item.symbol]) ||
+              common.search(s, m, item.otherSymbols));
     };
   }
 

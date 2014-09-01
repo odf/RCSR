@@ -1,57 +1,6 @@
 'use strict';
 
-
-var asSet = function(a) {
-  var result = {};
-  for (var i in a)
-    result[a[i]] = 1;
-  return result;
-};
-
-
-var equalSets = function(a, b) {
-  var sa = asSet(a);
-  var sb = asSet(b);
-
-  return (a.every(function(x) { return sb[x] == 1; })
-          &&
-          b.every(function(x) { return sa[x] == 1; }));
-};
-
-
-var matchText = {
-  'is'         : function(s, p) { return s == p; },
-  'contains'   : function(s, p) { return s.match(p) != null; },
-  'begins with': function(s, p) { return s.match('^' + p) != null; }
-};
-
-
-var search = function(pattern, mode, list) {
-  return list.some(function(text) {
-    return matchText[mode](text.toLowerCase(), pattern);
-  });
-};
-
-
-var rangeMatcher = function(key) {
-  return function(item, range) {
-    var value = item[key];
-
-    if (range.exclusive) {
-      if (range.from != null && value <= range.from)
-        return false;
-      if (range.to != null && value >= range.to)
-        return false;
-    } else {
-      if (range.from != null && value < range.from)
-        return false;
-      if (range.to != null && value > range.to)
-        return false;
-    }
-
-    return true;
-  };
-};
+var common = require('./common');
 
 
 var matcher = {
@@ -61,7 +10,8 @@ var matcher = {
   names: function(item, value) {
     var s = value.text.toLowerCase()
     var m = value.mode || 'is';
-    return search(s, m, item.names) || search(s, m, item.otherNames);
+    return (common.search(s, m, item.names) ||
+            common.search(s, m, item.otherNames));
   },
   keywords: function(item, values) {
     var keywords = item.keywords.map(function(s) { return s.toLowerCase(); });
@@ -72,9 +22,9 @@ var matcher = {
   },
   coordination: function(item, values) {
     var seen = item.vertices.map(function(v) { return v.coordination; });
-    return equalSets(values, seen);
+    return common.equalSets(values, seen);
   },
-  "kinds of vertex": rangeMatcher('kindsOfVertex')
+  "kinds of vertex": common.rangeMatcher('kindsOfVertex')
 };
 
 
@@ -100,7 +50,8 @@ var filteredBySymbol = function(data, query) {
 
   var check = function(s, m) {
     return function(item) {
-      return search(s, m, [item.symbol]) || search(s, m, item.otherSymbols);
+      return (common.search(s, m, [item.symbol]) ||
+              common.search(s, m, item.otherSymbols));
     };
   }
 
