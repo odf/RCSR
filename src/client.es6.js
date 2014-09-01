@@ -88,7 +88,12 @@ var Home = React.createClass({
                        $.h2({ className: 'center' },
                             'Department of Chemistry',
                             $.br(),
-                            'University of California, Berkeley')));
+                            'University of California, Berkeley')),
+                 $.p({ className: 'center' }, 'Additional hosting by'),
+                 $.h2({ className: 'center' },
+                      'Berzelii Center EXSELENT',
+                      $.br(),
+                      'Stockholm University'));
   }
 });
 
@@ -366,19 +371,20 @@ var Application = React.createClass({
       [ 'Links', '/links.html' ], [ '|' ],
       [ 'Nets', '/nets' ], [ '|' ],
       [ 'Layers', '/layers' ], [ '|' ],
-      [ 'Polyhedra', '/polyhedra' ], [ '|' ],
-      [ 'Testing', '/testing' ]
+      [ 'Polyhedra', '/polyhedra' ]
     ];
 
-    if (adminKnown || this.props.path == '/admin') {
+    if (this.props.path == '/admin') {
+      links.push([ '|' ]);
+      links.push([ 'Testing', '/testing' ]);
       links.push([ '|' ]);
       links.push([ 'Admin', '/admin' ]);
     }
 
     return $.div({ key: this.props.path },
-                 $.div(null,
+                 $.div({ className: 'header' },
                        $.img({ src: '/images/rcsr_logo.gif' }),
-                       $.span({ className: 'logoText' }, 'RCSR (beta)')),
+                       $.span({ className: 'logoText' }, 'RCSR')),
                  $.div({ className: 'navBar' },
                        $.span({ className: 'tagline' },
                               'Reticular Chemistry Structure Resource'),
@@ -392,14 +398,6 @@ var Application = React.createClass({
                  (adminMode && this.props.path != '/admin' ?
                   $.div({ className: "highlight" }, "In admin mode" + user) :
                   null),
-                 $.p({ className: 'disclaimer' },
-                     'This site is work in progress and will replace ',
-                     $.a({ href: 'http://rcsr.anu.edu.au' },
-                         'http://rcsr.anu.edu.au' ),
-                     '. In case of difficulties, please contact ',
-                     $.a({ href: 'mailto:support@rcsr.net' },
-                         'support@rcsr.net'),
-                     ''),
                  resolveRoute(this.props.path));
   }
 });
