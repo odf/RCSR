@@ -98,6 +98,44 @@ var Home = React.createClass({
 });
 
 
+var Links = React.createClass({
+  displayName: 'Links',
+
+  render: function() {
+    var links = [
+      ['http://www.iza-structure.org/databases',
+       'zeolite atlas (known zeolites)' ],
+      ['http://epinet.anu.edu.au/home',
+       'EPINET database of nets' ],
+      ['http://www.hypotheticalzeolites.net',
+       'hypothetical zeolites' ],
+      ['http://www.crystallography.net',
+       'predicted crystal structures' ],
+      ['http://www.chem.monash.edu.au/staff/sbatten/interpen/index.html',
+       'interpenetrating nets' ],
+      ['http://www.ccdc.cam.ac.uk',
+       'Cambridge structural database (CSD)' ],
+      ['http://www.topos.ssu.samara.ru',
+       'TOPOS topology analysis' ],
+      ['http://gavrog.org',
+       'Systre net analysis' ],
+      ['http://www.crystalmaker.com',
+       'CrystalMaker (structure visualization)' ],
+      ['http://www.iucr.org',
+       'International Union of Crystallography' ]
+    ];
+
+    return $.div({ className: 'article center' },
+                 $.h1(null, 'RCSR Links Page'),
+                 $.p(null,
+                     'These are some links to related resources on the Web.'),
+                 links.map(function(a, i) {
+                   return $.a({ key: i, href: a[0] }, a[1], $.br());
+                 }));
+  }
+});
+
+
 var Loader = React.createClass({
   displayName: 'Loader',
 
@@ -126,7 +164,7 @@ var Loader = React.createClass({
       return this.props.component({ data: this.state.data,
                                     info: this.props.info });
     else if (this.state.showMessage)
-      return $.div(null, $.p(null, "Loading data..."));
+      return $.div(null, $.p(null, 'Loading data...'));
     else
       return $.div();
   }
@@ -134,16 +172,16 @@ var Loader = React.createClass({
 
 
 var parsers = {
-  "Nets"     : parseNets,
-  "Layers"   : parseLayers,
-  "Polyhedra": parsePolys
+  'Nets'     : parseNets,
+  'Layers'   : parseLayers,
+  'Polyhedra': parsePolys
 };
 
 
 var components = {
-  "Nets"     : Nets.search,
-  "Layers"   : Layers.search,
-  "Polyhedra": Polyhedra.search
+  'Nets'     : Nets.search,
+  'Layers'   : Layers.search,
+  'Polyhedra': Polyhedra.search
 };
 
 
@@ -152,7 +190,7 @@ var Testing = React.createClass({
 
   getInitialState: function() {
     return {
-      type    : "Nets",
+      type    : 'Nets',
       deferred: null,
       info    : null
     }
@@ -172,18 +210,18 @@ var Testing = React.createClass({
                    $.h2(null, 'Locate data file'),
                    $.form({ onChange: this.handleChange },
                           $.p(null,
-                              $.input({ type: "radio", name: "type",
-                                        value: "Nets",
+                              $.input({ type: 'radio', name: 'type',
+                                        value: 'Nets',
                                         defaultChecked: true }),
-                              $.label(null, "Nets")),
+                              $.label(null, 'Nets')),
                           $.p(null,
-                              $.input({ type: "radio", name: "type",
-                                        value: "Layers" }),
-                              $.label(null, "Layers")),
+                              $.input({ type: 'radio', name: 'type',
+                                        value: 'Layers' }),
+                              $.label(null, 'Layers')),
                           $.p(null,
-                              $.input({ type: "radio", name: "type",
-                                        value: "Polyhedra" }),
-                              $.label(null, "Polyhedra"))),
+                              $.input({ type: 'radio', name: 'type',
+                                        value: 'Polyhedra' }),
+                              $.label(null, 'Polyhedra'))),
                    Uploader({
                      handleData: function(data) {
                        this.setState({
@@ -197,14 +235,14 @@ var Testing = React.createClass({
 
 
 var adminSchema = {
-  title: "Admin Properties",
-  type: "object",
+  title: 'Admin Properties',
+  type: 'object',
   properties: {
-    active: { type: "boolean", title: "Use admin mode" },
-    name  : { type: "string",  title: "Your Name" },
-    token : { type : "string", title: "Github access token" }
+    active: { type: 'boolean', title: 'Use admin mode' },
+    name  : { type: 'string',  title: 'Your Name' },
+    token : { type : 'string', title: 'Github access token' }
   },
-  "x-hints": { form: { classes: ['wideTextfields'] }}
+  'x-hints': { form: { classes: ['wideTextfields'] }}
 };
 
 
@@ -221,7 +259,7 @@ var Admin = React.createClass({
 
     return {
       active: localStorage.getItem('RCSR-admin-active') == 'true',
-      name  : localStorage.getItem('RCSR-admin-name') || "",
+      name  : localStorage.getItem('RCSR-admin-name') || '',
       token : starrify(token)
     };
   },
@@ -231,14 +269,14 @@ var Admin = React.createClass({
       this.setState(this.getInitialState());
     else {
       localStorage.setItem('RCSR-admin-active', inputs.active);
-      localStorage.setItem('RCSR-admin-name'  , inputs.name || "");
+      localStorage.setItem('RCSR-admin-name'  , inputs.name || '');
 
       if (inputs.token != starrify(inputs.token))
         localStorage.setItem('RCSR-admin-token' , inputs.token);
 
       this.setState({
         active: inputs.active,
-        name  : inputs.name || "",
+        name  : inputs.name || '',
         token : starrify(inputs.token)
       });
     }
@@ -316,7 +354,9 @@ var builtinPolyData = function(symbol) {
 
 
 var resolveRoute = function(path) {
-  if (path.match(/^\/nets\//))
+  if (path == '/links')
+    return Links();
+  else if (path.match(/^\/nets\//))
     return Loader({
       component: Nets.single,
       deferred: builtinNetData(path.replace(/^\/nets\//, ''))
@@ -363,12 +403,12 @@ var Application = React.createClass({
     var adminKnown = localStorage.getItem('RCSR-admin-known') == 'true';
     var adminMode = localStorage.getItem('RCSR-admin-active') == 'true';
     var user = localStorage.getItem('RCSR-admin-name');
-    user = user ? " - your name is " + user : "";
+    user = user ? ' - your name is ' + user : '';
 
     var links = [
       [ 'Home', '/' ], [ '|' ],
       [ 'About', '/about.html' ], [ '|' ],
-      [ 'Links', '/links.html' ], [ '|' ],
+      [ 'Links', '/links' ], [ '|' ],
       [ 'Nets', '/nets' ], [ '|' ],
       [ 'Layers', '/layers' ], [ '|' ],
       [ 'Polyhedra', '/polyhedra' ]
@@ -396,7 +436,7 @@ var Application = React.createClass({
                               return $.li({ key: i }, t);
                             }))),
                  (adminMode && this.props.path != '/admin' ?
-                  $.div({ className: "highlight" }, "In admin mode" + user) :
+                  $.div({ className: 'highlight' }, 'In admin mode' + user) :
                   null),
                  resolveRoute(this.props.path));
   }
