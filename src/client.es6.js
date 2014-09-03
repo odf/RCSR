@@ -414,7 +414,7 @@ var Application = React.createClass({
       [ 'Polyhedra', '/polyhedra' ]
     ];
 
-    if (this.props.path == '/admin') {
+    if (adminKnown) {
       links.push([ '|' ]);
       links.push([ 'Testing', '/testing' ]);
       links.push([ '|' ]);
