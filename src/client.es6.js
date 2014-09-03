@@ -247,7 +247,7 @@ var adminSchema = {
 
 
 var starrify = function(text) {
-  return text.split('').map(function() { return '*'; }).join('')
+  return (text || '').split('').map(function() { return '*'; }).join('')
 };
 
 
