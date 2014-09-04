@@ -250,6 +250,30 @@ common.formatReferences = function(net, kinds, keywords) {
 };
 
 
+common.formatReferencesI = function(net, kinds, keywords) {
+  var refs = [];
+  var i, key, title, val;
+
+  for (i in kinds) {
+    key = kinds[i];
+    title = key;
+    val = net.get(key);
+
+    if (key == 'keywords') {
+      title = 'key words';
+      val = val
+        .filter(function(x) { return keywords.indexOf(x) >= 0; })
+        .toVector();
+    }
+
+    if (val.length > 0)
+      refs.push($.li({ key: key }, common.makeLine(title, val)));
+  }
+
+  return refs;
+};
+
+
 var ActiveLink = React.createClass({
   displayName: 'ActiveLink',
 
