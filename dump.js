@@ -6,7 +6,9 @@ var path = process.argv[2];
 var type = process.argv[3] || 'nets';
 var json = path.match(/\.json$/);
 
-var parse  = require('./src/parse/' + type);
+var parse = require('./src/parse/' + type);
+var check = require('./src/check/' + type);
+
 
 fs.readFile(path, { encoding: 'utf8' }, function(err, text) {
   var data, start, end;
@@ -20,5 +22,10 @@ fs.readFile(path, { encoding: 'utf8' }, function(err, text) {
 
     console.log(JSON.stringify(data, null, 4));
     console.warn("Parsed in " + (end[0] + end[1] / 1000000000) + " seconds");
+
+    start = process.hrtime();
+    check(data, console.warn);
+    end = process.hrtime(start);
+    console.warn("Checked in " + (end[0] + end[1] / 1000000000) + " seconds");
   }
 });
