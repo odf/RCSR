@@ -212,18 +212,7 @@ var parseStructure = function(lines, startIndex) {
 };
 
 
-var checkStructure = function(net) {
-  var a = net.edgesPerUnitCell;
-  var b = 0.5 * net.vertices.reduce(function(sum, vert) {
-    return sum + vert.multiplicity * vert.coordinationNumber;
-  }, 0);
-  if (a != b)
-    console.error("WARNING: " + net.symbol + " - edge numbers inconsistent ("
-                  + a + " vs " + b + ")");
-};
-
-
-module.exports = function(text) {
+var parseFile = function(text) {
   var lines  = splitIntoLines(text).map(cleanupLine);
   var lineNo = 0;
   var seen   = {};
@@ -234,7 +223,6 @@ module.exports = function(text) {
     tmp = parseStructure(lines, lineNo);
     if (tmp == null)
       break;
-    checkStructure(tmp.result);
     symbol = tmp.result.symbol;
 
     if (seen[symbol])
@@ -248,3 +236,6 @@ module.exports = function(text) {
 
   return result;
 };
+
+
+module.exports = parseFile;
