@@ -16,8 +16,6 @@ var Layers      = require('./view/layers');
 var Polyhedra   = require('./view/polys');
 
 
-window.React = React; // wakes up the React Developer Tools
-
 var $ = React.DOM;
 
 
@@ -476,5 +474,4 @@ var Application = React.createClass({
 });
 
 
-React.renderComponent(Application({ path: document.location.pathname }),
-                      document.getElementById('react-main'));
+module.exports = Application;
