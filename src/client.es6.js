@@ -136,6 +136,21 @@ var Links = React.createClass({
 });
 
 
+var About = React.createClass({
+  displayName: 'About',
+
+  render: function() {
+    return $.div({ className: 'article center' },
+                 $.h1({ className: 'center' }, 'RCSR'),
+                 $.div({
+                   dangerouslySetInnerHTML: {
+                     __html: this.props.data
+                   }
+                 }));
+  }
+});
+
+
 var Loader = React.createClass({
   displayName: 'Loader',
 
@@ -294,6 +309,19 @@ var Admin = React.createClass({
 });
 
 
+var htmlFromServer = function(path) {
+  return cc.go(function*() {
+    var res;
+
+    res = yield cc.nbind(agent.get)(path);
+    if (res.ok)
+      return res.text;
+    else
+      alert('Could not load ' + path);
+  });
+};
+
+
 var builtinData = function(type, jsonPath, txtPath, parse, symbol) {
   return cc.go(function*() {
     var data, res;
@@ -354,7 +382,12 @@ var builtinPolyData = function(symbol) {
 
 
 var resolveRoute = function(path) {
-  if (path == '/links')
+  if (path == '/about')
+    return Loader({
+      component: About,
+      deferred: htmlFromServer('/about.html')
+    });
+  else if (path == '/links')
     return Links();
   else if (path.match(/^\/nets\//))
     return Loader({
@@ -407,7 +440,7 @@ var Application = React.createClass({
 
     var links = [
       [ 'Home', '/' ], [ '|' ],
-      [ 'About', '/about.html' ], [ '|' ],
+      [ 'About', '/about' ], [ '|' ],
       [ 'Links', '/links' ], [ '|' ],
       [ 'Nets', '/nets' ], [ '|' ],
       [ 'Layers', '/layers' ], [ '|' ],
