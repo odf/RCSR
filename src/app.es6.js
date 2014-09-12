@@ -308,7 +308,7 @@ var Testing = React.createClass({
   },
 
   render: function() {
-    var preview;
+    var preview, diagnostics;
 
     if (this.state.data) {
       preview = components[this.state.type]({
@@ -318,6 +318,10 @@ var Testing = React.createClass({
       });
     } else
       preview = $.p({ key: 'nodata' }, 'No data loaded.');
+
+    diagnostics = $.div(null,
+                        $.p(null, this.state.info),
+                        $.pre(null, this.state.issues || 'No problems found.'));
 
     return $.div(null,
                  $.h2(null, 'Data Uploads and Testing'),
@@ -339,7 +343,7 @@ var Testing = React.createClass({
                                        $.label(null, 'Polyhedra'))),
                             Uploader({ handleData: this.handleData }),
                             $.p(null, this.state.info)),
-                      $.pre(null, this.state.issues || 'No problems found.'),
+                      diagnostics,
                       preview));
   }
 });
