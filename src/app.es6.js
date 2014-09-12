@@ -198,6 +198,63 @@ var components = {
 };
 
 
+var Tab = React.createClass({
+  displayName: 'Tab',
+
+  handleClick: function(event) {
+    event.preventDefault();
+    if (this.props.onSelect)
+      this.props.onSelect(this.props.index);
+  },
+  componentDidMount: function() {
+    this.getDOMNode().addEventListener('click', this.handleClick);
+  },
+  componentWillUnmount: function() {
+    this.getDOMNode().removeEventListener('click', this.handleClick);
+  },
+  render: function() {
+    return $.li({ className: this.props.className }, this.props.label);
+  }
+});
+
+
+var Tabs = React.createClass({
+  displayName: 'Tabs',
+
+  getInitialState: function() {
+    return {
+      selected: 0
+    };
+  },
+
+  handleSelect: function(i) {
+    if (i < this.props.children.length)
+      this.setState({
+        selected: i
+      });
+  },
+
+  makeTab: function(label, index) {
+    var isSelected = index == this.state.selected;
+    var classes = 'TabsItem' + (isSelected ? ' TabsSelected' : '');
+
+    return Tab({ className: classes,
+                 key      : index,
+                 index    : index,
+                 label    : label,
+                 onSelect : this.handleSelect });
+  },
+
+  render: function() {
+    return $.div({ className: 'TabsContainer' },
+                 $.ul({ className: 'TabsList' },
+                      this.props.labels.map(this.makeTab)),
+                 $.div({ className: 'TabsPanel' },
+                       this.props.children[this.state.selected]));
+  }
+});
+
+
 var Testing = React.createClass({
   displayName: 'Testing',
 
@@ -220,6 +277,8 @@ var Testing = React.createClass({
       });
     else
       return $.div(null,
+                   Tabs({ labels: ["One", "Two", "Three"] },
+                        "Eins", "Zwei", "Drei"),
                    $.h2(null, 'Locate data file'),
                    $.form({ onChange: this.handleChange },
                           $.p(null,
