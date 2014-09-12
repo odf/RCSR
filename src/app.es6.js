@@ -46,12 +46,13 @@ var Uploader = React.createClass({
 
     if (files[0]) {
       cc.go(function*() {
-        handleData(yield loadFile(files[0]));
+        handleData(yield loadFile(files[0]), files[0].name);
       }).then(null, function(ex) { throw ex; });
     }
   },
   render: function() {
-    return $.form({ onSubmit: preventSubmit },
+    return $.form({ onSubmit: preventSubmit,
+                    style: { display: 'inline-block' } },
                   $.fieldset(null,
                              $.legend(null, 'Select a file'),
                              $.input({ type: 'file',
@@ -158,20 +159,30 @@ var Loader = React.createClass({
       data: null
     }
   },
+
   componentDidMount: function() {
+    this.loadData(this.props);
+  },
+
+  componentWillReceiveProps: function(props) {
+    this.loadData(props);
+  },
+
+  loadData: function(props) {
     cc.go(function*() {
       yield cc.sleep(500);
       if (this.isMounted() && !this.state.data)
         this.setState({ showMessage: true });
     }.bind(this));
     cc.go(function*() {
-      var data = yield this.props.deferred;
+      var data = yield props.deferred;
       if (this.isMounted())
         this.setState({ data: data, showMessage: false });
     }.bind(this)).then(null, function(ex) {
       alert(ex + '\n' + ex.stack);
     });
   },
+
   render: function() {
     if (this.state.data)
       return this.props.component({ data: this.state.data,
@@ -260,48 +271,59 @@ var Testing = React.createClass({
 
   getInitialState: function() {
     return {
-      type    : 'Nets',
-      deferred: null,
-      info    : null
+      type: 'Nets',
+      data: null,
+      info: null
     }
   },
+
   handleChange: function(event) {
     this.setState({ type: event.target.value });
   },
+
+  handleData: function(data, filename) {
+    var structures = parsers[this.state.type](data);
+
+    this.setState({
+      data: structures,
+      info: structures.length+' structures read from '+filename
+    });
+  },
+
   render: function() {
-    if (this.state.deferred)
-      return Loader({
-        component: components[this.state.type],
-        deferred : this.state.deferred,
-        info     : this.state.info
+    var preview;
+
+    if (this.state.data) {
+      preview = components[this.state.type]({
+        key : 'preview',
+        data: this.state.data,
+        info: this.state.info
       });
-    else
-      return $.div(null,
-                   Tabs({ labels: ["One", "Two", "Three"] },
-                        "Eins", "Zwei", "Drei"),
-                   $.h2(null, 'Locate data file'),
-                   $.form({ onChange: this.handleChange },
-                          $.p(null,
-                              $.input({ type: 'radio', name: 'type',
-                                        value: 'Nets',
-                                        defaultChecked: true }),
-                              $.label(null, 'Nets')),
-                          $.p(null,
-                              $.input({ type: 'radio', name: 'type',
-                                        value: 'Layers' }),
-                              $.label(null, 'Layers')),
-                          $.p(null,
-                              $.input({ type: 'radio', name: 'type',
-                                        value: 'Polyhedra' }),
-                              $.label(null, 'Polyhedra'))),
-                   Uploader({
-                     handleData: function(data) {
-                       this.setState({
-                         deferred: parsers[this.state.type](data),
-                         info    : 'user-defined data'
-                       });
-                     }.bind(this)
-                   }));
+    } else
+      preview = $.p({ key: 'nodata' }, 'No data loaded.');
+
+    return $.div(null,
+                 $.h2(null, 'Data Uploads and Testing'),
+                 Tabs({ labels: ['Locate Data', 'Diagnostics', 'Preview'] },
+                      $.div(null,
+                            $.form({ onChange: this.handleChange },
+                                   $.p(null,
+                                       $.input({ type: 'radio', name: 'type',
+                                                 value: 'Nets',
+                                                 defaultChecked: true }),
+                                       $.label(null, 'Nets')),
+                                   $.p(null,
+                                       $.input({ type: 'radio', name: 'type',
+                                                 value: 'Layers' }),
+                                       $.label(null, 'Layers')),
+                                   $.p(null,
+                                       $.input({ type: 'radio', name: 'type',
+                                                 value: 'Polyhedra' }),
+                                       $.label(null, 'Polyhedra'))),
+                            Uploader({ handleData: this.handleData }),
+                            $.p(null, this.state.info)),
+                      $.p(null, 'Coming soon...'),
+                      preview));
   }
 });
 
