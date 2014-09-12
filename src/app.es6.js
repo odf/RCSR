@@ -11,6 +11,10 @@ var parseNets   = require('./parse/nets');
 var parseLayers = require('./parse/layers');
 var parsePolys  = require('./parse/polys');
 
+var checkNets   = require('./check/nets');
+var checkLayers = require('./check/layers');
+var checkPolys  = require('./check/polys');
+
 var Nets        = require('./view/nets');
 var Layers      = require('./view/layers');
 var Polyhedra   = require('./view/polys');
@@ -202,6 +206,13 @@ var parsers = {
 };
 
 
+var checkers = {
+  'Nets'     : checkNets,
+  'Layers'   : checkLayers,
+  'Polyhedra': checkPolys
+};
+
+
 var components = {
   'Nets'     : Nets.search,
   'Layers'   : Layers.search,
@@ -283,10 +294,16 @@ var Testing = React.createClass({
 
   handleData: function(data, filename) {
     var structures = parsers[this.state.type](data);
+    var issues = [];
+    
+    checkers[this.state.type](structures, function(s) {
+      issues.push(s);
+    });
 
     this.setState({
-      data: structures,
-      info: structures.length+' structures read from '+filename
+      data  : structures,
+      issues: issues.join('\n'),
+      info  : structures.length+' structures read from '+filename
     });
   },
 
@@ -322,7 +339,7 @@ var Testing = React.createClass({
                                        $.label(null, 'Polyhedra'))),
                             Uploader({ handleData: this.handleData }),
                             $.p(null, this.state.info)),
-                      $.p(null, 'Coming soon...'),
+                      $.pre(null, this.state.issues || 'No problems found.'),
                       preview));
   }
 });

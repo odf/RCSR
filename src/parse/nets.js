@@ -124,7 +124,7 @@ var parseCell = function(line) {
 
 
 var parseStructure = function(lines, startIndex) {
-  var result = {};
+  var result = { warnings: [] };
   var i, k, key, tmp;
 
   for (i = startIndex; i < lines.length && lines[i] != "start"; ++i)
@@ -133,8 +133,7 @@ var parseStructure = function(lines, startIndex) {
   if (i == lines.length)
     return null;
   else if (i > startIndex)
-    console.error('warning: unrecognized content between lines '
-                  + startIndex + ' and ' + (i-1));
+    result.warnings.push('unrecognized trailing lines');
 
   result.serialNumber = parseInt(lines[++i]);
 
@@ -215,23 +214,16 @@ var parseStructure = function(lines, startIndex) {
 var parseFile = function(text) {
   var lines  = splitIntoLines(text).map(cleanupLine);
   var lineNo = 0;
-  var seen   = {};
   var result = [];
-  var i, tmp, symbol;
+  var i, tmp;
 
   for (;;) {
     tmp = parseStructure(lines, lineNo);
     if (tmp == null)
       break;
-    symbol = tmp.result.symbol;
 
-    if (seen[symbol])
-      console.error("WARNING: " + symbol + " appears more then once.");
-    else
-      result.push(tmp.result);
-
+    result.push(tmp.result);
     lineNo = tmp.nextLine;
-    seen[symbol] = true;
   }
 
   return result;
