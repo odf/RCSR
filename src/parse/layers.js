@@ -80,7 +80,7 @@ var parseVertex = function(lines, startIndex) {
 
 
 var parseStructure = function(lines, startIndex) {
-  var result = {};
+  var result = { warnings: [] };
   var i, k, key, tmp;
 
   for (i = startIndex; i < lines.length && lines[i] != "start"; ++i)
@@ -89,8 +89,7 @@ var parseStructure = function(lines, startIndex) {
   if (i == lines.length)
     return null;
   else if (i > startIndex)
-    console.error('warning: unrecognized content between lines '
-                  + startIndex + ' and ' + (i-1));
+    result.warnings.push('unrecognized trailing lines');
 
   result.serialNumber = parseInt(lines[++i]);
 
@@ -130,10 +129,6 @@ var parseStructure = function(lines, startIndex) {
 };
 
 
-var checkStructure = function(layer) {
-};
-
-
 module.exports = function(text) {
   var lines = splitIntoLines(text).map(cleanupLine);
   var lineNo = 0;
@@ -144,7 +139,7 @@ module.exports = function(text) {
     tmp = parseStructure(lines, lineNo);
     if (tmp == null)
       break;
-    checkStructure(tmp.result);
+
     result.push(tmp.result);
     lineNo = tmp.nextLine;
   }
