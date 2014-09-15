@@ -291,11 +291,11 @@ var Testing = React.createClass({
     }
   },
 
-  handleChange: function(event) {
+  handleUploadFormChange: function(event) {
     this.setState({ type: event.target.value });
   },
 
-  handleFileData: function(text, filename) {
+  handleUploadData: function(text, filename) {
     var structures = parsers[this.state.type](text);
     var issues = [];
     
@@ -304,6 +304,7 @@ var Testing = React.createClass({
     });
 
     this.setState({
+      name  : filename,
       text  : text,
       data  : structures,
       issues: issues.join('\n'),
@@ -311,46 +312,83 @@ var Testing = React.createClass({
     });
   },
 
-  render: function() {
-    var preview, diagnostics;
+  renderUploadScreen: function() {
+    return $.div(null,
+                 $.form({ onChange: this.handleUploadFormChange },
+                        $.p(null,
+                            $.input({ type: 'radio', name: 'type',
+                                      value: 'Nets',
+                                      defaultChecked: true }),
+                            $.label(null, 'Nets')),
+                        $.p(null,
+                            $.input({ type: 'radio', name: 'type',
+                                      value: 'Layers' }),
+                            $.label(null, 'Layers')),
+                        $.p(null,
+                            $.input({ type: 'radio', name: 'type',
+                                      value: 'Polyhedra' }),
+                            $.label(null, 'Polyhedra'))),
+                 Uploader({ handleData: this.handleUploadData }),
+                 $.p(null, this.state.info));
+  },
 
+  renderDiagnostics: function() {
+    return $.div(null,
+                 $.p(null, this.state.info),
+                 $.pre(null, this.state.issues || 'No problems found.'));
+  },
+
+  renderPreview: function() {
     if (this.state.data) {
-      preview = components[this.state.type]({
+      return components[this.state.type]({
         key : 'preview',
         data: this.state.data,
         info: this.state.info
       });
     } else
-      preview = $.p({ key: 'nodata' }, 'No data loaded.');
+      return $.p({ key: 'nodata' }, 'No data loaded.');
+  },
 
-    diagnostics = $.div(null,
-                        $.p(null, this.state.info),
-                        $.pre(null, this.state.issues || 'No problems found.'));
+  publish: function() {
+    alert('Publishing not yet implemented');
+  },
 
+  renderPublishingScreen: function() {
+    var user  = localStorage.getItem('RCSR-admin-name');
+    var token = localStorage.getItem('RCSR-admin-token');
+    var okay  = token && token.length == 40;
+    var label = 'Publish '+this.state.name;
+
+    var error;
+    if (!this.state.name)
+      error = 'You have not loaded any data to publish.';
+    else if (!okay)
+      error = 'You cannot publish without a valid access token.';
+
+    var button = (error ? $.p({ className: 'error' }, error) :
+                  $.input({ type   : 'submit',
+                            key    : label,
+                            value  : label,
+                            onClick: this.publish }));
+
+    return $.div(null,
+                 $.h3(null, 'Credentials'),
+                 $.p(null, $.b(null, 'Your name: '), (user || '-')),
+                 $.p(null, 'Access token '+(okay ? '' : 'not')+' found'),
+                 button);
+  },
+  
+  render: function() {
     return $.div(null,
                  $.h2(null, 'Testing and Publishing'),
                  Tabs({ labels: ['Load Data',
                                  'Diagnostics',
-                                 'Preview'] },
-                      $.div(null,
-                            $.form({ onChange: this.handleChange },
-                                   $.p(null,
-                                       $.input({ type: 'radio', name: 'type',
-                                                 value: 'Nets',
-                                                 defaultChecked: true }),
-                                       $.label(null, 'Nets')),
-                                   $.p(null,
-                                       $.input({ type: 'radio', name: 'type',
-                                                 value: 'Layers' }),
-                                       $.label(null, 'Layers')),
-                                   $.p(null,
-                                       $.input({ type: 'radio', name: 'type',
-                                                 value: 'Polyhedra' }),
-                                       $.label(null, 'Polyhedra'))),
-                            Uploader({ handleData: this.handleFileData }),
-                            $.p(null, this.state.info)),
-                      diagnostics,
-                      preview));
+                                 'Preview',
+                                 'Publish'] },
+                      this.renderUploadScreen(),
+                      this.renderDiagnostics(),
+                      this.renderPreview(),
+                      this.renderPublishingScreen()));
   }
 });
 
