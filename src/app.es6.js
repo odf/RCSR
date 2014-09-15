@@ -285,6 +285,7 @@ var Testing = React.createClass({
   getInitialState: function() {
     return {
       type: 'Nets',
+      text: null,
       data: null,
       info: null
     }
@@ -294,8 +295,8 @@ var Testing = React.createClass({
     this.setState({ type: event.target.value });
   },
 
-  handleData: function(data, filename) {
-    var structures = parsers[this.state.type](data);
+  handleFileData: function(text, filename) {
+    var structures = parsers[this.state.type](text);
     var issues = [];
     
     checkers[this.state.type](structures, function(s) {
@@ -303,6 +304,7 @@ var Testing = React.createClass({
     });
 
     this.setState({
+      text  : text,
       data  : structures,
       issues: issues.join('\n'),
       info  : structures.length+' structures read from '+filename
@@ -326,8 +328,10 @@ var Testing = React.createClass({
                         $.pre(null, this.state.issues || 'No problems found.'));
 
     return $.div(null,
-                 $.h2(null, 'Data Uploads and Testing'),
-                 Tabs({ labels: ['Locate Data', 'Diagnostics', 'Preview'] },
+                 $.h2(null, 'Testing and Publishing'),
+                 Tabs({ labels: ['Load Data',
+                                 'Diagnostics',
+                                 'Preview'] },
                       $.div(null,
                             $.form({ onChange: this.handleChange },
                                    $.p(null,
@@ -343,7 +347,7 @@ var Testing = React.createClass({
                                        $.input({ type: 'radio', name: 'type',
                                                  value: 'Polyhedra' }),
                                        $.label(null, 'Polyhedra'))),
-                            Uploader({ handleData: this.handleData }),
+                            Uploader({ handleData: this.handleFileData }),
                             $.p(null, this.state.info)),
                       diagnostics,
                       preview));
