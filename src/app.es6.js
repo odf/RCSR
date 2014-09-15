@@ -271,7 +271,9 @@ var Tabs = React.createClass({
     return $.div({ className: 'TabsContainer' },
                  $.ul({ className: 'TabsList' },
                       this.props.labels.map(this.makeTab)),
-                 $.div({ className: 'TabsPanel' },
+                 $.div({ className: 'TabsPanel',
+                         key: this.state.selected
+                       },
                        this.props.children[this.state.selected]));
   }
 });
