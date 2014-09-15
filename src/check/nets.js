@@ -1,17 +1,20 @@
 'use strict';
 
 
-var checkStructure = function(structure, log) {
-  var a, b;
-
-  structure.warnings.forEach(function(s) { log(structure.symbol+' - '+s); });
-
-  a = structure.edgesPerUnitCell;
-  b = 0.5 * structure.vertices.reduce(function(sum, vert) {
+var checkEdgeNumberConsistency = function(structure, log) {
+  var a = structure.edgesPerUnitCell;
+  var b = 0.5 * structure.vertices.reduce(function(sum, vert) {
     return sum + vert.multiplicity * vert.coordinationNumber;
   }, 0);
+
   if (a != b)
     log(structure.symbol+' - edge numbers inconsistent ('+a+' vs '+b+')');
+};
+
+
+var checkStructure = function(structure, log) {
+  structure.warnings.forEach(function(s) { log(structure.symbol+' - '+s); });
+  checkEdgeNumberConsistency(structure, log);
 };
 
 
