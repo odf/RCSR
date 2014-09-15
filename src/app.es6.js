@@ -351,66 +351,6 @@ var Testing = React.createClass({
 });
 
 
-var adminSchema = {
-  title: 'Admin Properties',
-  type: 'object',
-  properties: {
-    active: { type: 'boolean', title: 'Use admin mode' },
-    name  : { type: 'string',  title: 'Your Name' },
-    token : { type : 'string', title: 'Github access token' }
-  },
-  'x-hints': { form: { classes: ['wideTextfields'] }}
-};
-
-
-var starrify = function(text) {
-  return (text || '').split('').map(function() { return '*'; }).join('')
-};
-
-
-var Admin = React.createClass({
-  displayName: 'Admin',
-
-  getInitialState: function() {
-    var token = localStorage.getItem('RCSR-admin-token');
-
-    return {
-      active: localStorage.getItem('RCSR-admin-active') == 'true',
-      name  : localStorage.getItem('RCSR-admin-name') || '',
-      token : starrify(token)
-    };
-  },
-
-  handleSubmit: function(inputs, button) {
-    if (button != 'Submit')
-      this.setState(this.getInitialState());
-    else {
-      localStorage.setItem('RCSR-admin-active', inputs.active);
-      localStorage.setItem('RCSR-admin-name'  , inputs.name || '');
-
-      if (inputs.token != starrify(inputs.token))
-        localStorage.setItem('RCSR-admin-token' , inputs.token);
-
-      this.setState({
-        active: inputs.active,
-        name  : inputs.name || '',
-        token : starrify(inputs.token)
-      });
-    }
-  },
-
-  render: function() {
-    return $.div(null,
-                 Form({
-                   onSubmit: this.handleSubmit,
-                   schema  : adminSchema,
-                   validate: validate,
-                   values  : this.state
-                 }));
-  }
-});
-
-
 var htmlFromServer = function(path) {
   return cc.go(function*() {
     var res;
@@ -521,11 +461,9 @@ var resolveRoute = function(path) {
       component: Polyhedra.search,
       deferred: builtinPolyData()
     });
-  else if (path == '/testing')
+  else if (path == '/testing') {
+    localStorage.setItem('RCSR-testing-known', true);
     return Testing();
-  else if (path == '/admin') {
-    localStorage.setItem('RCSR-admin-known', true);
-    return Admin();
   } else
     return Home();
 };
@@ -535,10 +473,7 @@ var Application = React.createClass({
   displayName: 'Application',
 
   render: function() {
-    var adminKnown = localStorage.getItem('RCSR-admin-known') == 'true';
-    var adminMode = localStorage.getItem('RCSR-admin-active') == 'true';
-    var user = localStorage.getItem('RCSR-admin-name');
-    user = user ? ' - your name is ' + user : '';
+    var adminKnown = localStorage.getItem('RCSR-testing-known') == 'true';
 
     var links = [
       [ 'Home', '/' ], [ '|' ],
@@ -552,8 +487,6 @@ var Application = React.createClass({
     if (adminKnown) {
       links.push([ '|' ]);
       links.push([ 'Testing', '/testing' ]);
-      links.push([ '|' ]);
-      links.push([ 'Admin', '/admin' ]);
     }
 
     return $.div({ key: this.props.path },
@@ -570,9 +503,6 @@ var Application = React.createClass({
                               var t = url ? $.a({ href: url }, name) : name;
                               return $.li({ key: i }, t);
                             }))),
-                 (adminMode && this.props.path != '/admin' ?
-                  $.div({ className: 'highlight' }, 'In admin mode' + user) :
-                  null),
                  resolveRoute(this.props.path));
   }
 });
