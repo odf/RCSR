@@ -136,76 +136,84 @@ var parseStructure = function(lines, startIndex) {
     result.warnings.push('unrecognized trailing lines');
 
   result.serialNumber = parseInt(lines[++i]);
+  if (Number.isNaN(result.serialNumber))
+    result.warnings.push('serial number is not a number');
 
   if (result.serialNumber < 0)
     return null;
 
-  result.symbol    = lines[++i];
-  result.embedType = fixName(lines[++i]);
-  ++i;
+  result.symbol = lines[++i];
 
-  for (key in { 
-    otherSymbols: 0,
-    names       : 0,
-    otherNames  : 0,
-    keywords    : 0,
-    references  : 0
-  })
-  {
-    tmp = parseSection(lines, i);
-    result[key] = tmp.result;
+  try {
+    result.embedType = fixName(lines[++i]);
+    ++i;
+
+    for (key in { 
+      otherSymbols: 0,
+      names       : 0,
+      otherNames  : 0,
+      keywords    : 0,
+      references  : 0
+    })
+    {
+      tmp = parseSection(lines, i);
+      result[key] = tmp.result;
+      i = tmp.nextLine;
+    }
+
+    tmp = lines[i].split(/\s+/);
+    result.spacegroupSymbol = tmp[0];
+    result.spacegroupNumber = parseInt(tmp[1]);
+
+    result.cell = parseCell(lines[++i]);
+
+    tmp = parseSection(lines, ++i, parseVertex);
+    result.vertices = tmp.result;
     i = tmp.nextLine;
+
+    tmp = parseSection(lines, i, parseEdge);
+    result.edges = tmp.result;
+    i = tmp.nextLine;
+
+    result.numberOfVertices = result.vertices.length;
+    result.numberOfEdges    = result.edges.length;
+
+    result.numberOfFaces = parseInt(lines[i]);
+    result.numberOfTiles = parseInt(lines[++i]);
+    result.sizeOfDSymbol = parseInt(lines[++i]);
+    result.tiling        = fixName(lines[++i]);
+    result.dual          = fixName(lines[++i]);
+
+    for (k = 0; k < result.numberOfVertices; ++k) {
+      tmp = lines[++i].split(/\s+/).map(function(s) { return parseInt(s); });
+      result.vertices[k].coordinationSequence = tmp.slice(0, -1);
+      result.vertices[k].cum10 = tmp.slice(-1)[0];
+    }
+
+    for (k = 0; k < result.numberOfVertices; ++k)
+      result.vertices[k].symbol = fixName(lines[++i]);
+
+    result.smallestRingSize = parseInt(lines[++i]);
+
+    result.verticesPerUnitCell = sumOfMultiplicities(result.vertices);
+    result.edgesPerUnitCell = sumOfMultiplicities(result.edges);
+
+    result.density =  result.verticesPerUnitCell / result.cell.volume;
+    result.genus = 1 +
+      (result.edgesPerUnitCell - result.verticesPerUnitCell) / 
+      cellMultiplicity(result.spacegroupSymbol);
+
+    result.averageVertexOrder = result.vertices.reduce(function(s, v) {
+      return s + v.multiplicity * v.order;
+    }, 0) / result.verticesPerUnitCell;
+
+    result.td10 = Math.round(result.vertices.reduce(function(s, v) {
+      return s + v.multiplicity * v.cum10;
+    }, 0) / result.verticesPerUnitCell);
+
+  } catch(ex) {
+    result.warnings.push('error while parsing symbol: '+ex);
   }
-
-  tmp = lines[i].split(/\s+/);
-  result.spacegroupSymbol = tmp[0];
-  result.spacegroupNumber = parseInt(tmp[1]);
-
-  result.cell = parseCell(lines[++i]);
-
-  tmp = parseSection(lines, ++i, parseVertex);
-  result.vertices = tmp.result;
-  i = tmp.nextLine;
-
-  tmp = parseSection(lines, i, parseEdge);
-  result.edges = tmp.result;
-  i = tmp.nextLine;
-
-  result.numberOfVertices = result.vertices.length;
-  result.numberOfEdges    = result.edges.length;
-
-  result.numberOfFaces = parseInt(lines[i]);
-  result.numberOfTiles = parseInt(lines[++i]);
-  result.sizeOfDSymbol = parseInt(lines[++i]);
-  result.tiling        = fixName(lines[++i]);
-  result.dual          = fixName(lines[++i]);
-
-  for (k = 0; k < result.numberOfVertices; ++k) {
-    tmp = lines[++i].split(/\s+/).map(function(s) { return parseInt(s); });
-    result.vertices[k].coordinationSequence = tmp.slice(0, -1);
-    result.vertices[k].cum10 = tmp.slice(-1)[0];
-  }
-
-  for (k = 0; k < result.numberOfVertices; ++k)
-    result.vertices[k].symbol = fixName(lines[++i]);
-
-  result.smallestRingSize = parseInt(lines[++i]);
-
-  result.verticesPerUnitCell = sumOfMultiplicities(result.vertices);
-  result.edgesPerUnitCell = sumOfMultiplicities(result.edges);
-
-  result.density =  result.verticesPerUnitCell / result.cell.volume;
-  result.genus = 1 +
-    (result.edgesPerUnitCell - result.verticesPerUnitCell) / 
-    cellMultiplicity(result.spacegroupSymbol);
-
-  result.averageVertexOrder = result.vertices.reduce(function(s, v) {
-    return s + v.multiplicity * v.order;
-  }, 0) / result.verticesPerUnitCell;
-
-  result.td10 = Math.round(result.vertices.reduce(function(s, v) {
-    return s + v.multiplicity * v.cum10;
-  }, 0) / result.verticesPerUnitCell);
 
   return { result: result, nextLine: ++i };
 };
