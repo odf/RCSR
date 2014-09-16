@@ -279,6 +279,37 @@ var Tabs = React.createClass({
 });
 
 
+var getCredentials = function() {
+  var user  = localStorage.getItem('RCSR-admin-name');
+  var token = localStorage.getItem('RCSR-admin-token');
+  var isnew = localStorage.getItem('RCSR-admin-new-credentials') == 'true';
+  var okay  = token && token.length == 40;
+
+  localStorage.setItem('RCSR-admin-new-credentials', 'false');
+
+  return {
+    user : user,
+    token: token,
+    okay : okay,
+    isnew: isnew
+  };
+};
+
+
+var Credentials = React.createClass({
+  render: function() {
+    var credentials = getCredentials();
+
+    return $.div(null,
+                 $.h3(null, 'New Credentials'),
+                 $.p(null, $.b(null, 'Your name: '),
+                     (credentials.user || '-')),
+                 $.p(null, 'Access token '
+                     +(credentials.okay ? '' : 'not')+' found'));
+  }
+});
+
+
 var Testing = React.createClass({
   displayName: 'Testing',
 
@@ -354,15 +385,12 @@ var Testing = React.createClass({
   },
 
   renderPublishingScreen: function() {
-    var user  = localStorage.getItem('RCSR-admin-name');
-    var token = localStorage.getItem('RCSR-admin-token');
-    var okay  = token && token.length == 40;
+    var credentials = getCredentials();
     var label = 'Publish '+this.state.name;
-
     var error;
     if (!this.state.name)
       error = 'You have not loaded any data to publish.';
-    else if (!okay)
+    else if (!credentials.okay)
       error = 'You cannot publish without a valid access token.';
 
     var button = (error ? $.p({ className: 'error' }, error) :
@@ -373,8 +401,9 @@ var Testing = React.createClass({
 
     return $.div(null,
                  $.h3(null, 'Credentials'),
-                 $.p(null, $.b(null, 'Your name: '), (user || '-')),
-                 $.p(null, 'Access token '+(okay ? '' : 'not')+' found'),
+                 $.p(null, $.b(null, 'Your name: '), (credentials.user || '-')),
+                 $.p(null, 'Access token '
+                     +(credentials.okay ? '' : 'not')+' found'),
                  button);
   },
   
@@ -466,7 +495,9 @@ var builtinPolyData = function(symbol) {
 
 
 var resolveRoute = function(path) {
-  if (path == '/about')
+  if (getCredentials().isnew)
+    return Credentials();
+  else if (path == '/about')
     return Loader({
       component: About,
       deferred: htmlFromServer('/about.html')
