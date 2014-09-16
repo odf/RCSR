@@ -8,7 +8,8 @@ exports.agent = function(baseURL, token) {
   var request = cc.nbind(function(verb, path, data, cb) {
     agent(verb, baseURL + path)
       .auth(token, 'x-oauth-basic')
-      .set('User-Agent', 'nodejs')
+      .set('User-Agent', 'RCSR')
+      .set('Origin', 'http://rcsr.net')
       .send(data)
       .end(cb);
   });
