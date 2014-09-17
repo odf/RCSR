@@ -56,12 +56,7 @@ var Uploader = React.createClass({
     }
   },
   render: function() {
-    return $.form({ onSubmit: preventSubmit,
-                    style: { display: 'inline-block' } },
-                  $.fieldset(null,
-                             $.legend(null, 'Select a file'),
-                             $.input({ type: 'file',
-                                       onChange: this.loadFile })));
+    return $.input({ type: 'file', onChange: this.loadFile });
   }
 });
 
@@ -348,36 +343,31 @@ var Testing = React.createClass({
 
   renderUploadScreen: function() {
     return $.div(null,
+                 $.h3(null, 'Kind of data'),
                  $.form({ onChange: this.handleUploadFormChange },
-                        $.p(null,
-                            $.input({ type: 'radio', name: 'type',
-                                      value: 'Nets',
-                                      defaultChecked: true }),
-                            $.label(null, 'Nets')),
-                        $.p(null,
-                            $.input({ type: 'radio', name: 'type',
-                                      value: 'Layers' }),
-                            $.label(null, 'Layers')),
-                        $.p(null,
-                            $.input({ type: 'radio', name: 'type',
-                                      value: 'Polyhedra' }),
-                            $.label(null, 'Polyhedra'))),
-                 Uploader({ handleData: this.handleUploadData }),
-                 $.p(null, this.state.info));
+                        $.input({ type: 'radio', name: 'type',
+                                  value: 'Nets',
+                                  defaultChecked: true }),
+                        $.label(null, 'Nets'),
+                        $.input({ type: 'radio', name: 'type',
+                                  value: 'Layers' }),
+                        $.label(null, 'Layers'),
+                        $.input({ type: 'radio', name: 'type',
+                                  value: 'Polyhedra' }),
+                        $.label(null, 'Polyhedra')),
+                 $.h3(null, 'Choose a data file'),
+                 Uploader({ handleData: this.handleUploadData }));
   },
 
   renderDiagnostics: function() {
-    return $.div(null,
-                 $.p(null, this.state.info),
-                 $.pre(null, this.state.issues || 'No problems found.'));
+    return $.div(null, $.pre(null, this.state.issues || 'No problems found.'));
   },
 
   renderPreview: function() {
     if (this.state.data) {
       return components[this.state.type]({
         key : 'preview',
-        data: this.state.data,
-        info: this.state.info
+        data: this.state.data
       });
     } else
       return $.p({ key: 'nodata' }, 'No data loaded.');
@@ -449,6 +439,7 @@ var Testing = React.createClass({
   render: function() {
     return $.div(null,
                  $.h2(null, 'Testing and Publishing'),
+                 $.p(null, this.state.info),
                  Tabs({ labels: ['Load Data',
                                  'Diagnostics',
                                  'Preview',
