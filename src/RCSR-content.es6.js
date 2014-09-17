@@ -1,5 +1,6 @@
 'use strict';
 
+var fs     = require('fs');
 var cc     = require('ceci-core');
 var github = require('./github-content.es6');
 
@@ -16,7 +17,7 @@ var test = function() {
     });
 
     path     = process.argv[2];
-    content  = process.argv[3];
+    content  = fs.readFileSync(process.argv[3], { encoding: 'utf8' });
     response = yield (content ? gh.put(path, content) : gh.get(path));
 
     if (response.ok)
