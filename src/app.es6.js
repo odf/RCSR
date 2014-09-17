@@ -396,12 +396,33 @@ var Testing = React.createClass({
     gh.put('test/'+this.state.filename, this.state.text)
       .then(function(response) {
         if (response.ok)
-          this.setState({ status: 'published successfully!' });
+          this.setState({ status: 'Published successfully!' });
         else
-          this.setState({ status: 'error: '+response.message });
+          this.setState({ status: 'Error: '+response.message });
       }.bind(this), function(error) {
-        this.setState({ status: 'error: '+error });
+        this.setState({ status: 'Error: '+error });
       }.bind(this));
+  },
+
+  renderButton: function() {
+    var credentials = getCredentials();
+    var label = 'Publish '+this.state.filename;
+    var error, button;
+
+    if (!this.state.filename)
+      error = 'You have not loaded any data to publish.';
+    else if (!credentials.okay)
+      error = 'You cannot publish without a valid access token.';
+
+    if (error)
+      button = $.p({ className: 'error' }, error);
+    else
+      button = $.input({ type   : 'submit',
+                         key    : label,
+                         value  : label,
+                         onClick: this.publish });
+
+    return $.div(null, $.h3(null, 'Publish'), button);
   },
 
   renderStatus: function() {
@@ -415,25 +436,13 @@ var Testing = React.createClass({
 
   renderPublishingScreen: function() {
     var credentials = getCredentials();
-    var label = 'Publish '+this.state.filename;
-    var error;
-    if (!this.state.filename)
-      error = 'You have not loaded any data to publish.';
-    else if (!credentials.okay)
-      error = 'You cannot publish without a valid access token.';
-
-    var button = (error ? $.p({ className: 'error' }, error) :
-                  $.input({ type   : 'submit',
-                            key    : label,
-                            value  : label,
-                            onClick: this.publish }));
 
     return $.div(null,
                  $.h3(null, 'Credentials'),
                  $.p(null, $.b(null, 'Your name: '), (credentials.user || '-')),
                  $.p(null, 'Access token '
                      +(credentials.okay ? '' : 'not')+' found'),
-                 button,
+                 this.renderButton(),
                  this.renderStatus());
   },
   
