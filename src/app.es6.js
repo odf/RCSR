@@ -320,7 +320,7 @@ var Testing = React.createClass({
       text: null,
       data: null,
       info: null,
-      response: null
+      status: null
     }
   },
 
@@ -340,6 +340,7 @@ var Testing = React.createClass({
       filename: filename,
       text    : text,
       data    : structures,
+      status  : null,
       issues  : issues.join('\n'),
       info    : structures.length+' structures read from '+filename
     });
@@ -390,14 +391,26 @@ var Testing = React.createClass({
       origin   : 'http://rcsr.net'
     });
 
-    this.setState({ response: 'waiting for response...' });
+    this.setState({ status: 'publishing...' });
 
     gh.put('test/'+this.state.filename, this.state.text)
       .then(function(response) {
-        this.setState({ response: response });
+        if (response.ok)
+          this.setState({ status: 'published successfully!' });
+        else
+          this.setState({ status: 'error: '+response.message });
       }.bind(this), function(error) {
-        this.setState({ response: error + '\n' + error.stack });
+        this.setState({ status: 'error: '+error });
       }.bind(this));
+  },
+
+  renderStatus: function() {
+    if (this.state.status) {
+      return $.div(null,
+                   $.h3(null, 'Status'),
+                   $.p(null, this.state.status));
+    } else
+      return null;
   },
 
   renderPublishingScreen: function() {
@@ -421,7 +434,7 @@ var Testing = React.createClass({
                  $.p(null, 'Access token '
                      +(credentials.okay ? '' : 'not')+' found'),
                  button,
-                 $.pre(null, JSON.stringify(this.state.response, null, 4)));
+                 this.renderStatus());
   },
   
   render: function() {
