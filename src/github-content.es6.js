@@ -16,24 +16,44 @@ module.exports = function(options) {
 
   var get = function(path) {
     return cc.go(function*() {
-      var response, result;
+      var response, result, content;
 
       response = yield request('GET', path, null);
       result = JSON.parse(response.text);
 
-      if (response.ok)
+      if (response.ok) {
+        if (result.content)
+          content = new Buffer(result.content, 'base64').toString('utf8');
+
         return {
           ok     : response.ok,
           status : response.status,
-          content: new Buffer(result.content, 'base64').toString('utf8'),
+          result : result,
+          content: content,
           sha    : result.sha
         };
-      else
+      } else {
         return {
           ok     : response.ok,
           status : response.status,
           message: result.message
         }
+      }
+    });
+  };
+
+  var shaFor = function(path) {
+    return cc.go(function*() {
+      var parts, dir, file, contents, i;
+
+      parts = path.split('/');
+      file  = parts.pop();
+      dir   = parts.join('/');
+
+      contents = (yield get(dir)).result;
+      for (i = 0; i < contents.length; ++i)
+        if (contents[i].name == file)
+          return contents[i].sha;
     });
   };
 
@@ -44,7 +64,7 @@ module.exports = function(options) {
       data = {
         message: message || 'automated commit',
         content: new Buffer(content).toString('base64'),
-        sha    : (yield get(path)).sha
+        sha    : yield shaFor(path)
       };
 
       response = yield request('PUT', path, data);

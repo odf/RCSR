@@ -17,7 +17,8 @@ var test = function() {
     });
 
     path     = process.argv[2];
-    content  = fs.readFileSync(process.argv[3], { encoding: 'utf8' });
+    content  = process.argv[3] &&
+      fs.readFileSync(process.argv[3], { encoding: 'utf8' });
     response = yield (content ? gh.put(path, content) : gh.get(path));
 
     if (response.ok)
