@@ -19,6 +19,7 @@ var Nets        = require('./view/nets');
 var Layers      = require('./view/layers');
 var Polyhedra   = require('./view/polys');
 
+var github = require('./github-content');
 
 var $ = React.DOM;
 
@@ -318,7 +319,8 @@ var Testing = React.createClass({
       type: 'Nets',
       text: null,
       data: null,
-      info: null
+      info: null,
+      response: null
     }
   },
 
@@ -335,11 +337,11 @@ var Testing = React.createClass({
     });
 
     this.setState({
-      name  : filename,
-      text  : text,
-      data  : structures,
-      issues: issues.join('\n'),
-      info  : structures.length+' structures read from '+filename
+      filename: filename,
+      text    : text,
+      data    : structures,
+      issues  : issues.join('\n'),
+      info    : structures.length+' structures read from '+filename
     });
   },
 
@@ -381,14 +383,28 @@ var Testing = React.createClass({
   },
 
   publish: function() {
-    alert('Publishing not yet implemented');
+    var gh = github({
+      baseURL  : 'https://api.github.com/repos/odf/RCSR-content/contents/',
+      token    : getCredentials().token,
+      userAgent: 'RCSR',
+      origin   : 'http://rcsr.net'
+    });
+
+    this.setState({ response: 'waiting for response...' });
+
+    gh.put('test/'+this.state.filename, this.state.text)
+      .then(function(response) {
+        this.setState({ response: response });
+      }.bind(this), function(error) {
+        this.setState({ response: error + '\n' + error.stack });
+      }.bind(this));
   },
 
   renderPublishingScreen: function() {
     var credentials = getCredentials();
-    var label = 'Publish '+this.state.name;
+    var label = 'Publish '+this.state.filename;
     var error;
-    if (!this.state.name)
+    if (!this.state.filename)
       error = 'You have not loaded any data to publish.';
     else if (!credentials.okay)
       error = 'You cannot publish without a valid access token.';
@@ -404,7 +420,8 @@ var Testing = React.createClass({
                  $.p(null, $.b(null, 'Your name: '), (credentials.user || '-')),
                  $.p(null, 'Access token '
                      +(credentials.okay ? '' : 'not')+' found'),
-                 button);
+                 button,
+                 $.pre(null, JSON.stringify(this.state.response, null, 4)));
   },
   
   render: function() {
