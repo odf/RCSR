@@ -48,7 +48,7 @@ module.exports = function(options) {
       };
 
       response = yield request('PUT', path, data);
-      result = JSON.parse(response.text);
+      result = response.text && JSON.parse(response.text);
 
       if (response.ok)
         return {
