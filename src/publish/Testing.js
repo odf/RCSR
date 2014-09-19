@@ -123,16 +123,12 @@ var Tabs = React.createClass({
 });
 
 
-var Testing = React.createClass({
-  displayName: 'Testing',
+var DataUpload = React.createClass({
+  displayName: 'DataUpload',
 
   getInitialState: function() {
     return {
-      type: 'Nets',
-      text: null,
-      data: null,
-      info: null,
-      status: null
+      type: 'Nets'
     }
   },
 
@@ -148,17 +144,17 @@ var Testing = React.createClass({
       issues.push(s);
     });
 
-    this.setState({
+    this.props.onUpload({
+      type    : this.state.type,
       filename: filename,
       text    : text,
       data    : structures,
-      status  : null,
       issues  : issues.join('\n'),
       info    : structures.length+' structures read from '+filename
     });
   },
 
-  renderUploadScreen: function() {
+  render: function() {
     return $.div(null,
                  $.h3(null, 'Kind of data'),
                  $.form({ onChange: this.handleUploadFormChange },
@@ -174,6 +170,28 @@ var Testing = React.createClass({
                         $.label(null, 'Polyhedra')),
                  $.h3(null, 'Choose a data file'),
                  Uploader({ handleData: this.handleUploadData }));
+  }
+});
+
+
+var Testing = React.createClass({
+  displayName: 'Testing',
+
+  getInitialState: function() {
+    return {
+      type    : 'Nets',
+      filename: null,
+      text    : null,
+      data    : null,
+      issues  : null,
+      info    : null,
+      status  : null
+    }
+  },
+
+  handleDataUpload: function(state) {
+    this.setState(state);
+    this.setState({ status: null });
   },
 
   renderDiagnostics: function() {
@@ -211,7 +229,7 @@ var Testing = React.createClass({
       }.bind(this));
   },
 
-  renderButton: function() {
+  renderPublishButton: function() {
     var creds = credentials();
     var label = 'Publish '+this.state.filename;
     var error, button;
@@ -232,7 +250,7 @@ var Testing = React.createClass({
     return $.div(null, $.h3(null, 'Publish'), button);
   },
 
-  renderStatus: function() {
+  renderPublishStatus: function() {
     if (this.state.status) {
       return $.div(null,
                    $.h3(null, 'Status'),
@@ -249,8 +267,8 @@ var Testing = React.createClass({
                  $.p(null, $.b(null, 'Your name: '), (creds.user || '-')),
                  $.p(null, 'Access token '
                      +(creds.okay ? '' : 'not')+' found'),
-                 this.renderButton(),
-                 this.renderStatus());
+                 this.renderPublishButton(),
+                 this.renderPublishStatus());
   },
   
   render: function() {
@@ -261,7 +279,7 @@ var Testing = React.createClass({
                                  'Diagnostics',
                                  'Preview',
                                  'Publish'] },
-                      this.renderUploadScreen(),
+                      DataUpload({ onUpload: this.handleDataUpload }),
                       this.renderDiagnostics(),
                       this.renderPreview(),
                       this.renderPublishingScreen()));
