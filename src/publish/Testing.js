@@ -174,38 +174,13 @@ var DataUpload = React.createClass({
 });
 
 
-var Testing = React.createClass({
-  displayName: 'Testing',
+var Publish = React.createClass({
+  displayName: 'Publish',
 
   getInitialState: function() {
     return {
-      type    : 'Nets',
-      filename: null,
-      text    : null,
-      data    : null,
-      issues  : null,
-      info    : null,
-      status  : null
+      status: null
     }
-  },
-
-  handleDataUpload: function(state) {
-    this.setState(state);
-    this.setState({ status: null });
-  },
-
-  renderDiagnostics: function() {
-    return $.div(null, $.pre(null, this.state.issues || 'No problems found.'));
-  },
-
-  renderPreview: function() {
-    if (this.state.data) {
-      return components[this.state.type]({
-        key : 'preview',
-        data: this.state.data
-      });
-    } else
-      return $.p({ key: 'nodata' }, 'No data loaded.');
   },
 
   publish: function() {
@@ -218,7 +193,7 @@ var Testing = React.createClass({
 
     this.setState({ status: 'publishing...' });
 
-    gh.put('test/'+this.state.filename, this.state.text)
+    gh.put('test/'+this.props.filename, this.props.text)
       .then(function(response) {
         if (response.ok)
           this.setState({ status: 'Published successfully!' });
@@ -231,10 +206,10 @@ var Testing = React.createClass({
 
   renderPublishButton: function() {
     var creds = credentials();
-    var label = 'Publish '+this.state.filename;
+    var label = 'Publish '+this.props.filename;
     var error, button;
 
-    if (!this.state.filename)
+    if (!this.props.filename)
       error = 'You have not loaded any data to publish.';
     else if (!creds.okay)
       error = 'You cannot publish without a valid access token.';
@@ -259,7 +234,7 @@ var Testing = React.createClass({
       return null;
   },
 
-  renderPublishingScreen: function() {
+  render: function() {
     var creds = credentials();
 
     return $.div(null,
@@ -269,8 +244,42 @@ var Testing = React.createClass({
                      +(creds.okay ? '' : 'not')+' found'),
                  this.renderPublishButton(),
                  this.renderPublishStatus());
+  }
+});
+
+
+var Testing = React.createClass({
+  displayName: 'Testing',
+
+  getInitialState: function() {
+    return {
+      type    : 'Nets',
+      filename: null,
+      text    : null,
+      data    : null,
+      issues  : null,
+      info    : null
+    }
   },
-  
+
+  handleDataUpload: function(state) {
+    this.setState(state);
+  },
+
+  renderDiagnostics: function() {
+    return $.div(null, $.pre(null, this.state.issues || 'No problems found.'));
+  },
+
+  renderPreview: function() {
+    if (this.state.data) {
+      return components[this.state.type]({
+        key : 'preview',
+        data: this.state.data
+      });
+    } else
+      return $.p({ key: 'nodata' }, 'No data loaded.');
+  },
+
   render: function() {
     return $.div(null,
                  $.h2(null, 'Testing and Publishing'),
@@ -279,10 +288,15 @@ var Testing = React.createClass({
                                  'Diagnostics',
                                  'Preview',
                                  'Publish'] },
-                      DataUpload({ onUpload: this.handleDataUpload }),
+                      DataUpload({
+                        onUpload: this.handleDataUpload
+                      }),
                       this.renderDiagnostics(),
                       this.renderPreview(),
-                      this.renderPublishingScreen()));
+                      Publish({
+                        filename: this.state.filename,
+                        text    : this.state.text
+                      })));
   }
 });
 
