@@ -2,7 +2,7 @@
 
 var fs     = require('fs');
 var cc     = require('ceci-core');
-var github = require('./github-content.es6');
+var github = require('./publish/github.es6');
 
 
 var test = function() {
