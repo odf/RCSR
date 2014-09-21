@@ -138,6 +138,7 @@ var DataUpload = React.createClass({
 
   handleUploadData: function(text, filename) {
     var structures = parsers[this.state.type](text);
+    var type = this.state.type.toLowerCase();
     var issues = [];
     
     checkers[this.state.type](structures, function(s) {
@@ -150,7 +151,7 @@ var DataUpload = React.createClass({
       text    : text,
       data    : structures,
       issues  : issues.join('\n'),
-      info    : structures.length+' structures read from '+filename
+      info    : structures.length+' '+type+' read from '+filename+'.'
     });
   },
 
@@ -258,7 +259,7 @@ var Testing = React.createClass({
       text    : null,
       data    : null,
       issues  : null,
-      info    : null
+      info    : 'No data loaded.'
     }
   },
 
@@ -277,7 +278,7 @@ var Testing = React.createClass({
         data: this.state.data
       });
     } else
-      return $.p({ key: 'nodata' }, 'No data loaded.');
+      return $.p({ key: 'nodata' }, 'Nothing yet to preview.');
   },
 
   render: function() {
