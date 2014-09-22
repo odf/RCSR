@@ -1,17 +1,38 @@
 'use strict';
 
-var cc    = require('ceci-core');
-var agent = require('superagent');
+var cc = require('ceci-core');
 
 
 module.exports = function(options) {
   var request = cc.nbind(function(verb, path, data, cb) {
-    agent(verb, options.baseURL + path)
-      .auth(options.token, 'x-oauth-basic')
-      .set('User-Agent', options.userAgent)
-      .set('Origin', options.origin)
-      .send(data)
-      .end(cb);
+    var req  = new XMLHttpRequest();
+    var auth = new Buffer(options.token+':x-oauth-basic').toString('base64');
+
+    req.onreadystatechange = function() {
+      if (req.readyState === 4) {
+        cb(null, {
+          status: req.status,
+          data  : req.responseText && JSON.parse(req.responseText),
+          ok    : req.status >= 200 && req.status < 300
+        });
+      }
+    };
+
+    req.upload.addEventListener('progress', function(e) {
+      var percent = e.loaded / e.total * 100;
+      //console.log(percent+'% completed');
+    }, false);
+
+    req.open(verb, options.baseURL + path, true);
+    req.setRequestHeader('Content-Type', 'application/json');
+    req.setRequestHeader('User-Agent', options.userAgent);
+    req.setRequestHeader('Origin', options.origin);
+    req.setRequestHeader('Authorization', 'Basic '+auth);
+
+    if (data == null)
+      req.send();
+    else
+      req.send(JSON.stringify(data));
   });
 
   var get = function(path) {
@@ -19,7 +40,7 @@ module.exports = function(options) {
       var response, result, content;
 
       response = yield request('GET', path, null);
-      result = JSON.parse(response.text);
+      result = response.data;
 
       if (response.ok) {
         if (result.content)
@@ -68,7 +89,7 @@ module.exports = function(options) {
       };
 
       response = yield request('PUT', path, data);
-      result = response.text && JSON.parse(response.text);
+      result = response.data;
 
       if (response.ok)
         return {
