@@ -4,13 +4,14 @@ var cc = require('ceci-core');
 
 
 module.exports = function(options) {
-  var request = cc.nbind(function(verb, path, data, cb) {
+  var request = function(verb, path, data, onProgress) {
     var req  = new XMLHttpRequest();
     var auth = new Buffer(options.token+':x-oauth-basic').toString('base64');
+    var result = cc.defer();
 
     req.onreadystatechange = function() {
       if (req.readyState === 4) {
-        cb(null, {
+        result.resolve({
           status: req.status,
           data  : req.responseText && JSON.parse(req.responseText),
           ok    : req.status >= 200 && req.status < 300
@@ -18,10 +19,8 @@ module.exports = function(options) {
       }
     };
 
-    req.upload.addEventListener('progress', function(e) {
-      var percent = e.loaded / e.total * 100;
-      //console.log(percent+'% completed');
-    }, false);
+    if (onProgress)
+      req.upload.addEventListener('progress', onProgress, false);
 
     req.open(verb, options.baseURL + path, true);
     req.setRequestHeader('Content-Type', 'application/json');
@@ -33,13 +32,15 @@ module.exports = function(options) {
       req.send();
     else
       req.send(JSON.stringify(data));
-  });
+
+    return result;
+  };
 
   var get = function(path) {
     return cc.go(function*() {
       var response, result, content;
 
-      response = yield request('GET', path, null);
+      response = yield request('GET', path);
       result = response.data;
 
       if (response.ok) {
@@ -78,7 +79,7 @@ module.exports = function(options) {
     });
   };
 
-  var put = function(path, content, message) {
+  var put = function(path, content, message, onProgress) {
     return cc.go(function*() {
       var data, response, result;
 
@@ -88,7 +89,7 @@ module.exports = function(options) {
         sha    : yield shaFor(path)
       };
 
-      response = yield request('PUT', path, data);
+      response = yield request('PUT', path, data, onProgress);
       result = response.data;
 
       if (response.ok)

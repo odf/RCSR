@@ -180,8 +180,13 @@ var Publish = React.createClass({
 
   getInitialState: function() {
     return {
-      status: null
+      status: null,
+      progress: null
     }
+  },
+
+  handleProgress: function(event) {
+    this.setState({ progress: event.loaded / event.total });
   },
 
   publish: function() {
@@ -194,14 +199,26 @@ var Publish = React.createClass({
 
     this.setState({ status: 'publishing...' });
 
-    gh.put('test/'+this.props.filename, this.props.text)
+    gh.put('test/'+this.props.filename,
+           this.props.text,
+           'web commit',
+           this.handleProgress)
       .then(function(response) {
         if (response.ok)
-          this.setState({ status: 'Published successfully!' });
+          this.setState({
+            status: 'Published successfully!',
+            progress: null
+          });
         else
-          this.setState({ status: 'Error: '+response.message });
+          this.setState({
+            status: 'Error: '+response.message,
+            progress: null
+          });
       }.bind(this), function(error) {
-        this.setState({ status: 'Error: '+error });
+        this.setState({
+          status: 'Error: '+error,
+          progress: null
+        });
       }.bind(this));
   },
 
@@ -226,13 +243,25 @@ var Publish = React.createClass({
     return $.div(null, $.h3(null, 'Publish'), button);
   },
 
-  renderPublishStatus: function() {
-    if (this.state.status) {
-      return $.div(null,
-                   $.h3(null, 'Status'),
-                   $.p(null, this.state.status));
-    } else
+  renderProgress: function() {
+    if (this.state.progress == null)
       return null;
+
+    var percent = this.state.progress * 100;
+    return $.span(null,
+                  $.span({ className: 'meter hSep-1em',
+                           style: { width: '200px' } },
+                         $.span({ style: { width: percent+'%' } })),
+                  Math.round(percent)+'%');
+  },
+
+  renderPublishStatus: function() {
+    if (!this.state.status)
+      return null;
+
+    return $.div(null,
+                 $.h3(null, 'Status'),
+                 $.span(null, this.state.status, this.renderProgress()));
   },
 
   render: function() {
