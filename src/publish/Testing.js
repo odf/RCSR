@@ -253,9 +253,13 @@ var Publish = React.createClass({
     if (!this.state.status)
       return null;
 
+    var className = this.state.status.match(/^Error:/) ? 'error' : '';
+
     return $.div(null,
                  $.h3(null, 'Status'),
-                 $.span(null, this.state.status, this.renderProgress()));
+                 $.span({ className: className },
+                        this.state.status,
+                        this.renderProgress()));
   },
 
   render: function() {
