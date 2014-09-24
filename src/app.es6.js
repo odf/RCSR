@@ -194,18 +194,13 @@ var htmlFromServer = function(path) {
 };
 
 
-var builtinData = function(type, jsonPath, txtPath, parse, symbol) {
+var builtinData = function(type, txtPath, parse, symbol) {
   return cc.go(function*() {
     var data, res;
 
-    res = yield cc.nbind(agent.get)(jsonPath);
+    res = yield cc.nbind(agent.get)(txtPath);
     if (res.ok)
-      data = JSON.parse(res.text);
-    else {
-      res = yield cc.nbind(agent.get)(txtPath);
-      if (res.ok)
-        data = parse(res.text);
-    }
+      data = parse(res.text);
 
     if (data) {
       if (symbol)
@@ -223,7 +218,6 @@ var builtinData = function(type, jsonPath, txtPath, parse, symbol) {
 var builtinNetData = function(symbol) {
   return builtinData(
     'nets',
-    '/data/3dall.json',
     '/data/3dall.txt',
     parseNets,
     symbol
@@ -234,7 +228,6 @@ var builtinNetData = function(symbol) {
 var builtinLayerData = function(symbol) {
   return builtinData(
     'layers',
-    '/data/2dall.json',
     '/data/2dall.txt',
     parseLayers,
     symbol
@@ -245,7 +238,6 @@ var builtinLayerData = function(symbol) {
 var builtinPolyData = function(symbol) {
   return builtinData(
     'polyhedra',
-    '/data/0dall.json',
     '/data/0dall.txt',
     parsePolys,
     symbol
