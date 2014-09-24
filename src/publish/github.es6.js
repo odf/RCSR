@@ -11,11 +11,14 @@ module.exports = function(options) {
 
     req.onreadystatechange = function() {
       if (req.readyState === 4) {
-        result.resolve({
-          status: req.status,
-          data  : req.responseText && JSON.parse(req.responseText),
-          ok    : req.status >= 200 && req.status < 300
-        });
+        var data = (req.responseText && JSON.parse(req.responseText)) || {};
+        if (req.status >= 200 && req.status < 300) //TODO implement redirecting
+          result.resolve({
+            status: req.status,
+            data  : data
+          });
+        else
+          result.reject(req.status+' '+data.message);
       }
     };
 
@@ -43,24 +46,15 @@ module.exports = function(options) {
       response = yield request('GET', path);
       result = response.data;
 
-      if (response.ok) {
-        if (result.content)
-          content = new Buffer(result.content, 'base64').toString('utf8');
+      if (result.content)
+        content = new Buffer(result.content, 'base64').toString('utf8');
 
-        return {
-          ok     : response.ok,
-          status : response.status,
-          result : result,
-          content: content,
-          sha    : result.sha
-        };
-      } else {
-        return {
-          ok     : response.ok,
-          status : response.status,
-          message: result.message
-        }
-      }
+      return {
+        status : response.status,
+        result : result,
+        content: content,
+        sha    : result.sha
+      };
     });
   };
 
@@ -92,21 +86,13 @@ module.exports = function(options) {
       response = yield request('PUT', path, data, onProgress);
       result = response.data;
 
-      if (response.ok)
-        return {
-          ok    : response.ok,
-          status: response.status,
-          sha   : result.content.sha,
-          commit: {
-            sha: result.commit.sha
-          }
-        };
-      else
-        return {
-          ok    : response.ok,
-          status: response.status,
-          message: result.message
-        };
+      return {
+        status: response.status,
+        sha   : result.content.sha,
+        commit: {
+          sha: result.commit.sha
+        }
+      };
     });
   };
 

@@ -204,16 +204,10 @@ var Publish = React.createClass({
            'web commit',
            this.handleProgress)
       .then(function(response) {
-        if (response.ok)
-          this.setState({
-            status: 'Published successfully!',
-            progress: null
-          });
-        else
-          this.setState({
-            status: 'Error: '+response.message,
-            progress: null
-          });
+        this.setState({
+          status: 'Published successfully!',
+          progress: null
+        });
       }.bind(this), function(error) {
         this.setState({
           status: 'Error: '+error,
