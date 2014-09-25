@@ -126,7 +126,10 @@ var Tabs = React.createClass({
                  $.div({ className: 'TabsPanel' },
                        this.state.active.map(function(component, i) {
                          var d = (i == selected) ? 'block' : 'none';
-                         return $.div({ style: { display: d }}, component);
+                         return $.div({ key  : i,
+                                        style: { display: d }
+                                      },
+                                      component);
                        })));
   }
 });
