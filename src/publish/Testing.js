@@ -293,49 +293,115 @@ var Testing = React.createClass({
 
   getInitialState: function() {
     return {
-      type    : 'Nets',
-      filename: null,
-      text    : null,
-      data    : null,
-      issues  : null,
-      info    : 'No data loaded.'
+      info: 'No active data.',
+      active: 'Nets',
+      Nets: {
+        filename: null,
+        text    : null,
+        data    : null,
+        issues  : null
+      },
+      Layers: {
+        filename: null,
+        text    : null,
+        data    : null,
+        issues  : null
+      },
+      Polyhedra: {
+        filename: null,
+        text    : null,
+        data    : null,
+        issues  : null
+      }
     }
   },
 
-  handleDataUpload: function(state) {
-    this.setState(state);
+  handleUploadFormChange: function(event) {
+    if (event.target.name == 'type')
+      this.setState({ active: event.target.value });
+  },
+
+  handleDataUpload: function(kind, text, filename) {
+    var structures = parsers[kind](text);
+    var type = kind.toLowerCase();
+    var issues = [];
+    var newState = {};
+
+    checkers[kind](structures, function(s) {
+      issues.push(s);
+    });
+
+    newState[kind] = {
+      filename: filename,
+      text    : text,
+      data    : structures,
+      issues  : issues.join('\n'),
+    };
+    this.setState(newState);
+  },
+
+  info: function(kind) {
+    if (this.state[kind].data) {
+      var props = this.state[kind];
+      var n = props.data.length;
+      return n+' '+(kind.toLowerCase()) +' from '+props.filename+'.';
+    } else
+      return 'No active data.';
+  },
+
+  renderUploadSection: function(kind) {
+    var handleUpload = this.handleDataUpload.bind(null, kind);
+    var message = this.info(kind);
+
+    return $.div({ key: kind },
+                 $.h2(null, kind),
+                 $.p(null, 
+                     $.input({ type: 'radio', name: 'type',
+                               value: kind,
+                               defaultChecked: kind == 'Nets' }),
+                     $.span(null, message)),
+                 Uploader({ handleData: handleUpload }));
+  },
+
+  renderLoadData: function() {
+    return $.form({ onChange: this.handleUploadFormChange },
+                  ['Nets', 'Layers', 'Polyhedra'].map(this.renderUploadSection));
   },
 
   renderDiagnostics: function() {
-    return $.div(null, $.pre(null, this.state.issues || 'No problems found.'));
+    var section = this.state[this.state.active];
+
+    return $.div(null, $.pre(null, section.issues || 'No problems found.'));
   },
 
   renderPreview: function() {
-    if (this.state.data) {
-      return components[this.state.type]({
+    var section = this.state[this.state.active];
+
+    if (section.data) {
+      return components[this.state.active]({
         key : 'preview',
-        data: this.state.data
+        data: section.data
       });
     } else
       return $.p({ key: 'nodata' }, 'Nothing yet to preview.');
   },
 
   render: function() {
+    var section = this.state[this.state.active];
+
     return $.div(null,
                  $.h2(null, 'Testing and Publishing'),
-                 $.p(null, this.state.info),
+                 $.p(null, this.info(this.state.active)),
                  Tabs({ labels: ['Load Data',
                                  'Diagnostics',
                                  'Preview',
                                  'Publish'] },
-                      DataUpload({
-                        onUpload: this.handleDataUpload
-                      }),
+                      this.renderLoadData(),
                       this.renderDiagnostics(),
                       this.renderPreview(),
                       Publish({
-                        filename: this.state.filename,
-                        text    : this.state.text
+                        filename: section.filename,
+                        text    : section.text
                       })));
   }
 });
