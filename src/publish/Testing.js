@@ -135,58 +135,6 @@ var Tabs = React.createClass({
 });
 
 
-var DataUpload = React.createClass({
-  displayName: 'DataUpload',
-
-  getInitialState: function() {
-    return {
-      type: 'Nets'
-    }
-  },
-
-  handleUploadFormChange: function(event) {
-    this.setState({ type: event.target.value });
-  },
-
-  handleUploadData: function(text, filename) {
-    var structures = parsers[this.state.type](text);
-    var type = this.state.type.toLowerCase();
-    var issues = [];
-    
-    checkers[this.state.type](structures, function(s) {
-      issues.push(s);
-    });
-
-    this.props.onUpload({
-      type    : this.state.type,
-      filename: filename,
-      text    : text,
-      data    : structures,
-      issues  : issues.join('\n'),
-      info    : structures.length+' '+type+' read from '+filename+'.'
-    });
-  },
-
-  render: function() {
-    return $.div(null,
-                 $.h3(null, 'Kind of data'),
-                 $.form({ onChange: this.handleUploadFormChange },
-                        $.input({ type: 'radio', name: 'type',
-                                  value: 'Nets',
-                                  defaultChecked: true }),
-                        $.label(null, 'Nets'),
-                        $.input({ type: 'radio', name: 'type',
-                                  value: 'Layers' }),
-                        $.label(null, 'Layers'),
-                        $.input({ type: 'radio', name: 'type',
-                                  value: 'Polyhedra' }),
-                        $.label(null, 'Polyhedra')),
-                 $.h3(null, 'Choose a data file'),
-                 Uploader({ handleData: this.handleUploadData }));
-  }
-});
-
-
 var Publish = React.createClass({
   displayName: 'Publish',
 
