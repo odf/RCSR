@@ -236,7 +236,6 @@ var Testing = React.createClass({
 
   getInitialState: function() {
     return {
-      info: 'No active data.',
       active: 'Nets',
       Nets: {
         filename: null,
