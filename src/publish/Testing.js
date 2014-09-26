@@ -89,19 +89,14 @@ var Tabs = React.createClass({
 
   getInitialState: function() {
     return {
-      selected: 0,
-      active: [this.props.children[0]]
+      selected: 0
     };
   },
 
   handleSelect: function(i) {
     if (i < this.props.children.length) {
-      var a = this.state.active.slice();
-      a[i] = this.props.children[i];
-
       this.setState({
-        selected: i,
-        active  : a
+        selected: i
       });
     }
   },
@@ -124,7 +119,7 @@ var Tabs = React.createClass({
                  $.ul({ className: 'TabsList' },
                       this.props.labels.map(this.makeTab)),
                  $.div({ className: 'TabsPanel' },
-                       this.state.active.map(function(component, i) {
+                       this.props.children.map(function(component, i) {
                          var d = (i == selected) ? 'block' : 'none';
                          return $.div({ key  : i,
                                         style: { display: d }
