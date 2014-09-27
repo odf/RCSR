@@ -130,6 +130,20 @@ var Tabs = React.createClass({
 });
 
 
+var sendFile = function(filename, text, onProgress, cb) {
+  var gh = github({
+    baseURL  : 'https://api.github.com/repos/odf/RCSR-content/contents/',
+    token    : credentials().token,
+    userAgent: 'RCSR',
+    origin   : 'http://rcsr.net'
+  });
+
+  gh.put('test/'+filename, text, 'web commit', onProgress)
+    .then(function(response) { cb(null, true); },
+          function(error) { cb(error); });
+};
+
+
 var Publish = React.createClass({
   displayName: 'Publish',
 
@@ -145,30 +159,14 @@ var Publish = React.createClass({
   },
 
   publish: function() {
-    var gh = github({
-      baseURL  : 'https://api.github.com/repos/odf/RCSR-content/contents/',
-      token    : credentials().token,
-      userAgent: 'RCSR',
-      origin   : 'http://rcsr.net'
-    });
-
     this.setState({ status: 'publishing...' });
-
-    gh.put('test/'+this.props.filename,
-           this.props.text,
-           'web commit',
-           this.handleProgress)
-      .then(function(response) {
-        this.setState({
-          status: 'Published successfully!',
-          progress: null
-        });
-      }.bind(this), function(error) {
-        this.setState({
-          status: 'Error: '+error,
-          progress: null
-        });
-      }.bind(this));
+    sendFile(this.props.filename, this.props.text, this.handleProgress,
+             function(err, res) {
+               this.setState({
+                 status  : err ? 'Error: '+err : 'Published successfully!',
+                 progress: null
+               });
+             }.bind(this));
   },
 
   renderPublishButton: function() {
