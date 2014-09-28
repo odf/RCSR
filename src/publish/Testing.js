@@ -20,6 +20,8 @@ var github      = require('./github');
 
 var $ = React.DOM;
 
+var nbsp = '\u00a0';
+
 
 var parsers = {
   'Nets'     : parseNets,
@@ -196,32 +198,51 @@ var Publish = React.createClass({
 
   getInitialState: function() {
     return {
-      status: null,
-      progress: null
     }
   },
 
-  handleProgress: function(event) {
-    this.setState({ progress: event.loaded / event.total });
+  handleProgress: function(filename, event) {
+    var newState = {};
+    newState[filename] = {
+      status  : 'sending...',
+      progress: event.loaded / event.total
+    };
+    this.setState(newState);
+  },
+
+  handleCompletion: function(filename, err, res) {
+    var newState = {};
+    newState[filename] = {
+      status  : err ? 'error: '+err : 'sent successfully!',
+      progress: null
+    };
+    this.setState(newState);
+    if (!err)
+      this.props.onFileSent(filename);
+  },
+
+  publishSingle: function(data) {
+    sendFile(data.filename,
+             data.text,
+             function(event) {
+               this.handleProgress(data.filename, event);
+             }.bind(this),
+             function(err, res) {
+               this.handleCompletion(data.filename, err, res);
+             }.bind(this));
   },
 
   publish: function() {
-    this.setState({ status: 'publishing...' });
-    sendFile(this.props.filename, this.props.text, this.handleProgress,
-             function(err, res) {
-               this.setState({
-                 status  : err ? 'Error: '+err : 'Published successfully!',
-                 progress: null
-               });
-             }.bind(this));
+    this.props.data.forEach(this.publishSingle);
   },
 
   renderPublishButton: function() {
     var creds = credentials();
-    var label = 'Publish '+this.props.filename;
+    var n     = this.props.data.length;
+    var label = 'Publish '+n+' files';
     var error, button;
 
-    if (!this.props.filename)
+    if (n == 0)
       error = 'You have not loaded any data to publish.';
     else if (!creds.okay)
       error = 'You cannot publish without a valid access token.';
@@ -237,22 +258,28 @@ var Publish = React.createClass({
     return $.div(null, $.h3(null, 'Publish'), button);
   },
 
-  renderProgress: function() {
-    if (this.state.progress != null)
-      return ProgressBar({ progress: this.state.progress });
+  renderProgress: function(progress) {
+    if (progress != null)
+      return ProgressBar({ progress: progress });
   },
 
   renderPublishStatus: function() {
-    if (!this.state.status)
-      return null;
-
-    var className = this.state.status.match(/^Error:/) ? 'error' : '';
-
     return $.div(null,
                  $.h3(null, 'Status'),
-                 $.span({ className: className },
-                        this.state.status,
-                        this.renderProgress()));
+                 this.props.data.map(function(data) {
+                   var name = data.filename;
+                   var fileState = this.state[name] || {};
+                   var status = fileState.status || '';
+                   var progress = fileState.progress;
+                   var className = status.match(/^Error:/) ? 'error' : '';
+                   return $.div({ key: name,
+                                  className: className
+                                },
+                                name,
+                                nbsp,
+                                status,
+                                this.renderProgress(progress));
+                 }.bind(this)));
   },
 
   render: function() {
@@ -294,12 +321,18 @@ var Testing = React.createClass({
   },
 
   publishingData: function() {
-    var section = this.state[this.state.active];
+    var data = [];
 
-    return {
-      filename: section.filename,
-      text    : section.text
-    };
+    ['Nets', 'Layers', 'Polyhedra'].forEach(function(key) {
+      var section = this.state[key];
+      if (section.filename)
+        data.push({
+          filename: section.filename,
+          text    : section.text
+        });
+    }.bind(this));
+
+    return data;
   },
 
   handleUploadFormChange: function(event) {
@@ -324,6 +357,10 @@ var Testing = React.createClass({
       issues  : issues.join('\n')
     };
     this.setState(newState);
+  },
+
+  handleFileSent: function(filename) {
+    console.log("File '"+filename+"' send successfully!");
   },
 
   renderUploadSection: function(kind) {
@@ -374,7 +411,10 @@ var Testing = React.createClass({
                       this.renderLoadData(),
                       this.renderDiagnostics(),
                       this.renderPreview(),
-                      Publish(this.publishingData())));
+                      Publish({
+                        data: this.publishingData(),
+                        onFileSent: this.handleFileSent
+                      })));
   }
 });
 
