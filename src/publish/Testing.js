@@ -276,24 +276,30 @@ var Testing = React.createClass({
     return {
       active: 'Nets',
       Nets: {
-        filename: null,
-        text    : null,
-        data    : null,
-        issues  : null
       },
       Layers: {
-        filename: null,
-        text    : null,
-        data    : null,
-        issues  : null
       },
       Polyhedra: {
-        filename: null,
-        text    : null,
-        data    : null,
-        issues  : null
       }
     }
+  },
+
+  info: function(kind) {
+    if (this.state[kind].data) {
+      var props = this.state[kind];
+      var n = props.data.length;
+      return n+' '+(kind.toLowerCase()) +' from '+props.filename+'.';
+    } else
+      return 'No active data.';
+  },
+
+  publishingData: function() {
+    var section = this.state[this.state.active];
+
+    return {
+      filename: section.filename,
+      text    : section.text
+    };
   },
 
   handleUploadFormChange: function(event) {
@@ -315,18 +321,9 @@ var Testing = React.createClass({
       filename: filename,
       text    : text,
       data    : structures,
-      issues  : issues.join('\n'),
+      issues  : issues.join('\n')
     };
     this.setState(newState);
-  },
-
-  info: function(kind) {
-    if (this.state[kind].data) {
-      var props = this.state[kind];
-      var n = props.data.length;
-      return n+' '+(kind.toLowerCase()) +' from '+props.filename+'.';
-    } else
-      return 'No active data.';
   },
 
   renderUploadSection: function(kind) {
@@ -367,8 +364,6 @@ var Testing = React.createClass({
   },
 
   render: function() {
-    var section = this.state[this.state.active];
-
     return $.div(null,
                  $.h2(null, 'Testing and Publishing'),
                  $.p(null, this.info(this.state.active)),
@@ -379,10 +374,7 @@ var Testing = React.createClass({
                       this.renderLoadData(),
                       this.renderDiagnostics(),
                       this.renderPreview(),
-                      Publish({
-                        filename: section.filename,
-                        text    : section.text
-                      })));
+                      Publish(this.publishingData())));
   }
 });
 
