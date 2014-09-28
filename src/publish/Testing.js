@@ -130,7 +130,7 @@ var Tabs = React.createClass({
 });
 
 
-var sendFile = function(filename, text, onProgress, cb) {
+var sendToGithub = function(filename, text, onProgress, cb) {
   var gh = github({
     baseURL  : 'https://api.github.com/repos/odf/RCSR-content/contents/',
     token    : credentials().token,
@@ -142,6 +142,53 @@ var sendFile = function(filename, text, onProgress, cb) {
     .then(function(response) { cb(null, true); },
           function(error) { cb(error); });
 };
+
+
+var simulateSend = function(filename, text, onProgress, cb) {
+  var total = text.length;
+  var loaded = 0;
+
+  var f = function() {
+    clearTimeout(t);
+    loaded = Math.min(loaded + 15000, total);
+    onProgress({ loaded: loaded, total: total });
+
+    if (loaded >= total) {
+      var t1 = setTimeout(function() {
+        clearTimeout(t1);
+        cb(null, true);
+      }, 500);
+    } else {
+      t = setTimeout(f, 100);
+    }
+  };
+
+  var t = setTimeout(f, 100);
+
+  console.log('simulating file upload');
+};
+
+
+var sendFile = function(filename, text, onProgress, cb) {
+  if (credentials().user == 'Grimley Fiendish')
+    simulateSend(filename, text, onProgress, cb);
+  else
+    sendToGithub(filename, text, onProgress, cb);
+};
+
+
+var ProgressBar = React.createClass({
+  displayName: 'ProgressBar',
+
+  render: function() {
+    var percent = this.props.progress * 100;
+    return $.span(null,
+                  $.span({ className: 'meter hSep-1em',
+                           style: { width: '200px' } },
+                         $.span({ style: { width: percent+'%' } })),
+                  Math.round(percent)+'%');
+  }
+});
 
 
 var Publish = React.createClass({
@@ -191,15 +238,8 @@ var Publish = React.createClass({
   },
 
   renderProgress: function() {
-    if (this.state.progress == null)
-      return null;
-
-    var percent = this.state.progress * 100;
-    return $.span(null,
-                  $.span({ className: 'meter hSep-1em',
-                           style: { width: '200px' } },
-                         $.span({ style: { width: percent+'%' } })),
-                  Math.round(percent)+'%');
+    if (this.state.progress != null)
+      return ProgressBar({ progress: this.state.progress });
   },
 
   renderPublishStatus: function() {
