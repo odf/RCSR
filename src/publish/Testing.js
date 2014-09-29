@@ -342,7 +342,7 @@ var Testing = React.createClass({
       return 'No active data.';
   },
 
-  publishingData: function() {
+  publishableData: function() {
     var data = [];
 
     ['Nets', 'Layers', 'Polyhedra'].forEach(function(key) {
@@ -352,6 +352,14 @@ var Testing = React.createClass({
           filename: section.filename,
           text    : section.text
         });
+    }.bind(this));
+
+    Object.keys(this.state.Images).forEach(function(name) {
+      content = this.state.Images[name].split(',')[1];
+      data.push({
+        filename: name,
+        text    : new Buffer(content, 'base64')
+      });
     }.bind(this));
 
     return data;
@@ -468,7 +476,7 @@ var Testing = React.createClass({
                       this.renderDiagnostics(),
                       this.renderPreview(),
                       Publish({
-                        data: this.publishingData(),
+                        data: this.publishableData(),
                         onFileSent: this.handleFileSent
                       })));
   }
