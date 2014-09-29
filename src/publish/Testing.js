@@ -264,22 +264,25 @@ var Publish = React.createClass({
   },
 
   renderPublishStatus: function() {
-    return $.div(null,
-                 $.h3(null, 'Status'),
-                 this.props.data.map(function(data) {
-                   var name = data.filename;
-                   var fileState = this.state[name] || {};
-                   var status = fileState.status || '';
-                   var progress = fileState.progress;
-                   var className = status.match(/^Error:/) ? 'error' : '';
-                   return $.div({ key: name,
-                                  className: className
-                                },
-                                name,
-                                nbsp,
-                                status,
-                                this.renderProgress(progress));
-                 }.bind(this)));
+    var data = this.props.data
+      .filter(function(item) {
+        return this.state[item.filename] != null;
+      }.bind(this))
+      .map(function(item) {
+        var name      = item.filename;
+        var fileState = this.state[name] || {};
+        var ok        = !status.match(/^Error:/)
+
+        return $.div({ key      : name,
+                       className: ok ? '' : 'error' },
+                     name,
+                     nbsp,
+                     fileState.status,
+                     this.renderProgress(fileState.progress));
+      }.bind(this));
+
+    if (data.length > 0)
+      return $.div(null, $.h3(null, 'Status'), data);
   },
 
   render: function() {
