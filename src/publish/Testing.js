@@ -57,6 +57,30 @@ var merge = function() {
 };
 
 
+var makeThumbnail = function(src, width, height, cb) {
+  var img = new Image();
+
+  img.onload = function() {
+    var scale = Math.min(width / img.width, height / img.height);
+    var wd = img.width * scale;
+    var ht = img.height * scale;
+    var x0 = (width - wd) / 2;
+    var y0 = (height - ht) / 2;
+
+    var canvas = document.createElement('canvas');
+    var ctx    = canvas.getContext('2d');
+
+    canvas.width = width;
+    canvas.height = height;
+
+    ctx.drawImage(img, x0, y0, wd, ht);
+    cb(null, canvas.toDataURL("image/jpeg"));
+  };
+
+  img.src = src;
+};
+
+
 var Uploader = React.createClass({
   displayName: 'Uploader',
 
@@ -355,7 +379,8 @@ var Testing = React.createClass({
     }.bind(this));
 
     Object.keys(this.state.Images).forEach(function(name) {
-      content = this.state.Images[name].split(',')[1];
+      var entry = this.state.Images[name];
+      content = entry.original.split(',')[1];
       data.push({
         filename: name,
         text    : new Buffer(content, 'base64')
@@ -390,12 +415,19 @@ var Testing = React.createClass({
   },
 
   handleImageUpload: function(data, filename) {
-    var images = merge(this.state.Images);
-    images[filename] = data;
+    makeThumbnail(data, 72, 72, function(err, res) {
+      if (err) throw new Error(err);
 
-    this.setState({
-      Images: images
-    });
+      var images = merge(this.state.Images);
+      images[filename] = {
+        original : data,
+        thumbnail: res
+      };
+
+      this.setState({
+        Images: images
+      });
+    }.bind(this));
   },
 
   handleFileSent: function(filename) {
@@ -431,7 +463,7 @@ var Testing = React.createClass({
                        Object.keys(images).map(function(name) {
                          return $.img({
                            key: name,
-                           src: images[name]
+                           src: images[name].thumbnail
                          })
                        })),
                  Uploader({
