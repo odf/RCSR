@@ -44,20 +44,37 @@ var components = {
 };
 
 
+var merge = function() {
+  var args = Array.prototype.slice.call(arguments);
+  var result = args.every(Array.isArray) ? [] : {};
+  var i, obj, key;
+  for (i in args) {
+    obj = args[i];
+    for (key in obj)
+      result[key] = obj[key];
+  }
+  return result;
+};
+
+
 var Uploader = React.createClass({
   displayName: 'Uploader',
 
   loadFile: function(event) {
-    var files = event.target.files;
+    var file = event.target.files[0];
     var handleData = this.props.handleData;
     var reader = new FileReader();
 
     reader.onload = function(event) {
-      handleData(event.target.result, files[0].name);
+      handleData(event.target.result, file.name);
     };
 
-    if (files[0])
-      reader.readAsText(files[0]);
+    if (file) {
+      if (this.props.binary)
+        reader.readAsDataURL(file);
+      else
+        reader.readAsText(file);
+    }
   },
 
   render: function() {
@@ -310,6 +327,8 @@ var Testing = React.createClass({
       Layers: {
       },
       Polyhedra: {
+      },
+      Images: {
       }
     }
   },
@@ -362,27 +381,61 @@ var Testing = React.createClass({
     this.setState(newState);
   },
 
+  handleImageUpload: function(data, filename) {
+    var images = merge(this.state.Images);
+    images[filename] = data;
+
+    this.setState({
+      Images: images
+    });
+  },
+
   handleFileSent: function(filename) {
     console.log("File '"+filename+"' send successfully!");
   },
 
   renderUploadSection: function(kind) {
+    if (kind == 'Images')
+      return this.renderImageSection();
+
     var handleUpload = this.handleDataUpload.bind(null, kind);
     var message = this.info(kind);
 
     return $.div({ key: kind },
                  $.h2(null, kind),
-                 $.p(null, 
+                 $.p(null,
                      $.input({ type: 'radio', name: 'type',
                                value: kind,
                                defaultChecked: kind == 'Nets' }),
                      $.span(null, message)),
-                 Uploader({ handleData: handleUpload }));
+                 Uploader({
+                   binary    : false,
+                   handleData: handleUpload
+                 }));
+  },
+
+  renderImageSection: function() {
+    var images = this.state.Images;
+
+    return $.div({ key: 'Images' },
+                 $.h2(null, 'Images'),
+                 $.div(null,
+                       Object.keys(images).map(function(name) {
+                         return $.img({
+                           key: name,
+                           src: images[name]
+                         })
+                       })),
+                 Uploader({
+                   binary    : true,
+                   handleData: this.handleImageUpload
+                 }));
   },
 
   renderLoadData: function() {
     return $.form({ onChange: this.handleUploadFormChange },
-                  ['Nets', 'Layers', 'Polyhedra'].map(this.renderUploadSection));
+                  ['Nets', 'Layers', 'Polyhedra', 'Images']
+                  .map(this.renderUploadSection));
   },
 
   renderDiagnostics: function() {
