@@ -491,10 +491,11 @@ var Testing = React.createClass({
                  $.h2(null, 'Images'),
                  $.div(null,
                        Object.keys(images).map(function(name) {
-                         return $.img({
-                           key: name,
-                           src: images[name].thumbnail
-                         })
+                         return $.figure({ key: name,
+                                           className: 'inlineFigure' },
+                                         $.img({ src: images[name].thumbnail }),
+                                         $.figcaption({ className: 'center' },
+                                                      name));
                        })),
                  Uploader({
                    binary    : true,
