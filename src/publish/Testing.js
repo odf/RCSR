@@ -57,24 +57,54 @@ var merge = function() {
 };
 
 
-var makeThumbnail = function(src, width, height, cb) {
+var resizeImage = function(src, width, height, cb) {
   var img = new Image();
 
   img.onload = function() {
-    var scale = Math.min(width / img.width, height / img.height);
-    var wd = img.width * scale;
-    var ht = img.height * scale;
+    var wd = img.width;
+    var ht = img.height;
+
     var x0 = (width - wd) / 2;
     var y0 = (height - ht) / 2;
 
     var canvas = document.createElement('canvas');
-    var ctx    = canvas.getContext('2d');
-
     canvas.width = width;
     canvas.height = height;
 
+    var ctx = canvas.getContext('2d');
+
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, width, height);
     ctx.drawImage(img, x0, y0, wd, ht);
+
     cb(null, canvas.toDataURL("image/jpeg"));
+  };
+
+  img.src = src;
+};
+
+
+var rescaleImage = function(src, width, height, cb) {
+  var img = new Image();
+
+  img.onload = function() {
+    var desiredScale = Math.min(width / img.width, height / img.height);
+    var scale = Math.max(desiredScale, 0.5);
+    var wd = img.width * scale;
+    var ht = img.height * scale;
+
+    var canvas = document.createElement('canvas');
+    canvas.width = wd;
+    canvas.height = ht;
+    canvas.getContext('2d').drawImage(img, 0, 0, wd, ht);
+
+    var result = canvas.toDataURL("image/jpeg");
+    if (scale > desiredScale)
+      rescaleImage(result, width, height, cb);
+    else if (wd != width || ht != height)
+      resizeImage(result, width, height, cb);
+    else
+      cb(null, result);
   };
 
   img.src = src;
@@ -415,7 +445,7 @@ var Testing = React.createClass({
   },
 
   handleImageUpload: function(data, filename) {
-    makeThumbnail(data, 72, 72, function(err, res) {
+    rescaleImage(data, 72, 72, function(err, res) {
       if (err) throw new Error(err);
 
       var images = merge(this.state.Images);
