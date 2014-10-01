@@ -410,10 +410,13 @@ var Testing = React.createClass({
 
     Object.keys(this.state.Images).forEach(function(name) {
       var entry = this.state.Images[name];
-      content = entry.original.split(',')[1];
       data.push({
-        filename: name,
-        text    : new Buffer(content, 'base64')
+        filename: name+'.jpg',
+        text    : new Buffer(entry.main.split(',')[1], 'base64')
+      });
+      data.push({
+        filename: name+'T.jpg',
+        text    : new Buffer(entry.thumbnail.split(',')[1], 'base64')
       });
     }.bind(this));
 
@@ -445,18 +448,23 @@ var Testing = React.createClass({
   },
 
   handleImageUpload: function(data, filename) {
-    rescaleImage(data, 72, 72, function(err, res) {
+    rescaleImage(data, 432, 432, function(err, main) {
       if (err) throw new Error(err);
 
-      var images = merge(this.state.Images);
-      images[filename] = {
-        original : data,
-        thumbnail: res
-      };
+      rescaleImage(main, 72, 72, function(err, thumbnail) {
+        if (err) throw new Error(err);
 
-      this.setState({
-        Images: images
-      });
+        var name = filename.split('.')[0];
+        var images = merge(this.state.Images);
+        images[name] = {
+          main     : main,
+          thumbnail: thumbnail
+        };
+
+        this.setState({
+          Images: images
+        });
+      }.bind(this));
     }.bind(this));
   },
 
