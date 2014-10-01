@@ -1,20 +1,12 @@
 'use strict';
 
 var React       = require('react');
-var agent       = require('superagent');
-var cc          = require('ceci-core');
-
-var validate    = require('plexus-validate');
-var Form        = require('plexus-form');
-
-var parseNets   = require('./parse/nets');
-var parseLayers = require('./parse/layers');
-var parsePolys  = require('./parse/polys');
 
 var Nets        = require('./view/nets');
 var Layers      = require('./view/layers');
 var Polyhedra   = require('./view/polys');
 
+var loader      = require('./loader');
 var credentials = require('./publish/credentials');
 var Testing     = require('./publish/Testing');
 
@@ -133,26 +125,22 @@ var Loader = React.createClass({
   },
 
   componentDidMount: function() {
-    this.loadData(this.props);
+    this.props.loader(this.handleLoaderEvent);
   },
 
   componentWillReceiveProps: function(props) {
-    this.loadData(props);
+    props.loader(this.handleLoaderEvent);
   },
 
-  loadData: function(props) {
-    cc.go(function*() {
-      yield cc.sleep(500);
-      if (this.isMounted() && !this.state.data)
+  handleLoaderEvent: function(err, res) {
+    if (err)
+      alert(ex+'\n'+ex.stack);
+    else if (this.isMounted()) {
+      if (res == null)
         this.setState({ showMessage: true });
-    }.bind(this));
-    cc.go(function*() {
-      var data = yield props.deferred;
-      if (this.isMounted())
-        this.setState({ data: data, showMessage: false });
-    }.bind(this)).then(null, function(ex) {
-      alert(ex + '\n' + ex.stack);
-    });
+      else
+        this.setState({ data: res, showMessage: false });
+    }
   },
 
   render: function() {
@@ -167,81 +155,10 @@ var Loader = React.createClass({
 });
 
 
-var parsers = {
-  'Nets'     : parseNets,
-  'Layers'   : parseLayers,
-  'Polyhedra': parsePolys
-};
-
-
 var components = {
   'Nets'     : Nets.search,
   'Layers'   : Layers.search,
   'Polyhedra': Polyhedra.search
-};
-
-
-var htmlFromServer = function(path) {
-  return cc.go(function*() {
-    var res;
-
-    res = yield cc.nbind(agent.get)(path);
-    if (res.ok)
-      return res.text;
-    else
-      alert('Could not load ' + path);
-  });
-};
-
-
-var builtinData = function(type, txtPath, parse, symbol) {
-  return cc.go(function*() {
-    var data, res;
-
-    res = yield cc.nbind(agent.get)(txtPath);
-    if (res.ok)
-      data = parse(res.text);
-
-    if (data) {
-      if (symbol)
-        return data.filter(function(item) {
-          return item.symbol == symbol;
-        })[0];
-      else
-        return data;
-    } else
-      alert('Could not read data for RCSR ' + type);
-  });
-};
-
-
-var builtinNetData = function(symbol) {
-  return builtinData(
-    'nets',
-    '/data/3dall.txt',
-    parseNets,
-    symbol
-  );
-};
-
-
-var builtinLayerData = function(symbol) {
-  return builtinData(
-    'layers',
-    '/data/2dall.txt',
-    parseLayers,
-    symbol
-  );
-};
-
-
-var builtinPolyData = function(symbol) {
-  return builtinData(
-    'polyhedra',
-    '/data/0dall.txt',
-    parsePolys,
-    symbol
-  );
 };
 
 
@@ -251,39 +168,39 @@ var resolveRoute = function(path) {
   else if (path == '/about')
     return Loader({
       component: About,
-      deferred: htmlFromServer('/about.html')
+      loader   : loader('html', '/about.html')
     });
   else if (path == '/links')
     return Links();
   else if (path.match(/^\/nets\//))
     return Loader({
       component: Nets.single,
-      deferred: builtinNetData(path.replace(/^\/nets\//, ''))
+      loader   : loader('nets', path.replace(/^\/nets\//, ''))
     });
   else if (path == '/nets')
     return Loader({
       component: Nets.search,
-      deferred: builtinNetData()
+      loader   : loader('nets')
     });
   else if (path.match(/^\/layers\//))
     return Loader({
       component: Layers.single,
-      deferred: builtinLayerData(path.replace(/^\/layers\//, ''))
+      loader   : loader('layers', path.replace(/^\/layers\//, ''))
     });
   else if (path == '/layers')
     return Loader({
       component: Layers.search,
-      deferred: builtinLayerData()
+      loader   : loader('layers')
     });
   else if (path.match(/^\/polyhedra\//))
     return Loader({
       component: Polyhedra.single,
-      deferred: builtinPolyData(path.replace(/^\/polyhedra\//, ''))
+      loader   : loader('polyhedra', path.replace(/^\/polyhedra\//, ''))
     });
   else if (path == '/polyhedra')
     return Loader({
       component: Polyhedra.search,
-      deferred: builtinPolyData()
+      loader   : loader('polyhedra')
     });
   else if (path == '/testing') {
     localStorage.setItem('RCSR-testing-known', true);
