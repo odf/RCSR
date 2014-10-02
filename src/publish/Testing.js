@@ -250,6 +250,14 @@ var sendFile = function(filename, text, onProgress, cb) {
 };
 
 
+var structureTypeForSymbol = function(symbol, structures) {
+  for (var type in structures)
+    for (var i = 0; i < structures[type].length; ++i)
+      if (structures[type][i].symbol == symbol)
+        return type;
+};
+
+
 var ProgressBar = React.createClass({
   displayName: 'ProgressBar',
 
@@ -448,6 +456,11 @@ var Testing = React.createClass({
   },
 
   handleImageUpload: function(data, filename) {
+    var structures = merge(this.props.data);
+    for (var type in structures)
+      if (this.state[type].data)
+        structures[type] = this.state[type].data;
+
     rescaleImage(data, 432, 432, function(err, main) {
       if (err) throw new Error(err);
 
@@ -457,6 +470,7 @@ var Testing = React.createClass({
         var name = filename.split('.')[0];
         var images = merge(this.state.Images);
         images[name] = {
+          type     : structureTypeForSymbol(name, structures),
           main     : main,
           thumbnail: thumbnail
         };
@@ -494,17 +508,26 @@ var Testing = React.createClass({
 
   renderImageSection: function() {
     var images = this.state.Images;
+    var figure = function(name) {
+      return $.figure({ key: name, className: 'inlineFigure' },
+                      $.img({ src: images[name].thumbnail }),
+                      $.figcaption({ className: 'center' }, name));
+    };
 
     return $.div({ key: 'Images' },
                  $.h2(null, 'Images'),
-                 $.div(null,
-                       Object.keys(images).map(function(name) {
-                         return $.figure({ key: name,
-                                           className: 'inlineFigure' },
-                                         $.img({ src: images[name].thumbnail }),
-                                         $.figcaption({ className: 'center' },
-                                                      name));
-                       })),
+                 ['Nets', 'Layers', 'Polyhedra'].map(function(type) {
+                   var content = Object.keys(images)
+                     .filter(function(name) {
+                       return images[name].type == type;
+                     })
+                     .map(figure);
+
+                   if (content.length > 0)
+                     return $.div({ key: type },
+                                  $.h3(null, type),
+                                  content);
+                 }),
                  Uploader({
                    binary    : true,
                    handleData: this.handleImageUpload
