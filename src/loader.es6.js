@@ -72,13 +72,28 @@ var builtinPolyData = function(symbol) {
 };
 
 
+var allBuiltinData = function() {
+  return cc.go(function*() {
+    var data = yield cc.join([builtinNetData(),
+                              builtinLayerData(),
+                              builtinPolyData()]);
+    return {
+      Nets     : data[0],
+      Layers   : data[1],
+      Polyhedra: data[2]
+    };
+  });
+};
+
+
 module.exports = function(type, arg) {
   return function(handler) {
     var deferred = {
       'html'     : htmlFromServer,
       'nets'     : builtinNetData,
       'layers'   : builtinLayerData,
-      'polyhedra': builtinPolyData
+      'polyhedra': builtinPolyData,
+      'all'      : allBuiltinData
     }[type](arg);
 
     cc.go(function*() {

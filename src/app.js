@@ -7,6 +7,7 @@ var Layers      = require('./view/layers');
 var Polyhedra   = require('./view/polys');
 
 var loader      = require('./loader');
+var Deferred    = require('./Deferred');
 var credentials = require('./publish/credentials');
 var Testing     = require('./publish/Testing');
 
@@ -114,97 +115,52 @@ var Credentials = React.createClass({
 });
 
 
-var Loader = React.createClass({
-  displayName: 'Loader',
-
-  getInitialState: function() {
-    return {
-      showMessage: false,
-      data: null
-    }
-  },
-
-  componentDidMount: function() {
-    this.props.loader(this.handleLoaderEvent);
-  },
-
-  componentWillReceiveProps: function(props) {
-    props.loader(this.handleLoaderEvent);
-  },
-
-  handleLoaderEvent: function(err, res) {
-    if (err)
-      alert(ex+'\n'+ex.stack);
-    else if (this.isMounted()) {
-      if (res == null)
-        this.setState({ showMessage: true });
-      else
-        this.setState({ data: res, showMessage: false });
-    }
-  },
-
-  render: function() {
-    if (this.state.data)
-      return this.props.component({ data: this.state.data,
-                                    info: this.props.info });
-    else if (this.state.showMessage)
-      return $.div(null, $.p(null, 'Loading data...'));
-    else
-      return $.div();
-  }
-});
-
-
-var components = {
-  'Nets'     : Nets.search,
-  'Layers'   : Layers.search,
-  'Polyhedra': Polyhedra.search
-};
-
-
 var resolveRoute = function(path) {
   if (credentials().isnew)
     return Credentials();
   else if (path == '/about')
-    return Loader({
+    return Deferred({
       component: About,
       loader   : loader('html', '/about.html')
     });
   else if (path == '/links')
     return Links();
   else if (path.match(/^\/nets\//))
-    return Loader({
+    return Deferred({
       component: Nets.single,
       loader   : loader('nets', path.replace(/^\/nets\//, ''))
     });
   else if (path == '/nets')
-    return Loader({
+    return Deferred({
       component: Nets.search,
       loader   : loader('nets')
     });
   else if (path.match(/^\/layers\//))
-    return Loader({
+    return Deferred({
       component: Layers.single,
       loader   : loader('layers', path.replace(/^\/layers\//, ''))
     });
   else if (path == '/layers')
-    return Loader({
+    return Deferred({
       component: Layers.search,
       loader   : loader('layers')
     });
   else if (path.match(/^\/polyhedra\//))
-    return Loader({
+    return Deferred({
       component: Polyhedra.single,
       loader   : loader('polyhedra', path.replace(/^\/polyhedra\//, ''))
     });
   else if (path == '/polyhedra')
-    return Loader({
+    return Deferred({
       component: Polyhedra.search,
       loader   : loader('polyhedra')
     });
   else if (path == '/testing') {
     localStorage.setItem('RCSR-testing-known', true);
-    return Testing();
+    return Deferred({
+      component: Testing,
+      loader   : loader('all')
+    });
   } else
     return Home();
 };
