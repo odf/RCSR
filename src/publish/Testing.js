@@ -410,6 +410,9 @@ var Testing = React.createClass({
       Layers   : 'Layer',
       Polyhedra: 'Poly'
     };
+    var imageBuffer = function(dataURL) {
+      return new Buffer(dataURL.split(',')[1], 'base64');
+    };
     var data = [];
 
     ['Nets', 'Layers', 'Polyhedra'].forEach(function(key) {
@@ -427,11 +430,11 @@ var Testing = React.createClass({
 
       data.push({
         path: dirName+'/'+name+'.jpg',
-        text: new Buffer(entry.main.split(',')[1], 'base64')
+        text: imageBuffer(entry.main)
       });
       data.push({
         path: dirName+'Thumbs/'+name+'T.jpg',
-        text: new Buffer(entry.thumbnail.split(',')[1], 'base64')
+        text: imageBuffer(entry.thumbnail)
       });
     }.bind(this));
 
