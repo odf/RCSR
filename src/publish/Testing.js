@@ -203,7 +203,7 @@ var Tabs = React.createClass({
 });
 
 
-var sendToGithub = function(filename, text, onProgress, cb) {
+var sendToGithub = function(path, text, onProgress, cb) {
   var gh = github({
     baseURL  : 'https://api.github.com/repos/odf/RCSR-content/contents/',
     token    : credentials().token,
@@ -211,13 +211,13 @@ var sendToGithub = function(filename, text, onProgress, cb) {
     origin   : 'http://rcsr.net'
   });
 
-  gh.put('test/'+filename, text, 'web commit', onProgress)
+  gh.put('test/'+path, text, 'web commit', onProgress)
     .then(function(response) { cb(null, true); },
           function(error) { cb(error); });
 };
 
 
-var simulateSend = function(filename, text, onProgress, cb) {
+var simulateSend = function(path, text, onProgress, cb) {
   var total = text.length;
   var loaded = 0;
 
@@ -242,11 +242,11 @@ var simulateSend = function(filename, text, onProgress, cb) {
 };
 
 
-var sendFile = function(filename, text, onProgress, cb) {
+var sendFile = function(path, text, onProgress, cb) {
   if (credentials().user == 'Grimley Fiendish')
-    simulateSend(filename, text, onProgress, cb);
+    simulateSend(path, text, onProgress, cb);
   else
-    sendToGithub(filename, text, onProgress, cb);
+    sendToGithub(path, text, onProgress, cb);
 };
 
 
@@ -280,34 +280,34 @@ var Publish = React.createClass({
     }
   },
 
-  handleProgress: function(filename, event) {
+  handleProgress: function(path, event) {
     var newState = {};
-    newState[filename] = {
+    newState[path] = {
       status  : 'sending...',
       progress: event.loaded / event.total
     };
     this.setState(newState);
   },
 
-  handleCompletion: function(filename, err, res) {
+  handleCompletion: function(path, err, res) {
     var newState = {};
-    newState[filename] = {
+    newState[path] = {
       status  : err ? 'error: '+err : 'sent successfully!',
       progress: null
     };
     this.setState(newState);
     if (!err)
-      this.props.onFileSent(filename);
+      this.props.onFileSent(path);
   },
 
   publishSingle: function(data) {
-    sendFile(data.filename,
+    sendFile(data.path,
              data.text,
              function(event) {
-               this.handleProgress(data.filename, event);
+               this.handleProgress(data.path, event);
              }.bind(this),
              function(err, res) {
-               this.handleCompletion(data.filename, err, res);
+               this.handleCompletion(data.path, err, res);
              }.bind(this));
   },
 
@@ -345,10 +345,10 @@ var Publish = React.createClass({
   renderPublishStatus: function() {
     var data = this.props.data
       .filter(function(item) {
-        return this.state[item.filename] != null;
+        return this.state[item.path] != null;
       }.bind(this))
       .map(function(item) {
-        var name      = item.filename;
+        var name      = item.path;
         var fileState = this.state[name] || {};
         var ok        = !status.match(/^Error:/)
 
@@ -405,26 +405,33 @@ var Testing = React.createClass({
   },
 
   publishableData: function() {
+    var shortened = {
+      Nets     : 'Net',
+      Layers   : 'Layer',
+      Polyhedra: 'Poly'
+    };
     var data = [];
 
     ['Nets', 'Layers', 'Polyhedra'].forEach(function(key) {
       var section = this.state[key];
       if (section.filename)
         data.push({
-          filename: section.filename,
-          text    : section.text
+          path: 'public/data/'+section.filename,
+          text: section.text
         });
     }.bind(this));
 
     Object.keys(this.state.Images).forEach(function(name) {
       var entry = this.state.Images[name];
+      var dirName = 'public/images/'+shortened[entry.type]+'Pics';
+
       data.push({
-        filename: name+'.jpg',
-        text    : new Buffer(entry.main.split(',')[1], 'base64')
+        path: dirName+'/'+name+'.jpg',
+        text: new Buffer(entry.main.split(',')[1], 'base64')
       });
       data.push({
-        filename: name+'T.jpg',
-        text    : new Buffer(entry.thumbnail.split(',')[1], 'base64')
+        path: dirName+'Thumbs/'+name+'T.jpg',
+        text: new Buffer(entry.thumbnail.split(',')[1], 'base64')
       });
     }.bind(this));
 
@@ -483,7 +490,7 @@ var Testing = React.createClass({
   },
 
   handleFileSent: function(filename) {
-    console.log("File '"+filename+"' send successfully!");
+    console.log("File '"+filename+"' sent successfully!");
   },
 
   renderUploadSection: function(kind) {
