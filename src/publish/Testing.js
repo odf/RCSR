@@ -292,7 +292,7 @@ var Publish = React.createClass({
   handleCompletion: function(path, err, res) {
     var newState = {};
     newState[path] = {
-      status  : err ? 'error: '+err : 'sent successfully!',
+      status  : err ? 'error: '+err : 'published successfully!',
       progress: null
     };
     this.setState(newState);
@@ -344,24 +344,27 @@ var Publish = React.createClass({
 
   renderPublishStatus: function() {
     var data = this.props.data
-      .filter(function(item) {
-        return this.state[item.path] != null;
-      }.bind(this))
       .map(function(item) {
         var name      = item.path;
         var fileState = this.state[name] || {};
         var ok        = !status.match(/^Error:/)
 
-        return $.div({ key      : name,
-                       className: ok ? '' : 'error' },
-                     name,
-                     nbsp,
-                     fileState.status,
-                     this.renderProgress(fileState.progress));
+        return $.tr({ key      : name,
+                      className: ok ? '' : 'error' },
+                    $.td({ className: 'leftAlign' }, name),
+                    $.td({ className: 'leftAlign' },
+                         fileState.status || 'not yet published',
+                         this.renderProgress(fileState.progress)));
       }.bind(this));
 
-    if (data.length > 0)
-      return $.div(null, $.h3(null, 'Status'), data);
+    return $.div(null,
+                 $.h3(null, 'Status'),
+                 $.table(null,
+                         $.thead(null,
+                                 $.tr(null,
+                                      $.th(null, 'Path'),
+                                      $.th(null, 'Status'))),
+                         $.tbody(null, data)));
   },
 
   render: function() {
