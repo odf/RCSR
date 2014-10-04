@@ -357,14 +357,16 @@ var Publish = React.createClass({
                          this.renderProgress(fileState.progress)));
       }.bind(this));
 
-    return $.div(null,
-                 $.h3(null, 'Status'),
-                 $.table(null,
-                         $.thead(null,
-                                 $.tr(null,
-                                      $.th(null, 'Path'),
-                                      $.th(null, 'Status'))),
-                         $.tbody(null, data)));
+    if (data.length > 0) {
+      return $.div(null,
+                   $.h3(null, 'Status'),
+                   $.table(null,
+                           $.thead(null,
+                                   $.tr(null,
+                                        $.th(null, 'Path'),
+                                        $.th(null, 'Status'))),
+                           $.tbody(null, data)));
+    }
   },
 
   render: function() {
