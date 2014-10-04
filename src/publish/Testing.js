@@ -1,7 +1,6 @@
 'use strict';
 
 var React       = require('react');
-var cc          = require('ceci-core');
 
 var parseNets   = require('../parse/nets');
 var parseLayers = require('../parse/layers');
@@ -14,6 +13,8 @@ var checkPolys  = require('../check/polys');
 var Nets        = require('../view/nets');
 var Layers      = require('../view/layers');
 var Polyhedra   = require('../view/polys');
+
+var sha1        = require('../sha1');
 
 var credentials = require('./credentials');
 var github      = require('./github');
@@ -238,7 +239,7 @@ var simulateSend = function(path, text, onProgress, cb) {
 
   var t = setTimeout(f, 100);
 
-  console.log('simulating file upload');
+  console.log('simulating file upload - sha1 = '+sha1(text));
 };
 
 

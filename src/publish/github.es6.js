@@ -1,6 +1,7 @@
 'use strict';
 
-var cc = require('ceci-core');
+var cc   = require('ceci-core');
+var sha1 = require('../sha1');
 
 
 module.exports = function(options) {
@@ -85,6 +86,10 @@ module.exports = function(options) {
 
       response = yield request('PUT', path, data, onProgress);
       result = response.data;
+
+      //TODO report an error if these don't match
+      console.log(result.content.sha);
+      console.log(sha1(content));
 
       return {
         status: response.status,
