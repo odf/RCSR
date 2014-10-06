@@ -290,7 +290,7 @@ var Publish = React.createClass({
     this.setState(newState);
   },
 
-  handleCompletion: function(path, err, res) {
+  handleCompletion: function(path, err, res, onCompletion) {
     var newState = {};
     newState[path] = {
       status  : err ? 'error: '+err : 'published successfully!',
@@ -298,7 +298,7 @@ var Publish = React.createClass({
     };
     this.setState(newState);
     if (!err)
-      this.props.onFileSent(path);
+      onCompletion(path);
   },
 
   publishSingle: function(data) {
@@ -308,7 +308,7 @@ var Publish = React.createClass({
                this.handleProgress(data.path, event);
              }.bind(this),
              function(err, res) {
-               this.handleCompletion(data.path, err, res);
+               this.handleCompletion(data.path, err, res, data.onCompletion);
              }.bind(this));
   },
 
@@ -416,6 +416,12 @@ var Testing = React.createClass({
       Layers   : 'Layer',
       Polyhedra: 'Poly'
     };
+    var filename = {
+      Nets     : '3dall.txt',
+      Layers   : '2dall.txt',
+      Polyhedra: '0dall.txt'
+    };
+
     var imageBuffer = function(dataURL) {
       return new Buffer(dataURL.split(',')[1], 'base64');
     };
@@ -425,8 +431,11 @@ var Testing = React.createClass({
       var section = this.state[key];
       if (section.filename)
         data.push({
-          path: 'public/data/'+section.filename,
-          text: section.text
+          path: 'public/data/'+filename[key],
+          text: section.text,
+          onCompletion: function() {
+            console.log('published data for '+key);
+          }
         });
     }.bind(this));
 
@@ -436,11 +445,17 @@ var Testing = React.createClass({
 
       data.push({
         path: dirName+'/'+name+'.jpg',
-        text: imageBuffer(entry.main)
+        text: imageBuffer(entry.main),
+        onCompletion: function() {
+          console.log('published image for '+name);
+        }
       });
       data.push({
         path: dirName+'Thumbs/'+name+'T.jpg',
-        text: imageBuffer(entry.thumbnail)
+        text: imageBuffer(entry.thumbnail),
+        onCompletion: function() {
+          console.log('published thumb for '+name);
+        }
       });
     }.bind(this));
 
@@ -483,7 +498,7 @@ var Testing = React.createClass({
       rescaleImage(main, 72, 72, function(err, thumbnail) {
         if (err) throw new Error(err);
 
-        var name = filename.split('.')[0];
+        var name = filename.split('.')[0].toLowerCase();
         var images = merge(this.state.Images);
         images[name] = {
           type     : structureTypeForSymbol(name, structures),
@@ -496,10 +511,6 @@ var Testing = React.createClass({
         });
       }.bind(this));
     }.bind(this));
-  },
-
-  handleFileSent: function(filename) {
-    console.log("File '"+filename+"' sent successfully!");
   },
 
   renderUploadSection: function(kind) {
@@ -585,10 +596,7 @@ var Testing = React.createClass({
                       this.renderLoadData(),
                       this.renderDiagnostics(),
                       this.renderPreview(),
-                      Publish({
-                        data: this.publishableData(),
-                        onFileSent: this.handleFileSent
-                      })));
+                      Publish({ data: this.publishableData() })));
   }
 });
 
