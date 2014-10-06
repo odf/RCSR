@@ -323,7 +323,7 @@ var Publish = React.createClass({
     var error, button;
 
     if (n == 0)
-      error = 'You have not loaded any data to publish.';
+      error = 'You have no unpublished data.';
     else if (!creds.okay)
       error = 'You cannot publish without a valid access token.';
 
@@ -397,7 +397,9 @@ var Testing = React.createClass({
       Polyhedra: {
       },
       Images: {
-      }
+      },
+      log: [
+      ]
     }
   },
 
@@ -408,6 +410,12 @@ var Testing = React.createClass({
       return n+' '+(kind.toLowerCase()) +' from '+props.filename+'.';
     } else
       return 'No active data.';
+  },
+
+  addToLog: function(message) {
+    this.setState({
+      log: this.state.log.concat(message+' on '+(new Date()))
+    });
   },
 
   publishableData: function() {
@@ -434,27 +442,43 @@ var Testing = React.createClass({
           path: 'public/data/'+filename[key],
           text: section.text,
           onCompletion: function() {
-            console.log('published data for '+key);
-          }
+            this.addToLog('published data for '+key.toLowerCase());
+            var newState = {};
+            newState[key] = {};
+            this.setState(newState);
+          }.bind(this)
         });
     }.bind(this));
 
     Object.keys(this.state.Images).forEach(function(name) {
       var entry = this.state.Images[name];
       var dirName = 'public/images/'+shortened[entry.type]+'Pics';
+      var imageSent = false;
+      var thumbSent = false;
+
+      var imageDone = function() {
+        this.addToLog('published image for '+name);
+        var images = merge(this.state.Images);
+        delete images[name];
+        this.setState({ Images: images });
+      }.bind(this);
 
       data.push({
         path: dirName+'/'+name+'.jpg',
         text: imageBuffer(entry.main),
         onCompletion: function() {
-          console.log('published image for '+name);
+          imageSent = true;
+          if (thumbSent)
+            imageDone();
         }
       });
       data.push({
         path: dirName+'Thumbs/'+name+'T.jpg',
         text: imageBuffer(entry.thumbnail),
         onCompletion: function() {
-          console.log('published thumb for '+name);
+          thumbSent = true;
+          if (imageSent)
+            imageDone();
         }
       });
     }.bind(this));
@@ -573,6 +597,13 @@ var Testing = React.createClass({
     return $.div(null, $.pre(null, section.issues || 'No problems found.'));
   },
 
+  renderLog: function() {
+    var log = this.state.log.slice();
+    log.reverse();
+
+    return $.div(null, $.pre(null, log.join('\n')));
+  },
+
   renderPreview: function() {
     var section = this.state[this.state.active];
 
@@ -592,11 +623,13 @@ var Testing = React.createClass({
                  Tabs({ labels: ['Load Data',
                                  'Diagnostics',
                                  'Preview',
-                                 'Publish'] },
+                                 'Publish',
+                                 'Log'] },
                       this.renderLoadData(),
                       this.renderDiagnostics(),
                       this.renderPreview(),
-                      Publish({ data: this.publishableData() })));
+                      Publish({ data: this.publishableData() }),
+                      this.renderLog()));
   }
 });
 
