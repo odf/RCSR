@@ -7,7 +7,8 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.es6\.js$/, loader: "regenerator" }
+      { test: /\.es6\.js$/, loader: "regenerator" },
+      { test: /\.json$/, loader: "json" }
     ]
   },
   resolve: {
