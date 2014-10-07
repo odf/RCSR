@@ -439,6 +439,20 @@ var Testing = React.createClass({
     this._db.put('publishing-log', this.state.log);
   },
 
+  addImage: function(name, data) {
+    var images = merge(this.state.Images);
+    images[name] = data;
+    this.setState({ Images: images });
+    this._db.put('unpublished-images', images);
+  },
+
+  removeImage: function(name) {
+    var images = merge(this.state.Images);
+    delete images[name];
+    this.setState({ Images: images });
+    this._db.put('unpublished-images', images);
+  },
+
   publishableData: function() {
     var shortened = {
       Nets     : 'Net',
@@ -479,10 +493,7 @@ var Testing = React.createClass({
 
       var imageDone = function() {
         this.addToLog('published image for '+name);
-        var images = merge(this.state.Images);
-        delete images[name];
-        this.setState({ Images: images });
-        this._db.put('unpublished-images', images);
+        this.removeImage(name);
       }.bind(this);
 
       data.push({
@@ -545,15 +556,12 @@ var Testing = React.createClass({
         if (err) throw new Error(err);
 
         var name = filename.split('.')[0].toLowerCase();
-        var images = merge(this.state.Images);
-        images[name] = {
+
+        this.addImage(name, {
           type     : structureTypeForSymbol(name, structures),
           main     : main,
           thumbnail: thumbnail
-        };
-
-        this.setState({ Images: images });
-        this._db.put('unpublished-images', images);
+        });
       }.bind(this));
     }.bind(this));
   },
