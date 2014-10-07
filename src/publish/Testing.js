@@ -1,6 +1,8 @@
 'use strict';
 
 var React       = require('react');
+var levelup     = require('levelup');
+var leveljs     = require('level-js');
 
 var parseNets   = require('../parse/nets');
 var parseLayers = require('../parse/layers');
@@ -403,6 +405,24 @@ var Testing = React.createClass({
     }
   },
 
+  componentDidMount: function() {
+    this._db = levelup('RCSR', { valueEncoding: 'json', db: leveljs });
+
+    this._db.get('publishing-log', function(err, val) {
+      if (err) {
+        console.error(err);
+      } else
+        this.setState({ log: val });
+    }.bind(this));
+
+    this._db.get('unpublished-images', function(err, val) {
+      if (err) {
+        console.error(err);
+      } else
+        this.setState({ Images: val });
+    }.bind(this));
+  },
+
   info: function(kind) {
     if (this.state[kind].data) {
       var props = this.state[kind];
@@ -416,6 +436,7 @@ var Testing = React.createClass({
     this.setState({
       log: this.state.log.concat(message+' on '+(new Date()))
     });
+    this._db.put('publishing-log', this.state.log);
   },
 
   publishableData: function() {
@@ -461,6 +482,7 @@ var Testing = React.createClass({
         var images = merge(this.state.Images);
         delete images[name];
         this.setState({ Images: images });
+        this._db.put('unpublished-images', images);
       }.bind(this);
 
       data.push({
@@ -530,9 +552,8 @@ var Testing = React.createClass({
           thumbnail: thumbnail
         };
 
-        this.setState({
-          Images: images
-        });
+        this.setState({ Images: images });
+        this._db.put('unpublished-images', images);
       }.bind(this));
     }.bind(this));
   },
