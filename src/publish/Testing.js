@@ -588,10 +588,21 @@ var Testing = React.createClass({
 
   renderImageSection: function() {
     var images = this.state.Images;
+    var removeImage = this.removeImage;
+
     var figure = function(name) {
+      var remove = function() {
+        removeImage(name);
+      };
+
       return $.figure({ key: name, className: 'inlineFigure' },
-                      $.img({ src: images[name].thumbnail }),
-                      $.figcaption({ className: 'center' }, name));
+                      $.div({ className: 'withDeleteIcon' },
+                            $.img({ src: images[name].thumbnail },
+                                  $.img({ className: 'deleteIcon',
+                                          onClick: remove,
+                                          src: 'images/delete.gif'
+                                        })),
+                            $.figcaption({ className: 'center' }, name)));
     };
 
     return $.div({ key: 'Images' },
