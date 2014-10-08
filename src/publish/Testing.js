@@ -573,13 +573,25 @@ var Testing = React.createClass({
     var handleUpload = this.handleDataUpload.bind(null, kind);
     var message = this.info(kind);
 
+    var remove = function() {
+      var newState = {};
+      newState[kind] = {};
+      this.setState(newState);
+    }.bind(this);
+
+    var removeIcon = this.state[kind].data &&
+      $.img({ className: 'deleteIcon',
+              onClick: remove,
+              src: 'images/delete.gif'
+            });
     return $.div({ key: kind },
                  $.h2(null, kind),
-                 $.p(null,
+                 $.p({ className: 'withDeleteIcon' },
                      $.input({ type: 'radio', name: 'type',
                                value: kind,
                                defaultChecked: kind == 'Nets' }),
-                     $.span(null, message)),
+                     $.span(null, message),
+                     removeIcon),
                  Uploader({
                    binary    : false,
                    handleData: handleUpload
