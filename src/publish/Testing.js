@@ -605,7 +605,7 @@ var Testing = React.createClass({
                  }));
   },
 
-  renderImageSection: function() {
+  renderLoadImages: function() {
     var images = this.state.Images;
     var removeImage = this.removeImage;
 
@@ -625,7 +625,11 @@ var Testing = React.createClass({
     };
 
     return $.div({ key: 'Images' },
-                 $.h2(null, 'Images'),
+                 $.h2(null, 'Upload'),
+                 Uploader({
+                   binary    : true,
+                   handleData: this.handleImageUpload
+                 }),
                  ['Nets', 'Layers', 'Polyhedra', 'unknown'].map(function(type) {
                    var content = Object.keys(images)
                      .filter(function(name) {
@@ -635,18 +639,14 @@ var Testing = React.createClass({
 
                    if (content.length > 0)
                      return $.div({ key: type },
-                                  $.h3(null, type),
+                                  $.h2(null, type),
                                   content);
-                 }),
-                 Uploader({
-                   binary    : true,
-                   handleData: this.handleImageUpload
                  }));
   },
 
   renderLoadData: function() {
     return $.form({ onChange: this.handleUploadFormChange },
-                  ['Nets', 'Layers', 'Polyhedra', 'Images']
+                  ['Nets', 'Layers', 'Polyhedra']
                   .map(this.renderUploadSection));
   },
 
@@ -682,11 +682,13 @@ var Testing = React.createClass({
                  Tabs({ labels: ['Load Data',
                                  'Diagnostics',
                                  'Preview',
+                                 'Load Images',
                                  'Publish',
                                  'Log'] },
                       this.renderLoadData(),
                       this.renderDiagnostics(),
                       this.renderPreview(),
+                      this.renderLoadImages(),
                       Publish({ data: this.publishableData() }),
                       this.renderLog()));
   }
