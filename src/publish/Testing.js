@@ -121,24 +121,30 @@ var Uploader = React.createClass({
     var input = document.createElement('input');
     input.type = 'file';
     input.accept = this.props.accept;
+    input.multiple = this.props.multiple;
     input.addEventListener('change', this.loadFile);
     this._input = input;
   },
 
   loadFile: function(event) {
-    var file = event.target.files[0];
+    var files = event.target.files;
     var handleData = this.props.handleData;
-    var reader = new FileReader();
+    var binary = this.props.binary;
 
-    reader.onload = function(event) {
-      handleData(event.target.result, file.name);
-    };
+    for (var i = 0; i < files.length; ++i) {
+      (function(i) {
+        var file = files[i];
+        var reader = new FileReader();
 
-    if (file) {
-      if (this.props.binary)
-        reader.readAsDataURL(file);
-      else
-        reader.readAsText(file);
+        reader.onload = function(event) {
+          handleData(event.target.result, file.name);
+        };
+
+        if (binary)
+          reader.readAsDataURL(file);
+        else
+          reader.readAsText(file);
+      })(i);
     }
   },
 
@@ -638,8 +644,9 @@ var Testing = React.createClass({
     return $.div({ key: 'Images' },
                  $.h2(null, 'Upload'),
                  Uploader({
-                   prompt    : 'Add Image',
+                   prompt    : 'Add Images',
                    accept    : 'image/*',
+                   multiple  : true,
                    binary    : true,
                    handleData: this.handleImageUpload
                  }),
