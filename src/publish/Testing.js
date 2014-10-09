@@ -258,6 +258,7 @@ var structureTypeForSymbol = function(symbol, structures) {
     for (var i = 0; i < structures[type].length; ++i)
       if (structures[type][i].symbol == symbol)
         return type;
+  return 'unknown';
 };
 
 
@@ -487,6 +488,9 @@ var Testing = React.createClass({
 
     Object.keys(this.state.Images).forEach(function(name) {
       var entry = this.state.Images[name];
+      if (entry.type == null || entry.type == 'unknown')
+        return;
+
       var dirName = 'public/images/'+shortened[entry.type]+'Pics';
       var imageSent = false;
       var thumbSent = false;
@@ -619,10 +623,10 @@ var Testing = React.createClass({
 
     return $.div({ key: 'Images' },
                  $.h2(null, 'Images'),
-                 ['Nets', 'Layers', 'Polyhedra'].map(function(type) {
+                 ['Nets', 'Layers', 'Polyhedra', 'unknown'].map(function(type) {
                    var content = Object.keys(images)
                      .filter(function(name) {
-                       return images[name].type == type;
+                       return (images[name].type || 'unknown') == type;
                      })
                      .map(figure);
 
