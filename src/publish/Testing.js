@@ -117,6 +117,13 @@ var rescaleImage = function(src, width, height, cb) {
 var Uploader = React.createClass({
   displayName: 'Uploader',
 
+  componentDidMount: function() {
+    var input = document.createElement('input');
+    input.type = 'file';
+    input.addEventListener('change', this.loadFile);
+    this._input = input;
+  },
+
   loadFile: function(event) {
     var file = event.target.files[0];
     var handleData = this.props.handleData;
@@ -134,8 +141,12 @@ var Uploader = React.createClass({
     }
   },
 
+  openSelector: function() {
+    this._input.click();
+  },
+
   render: function() {
-    return $.input({ type: 'file', onChange: this.loadFile });
+    return $.button({ onClick: this.openSelector }, this.props.prompt || 'Add');
   }
 });
 
@@ -574,9 +585,6 @@ var Testing = React.createClass({
   },
 
   renderUploadSection: function(kind) {
-    if (kind == 'Images')
-      return this.renderImageSection();
-
     var handleUpload = this.handleDataUpload.bind(null, kind);
     var message = this.info(kind);
 
@@ -596,10 +604,13 @@ var Testing = React.createClass({
                  $.p({ className: 'withDeleteIcon' },
                      $.input({ type: 'radio', name: 'type',
                                value: kind,
+                               onChange: this.handleUploadFormChange,
                                defaultChecked: kind == 'Nets' }),
                      $.span(null, message),
                      removeIcon),
                  Uploader({
+                   key       : kind,
+                   prompt    : 'Load Data',
                    binary    : false,
                    handleData: handleUpload
                  }));
@@ -627,6 +638,7 @@ var Testing = React.createClass({
     return $.div({ key: 'Images' },
                  $.h2(null, 'Upload'),
                  Uploader({
+                   prompt    : 'Add Image',
                    binary    : true,
                    handleData: this.handleImageUpload
                  }),
@@ -645,9 +657,12 @@ var Testing = React.createClass({
   },
 
   renderLoadData: function() {
-    return $.form({ onChange: this.handleUploadFormChange },
-                  ['Nets', 'Layers', 'Polyhedra']
-                  .map(this.renderUploadSection));
+    // return $.form({ onChange: this.handleUploadFormChange },
+    //               ['Nets', 'Layers', 'Polyhedra']
+    //               .map(this.renderUploadSection));
+    return $.div(null,
+                 ['Nets', 'Layers', 'Polyhedra']
+                 .map(this.renderUploadSection));
   },
 
   renderDiagnostics: function() {
