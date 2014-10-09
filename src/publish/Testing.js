@@ -434,10 +434,13 @@ var Testing = React.createClass({
   },
 
   addToLog: function(message) {
-    this.setState({
-      log: this.state.log.concat(message+' on '+(new Date()))
-    });
-    this._db.put('publishing-log', this.state.log);
+    var maxLength = 25;
+    var newLog = this.state.log.concat(message+' on '+(new Date()));
+    if (newLog.length > maxLength)
+      newLog.splice(0, newLog.length - maxLength);
+
+    this.setState({ log: newLog });
+    this._db.put('publishing-log', newLog);
   },
 
   addImage: function(name, data) {
