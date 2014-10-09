@@ -120,6 +120,7 @@ var Uploader = React.createClass({
   componentDidMount: function() {
     var input = document.createElement('input');
     input.type = 'file';
+    input.accept = this.props.accept;
     input.addEventListener('change', this.loadFile);
     this._input = input;
   },
@@ -638,6 +639,7 @@ var Testing = React.createClass({
                  $.h2(null, 'Upload'),
                  Uploader({
                    prompt    : 'Add Image',
+                   accept    : 'image/*',
                    binary    : true,
                    handleData: this.handleImageUpload
                  }),
