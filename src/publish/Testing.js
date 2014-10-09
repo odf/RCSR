@@ -537,9 +537,8 @@ var Testing = React.createClass({
     return data;
   },
 
-  handleUploadFormChange: function(event) {
-    if (event.target.name == 'type')
-      this.setState({ active: event.target.value });
+  handleKindSelection: function(event) {
+    this.setState({ active: event.target.value });
   },
 
   handleDataUpload: function(kind, text, filename) {
@@ -604,7 +603,7 @@ var Testing = React.createClass({
                  $.p({ className: 'withDeleteIcon' },
                      $.input({ type: 'radio', name: 'type',
                                value: kind,
-                               onChange: this.handleUploadFormChange,
+                               onChange: this.handleKindSelection,
                                defaultChecked: kind == 'Nets' }),
                      $.span(null, message),
                      removeIcon),
@@ -657,9 +656,6 @@ var Testing = React.createClass({
   },
 
   renderLoadData: function() {
-    // return $.form({ onChange: this.handleUploadFormChange },
-    //               ['Nets', 'Layers', 'Polyhedra']
-    //               .map(this.renderUploadSection));
     return $.div(null,
                  ['Nets', 'Layers', 'Polyhedra']
                  .map(this.renderUploadSection));
