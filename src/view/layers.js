@@ -202,39 +202,19 @@ var layerTable = function(items, link) {
 var Layers = React.createClass({
   displayName: 'Layers',
 
-  getInitialState: function() {
-    return {
-      results: search(this.props.data, {})
-    }
-  },
-  onFormSubmit: function(inputs, value) {
-    if (value == 'Search')
-      this.setState({
-        results: search(this.props.data, common.makeQuery(inputs)),
-        reset  : false });
-    else
-      this.setState({
-        reset: true
-      });
-  },
+  mixins: [ common.viewer(search) ],
+
   render: function() {
     return $.div(null,
                  $.h1(null, 'Search Layers'),
                  this.props.info ? $.p(null, '(' + this.props.info + ')') : null,
                  widgets.Tabs({ labels: ['Search Form', 'Results'],
-                                spreadThreshold: 800
+                                spreadThreshold: 800,
+                                enableRemoteSelection: this.subscribe
                               },
-                              common.SearchForm({
-                                schema  : schema,
-                                onSubmit: this.onFormSubmit,
-                                values  : this.state.reset ? {} : null
-                              }),
-                              common.Results({
-                                type: 'layer',
-                                display: Layer,
-                                table: layerTable,
-                                results: this.state.results
-                              })));
+                              this.renderSearchForm(schema),
+                              this.renderResults('layer', 'layers',
+                                                 Layers, layerTable)));
   }
 });
 

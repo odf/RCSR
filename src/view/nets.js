@@ -1,5 +1,7 @@
 'use strict';
 
+var events  = require('events');
+
 var React    = require('react');
 
 var validate = require('plexus-validate');
@@ -285,39 +287,18 @@ var netTable = function(items, link) {
 var Nets = React.createClass({
   displayName: 'Nets',
 
-  getInitialState: function() {
-    return {
-      results: search(this.props.data, {}),
-    }
-  },
-  onFormSubmit: function(inputs, value) {
-    if (value == 'Search')
-      this.setState({
-        results: search(this.props.data, common.makeQuery(inputs)),
-        reset  : false });
-    else
-      this.setState({
-        reset: true
-      });
-  },
+  mixins: [ common.viewer(search) ],
+
   render: function() {
     return $.div(null,
                  $.h1(null, 'Search Nets'),
                  this.props.info ? $.p(null, '(' + this.props.info + ')') : null,
                  widgets.Tabs({ labels: ['Search Form', 'Results'],
-                                spreadThreshold: 800
+                                spreadThreshold: 800,
+                                enableRemoteSelection: this.subscribe
                               },
-                              common.SearchForm({
-                                schema  : schema,
-                                onSubmit: this.onFormSubmit,
-                                values  : this.state.reset ? {} : null
-                              }),
-                              common.Results({
-                                type: 'net',
-                                display: Net,
-                                table: netTable,
-                                results: this.state.results
-                              })));
+                              this.renderSearchForm(schema),
+                              this.renderResults('net', 'nets', Net, netTable)));
   }
 });
 
@@ -326,4 +307,3 @@ module.exports = {
   search: Nets,
   single: Net
 };
-

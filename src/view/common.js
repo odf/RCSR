@@ -417,3 +417,52 @@ common.Results = React.createClass({
     }
   }
 });
+
+
+common.viewer = function(search) {
+  return {
+    subscribe: function(cb) {
+      this.setState({
+        selectionCallback: cb
+      });
+    },
+
+    getInitialState: function() {
+      return {
+        results: search(this.props.data, {}),
+      }
+    },
+
+    onFormSubmit: function(inputs, value) {
+      if (value == 'Search') {
+        this.setState({
+          results: search(this.props.data, common.makeQuery(inputs)),
+          reset  : false });
+        if (this.state.selectionCallback)
+          this.state.selectionCallback(1);
+      }
+      else
+        this.setState({
+          reset: true
+        });
+    },
+
+    renderSearchForm: function(schema) {
+      return common.SearchForm({
+        schema  : schema,
+        onSubmit: this.onFormSubmit,
+        values  : this.state.reset ? {} : null
+      });
+    },
+
+    renderResults: function(type, typePlural, display, table) {
+      return common.Results({
+        type: type,
+        typePlural: typePlural,
+        display: display,
+        table: table,
+        results: this.state.results
+      });
+    }
+  };
+};

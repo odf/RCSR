@@ -86,10 +86,16 @@ var Tabs = React.createClass({
 
   componentDidMount: function() {
     window.addEventListener('resize', this.queryWindowSize);
+    if (this.props.enableRemoteSelection)
+      this.setState({
+        cancelRemoteSelection:
+        this.props.enableRemoteSelection(this.handleSelect)
+      });
   },
 
   componentWillUnMount: function() {
     window.removeEventListener('resize', this.queryWindowSize);
+    this.state.cancelRemoteSelection && this.state.cancelRemoteSelection();
   },
 
   handleSelect: function(i) {
