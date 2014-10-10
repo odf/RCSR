@@ -288,19 +288,7 @@ var Nets = React.createClass({
   getInitialState: function() {
     return {
       results: search(this.props.data, {}),
-      windowWidth: window.innerWidth
     }
-  },
-  queryWindowSize: function() {
-    this.setState({
-      windowWidth: window.innerWidth
-    });
-  },
-  componentDidMount: function() {
-    window.addEventListener('resize', this.queryWindowSize);
-  },
-  componentWillUnMount: function() {
-    window.removeEventListener('resize', this.queryWindowSize);
   },
   onFormSubmit: function(inputs, value) {
     if (value == 'Search')
@@ -312,36 +300,24 @@ var Nets = React.createClass({
         reset: true
       });
   },
-  renderSearchForm: function() {
-    return common.SearchForm({
-      schema  : schema,
-      onSubmit: this.onFormSubmit,
-      values  : this.state.reset ? {} : null
-    });
-  },
-  renderResults: function() {
-    return common.Results({
-      type: 'net',
-      display: Net,
-      table: netTable,
-      results: this.state.results
-    });
-  },
   render: function() {
     return $.div(null,
                  $.h1(null, 'Search Nets'),
                  this.props.info ? $.p(null, '(' + this.props.info + ')') : null,
-                 this.state.windowWidth > 950
-                 ?
-                 $.ul({ className: 'plainList columnBox' },
-                      $.li({ className: 'column fixed' },
-                           this.renderSearchForm()),
-                      $.li({ className: 'column' },
-                           this.renderResults()))
-                 :
-                 widgets.Tabs({ labels: ['Search Form', 'Results'] },
-                              this.renderSearchForm(),
-                              this.renderResults()));
+                 widgets.Tabs({ labels: ['Search Form', 'Results'],
+                                spreadThreshold: 800
+                              },
+                              common.SearchForm({
+                                schema  : schema,
+                                onSubmit: this.onFormSubmit,
+                                values  : this.state.reset ? {} : null
+                              }),
+                              common.Results({
+                                type: 'net',
+                                display: Net,
+                                table: netTable,
+                                results: this.state.results
+                              })));
   }
 });
 

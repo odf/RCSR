@@ -8,6 +8,7 @@ var Form     = require('plexus-form');
 
 var common   = require('./common');
 var search   = require('../search/layers');
+var widgets  = require('../widgets');
 
 
 var $ = React.DOM;
@@ -220,20 +221,20 @@ var Layers = React.createClass({
     return $.div(null,
                  $.h1(null, 'Search Layers'),
                  this.props.info ? $.p(null, '(' + this.props.info + ')') : null,
-                 $.ul({ className: 'plainList columnBox' },
-                      $.li({ className: 'column fixed' },
-                           common.SearchForm({
-                             schema  : schema,
-                             onSubmit: this.onFormSubmit,
-                             values  : this.state.reset ? {} : null
-                           })),
-                      $.li({ className: 'column' },
-                           common.Results({
-                             type: 'layer',
-                             display: Layer,
-                             table: layerTable,
-                             results: this.state.results
-                           }))));
+                 widgets.Tabs({ labels: ['Search Form', 'Results'],
+                                spreadThreshold: 800
+                              },
+                              common.SearchForm({
+                                schema  : schema,
+                                onSubmit: this.onFormSubmit,
+                                values  : this.state.reset ? {} : null
+                              }),
+                              common.Results({
+                                type: 'layer',
+                                display: Layer,
+                                table: layerTable,
+                                results: this.state.results
+                              })));
   }
 });
 

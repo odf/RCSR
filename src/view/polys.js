@@ -7,6 +7,7 @@ var Form     = require('plexus-form');
 
 var common   = require('./common');
 var search   = require('../search/polys');
+var widgets  = require('../widgets');
 
 
 var $ = React.DOM;
@@ -224,21 +225,21 @@ var Polyhedra = React.createClass({
     return $.div(null,
                  $.h1(null, 'Search Polyhedra'),
                  this.props.info ? $.p(null, '(' + this.props.info + ')') : null,
-                 $.ul({ className: 'plainList columnBox' },
-                      $.li({ className: 'column fixed' },
-                           common.SearchForm({
-                             schema  : schema,
-                             onSubmit: this.onFormSubmit,
-                             values  : this.state.reset ? {} : null
-                           })),
-                      $.li({ className: 'column' },
-                           common.Results({
-                             type: 'polyhedron',
-                             typePlural: 'polyhedra',
-                             display: Polyhedron,
-                             table: polyTable,
-                             results: this.state.results
-                           }))));
+                 widgets.Tabs({ labels: ['Search Form', 'Results'],
+                                spreadThreshold: 800
+                              },
+                              common.SearchForm({
+                                schema  : schema,
+                                onSubmit: this.onFormSubmit,
+                                values  : this.state.reset ? {} : null
+                              }),
+                              common.Results({
+                                type: 'polyhedron',
+                                typePlural: 'polyhedra',
+                                display: Polyhedron,
+                                table: polyTable,
+                                results: this.state.results
+                              })));
   }
 });
 

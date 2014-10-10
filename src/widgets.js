@@ -73,8 +73,23 @@ var Tabs = React.createClass({
 
   getInitialState: function() {
     return {
-      selected: 0
+      selected: 0,
+      windowWidth: window.innerWidth
     };
+  },
+
+  queryWindowSize: function() {
+    this.setState({
+      windowWidth: window.innerWidth
+    });
+  },
+
+  componentDidMount: function() {
+    window.addEventListener('resize', this.queryWindowSize);
+  },
+
+  componentWillUnMount: function() {
+    window.removeEventListener('resize', this.queryWindowSize);
   },
 
   handleSelect: function(i) {
@@ -98,18 +113,28 @@ var Tabs = React.createClass({
 
   render: function() {
     var selected = this.state.selected;
+    var threshold = this.props.spreadThreshold || 0;
 
-    return $.div({ className: 'TabsContainer' },
-                 $.ul({ className: 'TabsList' },
-                      this.props.labels.map(this.makeTab)),
-                 $.div({ className: 'TabsPanel' },
-                       this.props.children.map(function(component, i) {
-                         var d = (i == selected) ? 'block' : 'none';
-                         return $.div({ key  : i,
-                                        style: { display: d }
-                                      },
-                                      component);
-                       })));
+    if (threshold > 0 && this.state.windowWidth > threshold)
+      return $.ul({ className: 'plainList columnBox' },
+                  this.props.children.map(function(component, i) {
+                    return $.li({ key      : i,
+                                  className: 'column fixed'
+                                },
+                                component);
+                  }));
+    else
+      return $.div({ className: 'TabsContainer' },
+                   $.ul({ className: 'TabsList' },
+                        this.props.labels.map(this.makeTab)),
+                   $.div({ className: 'TabsPanel' },
+                         this.props.children.map(function(component, i) {
+                           var d = (i == selected) ? 'block' : 'none';
+                           return $.div({ key  : i,
+                                          style: { display: d }
+                                        },
+                                        component);
+                         })));
   }
 });
 
