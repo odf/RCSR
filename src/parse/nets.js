@@ -136,8 +136,8 @@ var parseStructure = function(lines, startIndex) {
     result.warnings.push('unrecognized trailing lines');
 
   result.serialNumber = parseInt(lines[++i]);
-  if (Number.isNaN(result.serialNumber))
-    result.warnings.push('serial number is not a number');
+  if (!result.serialNumber > 0)
+    result.warnings.push('serial number is not a positive number');
 
   if (result.serialNumber < 0)
     return null;
