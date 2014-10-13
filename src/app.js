@@ -110,7 +110,8 @@ var Credentials = React.createClass({
     return $.div(null,
                  $.h3(null, 'New Credentials'),
                  $.p(null, $.b(null, 'Your name: '), (creds.user || '-')),
-                 $.p(null, 'Access token '+(creds.okay ? '' : 'not')+' found'));
+                 $.p(null, 'Access token '+(creds.okay ? '' : 'not')+' found'),
+                 creds.simulate ? 'Publishing will be simulated.' : '');
   }
 });
 

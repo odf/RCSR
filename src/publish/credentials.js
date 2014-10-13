@@ -13,7 +13,8 @@ var getCredentials = function() {
     user : user,
     token: token,
     okay : okay,
-    isnew: isnew
+    isnew: isnew,
+    simulate: user == 'Leopold Bloom'
   };
 };
 

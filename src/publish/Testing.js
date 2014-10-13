@@ -153,7 +153,7 @@ var simulateSend = function(path, text, onProgress, cb) {
 
 
 var sendFile = function(path, text, onProgress, cb) {
-  if (credentials().user == 'Grimley Fiendish')
+  if (credentials().simulate)
     simulateSend(path, text, onProgress, cb);
   else
     sendToGithub(path, text, onProgress, cb);
@@ -585,8 +585,10 @@ var Testing = React.createClass({
   },
 
   render: function() {
+    var comment = credentials().simulate ? ' [simulated]' : '';
+
     return $.div(null,
-                 $.h2(null, 'Testing and Publishing'),
+                 $.h2(null, 'Testing and Publishing' + comment),
                  $.p(null, this.info(this.state.active)),
                  widgets.Tabs({ labels: ['Load Data',
                                          'Diagnostics',
