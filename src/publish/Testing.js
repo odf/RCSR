@@ -342,7 +342,10 @@ var Testing = React.createClass({
 
   addToLog: function(message) {
     var maxLength = 25;
-    var newLog = this.state.log.concat(message+' on '+(new Date()));
+    var simulated = credentials().simulate ? ' [simulated]' : '';
+    var fullmsg   = message + ' on ' + (new Date()) + simulated;
+    var newLog    = this.state.log.concat(fullmsg);
+
     if (newLog.length > maxLength)
       newLog.splice(0, newLog.length - maxLength);
 
