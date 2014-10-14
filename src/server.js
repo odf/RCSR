@@ -10,6 +10,14 @@ var app = express();
 app.use(express.logger('dev'));
 app.use(express.compress());
 
+app.get('/:name.manifest', function(req, res) {
+  var path = req.path;
+  if (fs.existsSync(home + path)) {
+    res.setHeader('Content-Type', 'text/cache-manifest');
+    res.sendfile(path, { root: home });
+  }
+});
+
 app.get('/images/:type/:name.jpg', function(req, res) {
   var path = req.path;
   if (fs.existsSync(home + path))
