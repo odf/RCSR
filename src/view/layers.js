@@ -214,7 +214,7 @@ var Layers = React.createClass({
                               },
                               this.renderSearchForm(schema),
                               this.renderResults('layer', 'layers',
-                                                 Layers, layerTable)));
+                                                 Layer, layerTable)));
   }
 });
 
