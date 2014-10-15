@@ -445,9 +445,25 @@ var Testing = React.createClass({
     var type = kind.toLowerCase();
     var issues = [];
     var newState = {};
+    var type, known;
 
     checkers[kind](structures, function(s) {
       issues.push(s);
+    });
+
+    known = {};
+    for (var type in this.props.data) {
+      if (kind != type) {
+        (this.state[type].data || this.props.data[type]).forEach(function(s) {
+          known[s.symbol] = type;
+        });
+      }
+    }
+
+    structures.forEach(function(s) {
+      var type = known[s.symbol];
+      if (type)
+        issues.push(s.symbol+' - symbol already used in '+type.toLowerCase());
     });
 
     newState[kind] = {
