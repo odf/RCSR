@@ -12,9 +12,23 @@ var checkEdgeNumberConsistency = function(structure, log) {
 };
 
 
+var checkTD10AgainstCoordinationSequence = function(structure, log) {
+  structure.vertices.forEach(function(vert) {
+    var a = 1 + vert.coordinationSequence.reduce(function(s, n) {
+      return s + n;
+    });
+    var b = vert.cum10;
+
+    if (a != b)
+      log(structure.symbol+' - coordination sequence sum is '+a+', not '+b);
+  });
+};
+
+
 var checkStructure = function(structure, log) {
   structure.warnings.forEach(function(s) { log(structure.symbol+' - '+s); });
   checkEdgeNumberConsistency(structure, log);
+  checkTD10AgainstCoordinationSequence(structure, log);
 };
 
 
