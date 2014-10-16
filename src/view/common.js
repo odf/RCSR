@@ -425,7 +425,7 @@ common.viewer = function(search) {
     onFormSubmit: function(inputs, value) {
       if (value == 'Search') {
         this.setState({
-          results: search(this.props.data, common.makeQuery(inputs)),
+          results: search(this.props.data, makeQuery(inputs)),
           reset  : false });
         if (this.state.selectionCallback)
           this.state.selectionCallback(1);
