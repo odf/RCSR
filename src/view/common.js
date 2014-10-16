@@ -5,6 +5,9 @@ var React    = require('react');
 var validate = require('plexus-validate');
 var Form     = require('plexus-form');
 
+var widgets  = require('../widgets');
+
+
 var $ = React.DOM;
 
 var laquo = '\u00ab';
@@ -250,28 +253,6 @@ common.formatReferences = function(net, kinds, keywords) {
 };
 
 
-var ActiveLink = React.createClass({
-  displayName: 'ActiveLink',
-
-  handleClick: function(event) {
-    event.preventDefault();
-    if (this.props.onClick)
-      this.props.onClick(this.props.href);
-  },
-  componentDidMount: function() {
-    this.getDOMNode().addEventListener('click', this.handleClick);
-  },
-  componentWillUnmount: function() {
-    this.getDOMNode().removeEventListener('click', this.handleClick);
-  },
-  render: function() {
-    return $.a({ className: this.props.className,
-                 href: '#' + (this.props.href || '') },
-               this.props.children);
-  }
-});
-
-
 common.StructureImage = React.createClass({
   displayName: 'StructureImage',
 
@@ -301,7 +282,7 @@ common.StructureImage = React.createClass({
     if (this.state.error)
       return $.span({ className: 'thumbnail' }, '(no image)');
     if (this.props.mayEnlarge)
-      return ActiveLink({ onClick: this.toggle }, img);
+      return widgets.ActiveLink({ onClick: this.toggle }, img);
     else
       return $.span({ className: 'thumbnail' }, img);
   }
@@ -360,7 +341,7 @@ common.Results = React.createClass({
     };
 
     var link = function(i, text) {
-      return ActiveLink({ href: i, onClick: this.select }, text);
+      return widgets.ActiveLink({ href: i, onClick: this.select }, text);
     }.bind(this);
 
     if (n < 1) {

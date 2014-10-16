@@ -145,7 +145,30 @@ var Tabs = React.createClass({
 });
 
 
+var ActiveLink = React.createClass({
+  displayName: 'ActiveLink',
+
+  handleClick: function(event) {
+    event.preventDefault();
+    if (this.props.onClick)
+      this.props.onClick(this.props.href);
+  },
+  componentDidMount: function() {
+    this.getDOMNode().addEventListener('click', this.handleClick);
+  },
+  componentWillUnmount: function() {
+    this.getDOMNode().removeEventListener('click', this.handleClick);
+  },
+  render: function() {
+    return $.a({ className: this.props.className,
+                 href: '#' + (this.props.href || '') },
+               this.props.children);
+  }
+});
+
+
 module.exports = {
-  Uploader: Uploader,
-  Tabs    : Tabs
+  Uploader  : Uploader,
+  Tabs      : Tabs,
+  ActiveLink: ActiveLink
 };
