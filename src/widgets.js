@@ -167,8 +167,58 @@ var ActiveLink = React.createClass({
 });
 
 
+var WithToolTip = React.createClass({
+  displayName: 'WithToolTip',
+
+  getInitialState: function() {
+    return { position: null };
+  },
+
+  handleMouseEnter: function(event) {
+    document.addEventListener('mousemove', this.handleMouseMove, false);
+  },
+
+  handleMouseLeave: function(event) {
+    this.setState({ position: null });
+    document.removeEventListener('mousemove', this.handleMouseMove);
+  },
+
+  handleMouseMove: function(event) {
+    this.setState({
+      position: [event.clientX+10, event.clientY+5]
+    });
+  },
+
+  renderTip: function() {
+    var pos = this.state.position;
+
+    if (pos == null)
+      return $.span();
+    else
+      return $.div({ className: 'overlay highlight inlineBlock',
+                     style: {
+                       position: 'fixed',
+                       left    : pos[0],
+                       top     : pos[1]
+                     }
+                   },
+                   this.props.content);
+  },
+
+  render: function() {
+    return $.div({ className: this.props.className,
+                   onMouseEnter: this.handleMouseEnter,
+                   onMouseLeave: this.handleMouseLeave
+                 },
+                 this.props.children,
+                 this.renderTip());
+  }
+});
+
+
 module.exports = {
-  Uploader  : Uploader,
-  Tabs      : Tabs,
-  ActiveLink: ActiveLink
+  Uploader   : Uploader,
+  Tabs       : Tabs,
+  ActiveLink : ActiveLink,
+  WithToolTip: WithToolTip
 };

@@ -278,17 +278,19 @@ common.StructureImage = React.createClass({
                       : this.props.prefix + 'PicsThumbs/' + symbol + 'T.jpg');
 
     var img = $.img({ src: src, alt: '', onError: this.handleError });
+    var tip = this.state.full ? 'Click to shrink' : 'Click to enlarge';
 
     if (this.state.error)
       return $.span({ className: 'thumbnail' }, '(no image)');
     if (this.props.mayEnlarge)
-      return $.div({ className: 'withDropDown inlineBlock' },
-                   widgets.ActiveLink({ className: 'noOutline',
-                                        onClick: this.toggle },
-                                      img),
-                   $.span({ className: 'dropDown highlight' },
-                          this.state.full ?
-                          'Click to shrink' : 'Click to enlarge'));
+      return widgets.WithToolTip(
+        { className: 'inlineBlock',
+          content  : $.div(null, tip)
+        },
+        widgets.ActiveLink({ className: 'noOutline',
+                             onClick: this.toggle
+                           },
+                           img));
     else
       return $.span({ className: 'thumbnail' }, img);
   }
