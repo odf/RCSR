@@ -282,7 +282,13 @@ common.StructureImage = React.createClass({
     if (this.state.error)
       return $.span({ className: 'thumbnail' }, '(no image)');
     if (this.props.mayEnlarge)
-      return widgets.ActiveLink({ onClick: this.toggle }, img);
+      return $.div({ className: 'withDropDown inlineBlock' },
+                   widgets.ActiveLink({ className: 'noOutline',
+                                        onClick: this.toggle },
+                                      img),
+                   $.span({ className: 'dropDown highlight' },
+                          this.state.full ?
+                          'Click to shrink' : 'Click to enlarge'));
     else
       return $.span({ className: 'thumbnail' }, img);
   }
