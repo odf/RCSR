@@ -278,7 +278,7 @@ common.StructureImage = React.createClass({
                       : this.props.prefix + 'PicsThumbs/' + symbol + 'T.jpg');
 
     var img = $.img({ src: src, alt: '', onError: this.handleError });
-    var tip = this.state.full ? 'Click to shrink' : 'Click to enlarge';
+    var tip = 'Click to '+(this.state.full ? 'shrink' : 'enlarge')+' image';
 
     if (this.state.error)
       return $.span({ className: 'thumbnail' }, '(no image)');
