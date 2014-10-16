@@ -123,7 +123,7 @@ var conversions = {
 };
 
 
-common.makeQuery = function(inputs) {
+var makeQuery = function(inputs) {
   var tmp;
   var result = {};
   for (var key in inputs) {
@@ -190,7 +190,7 @@ var makeSectionWrapper = function(schema) {
 };
 
 
-common.SearchForm = React.createClass({
+var SearchForm = React.createClass({
   displayName: 'SearchForm',
 
   render: function() {
@@ -292,7 +292,7 @@ common.StructureImage = React.createClass({
 var maxDetails = 12;
 
 
-common.Results = React.createClass({
+var Results = React.createClass({
   displayName: 'Results',
 
   getInitialState: function() {
@@ -429,7 +429,7 @@ common.viewer = function(search) {
     },
 
     renderSearchForm: function(schema) {
-      return common.SearchForm({
+      return SearchForm({
         schema  : schema,
         onSubmit: this.onFormSubmit,
         values  : this.state.reset ? {} : null
@@ -437,7 +437,7 @@ common.viewer = function(search) {
     },
 
     renderResults: function(type, typePlural, display, table) {
-      return common.Results({
+      return Results({
         type: type,
         typePlural: typePlural,
         display: display,
