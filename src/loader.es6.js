@@ -1,7 +1,7 @@
 'use strict';
 
 var agent = require('superagent');
-var cc    = require('ceci-core');
+var csp   = require('plexus-csp');
 
 var parseNets   = require('./parse/nets');
 var parseLayers = require('./parse/layers');
@@ -9,10 +9,10 @@ var parsePolys  = require('./parse/polys');
 
 
 var htmlFromServer = function(path) {
-  return cc.go(function*() {
+  return csp.go(function*() {
     var res;
 
-    res = yield cc.nbind(agent.get)(path);
+    res = yield csp.nbind(agent.get)(path);
     if (res.ok)
       return res.text;
     else
@@ -22,10 +22,10 @@ var htmlFromServer = function(path) {
 
 
 var builtinData = function(type, txtPath, parse, symbol) {
-  return cc.go(function*() {
+  return csp.go(function*() {
     var data, res;
 
-    res = yield cc.nbind(agent.get)(txtPath);
+    res = yield csp.nbind(agent.get)(txtPath);
     if (res.ok)
       data = parse(res.text);
 
@@ -73,10 +73,10 @@ var builtinPolyData = function(symbol) {
 
 
 var allBuiltinData = function() {
-  return cc.go(function*() {
-    var data = yield cc.join([builtinNetData(),
-                              builtinLayerData(),
-                              builtinPolyData()]);
+  return csp.go(function*() {
+    var data = yield csp.join([builtinNetData(),
+                               builtinLayerData(),
+                               builtinPolyData()]);
     return {
       Nets     : data[0],
       Layers   : data[1],
@@ -96,11 +96,11 @@ module.exports = function(type, arg) {
       'all'      : allBuiltinData
     }[type](arg);
 
-    cc.go(function*() {
-      yield cc.sleep(500);
+    csp.go(function*() {
+      yield csp.sleep(500);
       handler(null, null);
     });
-    cc.go(function*() {
+    csp.go(function*() {
       try {
         handler(null, yield deferred);
       } catch(ex) {

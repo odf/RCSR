@@ -1,6 +1,6 @@
 'use strict';
 
-var cc   = require('ceci-core');
+var csp  = require('plexus-csp');
 var sha1 = require('../sha1');
 
 
@@ -8,7 +8,7 @@ module.exports = function(options) {
   var request = function(verb, path, data, onProgress) {
     var req  = new XMLHttpRequest();
     var auth = new Buffer(options.token+':x-oauth-basic').toString('base64');
-    var result = cc.defer();
+    var result = csp.defer();
 
     req.onreadystatechange = function() {
       if (req.readyState === 4) {
@@ -41,7 +41,7 @@ module.exports = function(options) {
   };
 
   var get = function(path) {
-    return cc.go(function*() {
+    return csp.go(function*() {
       var response, result, content;
 
       response = yield request('GET', path);
@@ -60,7 +60,7 @@ module.exports = function(options) {
   };
 
   var shaFor = function(path) {
-    return cc.go(function*() {
+    return csp.go(function*() {
       var parts, dir, file, contents, i;
 
       parts = path.split('/');
@@ -75,7 +75,7 @@ module.exports = function(options) {
   };
 
   var put = function(path, content, message, onProgress) {
-    return cc.go(function*() {
+    return csp.go(function*() {
       var data, response, result;
 
       data = {

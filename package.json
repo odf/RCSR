@@ -15,7 +15,7 @@
   "dependencies": {
     "superagent": "~0.18.2",
     "react": "~0.10.0",
-    "ceci-core": "~0.2.2",
+    "plexus-csp": "~0.1.0",
     "plexus-validate": "~0.0.2",
     "plexus-form": "~0.0.15",
     "rusha": "~0.7.7",
