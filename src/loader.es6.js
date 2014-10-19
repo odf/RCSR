@@ -21,6 +21,19 @@ var htmlFromServer = function(path) {
 };
 
 
+var helpPage = function(path) {
+  return csp.go(function*() {
+    var res;
+
+    res = yield csp.nbind(agent.get)('/help'+path);
+    if (res.ok)
+      return res.text;
+    else
+      alert('Could not load help page for ' + path);
+  });
+};
+
+
 var builtinData = function(type, txtPath, parse, symbol) {
   return csp.go(function*() {
     var data, res;
@@ -90,6 +103,7 @@ module.exports = function(type, arg) {
   return function(handler) {
     var deferred = {
       'html'     : htmlFromServer,
+      'help'     : helpPage,
       'nets'     : builtinNetData,
       'layers'   : builtinLayerData,
       'polyhedra': builtinPolyData,

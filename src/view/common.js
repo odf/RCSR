@@ -5,6 +5,8 @@ var React    = require('react');
 var validate = require('plexus-validate');
 var Form     = require('plexus-form');
 
+var loader   = require('../loader');
+var Deferred = require('../Deferred');
 var widgets  = require('../widgets');
 
 
@@ -139,7 +141,29 @@ var makeQuery = function(inputs) {
 };
 
 
-function helpLink(path, schema) {
+var HelpSection = React.createClass({
+  displayName: 'HelpSection',
+
+  render: function() {
+    return $.div({
+      className: 'tooltip',
+      dangerouslySetInnerHTML: {
+        __html: this.props.data
+      }
+    });
+  }
+});
+
+
+var helpSection = function(path) {
+  return Deferred({
+    loader   : loader('help', path),
+    component: HelpSection
+  });
+};
+
+
+var helpLink = function(path, schema) {
   var sch = schema;
   var url;
 
@@ -148,11 +172,20 @@ function helpLink(path, schema) {
   });
   url = ((sch['x-hints'] || {}).form || {}).helpURL;
 
-  return $.a({
+  var link = $.a({
     className: 'help-link' + (url ? '' : ' invisible'),
     href     : url,
     target   : '_blank'
   }, '?');
+
+  if (url)
+    return widgets.WithToolTip(
+      { className: 'inlineBlock',
+        content  : helpSection(url.replace(/^\/?help\//, '/'))
+      },
+      link);
+  else
+    return link;
 };
 
 
