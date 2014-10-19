@@ -171,28 +171,75 @@ var WithToolTip = React.createClass({
   displayName: 'WithToolTip',
 
   getInitialState: function() {
-    return { position: null };
+    return {
+      active  : false,
+      position: null,
+      blocked : null
+    };
+  },
+
+  componentWillReceiveProps: function(props) {
+    this.update('reset');
   },
 
   handleMouseEnter: function(event) {
-    document.addEventListener('mousemove', this.handleMouseMove, false);
+    this.update('enter');
   },
 
   handleMouseLeave: function(event) {
-    this.setState({ position: null });
-    document.removeEventListener('mousemove', this.handleMouseMove);
+    this.update('leave');
   },
 
   handleMouseMove: function(event) {
+    this.update('move', { x: event.clientX, y: event.clientY });
+  },
+
+  handleTimout: function() {
+    this.update('timeout');
+  },
+
+  timeout: function(duration) {
+    return setTimeout(this.handleTimout, duration);
+  },
+
+  update: function(type, payload) {
+    var active   = this.state.active;
+    var position = this.state.position;
+    var blocked  = this.state.blocked;
+    var t        = this.props.timeoutValue || 500;
+
+    if (type == 'reset') {
+      if (blocked)
+        clearTimeout(blocked);
+      if (active)
+        blocked = this.timeout(t);
+      active = false;
+    } else if (type == 'enter') {
+      blocked = this.timeout(t);
+    } else if (type == 'timeout') {
+      blocked = null;
+      active = true;
+    } else if (type == 'move') {
+      position = [payload.x + 10, payload.y + 5];
+    } else if (type == 'leave') {
+      if (blocked)
+        clearTimeout(blocked);
+      position = null;
+      blocked  = null;
+      active   = false;
+    }
+
     this.setState({
-      position: [event.clientX+10, event.clientY+5]
+      active  : active,
+      position: position,
+      blocked : blocked
     });
   },
 
   renderTip: function() {
     var pos = this.state.position;
 
-    if (pos == null)
+    if (!this.state.active || pos == null)
       return $.span();
     else
       return $.div({ className: 'overlay highlight inlineBlock',
@@ -208,7 +255,8 @@ var WithToolTip = React.createClass({
   render: function() {
     return $.div({ className: this.props.className,
                    onMouseEnter: this.handleMouseEnter,
-                   onMouseLeave: this.handleMouseLeave
+                   onMouseLeave: this.handleMouseLeave,
+                   onMouseMove : this.handleMouseMove
                  },
                  this.props.children,
                  this.renderTip());
