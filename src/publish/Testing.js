@@ -121,7 +121,7 @@ var sendToGithub = function(path, text, onProgress, cb) {
     origin   : 'http://rcsr.net'
   });
 
-  gh.put('test/'+path, text, 'web commit', onProgress)
+  gh.put(path, text, 'web commit', onProgress)
     .then(function(response) { cb(null, true); },
           function(error) { cb(error); });
 };
