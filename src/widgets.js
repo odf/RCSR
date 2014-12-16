@@ -174,7 +174,7 @@ var WithToolTip = React.createClass({
     return {
       active  : false,
       position: null,
-      blocked : null
+      delay   : null
     };
   },
 
@@ -194,45 +194,45 @@ var WithToolTip = React.createClass({
     this.update('move', { x: event.clientX, y: event.clientY });
   },
 
-  handleTimout: function() {
-    this.update('timeout');
+  handleDelayTimeout: function() {
+    this.update('show');
   },
 
-  timeout: function(duration) {
-    return setTimeout(this.handleTimout, duration);
+  setDelay: function(duration) {
+    return setTimeout(this.handleDelayTimeout, duration);
   },
 
   update: function(type, payload) {
     var active   = this.state.active;
     var position = this.state.position;
-    var blocked  = this.state.blocked;
-    var t        = this.props.timeoutValue || 500;
+    var delay    = this.state.delay;
+    var t        = this.props.showAfter || 500;
+
+    if (type != 'move') {
+      if (delay)
+        clearTimeout(delay);
+      delay = null;
+    }
 
     if (type == 'reset') {
-      if (blocked)
-        clearTimeout(blocked);
       if (active)
-        blocked = this.timeout(t);
+        delay = this.setDelay(t);
       active = false;
     } else if (type == 'enter') {
-      blocked = this.timeout(t);
-    } else if (type == 'timeout') {
-      blocked = null;
+      delay = this.setDelay(t);
+    } else if (type == 'show') {
       active = true;
     } else if (type == 'move') {
       position = [payload.x + 10, payload.y + 5];
     } else if (type == 'leave') {
-      if (blocked)
-        clearTimeout(blocked);
       position = null;
-      blocked  = null;
       active   = false;
     }
 
     this.setState({
       active  : active,
       position: position,
-      blocked : blocked
+      delay   : delay
     });
   },
 
