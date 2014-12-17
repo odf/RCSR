@@ -318,7 +318,8 @@ common.StructureImage = React.createClass({
     if (this.props.mayEnlarge)
       return widgets.WithToolTip(
         { className: 'inlineBlock',
-          content  : $.div(null, tip)
+          content  : $.div(null, tip),
+          hideAfter: 2000
         },
         widgets.ActiveLink({ className: 'noOutline',
                              onClick: this.toggle

@@ -174,20 +174,21 @@ var WithToolTip = React.createClass({
     return {
       active  : false,
       position: null,
-      delay   : null
+      delay   : null,
+      duration: null
     };
   },
 
   componentWillReceiveProps: function(props) {
-    this.update('reset');
+    this.update('init');
   },
 
   handleMouseEnter: function(event) {
-    this.update('enter');
+    this.update('init');
   },
 
   handleMouseLeave: function(event) {
-    this.update('leave');
+    this.update('hide');
   },
 
   handleMouseMove: function(event) {
@@ -202,37 +203,46 @@ var WithToolTip = React.createClass({
     return setTimeout(this.handleDelayTimeout, duration);
   },
 
+  handleDurationTimeout: function() {
+    this.update('hide');
+  },
+
+  setDuration: function(duration) {
+    return setTimeout(this.handleDurationTimeout, duration);
+  },
+
   update: function(type, payload) {
     var active   = this.state.active;
     var position = this.state.position;
     var delay    = this.state.delay;
-    var t        = this.props.showAfter || 500;
+    var duration = this.state.duration;
 
-    if (type != 'move') {
+    if (type == 'move') {
+      position = [payload.x + 10, payload.y + 5];
+    } else {
       if (delay)
         clearTimeout(delay);
-      delay = null;
-    }
+      if (duration)
+        clearTimeout(duration);
+      delay = duration = null;
 
-    if (type == 'reset') {
-      if (active)
-        delay = this.setDelay(t);
-      active = false;
-    } else if (type == 'enter') {
-      delay = this.setDelay(t);
-    } else if (type == 'show') {
-      active = true;
-    } else if (type == 'move') {
-      position = [payload.x + 10, payload.y + 5];
-    } else if (type == 'leave') {
-      position = null;
-      active   = false;
+      if (type == 'init') {
+        delay = this.setDelay(this.props.showAfter || 500);
+        active = false;
+      } else if (type == 'show') {
+        active = true;
+        if (this.props.hideAfter)
+          duration = this.setDuration(this.props.hideAfter);
+      } else if (type == 'hide') {
+        active = false;
+      }
     }
 
     this.setState({
       active  : active,
       position: position,
-      delay   : delay
+      delay   : delay,
+      duration: duration
     });
   },
 
