@@ -174,79 +174,61 @@ var WithToolTip = React.createClass({
     return {
       active  : false,
       position: null,
-      delay   : null,
-      duration: null
+      timeout : null
     };
   },
 
   componentWillReceiveProps: function(props) {
-    this.update('init');
+    this.init();
   },
 
   handleMouseEnter: function(event) {
-    this.update('init');
+    this.init();
   },
 
   handleMouseLeave: function(event) {
-    this.update('hide');
+    this.hide();
   },
 
   handleMouseMove: function(event) {
-    this.update('move', { x: event.clientX, y: event.clientY });
+    this.move(event.clientX,event.clientY);
   },
 
-  handleDelayTimeout: function() {
-    this.update('show');
+  stopTimeouts: function() {
+    if (this.state.timeout)
+      clearTimeout(this.state.timeout);
   },
 
-  setDelay: function(duration) {
-    return setTimeout(this.handleDelayTimeout, duration);
-  },
-
-  handleDurationTimeout: function() {
-    this.update('hide');
-  },
-
-  setDuration: function(duration) {
-    return setTimeout(this.handleDurationTimeout, duration);
-  },
-
-  update: function(type, payload) {
-    var active   = this.state.active;
-    var position = this.state.position;
-    var delay    = this.state.delay;
-    var duration = this.state.duration;
-
-    if (type == 'move') {
-      position = [payload.x + 10, payload.y + 5];
-    } else {
-      if (delay)
-        clearTimeout(delay);
-      if (duration)
-        clearTimeout(duration);
-      delay = duration = null;
-
-      if (type == 'init') {
-        delay = this.setDelay(this.props.showAfter || 500);
-        active = false;
-      } else if (type == 'show') {
-        active = true;
-        if (this.props.hideAfter)
-          duration = this.setDuration(this.props.hideAfter);
-      } else if (type == 'hide') {
-        active = false;
-      }
-    }
-
+  init: function() {
+    this.stopTimeouts();
     this.setState({
-      active  : active,
-      position: position,
-      delay   : delay,
-      duration: duration
+      active : false,
+      timeout: setTimeout(this.show, this.props.showAfter || 500)
     });
   },
 
-  renderTip: function() {
+  move: function(x, y) {
+    this.setState({ position: [x + 10, y + 5] });
+  },
+
+  show: function() {
+    this.stopTimeouts();
+    this.setState({
+      active : true,
+      timeout: this.props.hideAfter ?
+        setTimeout(this.hide, this.props.hideAfter) : null
+    });
+  },
+
+  hide: function() {
+    this.stopTimeouts();
+    this.setState({
+      active : false,
+      timeout: null
+    });
+  },
+
+  renderToolTip: function() {
     var pos = this.state.position;
 
     if (!this.state.active || pos == null)
@@ -269,7 +251,7 @@ var WithToolTip = React.createClass({
                    onMouseMove : this.handleMouseMove
                  },
                  this.props.children,
-                 this.renderTip());
+                 this.renderToolTip());
   }
 });
 
