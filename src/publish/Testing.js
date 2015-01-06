@@ -115,7 +115,7 @@ var rescaleImage = function(src, width, height, cb) {
 
 var sendToGithub = function(path, text, onProgress, cb) {
   var gh = github({
-    baseURL  : 'https://api.github.com/repos/odf/RCSR-content/contents/',
+    baseURL  : 'https://api.github.com/repos/rcsr-net/RCSR-content/contents/',
     token    : credentials().token,
     userAgent: 'RCSR',
     origin   : 'http://rcsr.net'
