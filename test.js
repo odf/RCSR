@@ -2,14 +2,14 @@
 
 
 var fs = require('fs');
-var cc = require('ceci-core');
+var csp = require('plexus-csp');
 
-var parse  = require('./src/parse-3dall');
-var search = require('./src/search');
+var parse  = require('./src/parse/nets');
+var search = require('./src/search/nets');
 
 
 var fileContents = function(path) {
-  return cc.nbind(fs.readFile, fs)(path, { encoding: 'utf8' });
+  return csp.nbind(fs.readFile, fs)(path, { encoding: 'utf8' });
 };
 
 
@@ -23,7 +23,7 @@ var byKey = function(key, a, b) {
 };
 
 
-cc.top(cc.go(function*() {
+csp.top(csp.go(function*() {
   var data   = parse(yield fileContents(process.argv[2]));
   var query  = JSON.parse(process.argv[3])
   var result = search(data, query).slice();
