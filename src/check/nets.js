@@ -27,8 +27,12 @@ var checkTD10AgainstCoordinationSequence = function(structure, log) {
 
 var checkStructure = function(structure, log) {
   structure.warnings.forEach(function(s) { log(structure.symbol+' - '+s); });
-  checkEdgeNumberConsistency(structure, log);
-  checkTD10AgainstCoordinationSequence(structure, log);
+  try {
+    checkEdgeNumberConsistency(structure, log);
+    checkTD10AgainstCoordinationSequence(structure, log);
+  } catch(ex) {
+    log(structure.symbol+' - corrupt data ('+ex+')');
+  }
 };
 
 

@@ -26,6 +26,11 @@ var parseSection = function(lines, startIndex, parseBlock) {
   var start = startIndex + 1;
   var next, result, i, tmp;
 
+  if (!(size >= 0)) {
+    var msg = 'expected a non-negative number on line '+(startIndex+1);
+    throw new Error(msg);
+  }
+
   if (parseBlock) {
     next = start;
     result = [];
@@ -87,42 +92,48 @@ var parseStructure = function(lines, startIndex) {
     return null;
 
   result.symbol = lines[++i];
-  result.dual   = fixName(lines[++i]);
-  ++i;
 
-  for (key in {
-    otherSymbols: 0,
-    names       : 0,
-    otherNames  : 0,
-    keywords    : 0
-  })
-  {
-    tmp = parseSection(lines, i);
-    result[key] = tmp.result;
+  try {
+    result.dual = fixName(lines[++i]);
+    ++i;
+
+    for (key in {
+      otherSymbols: 0,
+      names       : 0,
+      otherNames  : 0,
+      keywords    : 0
+    })
+    {
+      tmp = parseSection(lines, i);
+      result[key] = tmp.result;
+      i = tmp.nextLine;
+    }
+
+    result.pointSymmetry    = lines[i];
+    result.spacegroupSymbol = lines[++i];
+    result.faceSymbol       = lines[++i];
+
+    tmp = lines[++i].split(/\s+/).map(parseInteger);
+    result.kindsOfVertex = tmp[0];
+    result.kindsOfEdge   = tmp[1];
+    result.kindsOfFace   = tmp[2];
+
+    tmp = lines[++i].split(/\s+/).map(parseInteger);
+    result.numberOfVertices = tmp[0];
+    result.numberOfEdges    = tmp[1];
+    result.numberOfFaces    = tmp[2];
+
+    tmp = parseSection(lines, ++i, parseVertex);
+    result.vertices = tmp.result;
     i = tmp.nextLine;
+
+    tmp = parseSection(lines, i, parseFace);
+    result.faces = tmp.result;
+    i = tmp.nextLine;
+
+  } catch(ex) {
+    result.warnings.push('error while parsing symbol ('+ex+')');
   }
-
-  result.pointSymmetry    = lines[i];
-  result.spacegroupSymbol = lines[++i];
-  result.faceSymbol       = lines[++i];
-
-  tmp = lines[++i].split(/\s+/).map(parseInteger);
-  result.kindsOfVertex = tmp[0];
-  result.kindsOfEdge   = tmp[1];
-  result.kindsOfFace   = tmp[2];
-
-  tmp = lines[++i].split(/\s+/).map(parseInteger);
-  result.numberOfVertices = tmp[0];
-  result.numberOfEdges    = tmp[1];
-  result.numberOfFaces    = tmp[2];
-
-  tmp = parseSection(lines, ++i, parseVertex);
-  result.vertices = tmp.result;
-  i = tmp.nextLine;
-
-  tmp = parseSection(lines, i, parseFace);
-  result.faces = tmp.result;
-  i = tmp.nextLine;
 
   return { result: result, nextLine: i };
 };

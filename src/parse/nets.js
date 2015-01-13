@@ -89,6 +89,11 @@ var parseSection = function(lines, startIndex, parseBlock) {
   var start = startIndex + 1;
   var next, result, i, tmp;
 
+  if (!(size >= 0)) {
+    var msg = 'expected a non-negative number on line '+(startIndex+1);
+    throw new Error(msg);
+  }
+
   if (parseBlock) {
     next = start;
     result = [];
@@ -212,7 +217,7 @@ var parseStructure = function(lines, startIndex) {
     }, 0) / result.verticesPerUnitCell);
 
   } catch(ex) {
-    result.warnings.push('error while parsing symbol: '+ex);
+    result.warnings.push('error while parsing symbol ('+ex+')');
   }
 
   return { result: result, nextLine: ++i };

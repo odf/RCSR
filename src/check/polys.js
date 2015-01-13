@@ -5,12 +5,16 @@ var checkStructure = function(structure, log) {
 
   structure.warnings.forEach(function(s) { log(structure.symbol+' - '+s); });
 
-  chi = (structure.numberOfFaces
-         - structure.numberOfEdges
-         + structure.numberOfVertices);
+  try {
+    chi = (structure.numberOfFaces
+           - structure.numberOfEdges
+           + structure.numberOfVertices);
 
-  if (chi != 2)
-    log(structure.symbol+' - Euler characteristic is '+chi);
+    if (chi != 2)
+      log(structure.symbol+' - Euler characteristic is '+chi);
+  } catch(ex) {
+    log(structure.symbol+' - corrupt data ('+ex+')');
+  }
 };
 
 
