@@ -36,8 +36,9 @@ var Deferred = React.createClass({
 
   render: function() {
     if (this.state.data)
-      return this.props.component({ data: this.state.data,
-                                    info: this.props.info });
+      return React.createElement(this.props.component, {
+        data: this.state.data,
+        info: this.props.info });
     else if (this.state.showMessage)
       return $.div(null, $.p(null, 'Loading data...'));
     else

@@ -46,6 +46,9 @@ var components = {
 };
 
 
+var makeUploader = React.createFactory(widgets.Uploader);
+
+
 var merge = function() {
   var args = Array.prototype.slice.call(arguments);
   var result = args.every(Array.isArray) ? [] : {};
@@ -250,7 +253,7 @@ var Publish = React.createClass({
 
   renderProgress: function(progress) {
     if (progress != null)
-      return ProgressBar({ progress: progress });
+      return React.createElement(ProgressBar, { progress: progress });
   },
 
   renderPublishStatus: function() {
@@ -522,7 +525,7 @@ var Testing = React.createClass({
                                defaultChecked: kind == 'Nets' }),
                      $.span(null, message),
                      removeIcon),
-                 widgets.Uploader({
+                 makeUploader({
                    key       : kind,
                    prompt    : 'Load Data',
                    binary    : false,
@@ -551,7 +554,7 @@ var Testing = React.createClass({
 
     return $.div({ key: 'Images' },
                  $.h2(null, 'Upload'),
-                 widgets.Uploader({
+                 makeUploader({
                    prompt    : 'Add Images',
                    accept    : 'image/*',
                    multiple  : true,
@@ -595,7 +598,7 @@ var Testing = React.createClass({
     var section = this.state[this.state.active];
 
     if (section.data) {
-      return components[this.state.active]({
+      return React.createElement(components[this.state.active], {
         key : 'preview',
         data: section.data
       });
@@ -609,18 +612,23 @@ var Testing = React.createClass({
     return $.div(null,
                  $.h2(null, 'Testing and Publishing' + comment),
                  $.p(null, this.info(this.state.active)),
-                 widgets.Tabs({ labels: ['Load Data',
-                                         'Diagnostics',
-                                         'Preview',
-                                         'Load Images',
-                                         'Publish',
-                                         'Log'] },
-                              this.renderLoadData(),
-                              this.renderDiagnostics(),
-                              this.renderPreview(),
-                              this.renderLoadImages(),
-                              Publish({ data: this.publishableData() }),
-                              this.renderLog()));
+                 React.createElement(
+                   widgets.Tabs,
+                   {
+                     labels: ['Load Data',
+                              'Diagnostics',
+                              'Preview',
+                              'Load Images',
+                              'Publish',
+                              'Log']
+                   },
+                   this.renderLoadData(),
+                   this.renderDiagnostics(),
+                   this.renderPreview(),
+                   this.renderLoadImages(),
+                   React.createElement(Publish,
+                                       { data: this.publishableData() }),
+                   this.renderLog()));
   }
 });
 

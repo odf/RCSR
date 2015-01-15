@@ -118,52 +118,52 @@ var Credentials = React.createClass({
 
 var resolveRoute = function(path) {
   if (credentials().isnew)
-    return Credentials();
+    return React.createElement(Credentials);
   else if (path == '/about')
-    return Deferred({
+    return React.createElement(Deferred, {
       component: About,
       loader   : loader('html', '/about.html')
     });
   else if (path == '/links')
-    return Links();
+    return React.createElement(Links);
   else if (path.match(/^\/nets\//))
-    return Deferred({
+    return React.createElement(Deferred, {
       component: Nets.single,
       loader   : loader('nets', path.replace(/^\/nets\//, ''))
     });
   else if (path == '/nets')
-    return Deferred({
+    return React.createElement(Deferred, {
       component: Nets.search,
       loader   : loader('nets')
     });
   else if (path.match(/^\/layers\//))
-    return Deferred({
+    return React.createElement(Deferred, {
       component: Layers.single,
       loader   : loader('layers', path.replace(/^\/layers\//, ''))
     });
   else if (path == '/layers')
-    return Deferred({
+    return React.createElement(Deferred, {
       component: Layers.search,
       loader   : loader('layers')
     });
   else if (path.match(/^\/polyhedra\//))
-    return Deferred({
+    return React.createElement(Deferred, {
       component: Polyhedra.single,
       loader   : loader('polyhedra', path.replace(/^\/polyhedra\//, ''))
     });
   else if (path == '/polyhedra')
-    return Deferred({
+    return React.createElement(Deferred, {
       component: Polyhedra.search,
       loader   : loader('polyhedra')
     });
   else if (path == '/testing') {
     localStorage.setItem('RCSR-testing-known', true);
-    return Deferred({
+    return React.createElement(Deferred, {
       component: Testing,
       loader   : loader('all')
     });
   } else
-    return Home();
+    return React.createElement(Home);
 };
 
 

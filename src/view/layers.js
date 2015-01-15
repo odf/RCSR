@@ -14,6 +14,10 @@ var widgets  = require('../widgets');
 var $ = React.DOM;
 
 
+var makeTabs = React.createFactory(widgets.Tabs);
+var makeImage = React.createFactory(common.StructureImage);
+
+
 var keywords = [
   "regular",
   "Archimedean",
@@ -162,7 +166,7 @@ var Layer = React.createClass({
 
     return $.div(null,
                  $.h2(null, layer.symbol),
-                 $.p(null, common.StructureImage({
+                 $.p(null, makeImage({
                    prefix: 'Layer',
                    symbol: layer.symbol,
                    mayEnlarge: true })),
@@ -183,7 +187,7 @@ var layerTable = function(items, link) {
      'kinds of vertex', 'kinds of edge', 'kinds of face'],
     items.map(function(layer, i) {
       return [
-        common.StructureImage({
+        makeImage({
           prefix: 'Layer',
           symbol: layer.symbol
         }),
@@ -208,13 +212,13 @@ var Layers = React.createClass({
     return $.div(null,
                  $.h1(null, 'Search Layers'),
                  this.props.info ? $.p(null, '(' + this.props.info + ')') : null,
-                 widgets.Tabs({ labels: ['Search Form', 'Results'],
-                                spreadThreshold: 800,
-                                enableRemoteSelection: this.subscribe
-                              },
-                              this.renderSearchForm(schema),
-                              this.renderResults('layer', 'layers',
-                                                 Layer, layerTable)));
+                 makeTabs({ labels: ['Search Form', 'Results'],
+                            spreadThreshold: 800,
+                            enableRemoteSelection: this.subscribe
+                          },
+                          this.renderSearchForm(schema),
+                          this.renderResults('layer', 'layers',
+                                             Layer, layerTable)));
   }
 });
 

@@ -110,11 +110,12 @@ var Tabs = React.createClass({
     var isSelected = index == this.state.selected;
     var classes = 'TabsItem' + (isSelected ? ' TabsSelected' : '');
 
-    return Tab({ className: classes,
-                 key      : index,
-                 index    : index,
-                 label    : label,
-                 onSelect : this.handleSelect });
+    return React.createElement(Tab, {
+      className: classes,
+      key      : index,
+      index    : index,
+      label    : label,
+      onSelect : this.handleSelect });
   },
 
   render: function() {

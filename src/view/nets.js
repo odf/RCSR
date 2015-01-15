@@ -16,6 +16,10 @@ var hellip   = '\u2026';
 var $ = React.DOM;
 
 
+var makeTabs = React.createFactory(widgets.Tabs);
+var makeImage = React.createFactory(common.StructureImage);
+
+
 var keywords = [
   "bipartite",
   "chiral",
@@ -246,7 +250,7 @@ var Net = React.createClass({
 
     return $.div(null,
                  $.h2(null, net.symbol),
-                 $.p(null, common.StructureImage({
+                 $.p(null, makeImage({
                    prefix: 'Net',
                    symbol: net.symbol,
                    mayEnlarge: true })),
@@ -268,7 +272,7 @@ var netTable = function(items, link) {
      'edges', 'genus'],
     items.map(function(net, i) {
       return [
-        common.StructureImage({
+        makeImage({
           prefix: 'Net',
           symbol: net.symbol
         }),
@@ -293,12 +297,12 @@ var Nets = React.createClass({
     return $.div(null,
                  $.h1(null, 'Search Nets'),
                  this.props.info ? $.p(null, '(' + this.props.info + ')') : null,
-                 widgets.Tabs({ labels: ['Search Form', 'Results'],
-                                spreadThreshold: 800,
-                                enableRemoteSelection: this.subscribe
-                              },
-                              this.renderSearchForm(schema),
-                              this.renderResults('net', 'nets', Net, netTable)));
+                 makeTabs({ labels: ['Search Form', 'Results'],
+                            spreadThreshold: 800,
+                            enableRemoteSelection: this.subscribe
+                          },
+                          this.renderSearchForm(schema),
+                          this.renderResults('net', 'nets', Net, netTable)));
   }
 });
 

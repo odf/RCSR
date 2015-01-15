@@ -16,7 +16,8 @@ var React = require('react');
 var Application = require('./app.es6');
 
 var path = process.argv[2];
-var html = React.renderComponentToString(Application({ path: path }));
+var html = React.renderToString(
+  React.createElement(Application, { path: path }));
 var layout = fs.readFileSync(process.argv[3], { encoding: 'utf8' });
 
 console.log(layout.replace(/Loading.../, html));

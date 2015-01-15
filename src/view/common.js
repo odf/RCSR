@@ -19,6 +19,11 @@ var raquo = '\u00bb';
 var common = module.exports;
 
 
+var makeToolTip = React.createFactory(widgets.WithToolTip);
+var makeDeferred = React.createFactory(Deferred);
+var makeActiveLink = React.createFactory(widgets.ActiveLink);
+
+
 common.makeBooleanProperties = function(names) {
   var result = {};
   names.forEach(function(name) {
@@ -156,7 +161,7 @@ var HelpSection = React.createClass({
 
 
 var helpSection = function(path) {
-  return Deferred({
+  return makeDeferred({
     loader   : loader('help', path),
     component: HelpSection
   });
@@ -179,7 +184,7 @@ var helpLink = function(path, schema) {
   }, '?');
 
   if (url)
-    return widgets.WithToolTip(
+    return makeToolTip(
       { className: 'inlineBlock',
         content  : helpSection(url.replace(/^\/?help\//, '/'))
       },
@@ -191,6 +196,8 @@ var helpLink = function(path, schema) {
 
 var makeFieldWrapper = function(schema) {
   return React.createClass({
+    displayName: 'field wrapper',
+
     render: function() {
       var classes = (this.props.classes || []).concat(
         'form-element',
@@ -208,6 +215,8 @@ var makeFieldWrapper = function(schema) {
 
 var makeSectionWrapper = function(schema) {
   return React.createClass({
+    displayName: 'section wrapper',
+
     render: function() {
       var classes = (this.props.classes || []).concat(
         'form-section',
@@ -227,7 +236,7 @@ var SearchForm = React.createClass({
   displayName: 'SearchForm',
 
   render: function() {
-    return Form({
+    return React.createElement(Form, {
       buttons: ['Search', 'Clear'],
       extraButtons: true,
       onSubmit: this.props.onSubmit,
@@ -316,15 +325,15 @@ common.StructureImage = React.createClass({
     if (this.state.error)
       return $.span({ className: 'thumbnail' }, '(no image)');
     if (this.props.mayEnlarge)
-      return widgets.WithToolTip(
+      return makeToolTip(
         { className: 'inlineBlock',
           content  : $.div(null, tip),
           hideAfter: 2000
         },
-        widgets.ActiveLink({ className: 'noOutline',
-                             onClick: this.toggle
-                           },
-                           img));
+        makeActiveLink({ className: 'noOutline',
+                         onClick: this.toggle
+                       },
+                       img));
     else
       return $.span({ className: 'thumbnail' }, img);
   }
@@ -383,7 +392,7 @@ var Results = React.createClass({
     };
 
     var link = function(i, text) {
-      return widgets.ActiveLink({ href: i, onClick: this.select }, text);
+      return makeActiveLink({ href: i, onClick: this.select }, text);
     }.bind(this);
 
     if (n < 1) {
@@ -402,7 +411,8 @@ var Results = React.createClass({
                         item(i < n-1
                              ? link(i+1, 'Next ' + raquo) : 'Next')),
                    $.p(null, msg),
-                   this.props.display({ data: structure }));
+                   React.createElement(this.props.display,
+                                       { data: structure }));
     } else if (this.state.symbolsOnly) {
       var resultList = results.map(function(structure, i) {
         return $.li({ className: 'fragment',
@@ -471,7 +481,7 @@ common.viewer = function(search) {
     },
 
     renderSearchForm: function(schema) {
-      return SearchForm({
+      return React.createElement(SearchForm, {
         schema  : schema,
         onSubmit: this.onFormSubmit,
         values  : this.state.reset ? {} : null
@@ -479,7 +489,7 @@ common.viewer = function(search) {
     },
 
     renderResults: function(type, typePlural, display, table) {
-      return Results({
+      return React.createElement(Results, {
         type: type,
         typePlural: typePlural,
         display: display,
