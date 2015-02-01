@@ -179,10 +179,6 @@ var WithToolTip = React.createClass({
     };
   },
 
-  componentWillReceiveProps: function(props) {
-    this.init();
-  },
-
   handleMouseEnter: function(event) {
     this.init();
   },
