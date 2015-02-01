@@ -8,13 +8,20 @@ var asSet = function(a) {
 };
 
 
-var equalSets = function(a, b) {
-  var sa = asSet(a);
+var subset = function(a, b) {
   var sb = asSet(b);
 
-  return (a.every(function(x) { return sb[x] == 1; })
-          &&
-          b.every(function(x) { return sa[x] == 1; }));
+  return a.every(function(x) { return sb[x] == 1; });
+};
+
+
+var equalSets = function(a, b) {
+  return subset(a, b) && subset(b, a);
+};
+
+
+var properSubset = function(a, b) {
+  return subset(a, b) && !subset(b, a);
 };
 
 
@@ -59,6 +66,8 @@ var rangeMatcher = function(key) {
 
 
 module.exports = {
+  subset      : subset,
+  properSubset: properSubset,
   equalSets   : equalSets,
   search      : search,
   rangeMatcher: rangeMatcher

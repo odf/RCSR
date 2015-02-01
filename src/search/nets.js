@@ -27,8 +27,12 @@ var matcher = {
     return true;
   },
   coordination: function(item, values) {
+    var n = values.length;
     var seen = item.vertices.map(function(v) { return v.coordinationNumber; });
-    return common.equalSets(values, seen);
+    if (values[n-1] == 0)
+      return common.properSubset(values.slice(0, n-1), seen);
+    else
+      return common.equalSets(values, seen);
   },
   "density"           : common.rangeMatcher('density'),
   "td10"              : common.rangeMatcher('td10'),

@@ -102,7 +102,7 @@ var schema = {
         spec: {
           title: "Coordination",
           type: "string",
-          pattern: "^[1-9][0-9]*([,; ][ ]*[1-9][0-9]*)*$",
+          pattern: "^[1-9][0-9]*([,; ][ ]*[1-9][0-9]*)*([,; ][ ]*[*])?$",
           "x-hints": {
             form: {
               classes: ["important"],

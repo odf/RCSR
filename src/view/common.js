@@ -86,7 +86,7 @@ var conversions = {
   },
   coordination: function(obj) {
     return obj.spec.split(/[,; ][ ]*/).map(function(s) {
-      return parseInt(s);
+      return s == '*' ? 0 : parseInt(s);
     });
   },
   bounds: function(data) {
