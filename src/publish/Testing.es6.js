@@ -3,6 +3,7 @@
 var React       = require('react');
 var levelup     = require('levelup');
 var leveljs     = require('level-js');
+var csp         = require('plexus-csp');
 
 var parseNets   = require('../parse/nets');
 var parseLayers = require('../parse/layers');
@@ -116,7 +117,7 @@ var rescaleImage = function(src, width, height, cb) {
 };
 
 
-var sendToGithub = function(path, text, onProgress, cb) {
+var sendToGithub = function(path, text, onProgress) {
   var gh = github({
     baseURL  : 'https://api.github.com/repos/rcsr-net/RCSR-content/contents/',
     token    : credentials().token,
@@ -124,42 +125,33 @@ var sendToGithub = function(path, text, onProgress, cb) {
     origin   : 'http://rcsr.net'
   });
 
-  gh.put(path, text, 'web commit', onProgress)
-    .then(function(response) { cb(null, true); },
-          function(error) { cb(error); });
+  return gh.put(path, text, 'web commit', onProgress);
 };
 
 
-var simulateSend = function(path, text, onProgress, cb) {
-  var total = text.length;
-  var loaded = 0;
+var simulateSend = function(path, text, onProgress) {
+  return csp.go(function*() {
+    var total = text.length;
+    var loaded = 0;
 
-  var f = function() {
-    clearTimeout(t);
-    loaded = Math.min(loaded + 15000, total);
-    onProgress({ loaded: loaded, total: total });
+    console.log('simulating file upload - sha1 = '+sha1(text));
 
-    if (loaded >= total) {
-      var t1 = setTimeout(function() {
-        clearTimeout(t1);
-        cb(null, true);
-      }, 500);
-    } else {
-      t = setTimeout(f, 100);
+    while (loaded < total) {
+      yield csp.sleep(100);
+      loaded = Math.min(loaded + 15000, total);
+      onProgress({ loaded: loaded, total: total });
     }
-  };
 
-  var t = setTimeout(f, 100);
-
-  console.log('simulating file upload - sha1 = '+sha1(text));
+    yield csp.sleep(500);
+  });
 };
 
 
-var sendFile = function(path, text, onProgress, cb) {
+var sendFile = function(path, text, onProgress) {
   if (credentials().simulate)
-    simulateSend(path, text, onProgress, cb);
+    return simulateSend(path, text, onProgress);
   else
-    sendToGithub(path, text, onProgress, cb);
+    return sendToGithub(path, text, onProgress);
 };
 
 
@@ -215,18 +207,36 @@ var Publish = React.createClass({
   },
 
   publishSingle: function(data) {
-    sendFile(data.path,
-             data.text,
-             function(event) {
-               this.handleProgress(data.path, event);
-             }.bind(this),
-             function(err, res) {
-               this.handleCompletion(data.path, err, res, data.onCompletion);
-             }.bind(this));
+    var handleProgress = this.handleProgress;
+    var handleCompletion = this.handleCompletion;
+
+    return csp.go(function*() {
+      var err, res;
+
+      try {
+        res = yield sendFile(
+          data.path,
+          data.text,
+          function(event) {
+            handleProgress(data.path, event);
+          });
+      } catch (ex) {
+        err = new Error(ex);
+      }
+
+      handleCompletion(data.path, err, res, data.onCompletion);
+    });
   },
 
   publish: function() {
-    this.props.data.forEach(this.publishSingle);
+    var data = this.props.data;
+    var publishSingle = this.publishSingle;
+
+    csp.go(function*() {
+      var i;
+      for (i = 0; i < data.length; ++i)
+        yield publishSingle(data[i]);
+    }).then(null, function(ex) { console.log(ex + '\n' + ex.stack); });
   },
 
   renderPublishButton: function() {
