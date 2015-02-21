@@ -23,7 +23,7 @@ var keywords = [
   "Archimedean",
   "isohedral",
   "plane",
-  "layer"
+  "self-dual"
 ];
 
 
