@@ -54,6 +54,8 @@ var Links = React.createClass({
   displayName: 'Links',
 
   render: function() {
+    var emdash = '\u2014';
+
     var links = [
       ['http://www.iza-structure.org/databases',
        'zeolite atlas (known zeolites)' ],
@@ -76,16 +78,23 @@ var Links = React.createClass({
       ['http://www.iucr.org',
        'International Union of Crystallography' ],
       ['/downloads/OKeeffeLecturesLR.zip',
-       'O\'Keeffe lectures']
+       'O\'Keeffe lectures', 'download (ZIP file, 19MB)']
     ];
+
+    var makeLink = function(a, k) {
+      if (a.length > 2)
+        return $.p({ key: k },
+                   a[1]+': ',
+                   makeLink([a[0], a[2]], k));
+      else
+        return $.a({ key: k, href: a[0] }, a[1], $.br());
+    };
 
     return $.div({ className: 'article center' },
                  $.h1(null, 'RCSR Links Page'),
                  $.p(null,
                      'These are some links to related resources on the Web.'),
-                 links.map(function(a, i) {
-                   return $.a({ key: i, href: a[0] }, a[1], $.br());
-                 }));
+                 links.map(makeLink));
   }
 });
 
