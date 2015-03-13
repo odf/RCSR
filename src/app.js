@@ -74,7 +74,9 @@ var Links = React.createClass({
       ['http://www.crystalmaker.com',
        'CrystalMaker (structure visualization)' ],
       ['http://www.iucr.org',
-       'International Union of Crystallography' ]
+       'International Union of Crystallography' ],
+      ['/downloads/OKeeffeLecturesLR.zip',
+       'O\'Keeffe lectures']
     ];
 
     return $.div({ className: 'article center' },
