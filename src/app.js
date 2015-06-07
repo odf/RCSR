@@ -78,7 +78,9 @@ var Links = React.createClass({
       ['http://www.iucr.org',
        'International Union of Crystallography' ],
       ['/downloads/OKeeffeLecturesLR.zip',
-       'O\'Keeffe lectures', 'download (ZIP file, 19MB)']
+       'O\'Keeffe lectures', 'download (ZIP file, 19MB)'],
+      ['/downloads/RCSRnets.cgd',
+       'Systre data for RCSR nets (where available)', 'download (1.3MB)']
     ];
 
     var makeLink = function(a, k) {
