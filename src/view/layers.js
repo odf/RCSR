@@ -22,14 +22,14 @@ var keywords = [
   "regular",
   "Archimedean",
   "isohedral",
-  "plane",
+  "pentagonal tiling",
   "self-dual",
   "uniform"
 ];
 
 
 var schema = {
-  title: "Search layers",
+  title: "Search 2D nets",
   type: "object",
   required: [],
   properties: {
@@ -211,14 +211,14 @@ var Layers = React.createClass({
 
   render: function() {
     return $.div(null,
-                 $.h1(null, 'Search Layers'),
+                 $.h1(null, 'Search 2D Nets'),
                  this.props.info ? $.p(null, '(' + this.props.info + ')') : null,
                  makeTabs({ labels: ['Search Form', 'Results'],
                             spreadThreshold: 800,
                             enableRemoteSelection: this.subscribe
                           },
                           this.renderSearchForm(schema),
-                          this.renderResults('layer', 'layers',
+                          this.renderResults('net', 'nets',
                                              Layer, layerTable)));
   }
 });

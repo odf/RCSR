@@ -50,12 +50,20 @@ var Home = React.createClass({
 });
 
 
+var makeLink = function(a, k) {
+  if (a.length > 2)
+    return $.p({ key: k },
+               a[1]+': ',
+               makeLink([a[0], a[2]], k));
+  else
+    return $.a({ key: k, href: a[0] }, a[1], $.br());
+};
+
+
 var Links = React.createClass({
   displayName: 'Links',
 
   render: function() {
-    var emdash = '\u2014';
-
     var links = [
       ['http://www.iza-structure.org/databases',
        'zeolite atlas (known zeolites)' ],
@@ -78,24 +86,29 @@ var Links = React.createClass({
       ['http://www.iucr.org',
        'International Union of Crystallography' ],
       ['/downloads/OKeeffeLecturesLR.zip',
-       'O\'Keeffe lectures', 'download (ZIP file, 19MB)'],
-      ['/downloads/RCSRnets.cgd',
-       'Systre data for RCSR nets (where available)', 'download (1.3MB)']
+       'O\'Keeffe lectures', 'download (ZIP file, 19MB)']
     ];
-
-    var makeLink = function(a, k) {
-      if (a.length > 2)
-        return $.p({ key: k },
-                   a[1]+': ',
-                   makeLink([a[0], a[2]], k));
-      else
-        return $.a({ key: k, href: a[0] }, a[1], $.br());
-    };
 
     return $.div({ className: 'article center' },
                  $.h1(null, 'RCSR Links Page'),
                  $.p(null,
                      'These are some links to related resources on the Web.'),
+                 links.map(makeLink));
+  }
+});
+
+
+var Systre = React.createClass({
+  displayName: 'Systre',
+
+  render: function() {
+    var links = [
+      ['/downloads/RCSRnets.cgd',
+       'Systre data for RCSR nets (where available)', 'download (1.3MB)']
+    ];
+
+    return $.div({ className: 'article center' },
+                 $.h1(null, 'RCSR Systre Page'),
                  links.map(makeLink));
   }
 });
@@ -139,6 +152,8 @@ var resolveRoute = function(path) {
     });
   else if (path == '/links')
     return React.createElement(Links);
+  else if (path == '/systre')
+    return React.createElement(Systre);
   else if (path.match(/^\/nets\//))
     return React.createElement(Deferred, {
       component: Nets.single,
@@ -190,8 +205,9 @@ var Application = React.createClass({
       [ 'Home', '/' ], [ '|' ],
       [ 'About', '/about' ], [ '|' ],
       [ 'Links', '/links' ], [ '|' ],
-      [ 'Nets', '/nets' ], [ '|' ],
-      [ 'Layers', '/layers' ], [ '|' ],
+      [ 'Systre', '/systre' ], [ '|' ],
+      [ '3D Nets', '/nets' ], [ '|' ],
+      [ '2D Nets', '/layers' ], [ '|' ],
       [ 'Polyhedra', '/polyhedra' ]
     ];
 

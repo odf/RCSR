@@ -39,7 +39,7 @@ var keywords = [
 
 
 var schema = {
-  title: "Search nets",
+  title: "Search 3D nets",
   type: "object",
   required: [],
   properties: {
@@ -295,7 +295,7 @@ var Nets = React.createClass({
 
   render: function() {
     return $.div(null,
-                 $.h1(null, 'Search Nets'),
+                 $.h1(null, 'Search 3D Nets'),
                  this.props.info ? $.p(null, '(' + this.props.info + ')') : null,
                  makeTabs({ labels: ['Search Form', 'Results'],
                             spreadThreshold: 800,
