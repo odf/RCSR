@@ -22,7 +22,7 @@ var keywords = [
   "regular",
   "Archimedean",
   "isohedral",
-  "pentagonal tiling",
+  "pentagon tiling",
   "self-dual",
   "uniform"
 ];
