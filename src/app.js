@@ -86,7 +86,7 @@ var Links = React.createClass({
       ['http://www.iucr.org',
        'International Union of Crystallography' ],
       ['/downloads/OKeeffeLecturesLR.zip',
-       'O\'Keeffe lectures', 'download (ZIP file, 19MB)']
+       'O\'Keeffe lectures', 'download (ZIP file, 25MB)']
     ];
 
     return $.div({ className: 'article center' },
