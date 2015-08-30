@@ -427,7 +427,7 @@ var Testing = React.createClass({
       }.bind(this);
 
       data.push({
-        path: dirName+'/'+name+'.jpg',
+        path: dirName+'/'+name[0]+'/'+name+'.jpg',
         text: imageBuffer(entry.main),
         onCompletion: function() {
           imageSent = true;
@@ -436,7 +436,7 @@ var Testing = React.createClass({
         }
       });
       data.push({
-        path: dirName+'Thumbs/'+name+'T.jpg',
+        path: dirName+'Thumbs/'+name[0]+'/'+name+'T.jpg',
         text: imageBuffer(entry.thumbnail),
         onCompletion: function() {
           thumbSent = true;

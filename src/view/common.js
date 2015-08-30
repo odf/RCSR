@@ -313,14 +313,13 @@ common.StructureImage = React.createClass({
     this.setState({ error: false });
   },
   render: function() {
-    var base = '/images/';
+    var base   = '/images';
+    var subdir = this.props.prefix + 'Pics' + (this.state.full ? '' : 'Thumbs');
     var symbol = this.props.symbol;
-    var src = base + (this.state.full
-                      ? this.props.prefix + 'Pics/' + symbol + '.jpg'
-                      : this.props.prefix + 'PicsThumbs/' + symbol + 'T.jpg');
-
-    var img = $.img({ src: src, alt: '', onError: this.handleError });
-    var tip = 'Click to '+(this.state.full ? 'shrink' : 'enlarge')+' image';
+    var fname  = symbol + (this.state.full ? '' : 'T') + '.jpg';
+    var src    = [ base, subdir, symbol[0], fname ].join('/');
+    var img    = $.img({ src: src, alt: '', onError: this.handleError });
+    var tip    = 'Click to '+(this.state.full ? 'shrink' : 'enlarge')+' image';
 
     if (this.state.error)
       return $.span({ className: 'thumbnail' }, '(no image)');
