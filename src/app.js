@@ -214,7 +214,9 @@ var Application = React.createClass({
     var mirrors = [
       [ 'RCSR Mirrors:' ],
       [ 'Main Site (US)', 'http://rcsr.net' ],
+      [ '-' ],
       [ 'Canberra', 'http://rcsr.anu.edu.au' ],
+      [ '-' ],
       [ 'Stockholm'   , 'http://rcsr.fos.su.se' ]
     ];
 
