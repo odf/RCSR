@@ -195,11 +195,26 @@ var resolveRoute = function(path) {
 };
 
 
+var showLink = function(item, i) {
+  var name = item[0];
+  var url = item[1];
+  var t = url ? $.a({ href: url }, name) : name;
+  return $.li({ key: i }, t);
+};
+
+
 var Application = React.createClass({
   displayName: 'Application',
 
   render: function() {
     var adminKnown = localStorage.getItem('RCSR-testing-known') == 'true';
+
+    var mirrors = [
+      [ 'RCSR Mirrors:' ],
+      [ 'Main Site (US)', 'http://rcsr.net' ],
+      [ 'Canberra', 'http://rcsr.anu.edu.au' ],
+      [ 'Stockholm'   , 'http://rcsr.fos.su.se' ]
+    ];
 
     var links = [
       [ 'Home', '/' ], [ '|' ],
@@ -219,17 +234,13 @@ var Application = React.createClass({
     return $.div({ key: this.props.path },
                  $.div({ className: 'header' },
                        $.img({ src: '/images/rcsr_logo.gif' }),
-                       $.span({ className: 'logoText' }, 'RCSR')),
+                       $.span({ className: 'logoText' }, 'RCSR'),
+                       $.ul(null, mirrors.map(showLink))),
                  $.div({ className: 'navBar' },
                        $.span({ className: 'tagline' },
                               'Reticular Chemistry Structure Resource'),
                        $.ul({ className: 'pageLinks' },
-                            links.map(function(item, i) {
-                              var name = item[0];
-                              var url = item[1];
-                              var t = url ? $.a({ href: url }, name) : name;
-                              return $.li({ key: i }, t);
-                            }))),
+                            links.map(showLink))),
                  resolveRoute(this.props.path));
   }
 });
