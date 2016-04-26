@@ -212,8 +212,8 @@ var Application = React.createClass({
     var adminKnown = localStorage.getItem('RCSR-testing-known') == 'true';
 
     var mirrors = [
-      [ 'RCSR Mirrors:' ],
-      [ 'Main Site (US)', 'http://rcsr.net' ],
+      [ 'Locations:' ],
+      [ 'rcsr.net (US)', 'http://rcsr.net' ],
       [ '-' ],
       [ 'Canberra', 'http://rcsr.anu.edu.au' ],
       [ '-' ],
@@ -221,30 +221,24 @@ var Application = React.createClass({
     ];
 
     var links = [
-      [ 'Home', '/' ], [ '|' ],
-      [ 'About', '/about' ], [ '|' ],
-      [ 'Links', '/links' ], [ '|' ],
-      [ 'Systre', '/systre' ], [ '|' ],
-      [ '3D Nets', '/nets' ], [ '|' ],
-      [ '2D Nets', '/layers' ], [ '|' ],
-      [ 'Polyhedra', '/polyhedra' ]
+      [ 'HOME', '/' ],
+      [ 'ABOUT', '/about' ],
+      [ 'LINKS', '/links' ],
+      [ 'SYSTRE', '/systre' ],
+      [ '3D NETS', '/nets' ],
+      [ '2D NETS', '/layers' ],
+      [ 'POLYHEDRA', '/polyhedra' ]
     ];
 
     if (adminKnown) {
-      links.push([ '|' ]);
-      links.push([ 'Testing', '/testing' ]);
+      links.push([ 'TESTING', '/testing' ]);
     }
 
     return $.div({ key: this.props.path },
                  $.div({ className: 'header' },
-                       $.img({ src: '/images/rcsr_logo.gif' }),
-                       $.span({ className: 'logoText' }, 'RCSR'),
-                       $.ul(null, mirrors.map(showLink))),
-                 $.div({ className: 'navBar' },
-                       $.span({ className: 'tagline' },
-                              'Reticular Chemistry Structure Resource'),
-                       $.ul({ className: 'pageLinks' },
-                            links.map(showLink))),
+                       $.div({ className: 'logoText' }, 'RCSR'),
+                       $.ul({ className: 'mirrors' }, mirrors.map(showLink)),
+                       $.ul({ className: 'pageLinks' }, links.map(showLink))),
                  resolveRoute(this.props.path));
   }
 });
