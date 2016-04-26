@@ -20,9 +20,9 @@ var Home = React.createClass({
   render: function() {
     var greeting = 'Welcome to the Reticular Chemistry Structure Resource';
 
-    return $.div({ className: 'homePage' },
-                 $.h1({ className: 'center' }, greeting),
-                 $.div(null,
+    return $.div(null,
+                 $.h1({ className: 'centeredText' }, greeting),
+                 $.div({ className: 'homePage' },
                        $.img({ className: 'center',
                                src: '/images/CRC_sphere_pic.jpg' }),
                        $.h2({ className: 'center' },
@@ -89,11 +89,12 @@ var Links = React.createClass({
        'O\'Keeffe lectures', 'download (ZIP file, 25MB)']
     ];
 
-    return $.div({ className: 'article center' },
-                 $.h1(null, 'RCSR Links Page'),
-                 $.p(null,
-                     'These are some links to related resources on the Web.'),
-                 links.map(makeLink));
+    return $.div(
+      null,
+      $.h1({ className: 'centeredText' }, 'RCSR Links Page'),
+      $.div({ className: 'article center' },
+            $.p(null, 'These are some links to related resources on the Web.'),
+            links.map(makeLink)));
   }
 });
 
@@ -109,9 +110,10 @@ var Systre = React.createClass({
        'Systre data for RCSR nets (where available)', 'download (1.3MB)']
     ];
 
-    return $.div({ className: 'article center' },
-                 $.h1(null, 'RCSR Systre Page'),
-                 links.map(makeLink));
+    return $.div(null,
+                 $.h1({ className: 'centeredText' }, 'RCSR Systre Page'),
+                 $.div({ className: 'article center' },
+                       links.map(makeLink)));
   }
 });
 
@@ -120,9 +122,10 @@ var About = React.createClass({
   displayName: 'About',
 
   render: function() {
-    return $.div({ className: 'article center' },
-                 $.h1({ className: 'center' }, 'RCSR'),
+    return $.div(null,
+                 $.h1({ className: 'centeredText' }, 'About RCSR'),
                  $.div({
+                   className: 'article center',
                    dangerouslySetInnerHTML: {
                      __html: this.props.data
                    }

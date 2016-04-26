@@ -620,7 +620,7 @@ var Testing = React.createClass({
     var comment = credentials().simulate ? ' [simulated]' : '';
 
     return $.div(null,
-                 $.h2(null, 'Testing and Publishing' + comment),
+                 $.h1(null, 'Testing and Publishing' + comment),
                  $.p(null, this.info(this.state.active)),
                  React.createElement(
                    widgets.Tabs,
