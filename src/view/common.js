@@ -395,7 +395,7 @@ var Results = React.createClass({
     }.bind(this);
 
     if (n < 1) {
-      return $.p(null, msg + '.');
+      return $.p({ className: 'resultsMessage' }, msg + '.');
     } else if (i >= 0) {
       structure = results[i];
       msg = 'Showing ' + type + ' ' + (i+1) +
@@ -409,7 +409,7 @@ var Results = React.createClass({
                              ? link(i-1, laquo + ' Previous') : 'Previous'),
                         item(i < n-1
                              ? link(i+1, 'Next ' + raquo) : 'Next')),
-                   $.p(null, msg),
+                   $.p({ className: 'resultsMessage' }, msg),
                    React.createElement(this.props.display,
                                        { data: structure }));
     } else if (this.state.symbolsOnly) {
@@ -440,7 +440,7 @@ var Results = React.createClass({
                         item(end < n
                              ? link("forward", 'Next ' + raquo)
                              : 'Next')),
-                   $.p(null, msg),
+                   $.p({ className: 'resultsMessage' }, msg),
                    this.props.table(results.slice(begin, end),
                                     function(i) {
                                       var n = i + begin;
