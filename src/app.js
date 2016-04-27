@@ -21,10 +21,11 @@ var Home = React.createClass({
     var greeting = 'Welcome to the Reticular Chemistry Structure Resource';
 
     return $.div(null,
-                 $.h1({ className: 'centeredText' }, greeting),
-                 $.div({ className: 'homePage' },
-                       $.img({ className: 'center',
-                               src: '/images/CRC_sphere_pic.jpg' }),
+                 $.div({ className: 'homePageLogo' },
+                       $.img({ src: '/images/artwork-1.svg',
+                               height: 350 }),
+                       $.p(null, greeting)),
+                 $.ul({ style: { clear: 'both' } },
                        $.h2({ className: 'center' },
                             'Department of Chemistry and Biochemistry',
                             $.br(),
@@ -91,7 +92,7 @@ var Links = React.createClass({
 
     return $.div(
       null,
-      $.h1({ className: 'centeredText' }, 'RCSR Links Page'),
+      $.h1(null, 'RCSR Links Page'),
       $.div({ className: 'article center' },
             $.p(null, 'These are some links to related resources on the Web.'),
             links.map(makeLink)));
@@ -111,7 +112,7 @@ var Systre = React.createClass({
     ];
 
     return $.div(null,
-                 $.h1({ className: 'centeredText' }, 'RCSR Systre Page'),
+                 $.h1(null, 'RCSR Systre Page'),
                  $.div({ className: 'article center' },
                        links.map(makeLink)));
   }
@@ -123,7 +124,7 @@ var About = React.createClass({
 
   render: function() {
     return $.div(null,
-                 $.h1({ className: 'centeredText' }, 'About RCSR'),
+                 $.h1(null, 'About RCSR'),
                  $.div({
                    className: 'article center',
                    dangerouslySetInnerHTML: {
