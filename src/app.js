@@ -14,6 +14,18 @@ var Testing     = require('./publish/Testing');
 var $ = React.DOM;
 
 
+var partnerLogo = function(src) {
+  var args = [].slice.call(arguments, 1);
+  var captionArgs = [].concat.apply(
+    [null],
+    args.map(function(x) { return [$.br(), x]; })).slice(1);
+
+  return $.figure(null,
+                  $.img({ src: src, height: 64 }),
+                  $.figcaption.apply(null, captionArgs));
+};
+
+
 var Home = React.createClass({
   displayName: 'Home',
 
@@ -22,27 +34,25 @@ var Home = React.createClass({
 
     return $.div(null,
                  $.div({ className: 'homePageLogo' },
-                       $.img({ src: '/images/artwork-1.svg',
+                       $.img({ src: '/images/netcenter-logo.svg',
                                height: 350 }),
                        $.p(null, greeting)),
-                 $.ul({ style: { clear: 'both' } },
-                       $.h2({ className: 'center' },
-                            'Department of Chemistry and Biochemistry',
-                            $.br(),
-                            'Arizona State University'),
-                       $.h2({ className: 'center' },
-                            'Department of Applied Mathematics',
-                            $.br(),
-                            'Australian National University'),
-                       $.h2({ className: 'center' },
-                            'NCI Vizlab',
-                            $.br(),
-                            'Australian National University'),
-                       $.h2({ className: 'center' },
-                            'Department of Chemistry',
-                            $.br(),
-                            'University of California, Berkeley')),
-                 $.p({ className: 'center' }, 'Additional hosting by'),
+                 $.div({ className: 'partnerLogos', style: { clear: 'both' } },
+                       partnerLogo('/images/asu-logo.svg',
+                                   'School of Molecular Sciences,',
+                                   'Arizona State University'),
+                       partnerLogo('/images/anu-logo.svg',
+                                   'Department of Applied Mathematics,',
+                                   'Australian National University'),
+                       partnerLogo('/images/nci-logo.svg',
+                                   'NCI Vizlab,',
+                                   'Australian National University'),
+                       partnerLogo('/images/ucb-logo.svg',
+                                   'College of Chemistry,',
+                                   'University of California, Berkeley')
+                      ),
+                 $.p({ className: 'center' },
+                     'Additional hosting by'),
                  $.h2({ className: 'center' },
                       'Berzelii Center EXSELENT',
                       $.br(),
