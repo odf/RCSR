@@ -21,7 +21,7 @@ var partnerLogo = function(src) {
     args.map(function(x) { return [$.br(), x]; })).slice(1);
 
   return $.figure(null,
-                  $.img({ src: src, height: 64 }),
+                  $.img({ src: src }),
                   $.figcaption.apply(null, captionArgs));
 };
 
@@ -34,8 +34,7 @@ var Home = React.createClass({
 
     return $.div(null,
                  $.div({ className: 'homePageLogo' },
-                       $.img({ src: '/images/netcenter-logo.svg',
-                               height: 350 }),
+                       $.img({ src: '/images/netcenter-logo.svg' }),
                        $.p(null, greeting)),
                  $.div({ className: 'partnerLogos', style: { clear: 'both' } },
                        partnerLogo('/images/asu-logo.svg',
