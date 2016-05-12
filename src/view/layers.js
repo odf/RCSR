@@ -83,8 +83,15 @@ var schema = {
       title: "Bounds",
       type: "object",
       properties: common.makeBoundsProperties([
-        "kinds of vertex"
-      ])
+        "kinds of vertex",
+        "kinds of edge",
+        "kinds of face"
+      ]),
+      "x-hints": {
+        form: {
+          helpURL: "/help/bounds.html"
+        }
+      }
     }
   }};
 

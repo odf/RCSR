@@ -24,7 +24,9 @@ var matcher = {
     var seen = item.vertices.map(function(v) { return v.coordination; });
     return common.equalSets(values, seen);
   },
-  "kinds of vertex": common.rangeMatcher('kindsOfVertex')
+  "kinds of vertex": common.rangeMatcher('kindsOfVertex'),
+  "kinds of edge": common.rangeMatcher('kindsOfEdge'),
+  "kinds of face": common.rangeMatcher('kindsOfFace'),
 };
 
 
