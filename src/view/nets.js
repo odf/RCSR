@@ -29,6 +29,7 @@ var keywords = [
   "quasiregular net",
   "quasisimple tiling",
   "regular net",
+  "rod net",
   "self dual net",
   "semiregular net",
   "simple tiling",
