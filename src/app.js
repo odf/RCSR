@@ -96,7 +96,9 @@ var Links = React.createClass({
       ['http://www.iucr.org',
        'International Union of Crystallography' ],
       ['/downloads/OKeeffeLecturesLR.zip',
-       'O\'Keeffe lectures', 'download (ZIP file, 25MB)']
+       'O\'Keeffe lectures', 'download (ZIP file, 25MB)'],
+      ['/downloads/TouristGuide.pdf',
+       'A tourist guide to the RCSR', 'download (PDF file, 12MB)']
     ];
 
     return $.div(
@@ -117,7 +119,11 @@ var Systre = React.createClass({
       ['https://github.com/odf/gavrog/releases/download/v0.6.0-beta2/Systre-1.2.0-beta2.jar',
        'Latest Systre executable (1.2.0-beta2)', 'download (1.5MB)'],
       ['/downloads/RCSRnets.cgd',
-       'Systre data for RCSR nets (where available)', 'download (1.3MB)']
+       'Systre input data (.cgd) for RCSR nets (where available)',
+       'download (1.5MB)'],
+      ['/downloads/RCSRnets.arc',
+       'Systre archive file (.arc) for RCSR nets (where available)',
+       'download (1.7MB)']
     ];
 
     return $.div(null,
