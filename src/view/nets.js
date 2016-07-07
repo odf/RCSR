@@ -154,9 +154,10 @@ var a = function(val) {
 
 var properties = function(net) {
   return common.makeTable(
-    ['embed type', 'space group', 'volume', 'density', 'genus', 'td10'],
-    [[ net.embedType, net.spacegroupSymbol,
-       f(net.cell.volume), f(net.density), net.genus, net.td10 ]]);
+    ['embed type', 'space group', 'volume', 'density',
+     'genus', 'td10', 'deg freedom'],
+    [[ net.embedType, net.spacegroupSymbol, f(net.cell.volume), f(net.density),
+       net.genus, net.td10, net.degreesOfFreedom ]]);
 };
 
 

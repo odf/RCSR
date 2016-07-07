@@ -199,6 +199,7 @@ var parseStructure = function(lines, startIndex) {
       result.vertices[k].symbol = fixName(lines[++i]);
 
     result.smallestRingSize = parseInt(lines[++i]);
+    result.degreesOfFreedom = parseInt(lines[++i]);
 
     result.verticesPerUnitCell = sumOfMultiplicities(result.vertices);
     result.edgesPerUnitCell = sumOfMultiplicities(result.edges);
