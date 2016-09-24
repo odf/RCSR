@@ -120,6 +120,9 @@ var f = function(val) {
 
 
 var vertices = function(poly) {
+  if (poly.vertices.length == 0)
+    return $.div(null);
+
   return $.div(null,
                $.p(null, common.makeLine('vertices', [poly.vertices.length])),
                common.makeTable(['vertex', 'coordination', 'x', 'y', 'z'],
@@ -136,6 +139,9 @@ var vertices = function(poly) {
 
 
 var faces = function(poly) {
+  if (poly.faces.length == 0)
+    return $.div(null);
+
   return $.div(null,
                $.p(null, common.makeLine('faces', [poly.faces.length])),
                common.makeTable(['face', 'number of edges', 'x', 'y', 'z'],
