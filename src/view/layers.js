@@ -24,7 +24,8 @@ var keywords = [
   "isohedral",
   "pentagon tiling",
   "self-dual",
-  "uniform"
+  "uniform",
+  "circle packing"
 ];
 
 
