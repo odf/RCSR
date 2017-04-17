@@ -120,6 +120,7 @@ var schema = {
         ["density"],
         ["td10"],
         ["genus"],
+        ["degrees of freedom"],
         ["kinds of vertex"],
         ["kinds of edge"],
         ["kinds of face"],

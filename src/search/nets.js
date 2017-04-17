@@ -37,6 +37,7 @@ var matcher = {
   "density"           : common.rangeMatcher('density'),
   "td10"              : common.rangeMatcher('td10'),
   "genus"             : common.rangeMatcher('genus'),
+  "degrees of freedom": common.rangeMatcher('degreesOfFreedom'),
   "kinds of vertex"   : common.rangeMatcher('numberOfVertices'),
   "kinds of edge"     : common.rangeMatcher('numberOfEdges'),
   "kinds of face"     : common.rangeMatcher('numberOfFaces'),
