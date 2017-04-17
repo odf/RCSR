@@ -29,7 +29,7 @@ var matcher = {
   coordination: function(item, values) {
     var n = values.length;
     var seen = item.vertices.map(function(v) { return v.coordinationNumber; });
-    if (values[n-1] == 0)
+    if (values[n-1] == 0 && !common.equalSets([2], seen))
       return common.properSubset(values.slice(0, n-1), seen);
     else
       return common.equalSets(values, seen);
@@ -64,7 +64,11 @@ var matches = function(item, query) {
     if (!good)
       return false;
   }
-  return true;
+
+  if (query.coordination)
+    return true;
+  else
+    return matcher.coordination(item, [0]);
 };
 
 
