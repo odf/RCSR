@@ -65,10 +65,7 @@ var matches = function(item, query) {
       return false;
   }
 
-  if (query.coordination)
-    return true;
-  else
-    return matcher.coordination(item, [0]);
+  return true;
 };
 
 
@@ -125,6 +122,11 @@ var cmp = function(a, b) {
 module.exports = function(data, query) {
   var results = filteredBySymbol(data, query)
     .filter(function(item) { return matches(item, query); });
+
+  if (!query.coordination)
+    results = results.filter(function(item) {
+      return matcher.coordination(item, [0]);
+    });
 
   if (query.modifiers && query.modifiers.include_a)
     results = withAugmented(results, data, query);
