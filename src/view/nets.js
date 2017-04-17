@@ -113,6 +113,17 @@ var schema = {
         }
       }
     },
+    embedType: {
+      title: "Embed Type",
+      type: "string",
+      pattern: "^[1-5]$",
+      "x-hints": {
+        form: {
+          classes: ["important"],
+          helpURL: "/help/embed_type.html"
+        }
+      }
+    },
     bounds: {
       title: "Bounds",
       type: "object",

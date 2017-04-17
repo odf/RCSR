@@ -34,6 +34,9 @@ var matcher = {
     else
       return common.equalSets(values, seen);
   },
+  embedType: function(item, value) {
+    return item.embedType[0] == value;
+  },
   "density"           : common.rangeMatcher('density'),
   "td10"              : common.rangeMatcher('td10'),
   "genus"             : common.rangeMatcher('genus'),
