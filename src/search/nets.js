@@ -119,11 +119,17 @@ var cmp = function(a, b) {
 };
 
 
+var isExactSymbolSearch = function(query) {
+  var spec = query.symbol;
+  return spec && (!spec.mode || spec.mode == 'is');
+};
+
+
 module.exports = function(data, query) {
   var results = filteredBySymbol(data, query)
     .filter(function(item) { return matches(item, query); });
 
-  if (!query.coordination)
+  if (! (isExactSymbolSearch(query) || query.coordination))
     results = results.filter(function(item) {
       return matcher.coordination(item, [0]);
     });
