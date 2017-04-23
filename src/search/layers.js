@@ -74,8 +74,26 @@ var cmp = function(a, b) {
 };
 
 
+var isExactSymbolSearch = function(query) {
+  var spec = query.symbol;
+  return spec && (!spec.mode || spec.mode == 'is');
+};
+
+
+var isWeavingSearch = function(query) {
+  return query.keywords && query.keywords.indexOf("weaving") >= 0;
+};
+
+
 module.exports = function(data, query) {
-  return filteredBySymbol(data, query)
-    .filter(function(item) { return matches(item, query); })
+  var results = filteredBySymbol(data, query)
+    .filter(function(item) { return matches(item, query); });
+
+  if (! (isExactSymbolSearch(query) || isWeavingSearch(query)))
+    results = results.filter(function(item) {
+      return !matcher.keywords(item, ["weaving"]);
+    });
+
+  return results
     .sort(function(a, b) { return cmp(a.symbol, b.symbol); });
 };

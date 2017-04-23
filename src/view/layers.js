@@ -25,7 +25,8 @@ var keywords = [
   "pentagon tiling",
   "self-dual",
   "uniform",
-  "circle packing"
+  "circle packing",
+  "weaving"
 ];
 
 
