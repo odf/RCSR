@@ -91,7 +91,7 @@ var schema = {
       ]),
       "x-hints": {
         form: {
-          helpURL: "/help/bounds.html"
+          helpURL: "/help/bounds2d.html"
         }
       }
     }
