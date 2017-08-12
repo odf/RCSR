@@ -125,14 +125,25 @@ var isExactSymbolSearch = function(query) {
 };
 
 
+var isWeavingSearch = function(query) {
+  return query.keywords && query.keywords.indexOf("weaving") >= 0;
+};
+
+
 module.exports = function(data, query) {
   var results = filteredBySymbol(data, query)
     .filter(function(item) { return matches(item, query); });
 
-  if (! (isExactSymbolSearch(query) || query.coordination))
+  if (! (isExactSymbolSearch(query) || isWeavingSearch(query))) {
     results = results.filter(function(item) {
-      return matcher.coordination(item, [0]);
+      return !matcher.keywords(item, ["weaving"]);
     });
+
+    if (!query.coordination)
+      results = results.filter(function(item) {
+        return matcher.coordination(item, [0]);
+      });
+  }
 
   if (query.modifiers && query.modifiers.include_a)
     results = withAugmented(results, data, query);

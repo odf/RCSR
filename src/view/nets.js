@@ -35,6 +35,7 @@ var keywords = [
   "simple tiling",
   "uniform net",
   "uniform tiling",
+  "weaving",
   "zeolite net"
 ];
 
