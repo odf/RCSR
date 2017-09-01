@@ -27,7 +27,8 @@ var keywords = [
   "regular",
   "simple",
   "simplicial",
-  "spacefilling"
+  "spacefilling",
+  "weaving"
 ];
 
 
