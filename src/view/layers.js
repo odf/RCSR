@@ -187,7 +187,9 @@ var Layer = React.createClass({
                  properties(layer),
                  kinds(layer),
                  cell(layer),
-                 vertices(layer));
+                 vertices(layer),
+                 $.a({ href: 'http://toris.topospro.com/', target: '_blank' },
+                     'Find occurrences...'));
   }
 });
 

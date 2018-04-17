@@ -276,7 +276,9 @@ var Net = React.createClass({
                  cell(net),
                  vertices(net),
                  edges(net),
-                 tiling(net));
+                 tiling(net),
+                 $.a({ href: 'http://toris.topospro.com/', target: '_blank' },
+                     'Find occurrences...'));
   }
 });
 
