@@ -1,6 +1,10 @@
 'use strict';
 
 
+var unicodeInfinity = '\u221e';
+var unicodeDummy = '\ufffd';
+
+
 var cellVolume = function(cell) {
   var a = cell.a;
   var b = cell.b;
@@ -45,6 +49,14 @@ var cleanupLine = function(line) {
 
 var fixName = function(name) {
   return name == 'unk' ? '-' : name;
+};
+
+
+var fixVertexSymbol = function(sym) {
+  if (sym == 'inf' || sym == unicodeDummy)
+    return unicodeInfinity;
+  else
+    return fixName(sym);
 };
 
 
@@ -196,7 +208,7 @@ var parseStructure = function(lines, startIndex) {
     }
 
     for (k = 0; k < result.numberOfVertices; ++k)
-      result.vertices[k].symbol = fixName(lines[++i]);
+      result.vertices[k].symbol = fixVertexSymbol(lines[++i]);
 
     result.smallestRingSize = parseInt(lines[++i]);
     result.degreesOfFreedom = parseInt(lines[++i]);

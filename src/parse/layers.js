@@ -1,6 +1,10 @@
 'use strict';
 
 
+var unicodeInfinity = '\u221e';
+var unicodeDummy = '\ufffd';
+
+
 var splitIntoLines = function(text) {
   return text.split(/\r?\n/);
 };
@@ -13,6 +17,14 @@ var cleanupLine = function(line) {
 
 var parseInteger = function(s) {
   return parseInt(s);
+};
+
+
+var fixVertexSymbol = function(sym) {
+  if (sym == 'inf' || sym == unicodeDummy)
+    return unicodeInfinity;
+  else
+    return sym;
 };
 
 
@@ -78,7 +90,7 @@ var parseVertex = function(lines, startIndex) {
   tmp = lines[++i].split(/\s+/).map(function(s) { return parseInt(s); });
   result.coordinationSequence = tmp.slice(0, -1)
   result.cum10 = tmp.slice(-1)[0];
-  result.symbol = lines[++i];
+  result.symbol = fixVertexSymbol(lines[++i]);
 
   return { result: result, nextLine: ++i };
 };
