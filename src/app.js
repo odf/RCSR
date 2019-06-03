@@ -118,12 +118,12 @@ var Systre = React.createClass({
     var links = [
       ['https://github.com/odf/gavrog/releases/download/v0.6.0-beta2/Systre-1.2.0-beta2.jar',
        'Latest Systre executable (1.2.0-beta2)', 'download (1.5MB)'],
-      ['/downloads/RCSRnets.cgd',
-       'Systre input data (.cgd) for RCSR nets (where available)',
-       'download (1.5MB)'],
-      ['/downloads/RCSRnets.arc',
-       'Systre archive file (.arc) for RCSR nets (where available)',
-       'download (1.7MB)']
+      ['/downloads/RCSRnets-2019-06-01.cgd',
+       'Systre input data (.cgd) for RCSR nets as of June 1, 2019',
+       'download (1.8MB)'],
+      ['/downloads/RCSRnets-2019-06-01.arc',
+       'Systre archive file (.arc) for RCSR nets as of June 1, 2019',
+       'download (2.2MB)']
     ];
 
     return $.div(null,
