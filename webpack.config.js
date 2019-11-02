@@ -6,12 +6,12 @@ module.exports = {
     filename: "app.js"
   },
   module: {
-    loaders: [
-      { test: /\.es6\.js$/, loader: "regenerator" },
-      { test: /\.json$/, loader: "json" }
+    rules: [
+      { test: /\.es6\.js$/, use: "regenerator" },
+      { test: /\.json$/, use: "json" }
     ]
   },
   resolve: {
-    extensions: [ "", ".js", ".es6.js" ]
+    extensions: [ ".js", ".es6.js" ]
   }
 };

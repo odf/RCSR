@@ -2,40 +2,42 @@
 
 var fs = require('fs');
 var express = require('express');
+var compression = require('compression');
+var morgan = require('morgan');
 
 var home = process.argv[2];
 
 var app = express();
 
-app.use(express.logger('dev'));
-app.use(express.compress());
+app.use(morgan('dev'));
+app.use(compression());
 
 app.get('/:name.manifest', function(req, res) {
   var path = req.path;
   if (fs.existsSync(home + path)) {
     res.setHeader('Content-Type', 'text/cache-manifest');
-    res.sendfile(path, { root: home });
+    res.sendFile(path, { root: home });
   }
 });
 
 app.get('/images/:type/:name.jpg', function(req, res) {
   var path = req.path;
   if (fs.existsSync(home + path))
-    res.sendfile(path, { root: home });
+    res.sendFile(path, { root: home });
   else
-    res.sendfile('/images/placeholder.jpg', { root: home });
+    res.sendFile('/images/placeholder.jpg', { root: home });
 });
 
 app.get('/', function(req, res) {
-  res.sendfile('app.html', { root: home });
+  res.sendFile('app.html', { root: home });
 });
 
 app.get('*', function(req, res) {
   var path = req.path;
   if (fs.existsSync(home + path))
-    res.sendfile(path, { root: home });
+    res.sendFile(path, { root: home });
   else
-    res.sendfile('app.html', { root: home });
+    res.sendFile('app.html', { root: home });
 });
 
 app.listen(3000);
