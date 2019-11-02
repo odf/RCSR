@@ -87,7 +87,7 @@ var Links = React.createClass({
        'interpenetrating nets' ],
       ['http://www.ccdc.cam.ac.uk',
        'Cambridge structural database (CSD)' ],
-      ['http://www.topos.ssu.samara.ru',
+      ['https://topospro.com',
        'TOPOS topology analysis' ],
       ['http://gavrog.org',
        'Systre net analysis' ],

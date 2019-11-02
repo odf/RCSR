@@ -188,8 +188,13 @@ var Layer = React.createClass({
                  kinds(layer),
                  cell(layer),
                  vertices(layer),
-                 $.a({ href: 'https://topcryst.com/', target: '_blank' },
-                     'Find occurrences...'));
+                 $.a(
+                   {
+                     href: 'https://topcryst.com/s.php?ttdName=' + layer.symbol,
+                     target: '_blank'
+                   },
+                   'Find occurrences...'
+                 ));
   }
 });
 

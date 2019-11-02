@@ -277,8 +277,13 @@ var Net = React.createClass({
                  vertices(net),
                  edges(net),
                  tiling(net),
-                 $.a({ href: 'http://topcryst.com/', target: '_blank' },
-                     'Find occurrences...'));
+                 $.a(
+                   {
+                     href: 'https://topcryst.com/s.php?ttdName=' + net.symbol,
+                     target: '_blank'
+                   },
+                   'Find occurrences...'
+                 ));
   }
 });
 
