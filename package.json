@@ -8,7 +8,7 @@
     "json-loader": "^0.5.7",
     "morgan": "^1.9.1",
     "regenerator": "^0.4.12",
-    "webpack": "^4.41.2",
+    "webpack": "^4.41.4",
     "webpack-cli": "^3.3.10"
   },
   "author": {
@@ -16,14 +16,14 @@
     "email": "olaf.delgado@gmail.com"
   },
   "dependencies": {
-    "level-js": "^5.0.0",
+    "level-js": "^5.0.1",
     "levelup": "^4.3.2",
     "plexus-csp": "^0.2.2",
     "plexus-form": "^0.1.3",
     "plexus-validate": "~0.0.4",
     "react": "~0.12.2",
     "rusha": "^0.8.13",
-    "superagent": ">= 3.7.0"
+    "superagent": "^5.1.2"
   },
   "scripts": {
     "build": "webpack -p"
