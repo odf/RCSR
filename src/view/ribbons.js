@@ -137,9 +137,24 @@ var vertices = function(ribbon) {
                                   return [
                                     v.name,
                                     v.coordination,
-                                    f(v.coordinates.numerical[0]),
-                                    f(v.coordinates.numerical[1]),
-                                    f(v.coordinates.numerical[2])
+                                    f(v.coordinates[0]),
+                                    f(v.coordinates[1]),
+                                    f(v.coordinates[2])
+                                  ];
+                                })));
+};
+
+
+var edges = function(ribbon) {
+  return $.div(null,
+               $.p(null, common.makeLine('edges', [ribbon.edges.length])),
+               common.makeTable(['edge', 'x', 'y', 'z'],
+                                ribbon.edges.map(function(e) {
+                                  return [
+                                    e.name,
+                                    f(e.coordinates[0]),
+                                    f(e.coordinates[1]),
+                                    f(e.coordinates[2])
                                   ];
                                 })));
 };
@@ -167,6 +182,7 @@ var Ribbon = React.createClass({
                  kinds(ribbon),
                  cell(ribbon),
                  vertices(ribbon),
+                 edges(ribbon),
                  $.a(
                    {
                      href: 'https://topcryst.com/s.php?ttdName=' + ribbon.symbol,
