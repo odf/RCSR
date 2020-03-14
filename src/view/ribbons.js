@@ -25,7 +25,7 @@ var keywords = [
 
 
 var schema = {
-  title: "Search 2D nets",
+  title: "Search 1-periodic",
   type: "object",
   required: [],
   properties: {
@@ -206,7 +206,7 @@ var Ribbons = React.createClass({
 
   render: function() {
     return $.div(null,
-                 $.h1(null, 'Search 2D Nets'),
+                 $.h1(null, 'Search 1-periodic'),
                  this.props.info ? $.p(null, '(' + this.props.info + ')') : null,
                  makeTabs({ labels: ['Search Form', 'Results'],
                             spreadThreshold: 800,
