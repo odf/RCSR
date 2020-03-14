@@ -5,6 +5,7 @@ var csp   = require('plexus-csp');
 
 var parseNets   = require('./parse/nets');
 var parseLayers = require('./parse/layers');
+var parseRibbons= require('./parse/ribbons');
 var parsePolys  = require('./parse/polys');
 
 
@@ -75,6 +76,16 @@ var builtinLayerData = function(symbol) {
 };
 
 
+var builtinRibbonData = function(symbol) {
+  return builtinData(
+    'ribbons',
+    '/data/1dall.txt',
+    parseRibbons,
+    symbol
+  );
+};
+
+
 var builtinPolyData = function(symbol) {
   return builtinData(
     'polyhedra',
@@ -89,11 +100,13 @@ var allBuiltinData = function() {
   return csp.go(function*() {
     var data = yield csp.join([builtinNetData(),
                                builtinLayerData(),
+                               builtinRibbonData(),
                                builtinPolyData()]);
     return {
       Nets     : data[0],
       Layers   : data[1],
-      Polyhedra: data[2]
+      Ribbons  : data[2],
+      Polyhedra: data[3]
     };
   });
 };
@@ -106,6 +119,7 @@ module.exports = function(type, arg) {
       'help'     : helpPage,
       'nets'     : builtinNetData,
       'layers'   : builtinLayerData,
+      'ribbons'  : builtinRibbonData,
       'polyhedra': builtinPolyData,
       'all'      : allBuiltinData
     }[type](arg);

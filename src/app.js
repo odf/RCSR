@@ -4,6 +4,7 @@ var React       = require('react');
 
 var Nets        = require('./view/nets');
 var Layers      = require('./view/layers');
+var Ribbons     = require('./view/ribbons');
 var Polyhedra   = require('./view/polys');
 
 var loader      = require('./loader');
@@ -198,6 +199,16 @@ var resolveRoute = function(path) {
       component: Layers.search,
       loader   : loader('layers')
     });
+  else if (path.match(/^\/ribbons\//))
+    return React.createElement(Deferred, {
+      component: Ribbons.single,
+      loader   : loader('ribbons', path.replace(/^\/ribbons\//, ''))
+    });
+  else if (path == '/ribbons')
+    return React.createElement(Deferred, {
+      component: Ribbons.search,
+      loader   : loader('ribbons')
+    });
   else if (path.match(/^\/polyhedra\//))
     return React.createElement(Deferred, {
       component: Polyhedra.single,
@@ -249,6 +260,7 @@ var Application = React.createClass({
       [ 'SYSTRE', '/systre' ],
       [ '3D NETS', '/nets' ],
       [ '2D NETS', '/layers' ],
+      [ '1-PERIODIC', '/ribbons' ],
       [ 'POLYHEDRA', '/polyhedra' ]
     ];
 

@@ -122,10 +122,12 @@ var parseStructure = function(lines, startIndex) {
 
     tmp = parseSection(lines, ++i, parseVertex);
     result.vertices = tmp.result;
+    result.kindsOfVertex = result.vertices.length;
     i = tmp.nextLine;
 
     tmp = parseSection(lines, i, parseEdge);
     result.edges = tmp.result;
+    result.kindsOfEdge = result.edges.length;
     i = tmp.nextLine;
 
   } catch(ex) {
