@@ -115,7 +115,7 @@ var parseStructure = function(lines, startIndex) {
       i = tmp.nextLine;
     }
 
-    result.group2d = lines[i];
+    result.group1d = lines[i];
     result.group3d = lines[++i];
 
     result.cell = parseCell(lines[++i]);
