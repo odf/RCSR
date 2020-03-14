@@ -7,14 +7,17 @@ var csp         = require('plexus-csp');
 
 var parseNets   = require('../parse/nets');
 var parseLayers = require('../parse/layers');
+var parseRibbons= require('../parse/ribbons');
 var parsePolys  = require('../parse/polys');
 
 var checkNets   = require('../check/nets');
 var checkLayers = require('../check/layers');
+var checkRibbons= require('../check/ribbons');
 var checkPolys  = require('../check/polys');
 
 var Nets        = require('../view/nets');
 var Layers      = require('../view/layers');
+var Ribbons     = require('../view/ribbons');
 var Polyhedra   = require('../view/polys');
 
 var sha1        = require('../sha1');
@@ -29,6 +32,7 @@ var $ = React.DOM;
 var parsers = {
   'Nets'     : parseNets,
   'Layers'   : parseLayers,
+  'Ribbons'  : parseRibbons,
   'Polyhedra': parsePolys
 };
 
@@ -36,6 +40,7 @@ var parsers = {
 var checkers = {
   'Nets'     : checkNets,
   'Layers'   : checkLayers,
+  'Ribbons'  : checkRibbons,
   'Polyhedra': checkPolys
 };
 
@@ -43,6 +48,7 @@ var checkers = {
 var components = {
   'Nets'     : Nets.search,
   'Layers'   : Layers.search,
+  'Ribbons'  : Ribbons.search,
   'Polyhedra': Polyhedra.search
 };
 
@@ -317,6 +323,8 @@ var Testing = React.createClass({
       },
       Layers: {
       },
+      Ribbons: {
+      },
       Polyhedra: {
       },
       Images: {
@@ -384,11 +392,13 @@ var Testing = React.createClass({
     var shortened = {
       Nets     : 'Net',
       Layers   : 'Layer',
+      Ribbons  : 'Ribbon',
       Polyhedra: 'Poly'
     };
     var filename = {
       Nets     : '3dall.txt',
       Layers   : '2dall.txt',
+      Ribbons  : '1dall.txt',
       Polyhedra: '0dall.txt'
     };
 
@@ -397,7 +407,7 @@ var Testing = React.createClass({
     };
     var data = [];
 
-    ['Nets', 'Layers', 'Polyhedra'].forEach(function(key) {
+    ['Nets', 'Layers', 'Ribbons', 'Polyhedra'].forEach(function(key) {
       var section = this.state[key];
       if (section.filename)
         data.push({
@@ -571,7 +581,8 @@ var Testing = React.createClass({
                    binary    : true,
                    handleData: this.handleImageUpload
                  }),
-                 ['Nets', 'Layers', 'Polyhedra', 'unknown'].map(function(type) {
+                 ['Nets', 'Layers', 'Ribbons', 'Polyhedra', 'unknown']
+                 .map(function(type) {
                    var content = Object.keys(images)
                      .filter(function(name) {
                        return (images[name].type || 'unknown') == type;
@@ -587,7 +598,7 @@ var Testing = React.createClass({
 
   renderLoadData: function() {
     return $.div(null,
-                 ['Nets', 'Layers', 'Polyhedra']
+                 ['Nets', 'Layers', 'Ribbons', 'Polyhedra']
                  .map(this.renderUploadSection));
   },
 
