@@ -205,11 +205,15 @@ var Publish = React.createClass({
     var newState = {};
     newState[path] = {
       status  : err ? 'error: '+err : 'published successfully!',
+      complete: !err,
       progress: null
     };
     this.setState(newState);
-    if (!err)
-      onCompletion(path);
+
+    csp.go(function*() {
+      if (!err)
+        yield onCompletion(path);
+    }).then(null, function(ex) { console.log(ex + '\n' + ex.stack); });
   },
 
   publishSingle: function(data) {
