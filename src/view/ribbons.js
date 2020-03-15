@@ -25,7 +25,7 @@ var keywords = [
 
 
 var schema = {
-  title: "Search 1-periodic",
+  title: "Search 1-Periodic",
   type: "object",
   required: [],
   properties: {
@@ -222,14 +222,14 @@ var Ribbons = React.createClass({
 
   render: function() {
     return $.div(null,
-                 $.h1(null, 'Search 1-periodic'),
+                 $.h1(null, 'Search 1-Periodic'),
                  this.props.info ? $.p(null, '(' + this.props.info + ')') : null,
                  makeTabs({ labels: ['Search Form', 'Results'],
                             spreadThreshold: 800,
                             enableRemoteSelection: this.subscribe
                           },
                           this.renderSearchForm(schema),
-                          this.renderResults('ribbon', 'ribbons',
+                          this.renderResults('structure', 'structures',
                                              Ribbon, ribbonTable)));
   }
 });

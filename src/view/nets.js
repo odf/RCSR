@@ -41,7 +41,7 @@ var keywords = [
 
 
 var schema = {
-  title: "Search 3D nets",
+  title: "Search 3-Periodic",
   type: "object",
   required: [],
   properties: {
@@ -317,14 +317,15 @@ var Nets = React.createClass({
 
   render: function() {
     return $.div(null,
-                 $.h1(null, 'Search 3D Nets'),
+                 $.h1(null, 'Search 3-Periodic'),
                  this.props.info ? $.p(null, '(' + this.props.info + ')') : null,
                  makeTabs({ labels: ['Search Form', 'Results'],
                             spreadThreshold: 800,
                             enableRemoteSelection: this.subscribe
                           },
                           this.renderSearchForm(schema),
-                          this.renderResults('net', 'nets', Net, netTable)));
+                          this.renderResults('structure', 'structures',
+                                             Net, netTable)));
   }
 });
 

@@ -33,7 +33,7 @@ var keywords = [
 
 
 var schema = {
-  title: "Search polyhedra",
+  title: "Search 0-Periodic",
   type: "object",
   required: [],
   properties: {
@@ -221,14 +221,14 @@ var Polyhedra = React.createClass({
 
   render: function() {
     return $.div(null,
-                 $.h1(null, 'Search Polyhedra'),
+                 $.h1(null, 'Search 0-Periodic'),
                  this.props.info ? $.p(null, '(' + this.props.info + ')') : null,
                  makeTabs({ labels: ['Search Form', 'Results'],
                             spreadThreshold: 800,
                             enableRemoteSelection: this.subscribe
                           },
                           this.renderSearchForm(schema),
-                          this.renderResults('polyhedron', 'polyhedra',
+                          this.renderResults('structure', 'structures',
                                              Polyhedron, polyTable)));
   }
 });

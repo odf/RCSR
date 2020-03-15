@@ -258,10 +258,10 @@ var Application = React.createClass({
       [ 'ABOUT', '/about' ],
       [ 'LINKS', '/links' ],
       [ 'SYSTRE', '/systre' ],
-      [ '3D NETS', '/nets' ],
-      [ '2D NETS', '/layers' ],
+      [ '3-PERIODIC', '/nets' ],
+      [ '2-PERIODIC', '/layers' ],
       [ '1-PERIODIC', '/ribbons' ],
-      [ 'POLYHEDRA', '/polyhedra' ]
+      [ '0-PERIODIC', '/polyhedra' ]
     ];
 
     if (adminKnown) {

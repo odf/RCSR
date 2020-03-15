@@ -31,7 +31,7 @@ var keywords = [
 
 
 var schema = {
-  title: "Search 2D nets",
+  title: "Search 2-Periodic",
   type: "object",
   required: [],
   properties: {
@@ -228,14 +228,14 @@ var Layers = React.createClass({
 
   render: function() {
     return $.div(null,
-                 $.h1(null, 'Search 2D Nets'),
+                 $.h1(null, 'Search 2-Periodic'),
                  this.props.info ? $.p(null, '(' + this.props.info + ')') : null,
                  makeTabs({ labels: ['Search Form', 'Results'],
                             spreadThreshold: 800,
                             enableRemoteSelection: this.subscribe
                           },
                           this.renderSearchForm(schema),
-                          this.renderResults('net', 'nets',
+                          this.renderResults('structure', 'structures',
                                              Layer, layerTable)));
   }
 });
