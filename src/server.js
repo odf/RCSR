@@ -20,7 +20,7 @@ app.get('/:name.manifest', function(req, res) {
   }
 });
 
-app.get('/images/:type/:name.jpg', function(req, res) {
+app.get('/images/:type/:initial/:name.jpg', function(req, res) {
   var path = req.path;
   if (fs.existsSync(home + path))
     res.sendFile(path, { root: home });
