@@ -35,8 +35,8 @@ var Home = React.createClass({
 
     return $.div(null,
                  $.div({ className: 'homePageLogo' },
-                       $.p(null, greeting),
-                       $.img({ src: '/images/RCSRpic.png' })
+                       $.img({ src: '/images/RCSRpic.png' }),
+                       $.p(null, greeting)
                       ),
                  $.div({ className: 'partnerLogos', style: { clear: 'both' } },
                        partnerLogo('/images/asu-logo.svg',
