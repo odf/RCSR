@@ -82,7 +82,12 @@ var schema = {
         "kinds of vertex",
         "kinds of edge",
         "kinds of face"
-      ])
+      ]),
+      "x-hints": {
+        form: {
+          helpURL: "/help/bounds0d.html"
+        }
+      }
     }
   }
 };

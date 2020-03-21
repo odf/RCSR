@@ -61,8 +61,7 @@ var schema = {
       properties: common.makeBooleanProperties(keywords),
       "x-hints": {
         form: {
-          classes: ["inline", "narrow", "checkbox-left"],
-          helpURL: "/help/keywords1d.html"
+          classes: ["inline", "narrow", "checkbox-left"]
         }
       }
     },
