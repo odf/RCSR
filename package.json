@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "create-react-class": "^15.6.3",
+    "encoding-down": "^6.3.0",
     "level-js": "^5.0.2",
     "levelup": "^4.4.0",
     "plexus-csp": "^0.2.2",

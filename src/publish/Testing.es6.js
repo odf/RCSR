@@ -5,6 +5,7 @@ var createReactClass = require('create-react-class');
 
 var levelup     = require('levelup');
 var leveljs     = require('level-js');
+var encode      = require('encoding-down');
 var csp         = require('plexus-csp');
 
 var parseNets   = require('../parse/nets');
@@ -341,7 +342,7 @@ var Testing = createReactClass({
   },
 
   componentDidMount: function() {
-    this._db = levelup('RCSR', { valueEncoding: 'json', db: leveljs });
+    this._db = levelup(encode(leveljs('RCSR'), { valueEncoding: 'json' }));
 
     this._db.get('publishing-log', function(err, val) {
       if (err) {
