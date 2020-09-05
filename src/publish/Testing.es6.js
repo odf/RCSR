@@ -1,6 +1,8 @@
 'use strict';
 
 var React       = require('react');
+var createReactClass = require('create-react-class');
+
 var levelup     = require('levelup');
 var leveljs     = require('level-js');
 var csp         = require('plexus-csp');
@@ -26,7 +28,7 @@ var widgets     = require('../widgets');
 var credentials = require('./credentials');
 var github      = require('./github');
 
-var $ = React.DOM;
+var $ = React.createElement;
 
 
 var parsers = {
@@ -170,21 +172,21 @@ var structureTypeForSymbol = function(symbol, structures) {
 };
 
 
-var ProgressBar = React.createClass({
+var ProgressBar = createReactClass({
   displayName: 'ProgressBar',
 
   render: function() {
     var percent = this.props.progress * 100;
-    return $.span(null,
-                  $.span({ className: 'meter hSep-1em',
+    return $('span', null,
+                  $('span', { className: 'meter hSep-1em',
                            style: { width: '200px' } },
-                         $.span({ style: { width: percent+'%' } })),
+                         $('span', { style: { width: percent+'%' } })),
                   Math.round(percent)+'%');
   }
 });
 
 
-var Publish = React.createClass({
+var Publish = createReactClass({
   displayName: 'Publish',
 
   getInitialState: function() {
@@ -261,14 +263,14 @@ var Publish = React.createClass({
       error = 'You cannot publish without a valid access token.';
 
     if (error)
-      button = $.p({ className: 'error' }, error);
+      button = $('p', { className: 'error' }, error);
     else
-      button = $.input({ type   : 'submit',
+      button = $('input', { type   : 'submit',
                          key    : label,
                          value  : label,
                          onClick: this.publish });
 
-    return $.div(null, $.h3(null, 'Publish'), button);
+    return $('div', null, $('h3', null, 'Publish'), button);
   },
 
   renderProgress: function(progress) {
@@ -283,33 +285,33 @@ var Publish = React.createClass({
         var fileState = this.state[name] || {};
         var ok        = !status.match(/^Error:/)
 
-        return $.tr({ key      : name,
+        return $('tr', { key      : name,
                       className: ok ? '' : 'error' },
-                    $.td({ className: 'leftAlign' }, name),
-                    $.td({ className: 'leftAlign' },
+                    $('td', { className: 'leftAlign' }, name),
+                    $('td', { className: 'leftAlign' },
                          fileState.status || 'not yet published',
                          this.renderProgress(fileState.progress)));
       }.bind(this));
 
     if (data.length > 0) {
-      return $.div(null,
-                   $.h3(null, 'Status'),
-                   $.table(null,
-                           $.thead(null,
-                                   $.tr(null,
-                                        $.th(null, 'Path'),
-                                        $.th(null, 'Status'))),
-                           $.tbody(null, data)));
+      return $('div', null,
+                   $('h3', null, 'Status'),
+                   $('table', null,
+                           $('thead', null,
+                                   $('tr', null,
+                                        $('th', null, 'Path'),
+                                        $('th', null, 'Status'))),
+                           $('tbody', null, data)));
     }
   },
 
   render: function() {
     var creds = credentials();
 
-    return $.div(null,
-                 $.h3(null, 'Credentials'),
-                 $.p(null, $.b(null, 'Your name: '), (creds.user || '-')),
-                 $.p(null, 'Access token '
+    return $('div', null,
+                 $('h3', null, 'Credentials'),
+                 $('p', null, $('b', null, 'Your name: '), (creds.user || '-')),
+                 $('p', null, 'Access token '
                      +(creds.okay ? '' : 'not')+' found'),
                  this.renderPublishButton(),
                  this.renderPublishStatus());
@@ -317,7 +319,7 @@ var Publish = React.createClass({
 });
 
 
-var Testing = React.createClass({
+var Testing = createReactClass({
   displayName: 'Testing',
 
   getInitialState: function() {
@@ -536,18 +538,18 @@ var Testing = React.createClass({
     }.bind(this);
 
     var removeIcon = this.state[kind].data &&
-      $.img({ className: 'deleteIcon',
+      $('img', { className: 'deleteIcon',
               onClick: remove,
               src: 'images/delete.gif'
             });
-    return $.div({ key: kind },
-                 $.h2(null, kind),
-                 $.p({ className: 'withDeleteIcon' },
-                     $.input({ type: 'radio', name: 'type',
+    return $('div', { key: kind },
+                 $('h2', null, kind),
+                 $('p', { className: 'withDeleteIcon' },
+                     $('input', { type: 'radio', name: 'type',
                                value: kind,
                                onChange: this.handleKindSelection,
                                defaultChecked: kind == 'Nets' }),
-                     $.span(null, message),
+                     $('span', null, message),
                      removeIcon),
                  makeUploader({
                    key       : kind,
@@ -566,18 +568,18 @@ var Testing = React.createClass({
         removeImage(name);
       };
 
-      return $.figure({ key: name, className: 'inlineFigure' },
-                      $.div({ className: 'withDeleteIcon' },
-                            $.img({ src: images[name].thumbnail },
-                                  $.img({ className: 'deleteIcon',
+      return $('figure', { key: name, className: 'inlineFigure' },
+                      $('div', { className: 'withDeleteIcon' },
+                            $('img', { src: images[name].thumbnail },
+                                  $('img', { className: 'deleteIcon',
                                           onClick: remove,
                                           src: 'images/delete.gif'
                                         })),
-                            $.figcaption({ className: 'center' }, name)));
+                            $('figcaption', { className: 'center' }, name)));
     };
 
-    return $.div({ key: 'Images' },
-                 $.h2(null, 'Upload'),
+    return $('div', { key: 'Images' },
+                 $('h2', null, 'Upload'),
                  makeUploader({
                    prompt    : 'Add Images',
                    accept    : 'image/*',
@@ -594,14 +596,14 @@ var Testing = React.createClass({
                      .map(figure);
 
                    if (content.length > 0)
-                     return $.div({ key: type },
-                                  $.h2(null, type),
+                     return $('div', { key: type },
+                                  $('h2', null, type),
                                   content);
                  }));
   },
 
   renderLoadData: function() {
-    return $.div(null,
+    return $('div', null,
                  ['Nets', 'Layers', 'Ribbons', 'Polyhedra']
                  .map(this.renderUploadSection));
   },
@@ -609,14 +611,14 @@ var Testing = React.createClass({
   renderDiagnostics: function() {
     var section = this.state[this.state.active];
 
-    return $.div(null, $.pre(null, section.issues || 'No problems found.'));
+    return $('div', null, $('pre', null, section.issues || 'No problems found.'));
   },
 
   renderLog: function() {
     var log = this.state.log.slice();
     log.reverse();
 
-    return $.div(null, $.pre(null, log.join('\n')));
+    return $('div', null, $('pre', null, log.join('\n')));
   },
 
   renderPreview: function() {
@@ -628,15 +630,15 @@ var Testing = React.createClass({
         data: section.data
       });
     } else
-      return $.p({ key: 'nodata' }, 'Nothing yet to preview.');
+      return $('p', { key: 'nodata' }, 'Nothing yet to preview.');
   },
 
   render: function() {
     var comment = credentials().simulate ? ' [simulated]' : '';
 
-    return $.div(null,
-                 $.h1(null, 'Testing and Publishing' + comment),
-                 $.p(null, this.info(this.state.active)),
+    return $('div', null,
+                 $('h1', null, 'Testing and Publishing' + comment),
+                 $('p', null, this.info(this.state.active)),
                  React.createElement(
                    widgets.Tabs,
                    {

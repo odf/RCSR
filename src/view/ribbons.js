@@ -1,9 +1,10 @@
 'use strict';
 
 var React    = require('react');
+var createReactClass = require('create-react-class');
 
 var validate = require('plexus-validate');
-var Form     = require('plexus-form');
+var Form     = require('../plexus-form');
 
 
 var common   = require('./common');
@@ -11,7 +12,7 @@ var search   = require('../search/ribbons');
 var widgets  = require('../widgets');
 
 
-var $ = React.DOM;
+var $ = React.createElement;
 
 
 var makeTabs = React.createFactory(widgets.Tabs);
@@ -123,13 +124,13 @@ var cell = function(ribbon) {
 
 
 var makeIndexed = function(text, index) {
-  return $.span(null, text, $.sub(null, '' + index));
+  return $('span', null, text, $('sub', null, '' + index));
 };
 
 
 var vertices = function(ribbon) {
-  return $.div(null,
-               $.p(null, common.makeLine('vertices', [ribbon.vertices.length])),
+  return $('div', null,
+               $('p', null, common.makeLine('vertices', [ribbon.vertices.length])),
                common.makeTable(['vertex', 'coordination',
                                  'x', 'y', 'z'],
                                 ribbon.vertices.map(function(v) {
@@ -145,8 +146,8 @@ var vertices = function(ribbon) {
 
 
 var edges = function(ribbon) {
-  return $.div(null,
-               $.p(null, common.makeLine('edges', [ribbon.edges.length])),
+  return $('div', null,
+               $('p', null, common.makeLine('edges', [ribbon.edges.length])),
                common.makeTable(['edge', 'x', 'y', 'z'],
                                 ribbon.edges.map(function(e) {
                                   return [
@@ -159,7 +160,7 @@ var edges = function(ribbon) {
 };
 
 
-var Ribbon = React.createClass({
+var Ribbon = createReactClass({
   displayName: 'Ribbon',
 
   render: function() {
@@ -168,21 +169,21 @@ var Ribbon = React.createClass({
     var url      = 'http://rcsr.net' + path;
     var refKinds = ['names', 'keywords'];
 
-    return $.div(null,
-                 $.h2(null, ribbon.symbol),
-                 $.p(null, makeImage({
+    return $('div', null,
+                 $('h2', null, ribbon.symbol),
+                 $('p', null, makeImage({
                    prefix: 'Ribbon',
                    symbol: ribbon.symbol,
                    mayEnlarge: true })),
-                 $.p(null, 'RCSR reference: ', $.a({ href: path }, url)),
-                 $.ul({ className: 'plainList' },
+                 $('p', null, 'RCSR reference: ', $('a', { href: path }, url)),
+                 $('ul', { className: 'plainList' },
                       common.formatReferences(ribbon, refKinds, keywords)),
                  properties(ribbon),
                  kinds(ribbon),
                  cell(ribbon),
                  vertices(ribbon),
                  edges(ribbon),
-                 $.a(
+                 $('a', 
                    {
                      href: 'https://topcryst.com/s.php?ttdName=' + ribbon.symbol,
                      target: '_blank'
@@ -214,15 +215,15 @@ var ribbonTable = function(items, link) {
 };
 
 
-var Ribbons = React.createClass({
+var Ribbons = createReactClass({
   displayName: 'Ribbons',
 
   mixins: [ common.viewer(search) ],
 
   render: function() {
-    return $.div(null,
-                 $.h1(null, 'Search 1-Periodic'),
-                 this.props.info ? $.p(null, '(' + this.props.info + ')') : null,
+    return $('div', null,
+                 $('h1', null, 'Search 1-Periodic'),
+                 this.props.info ? $('p', null, '(' + this.props.info + ')') : null,
                  makeTabs({ labels: ['Search Form', 'Results'],
                             spreadThreshold: 800,
                             enableRemoteSelection: this.subscribe

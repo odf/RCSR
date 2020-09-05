@@ -1,9 +1,10 @@
 'use strict';
 
 var React    = require('react');
+var createReactClass = require('create-react-class');
 
 var validate = require('plexus-validate');
-var Form     = require('plexus-form');
+var Form     = require('../plexus-form');
 
 
 var common   = require('./common');
@@ -11,7 +12,7 @@ var search   = require('../search/layers');
 var widgets  = require('../widgets');
 
 
-var $ = React.DOM;
+var $ = React.createElement;
 
 
 var makeTabs = React.createFactory(widgets.Tabs);
@@ -132,13 +133,13 @@ var cell = function(layer) {
 
 
 var makeIndexed = function(text, index) {
-  return $.span(null, text, $.sub(null, '' + index));
+  return $('span', null, text, $('sub', null, '' + index));
 };
 
 
 var vertices = function(layer) {
-  return $.div(null,
-               $.p(null, common.makeLine('vertices', [layer.vertices.length])),
+  return $('div', null,
+               $('p', null, common.makeLine('vertices', [layer.vertices.length])),
                common.makeTable(['vertex', 'coordination',
                                  'x', 'y', 'z', 'symbolic'],
                                 layer.vertices.map(function(v) {
@@ -166,7 +167,7 @@ var vertices = function(layer) {
 };
 
 
-var Layer = React.createClass({
+var Layer = createReactClass({
   displayName: 'Layer',
 
   render: function() {
@@ -175,20 +176,20 @@ var Layer = React.createClass({
     var url      = 'http://rcsr.net' + path;
     var refKinds = ['names', 'keywords'];
 
-    return $.div(null,
-                 $.h2(null, layer.symbol),
-                 $.p(null, makeImage({
+    return $('div', null,
+                 $('h2', null, layer.symbol),
+                 $('p', null, makeImage({
                    prefix: 'Layer',
                    symbol: layer.symbol,
                    mayEnlarge: true })),
-                 $.p(null, 'RCSR reference: ', $.a({ href: path }, url)),
-                 $.ul({ className: 'plainList' },
+                 $('p', null, 'RCSR reference: ', $('a', { href: path }, url)),
+                 $('ul', { className: 'plainList' },
                       common.formatReferences(layer, refKinds, keywords)),
                  properties(layer),
                  kinds(layer),
                  cell(layer),
                  vertices(layer),
-                 $.a(
+                 $('a', 
                    {
                      href: 'https://topcryst.com/s.php?ttdName=' + layer.symbol,
                      target: '_blank'
@@ -221,15 +222,15 @@ var layerTable = function(items, link) {
 };
 
 
-var Layers = React.createClass({
+var Layers = createReactClass({
   displayName: 'Layers',
 
   mixins: [ common.viewer(search) ],
 
   render: function() {
-    return $.div(null,
-                 $.h1(null, 'Search 2-Periodic'),
-                 this.props.info ? $.p(null, '(' + this.props.info + ')') : null,
+    return $('div', null,
+                 $('h1', null, 'Search 2-Periodic'),
+                 this.props.info ? $('p', null, '(' + this.props.info + ')') : null,
                  makeTabs({ labels: ['Search Form', 'Results'],
                             spreadThreshold: 800,
                             enableRemoteSelection: this.subscribe

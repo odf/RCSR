@@ -1,11 +1,12 @@
 'use strict';
 
 var React = require('react');
+var createReactClass = require('create-react-class');
 
-var $ = React.DOM;
+var $ = React.createElement;
 
 
-var Deferred = React.createClass({
+var Deferred = createReactClass({
   displayName: 'Deferred',
 
   getInitialState: function() {
@@ -40,9 +41,9 @@ var Deferred = React.createClass({
         data: this.state.data,
         info: this.props.info });
     else if (this.state.showMessage)
-      return $.div(null, $.p(null, 'Loading data...'));
+      return $('div', null, $('p', null, 'Loading data...'));
     else
-      return $.div();
+      return $('div', );
   }
 });
 

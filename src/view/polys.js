@@ -1,16 +1,17 @@
 'use strict';
 
 var React    = require('react');
+var createReactClass = require('create-react-class');
 
 var validate = require('plexus-validate');
-var Form     = require('plexus-form');
+var Form     = require('../plexus-form');
 
 var common   = require('./common');
 var search   = require('../search/polys');
 var widgets  = require('../widgets');
 
 
-var $ = React.DOM;
+var $ = React.createElement;
 
 
 var makeTabs = React.createFactory(widgets.Tabs);
@@ -127,10 +128,10 @@ var f = function(val) {
 
 var vertices = function(poly) {
   if (poly.vertices.length == 0)
-    return $.div(null);
+    return $('div', null);
 
-  return $.div(null,
-               $.p(null, common.makeLine('vertices', [poly.vertices.length])),
+  return $('div', null,
+               $('p', null, common.makeLine('vertices', [poly.vertices.length])),
                common.makeTable(['vertex', 'coordination', 'x', 'y', 'z'],
                                 poly.vertices.map(function(v) {
                                   return [
@@ -146,10 +147,10 @@ var vertices = function(poly) {
 
 var faces = function(poly) {
   if (poly.faces.length == 0)
-    return $.div(null);
+    return $('div', null);
 
-  return $.div(null,
-               $.p(null, common.makeLine('faces', [poly.faces.length])),
+  return $('div', null,
+               $('p', null, common.makeLine('faces', [poly.faces.length])),
                common.makeTable(['face', 'number of edges', 'x', 'y', 'z'],
                                 poly.faces.map(function(face) {
                                   return [
@@ -163,7 +164,7 @@ var faces = function(poly) {
 };
 
 
-var Polyhedron = React.createClass({
+var Polyhedron = createReactClass({
   displayName: 'Polyhedron',
 
   render: function() {
@@ -172,15 +173,15 @@ var Polyhedron = React.createClass({
     var url      = 'http://rcsr.net' + path;
     var refKinds = ['names', 'keywords'];
 
-    return $.div(null,
-                 $.h2(null, poly.symbol),
-                 $.p(null, makeImage({
+    return $('div', null,
+                 $('h2', null, poly.symbol),
+                 $('p', null, makeImage({
                    prefix: 'Poly',
                    symbol: poly.symbol,
                    mayEnlarge: true
                  })),
-                 $.p(null, 'RCSR reference: ', $.a({ href: path }, url)),
-                 $.ul({ className: 'plainList' },
+                 $('p', null, 'RCSR reference: ', $('a', { href: path }, url)),
+                 $('ul', { className: 'plainList' },
                       common.formatReferences(poly, refKinds, keywords)),
                  properties(poly),
                  kinds(poly),
@@ -219,15 +220,15 @@ var polyTable = function(items, link) {
 };
 
 
-var Polyhedra = React.createClass({
+var Polyhedra = createReactClass({
   displayName: 'Polyhedra',
 
   mixins: [ common.viewer(search) ],
 
   render: function() {
-    return $.div(null,
-                 $.h1(null, 'Search 0-Periodic'),
-                 this.props.info ? $.p(null, '(' + this.props.info + ')') : null,
+    return $('div', null,
+                 $('h1', null, 'Search 0-Periodic'),
+                 this.props.info ? $('p', null, '(' + this.props.info + ')') : null,
                  makeTabs({ labels: ['Search Form', 'Results'],
                             spreadThreshold: 800,
                             enableRemoteSelection: this.subscribe

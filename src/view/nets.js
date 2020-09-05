@@ -3,9 +3,10 @@
 var events  = require('events');
 
 var React    = require('react');
+var createReactClass = require('create-react-class');
 
 var validate = require('plexus-validate');
-var Form     = require('plexus-form');
+var Form     = require('../plexus-form');
 
 var common   = require('./common');
 var search   = require('../search/nets');
@@ -13,7 +14,7 @@ var widgets  = require('../widgets');
 
 var hellip   = '\u2026';
 
-var $ = React.DOM;
+var $ = React.createElement;
 
 
 var makeTabs = React.createFactory(widgets.Tabs);
@@ -152,7 +153,7 @@ var schema = {
 };
 
 var makeIndexed = function(text, index) {
-  return $.span(null, text, $.sub(null, '' + index));
+  return $('span', null, text, $('sub', null, '' + index));
 };
 
 
@@ -187,8 +188,8 @@ var vertices = function(net) {
     return v.coordinationNumber <= 6;
   });
 
-  return $.div(null,
-               $.p(null, common.makeLine('vertices', [net.vertices.length])),
+  return $('div', null,
+               $('p', null, common.makeLine('vertices', [net.vertices.length])),
                common.makeTable(['vertex', 'cn', 'x', 'y', 'z', 'symbolic',
                                  'Wyckoff', 'symmetry', 'order'],
                                 net.vertices.map(function(v) {
@@ -220,8 +221,8 @@ var vertices = function(net) {
 
 
 var edges = function(net) {
-  return $.div(null,
-               $.p(null, common.makeLine('edges', [net.edges.length])),
+  return $('div', null,
+               $('p', null, common.makeLine('edges', [net.edges.length])),
                common.makeTable(['edge', 'x', 'y', 'z',
                                  'symbolic', 'Wyckoff', 'symmetry'],
                                 net.edges.map(function(e) {
@@ -240,8 +241,8 @@ var edges = function(net) {
 
 var tiling = function(net) {
   if (net.numberOfFaces > 0)
-    return $.div(null,
-                 $.p(null, common.makeLine('tiling', [])),
+    return $('div', null,
+                 $('p', null, common.makeLine('tiling', [])),
                  common.makeTable(['tiling', 'dual',
                                    'vertices', 'edges', 'faces', 'tiles',
                                    'D-symbol'],
@@ -250,11 +251,11 @@ var tiling = function(net) {
                                      net.numberOfFaces, net.numberOfTiles,
                                      net.sizeOfDSymbol ]]));
   else
-    return $.div();
+    return $('div', );
 };
 
 
-var Net = React.createClass({
+var Net = createReactClass({
   displayName: 'Net',
 
   render: function() {
@@ -263,21 +264,21 @@ var Net = React.createClass({
     var url      = 'http://rcsr.net' + path;
     var refKinds = ['names', 'keywords', 'references'];
 
-    return $.div(null,
-                 $.h2(null, net.symbol),
-                 $.p(null, makeImage({
+    return $('div', null,
+                 $('h2', null, net.symbol),
+                 $('p', null, makeImage({
                    prefix: 'Net',
                    symbol: net.symbol,
                    mayEnlarge: true })),
-                 $.p(null, 'RCSR reference: ', $.a({ href: path }, url)),
-                 $.ul({ className: 'plainList' },
+                 $('p', null, 'RCSR reference: ', $('a', { href: path }, url)),
+                 $('ul', { className: 'plainList' },
                       common.formatReferences(net, refKinds, keywords)),
                  properties(net),
                  cell(net),
                  vertices(net),
                  edges(net),
                  tiling(net),
-                 $.a(
+                 $('a', 
                    {
                      href: 'https://topcryst.com/s.php?ttdName=' + net.symbol,
                      target: '_blank'
@@ -310,15 +311,15 @@ var netTable = function(items, link) {
 };
 
 
-var Nets = React.createClass({
+var Nets = createReactClass({
   displayName: 'Nets',
 
   mixins: [ common.viewer(search) ],
 
   render: function() {
-    return $.div(null,
-                 $.h1(null, 'Search 3-Periodic'),
-                 this.props.info ? $.p(null, '(' + this.props.info + ')') : null,
+    return $('div', null,
+                 $('h1', null, 'Search 3-Periodic'),
+                 this.props.info ? $('p', null, '(' + this.props.info + ')') : null,
                  makeTabs({ labels: ['Search Form', 'Results'],
                             spreadThreshold: 800,
                             enableRemoteSelection: this.subscribe

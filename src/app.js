@@ -1,6 +1,7 @@
 'use strict';
 
 var React       = require('react');
+var createReactClass = require('create-react-class');
 
 var Nets        = require('./view/nets');
 var Layers      = require('./view/layers');
@@ -12,33 +13,28 @@ var Deferred    = require('./Deferred');
 var credentials = require('./publish/credentials');
 var Testing     = require('./publish/Testing');
 
-var $ = React.DOM;
+var $ = React.createElement;
 
 
-var partnerLogo = function(src) {
-  var args = [].slice.call(arguments, 1);
-  var captionArgs = [].concat.apply(
-    [null],
-    args.map(function(x) { return [$.br(), x]; })).slice(1);
-
-  return $.figure(null,
-                  $.img({ src: src }),
-                  $.figcaption.apply(null, captionArgs));
+var partnerLogo = function(src, cap1, cap2) {
+  return $('figure', null,
+           $('img', { src: src }),
+           $('figcaption', null, cap1, $('br'), cap2));
 };
 
 
-var Home = React.createClass({
+var Home = createReactClass({
   displayName: 'Home',
 
   render: function() {
     var greeting = 'Welcome to the Reticular Chemistry Structure Resource';
 
-    return $.div(null,
-                 $.div({ className: 'homePageLogo' },
-                       $.p(null, greeting),
-                       $.img({ src: '/images/RCSRpic.png' })
+    return $('div', null,
+                 $('div', { className: 'homePageLogo' },
+                       $('p', null, greeting),
+                       $('img', { src: '/images/RCSRpic.png' })
                       ),
-                 $.div({ className: 'partnerLogos', style: { clear: 'both' } },
+                 $('div', { className: 'partnerLogos', style: { clear: 'both' } },
                        partnerLogo('/images/asu-logo.svg',
                                    'School of Molecular Sciences,',
                                    'Arizona State University'),
@@ -52,11 +48,11 @@ var Home = React.createClass({
                                    'College of Chemistry,',
                                    'University of California, Berkeley')
                       ),
-                 $.p({ className: 'center' },
+                 $('p', { className: 'center' },
                      'Additional hosting by'),
-                 $.h2({ className: 'center' },
+                 $('h2', { className: 'center' },
                       'Berzelii Center EXSELENT',
-                      $.br(),
+                      $('br', ),
                       'Stockholm University'));
   }
 });
@@ -64,15 +60,15 @@ var Home = React.createClass({
 
 var makeLink = function(a, k) {
   if (a.length > 2)
-    return $.p({ key: k },
+    return $('p', { key: k },
                a[1]+': ',
                makeLink([a[0], a[2]], k));
   else
-    return $.a({ key: k, href: a[0] }, a[1], $.br());
+    return $('a', { key: k, href: a[0] }, a[1], $('br', ));
 };
 
 
-var Links = React.createClass({
+var Links = createReactClass({
   displayName: 'Links',
 
   render: function() {
@@ -99,17 +95,17 @@ var Links = React.createClass({
        'A tourist guide to the RCSR', 'download (PDF file, 12MB)']
     ];
 
-    return $.div(
+    return $('div', 
       null,
-      $.h1(null, 'RCSR Links Page'),
-      $.div({ className: 'article center' },
-            $.p(null, 'These are some links to related resources on the Web.'),
+      $('h1', null, 'RCSR Links Page'),
+      $('div', { className: 'article center' },
+            $('p', null, 'These are some links to related resources on the Web.'),
             links.map(makeLink)));
   }
 });
 
 
-var Systre = React.createClass({
+var Systre = createReactClass({
   displayName: 'Systre',
 
   render: function() {
@@ -125,23 +121,23 @@ var Systre = React.createClass({
        'download (2.2MB)']
     ];
 
-    return $.div(null,
-                 $.h1(null, 'RCSR Systre Page'),
-                 $.div({ className: 'article center' },
+    return $('div', null,
+                 $('h1', null, 'RCSR Systre Page'),
+                 $('div', { className: 'article center' },
                        'RCSR data as of June 1, 2019'),
-                 $.div({ className: 'article center' },
+                 $('div', { className: 'article center' },
                        links.map(makeLink)));
   }
 });
 
 
-var About = React.createClass({
+var About = createReactClass({
   displayName: 'About',
 
   render: function() {
-    return $.div(null,
-                 $.h1(null, 'About RCSR'),
-                 $.div({
+    return $('div', null,
+                 $('h1', null, 'About RCSR'),
+                 $('div', {
                    className: 'article center',
                    dangerouslySetInnerHTML: {
                      __html: this.props.data
@@ -151,14 +147,14 @@ var About = React.createClass({
 });
 
 
-var Credentials = React.createClass({
+var Credentials = createReactClass({
   render: function() {
     var creds = credentials();
 
-    return $.div(null,
-                 $.h3(null, 'New Credentials'),
-                 $.p(null, $.b(null, 'Your name: '), (creds.user || '-')),
-                 $.p(null, 'Access token '+(creds.okay ? '' : 'not')+' found'),
+    return $('div', null,
+                 $('h3', null, 'New Credentials'),
+                 $('p', null, $('b', null, 'Your name: '), (creds.user || '-')),
+                 $('p', null, 'Access token '+(creds.okay ? '' : 'not')+' found'),
                  creds.simulate ? 'Publishing will be simulated.' : '');
   }
 });
@@ -230,12 +226,12 @@ var resolveRoute = function(path) {
 var showLink = function(item, i) {
   var name = item[0];
   var url = item[1];
-  var t = url ? $.a({ href: url }, name) : name;
-  return $.li({ key: i }, t);
+  var t = url ? $('a', { href: url }, name) : name;
+  return $('li', { key: i }, t);
 };
 
 
-var Application = React.createClass({
+var Application = createReactClass({
   displayName: 'Application',
 
   render: function() {
@@ -265,11 +261,11 @@ var Application = React.createClass({
       links.push([ 'TESTING', '/testing' ]);
     }
 
-    return $.div({ key: this.props.path },
-                 $.div({ className: 'header' },
-                       $.div({ className: 'logoText' }, 'RCSR'),
-                       $.ul({ className: 'mirrors' }, mirrors.map(showLink)),
-                       $.ul({ className: 'pageLinks' }, links.map(showLink))),
+    return $('div', { key: this.props.path },
+                 $('div', { className: 'header' },
+                       $('div', { className: 'logoText' }, 'RCSR'),
+                       $('ul', { className: 'mirrors' }, mirrors.map(showLink)),
+                       $('ul', { className: 'pageLinks' }, links.map(showLink))),
                  resolveRoute(this.props.path));
   }
 });

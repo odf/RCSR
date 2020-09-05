@@ -1,10 +1,11 @@
 'use strict';
 
 var React = require('react');
-var $ = React.DOM;
+var createReactClass = require('create-react-class');
+var $ = React.createElement;
 
 
-var Uploader = React.createClass({
+var Uploader = createReactClass({
   displayName: 'Uploader',
 
   componentDidMount: function() {
@@ -43,12 +44,12 @@ var Uploader = React.createClass({
   },
 
   render: function() {
-    return $.button({ onClick: this.openSelector }, this.props.prompt || 'Add');
+    return $('button', { onClick: this.openSelector }, this.props.prompt || 'Add');
   }
 });
 
 
-var Tab = React.createClass({
+var Tab = createReactClass({
   displayName: 'Tab',
 
   handleClick: function(event) {
@@ -56,19 +57,20 @@ var Tab = React.createClass({
     if (this.props.onSelect)
       this.props.onSelect(this.props.index);
   },
-  componentDidMount: function() {
-    this.getDOMNode().addEventListener('click', this.handleClick);
-  },
-  componentWillUnmount: function() {
-    this.getDOMNode().removeEventListener('click', this.handleClick);
-  },
   render: function() {
-    return $.li({ className: this.props.className }, this.props.label);
+    return $(
+      'li',
+      {
+        className: this.props.className,
+        onClick: this.handleClick
+      },
+      this.props.label
+    );
   }
 });
 
 
-var Tabs = React.createClass({
+var Tabs = createReactClass({
   displayName: 'Tabs',
 
   getInitialState: function() {
@@ -123,21 +125,21 @@ var Tabs = React.createClass({
     var threshold = this.props.spreadThreshold || 0;
 
     if (threshold > 0 && this.state.windowWidth > threshold)
-      return $.ul({ className: 'plainList columnBox' },
+      return $('ul', { className: 'plainList columnBox' },
                   this.props.children.map(function(component, i) {
-                    return $.li({ key      : i,
+                    return $('li', { key      : i,
                                   className: 'column fixed'
                                 },
                                 component);
                   }));
     else
-      return $.div({ className: 'TabsContainer' },
-                   $.ul({ className: 'TabsList' },
+      return $('div', { className: 'TabsContainer' },
+                   $('ul', { className: 'TabsList' },
                         this.props.labels.map(this.makeTab)),
-                   $.div({ className: 'TabsPanel' },
+                   $('div', { className: 'TabsPanel' },
                          this.props.children.map(function(component, i) {
                            var d = (i == selected) ? 'block' : 'none';
-                           return $.div({ key  : i,
+                           return $('div', { key  : i,
                                           style: { display: d }
                                         },
                                         component);
@@ -146,7 +148,7 @@ var Tabs = React.createClass({
 });
 
 
-var ActiveLink = React.createClass({
+var ActiveLink = createReactClass({
   displayName: 'ActiveLink',
 
   handleClick: function(event) {
@@ -154,21 +156,21 @@ var ActiveLink = React.createClass({
     if (this.props.onClick)
       this.props.onClick(this.props.href);
   },
-  componentDidMount: function() {
-    this.getDOMNode().addEventListener('click', this.handleClick);
-  },
-  componentWillUnmount: function() {
-    this.getDOMNode().removeEventListener('click', this.handleClick);
-  },
   render: function() {
-    return $.a({ className: this.props.className,
-                 href: '#' + (this.props.href || '') },
-               this.props.children);
+    return $(
+      'a',
+      {
+        className: this.props.className,
+        onClick: this.handleClick,
+        href: '#' + (this.props.href || '')
+      },
+      this.props.children
+    );
   }
 });
 
 
-var WithToolTip = React.createClass({
+var WithToolTip = createReactClass({
   displayName: 'WithToolTip',
 
   getInitialState: function() {
@@ -229,9 +231,9 @@ var WithToolTip = React.createClass({
     var pos = this.state.position;
 
     if (!this.state.active || pos == null)
-      return $.span();
+      return $('span', );
     else
-      return $.div({ className: 'overlay highlight inlineBlock',
+      return $('div', { className: 'overlay highlight inlineBlock',
                      style: {
                        position: 'fixed',
                        left    : pos[0],
@@ -242,7 +244,7 @@ var WithToolTip = React.createClass({
   },
 
   render: function() {
-    return $.div({ className: this.props.className,
+    return $('div', { className: this.props.className,
                    onMouseEnter: this.handleMouseEnter,
                    onMouseLeave: this.handleMouseLeave,
                    onMouseMove : this.handleMouseMove

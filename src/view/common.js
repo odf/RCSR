@@ -1,16 +1,17 @@
 'use strict';
 
 var React    = require('react');
+var createReactClass = require('create-react-class');
 
 var validate = require('plexus-validate');
-var Form     = require('plexus-form');
+var Form     = require('../plexus-form');
 
 var loader   = require('../loader');
 var Deferred = require('../Deferred');
 var widgets  = require('../widgets');
 
 
-var $ = React.DOM;
+var $ = React.createElement;
 
 var laquo = '\u00ab';
 var raquo = '\u00bb';
@@ -146,11 +147,11 @@ var makeQuery = function(inputs) {
 };
 
 
-var HelpSection = React.createClass({
+var HelpSection = createReactClass({
   displayName: 'HelpSection',
 
   render: function() {
-    return $.div({
+    return $('div', {
       className: 'tooltip',
       dangerouslySetInnerHTML: {
         __html: this.props.data
@@ -177,7 +178,7 @@ var helpLink = function(path, schema) {
   });
   url = ((sch['x-hints'] || {}).form || {}).helpURL;
 
-  var link = $.a({
+  var link = $('a', {
     className: 'help-link' + (url ? '' : ' invisible'),
     href     : url,
     target   : '_blank'
@@ -195,7 +196,7 @@ var helpLink = function(path, schema) {
 
 
 var makeFieldWrapper = function(schema) {
-  return React.createClass({
+  return createReactClass({
     displayName: 'field wrapper',
 
     render: function() {
@@ -203,8 +204,8 @@ var makeFieldWrapper = function(schema) {
         'form-element',
         this.props.errors ? 'error' : []).join(' ');
 
-      return $.div({ className: classes, key: this.props.key },
-                   $.label({ htmlFor: this.props.key },
+      return $('div', { className: classes, key: this.props.key },
+                   $('label', { htmlFor: this.props.key },
                            this.props.title),
                    helpLink(this.props.path, schema),
                    this.props.children);
@@ -214,7 +215,7 @@ var makeFieldWrapper = function(schema) {
 
 
 var makeSectionWrapper = function(schema) {
-  return React.createClass({
+  return createReactClass({
     displayName: 'section wrapper',
 
     render: function() {
@@ -222,8 +223,8 @@ var makeSectionWrapper = function(schema) {
         'form-section',
         this.props.path.length > 0 ? 'form-subsection' : []).join(' ');
 
-      return $.fieldset({ className: classes, key: this.props.key },
-                        $.legend({ className: 'form-section-title' },
+      return $('fieldset', { className: classes, key: this.props.key },
+                        $('legend', { className: 'form-section-title' },
                                  this.props.title,
                                  helpLink(this.props.path, schema)),
                         this.props.children);
@@ -232,7 +233,7 @@ var makeSectionWrapper = function(schema) {
 };
 
 
-var SearchForm = React.createClass({
+var SearchForm = createReactClass({
   displayName: 'SearchForm',
 
   render: function() {
@@ -252,22 +253,22 @@ var SearchForm = React.createClass({
 
 
 common.makeLine = function(title, values) {
-  return $.span(null,
-                $.span({ className: 'bold' }, title + ': '),
-                $.span(null, values.join(', ')))
+  return $('span', null,
+                $('span', { className: 'bold' }, title + ': '),
+                $('span', null, values.join(', ')))
 };
 
 
 common.makeTable = function(headers, values) {
-  return $.table(null,
-                 $.thead(null,
-                         $.tr(null, headers.map(function(s, i) {
-                           return $.th({ key: i }, s);
+  return $('table', null,
+                 $('thead', null,
+                         $('tr', null, headers.map(function(s, i) {
+                           return $('th', { key: i }, s);
                          }))),
-                 $.tbody(null,
+                 $('tbody', null,
                          values.map(function(row, i) {
-                           return $.tr({ key: i }, row.map(function(s, i) {
-                             return $.td({ key: i }, s);
+                           return $('tr', { key: i }, row.map(function(s, i) {
+                             return $('td', { key: i }, s);
                            }));
                          })));
 };
@@ -288,14 +289,14 @@ common.formatReferences = function(net, kinds, keywords) {
     }
 
     if (val.length > 0)
-      refs.push($.li({ key: key }, common.makeLine(title, val)));
+      refs.push($('li', { key: key }, common.makeLine(title, val)));
   }
 
   return refs;
 };
 
 
-common.StructureImage = React.createClass({
+common.StructureImage = createReactClass({
   displayName: 'StructureImage',
 
   getInitialState: function() {
@@ -318,15 +319,15 @@ common.StructureImage = React.createClass({
     var symbol = this.props.symbol;
     var fname  = symbol + (this.state.full ? '' : 'T') + '.jpg';
     var src    = [ base, subdir, symbol[0], fname ].join('/');
-    var img    = $.img({ src: src, alt: '', onError: this.handleError });
+    var img    = $('img', { src: src, alt: '', onError: this.handleError });
     var tip    = 'Click to '+(this.state.full ? 'shrink' : 'enlarge')+' image';
 
     if (this.state.error)
-      return $.span({ className: 'thumbnail' }, '(no image)');
+      return $('span', { className: 'thumbnail' }, '(no image)');
     if (this.props.mayEnlarge)
       return makeToolTip(
         { className: 'inlineBlock',
-          content  : $.div(null, tip),
+          content  : $('div', null, tip),
           hideAfter: 2000
         },
         makeActiveLink({ className: 'noOutline',
@@ -334,7 +335,7 @@ common.StructureImage = React.createClass({
                        },
                        img));
     else
-      return $.span({ className: 'thumbnail' }, img);
+      return $('span', { className: 'thumbnail' }, img);
   }
 });
 
@@ -342,7 +343,7 @@ common.StructureImage = React.createClass({
 var maxDetails = 12;
 
 
-var Results = React.createClass({
+var Results = createReactClass({
   displayName: 'Results',
 
   getInitialState: function() {
@@ -387,7 +388,7 @@ var Results = React.createClass({
     var structure;
 
     var item = function(content) {
-      return $.li({ className: 'fragment column' }, content);
+      return $('li', { className: 'fragment column' }, content);
     };
 
     var link = function(i, text) {
@@ -395,44 +396,44 @@ var Results = React.createClass({
     }.bind(this);
 
     if (n < 1) {
-      return $.p({ className: 'resultsMessage' }, msg + '.');
+      return $('p', { className: 'resultsMessage' }, msg + '.');
     } else if (i >= 0) {
       structure = results[i];
       msg = 'Showing ' + type + ' ' + (i+1) +
         ' of ' + n + ' matching your search.';
 
-      return $.div(null,
-                   $.ul({ className: 'plainList', key: 'no_' + i },
+      return $('div', null,
+                   $('ul', { className: 'plainList', key: 'no_' + i },
                         item(n > 1
                              ? link(-1, 'All Results') : 'All Results'),
                         item(i > 0
                              ? link(i-1, laquo + ' Previous') : 'Previous'),
                         item(i < n-1
                              ? link(i+1, 'Next ' + raquo) : 'Next')),
-                   $.p({ className: 'resultsMessage' }, msg),
+                   $('p', { className: 'resultsMessage' }, msg),
                    React.createElement(this.props.display,
                                        { data: structure }));
     } else if (this.state.symbolsOnly) {
       var resultList = results.map(function(structure, i) {
-        return $.li({ className: 'fragment',
+        return $('li', { className: 'fragment',
                       style: { width: '5em' },
                       key: structure.symbol },
                     link(i, structure.symbol));
       }.bind(this));
 
-      return $.div(null,
-                   $.ul({ className: 'plainList', key: 'all' },
+      return $('div', null,
+                   $('ul', { className: 'plainList', key: 'all' },
                         link('details', 'More Details')),
-                   $.p(null, msg + '.'),
-                   $.div(null,
-                         $.ul({ className: 'plainList' }, resultList)));
+                   $('p', null, msg + '.'),
+                   $('div', null,
+                         $('ul', { className: 'plainList' }, resultList)));
     } else {
       if (begin > 0 || end < n)
         msg = msg + ', showing ' + (begin+1) + ' through ' + end;
       msg = msg + '.'
 
-      return $.div(null,
-                   $.ul({ className: 'plainList', key: 'from_' + begin },
+      return $('div', null,
+                   $('ul', { className: 'plainList', key: 'from_' + begin },
                         item(link('symbols', 'Symbols Only')),
                         item(begin > 0
                              ? link("backward", laquo + ' Previous') 
@@ -440,7 +441,7 @@ var Results = React.createClass({
                         item(end < n
                              ? link("forward", 'Next ' + raquo)
                              : 'Next')),
-                   $.p({ className: 'resultsMessage' }, msg),
+                   $('p', { className: 'resultsMessage' }, msg),
                    this.props.table(results.slice(begin, end),
                                     function(i) {
                                       var n = i + begin;
