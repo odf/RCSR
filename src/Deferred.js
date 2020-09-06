@@ -20,14 +20,15 @@ var Deferred = createReactClass({
     this.props.loader(this.handleLoaderEvent);
   },
 
-  componentWillReceiveProps: function(props) {
-    props.loader(this.handleLoaderEvent);
+  componentDidUpdate: function(prevProps) {
+    if (this.props.loader != prevProps.loader)
+      this.props.loader(this.handleLoaderEvent);
   },
 
   handleLoaderEvent: function(err, res) {
     if (err)
       alert(ex+'\n'+ex.stack);
-    else if (this.isMounted()) {
+    else {
       if (res == null)
         this.setState({ showMessage: true });
       else

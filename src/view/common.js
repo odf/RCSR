@@ -305,8 +305,9 @@ common.StructureImage = createReactClass({
     this.setState({ error: true });
     event.preventDefault();
   },
-  componentWillReceiveProps: function() {
-    this.setState({ error: false });
+  componentDidUpdate: function(prevProps) {
+    if (this.props.symbol != prevProps.symbol)
+      this.setState({ error: false });
   },
   render: function() {
     var base   = '/images';
@@ -348,12 +349,14 @@ var Results = createReactClass({
       symbolsOnly: false
     }
   },
-  componentWillReceiveProps: function(props) {
-    var n = (props.results || []).length == 1 ? 0 : -1;
-    this.setState({
-      selected: n,
-      detailsOffset: 0
-    });
+  componentDidUpdate: function(prevProps) {
+    if (this.props.results != prevProps.results) {
+      var n = (this.props.results || []).length == 1 ? 0 : -1;
+      this.setState({
+        selected: n,
+        detailsOffset: 0
+      });
+    }
   },
   select: function(choice) {
     var mods;

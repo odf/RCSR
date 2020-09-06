@@ -20,14 +20,17 @@ module.exports = createReactClass({
              output: values,
              errors: errors };
   },
-  componentWillReceiveProps: function(props) {
-    var values = props.values || this.state.values;
-    var output = props.values || this.state.output;
-    this.setState({
-      values: values,
-      output: output,
-      errors: this.validate(props.schema, output, context(props))
-    });
+  componentDidUpdate: function(prevProps) {
+    if (this.props.values != prevProps.values) {
+      var props = this.props;
+      var values = props.values || this.state.values;
+      var output = props.values || this.state.output;
+      this.setState({
+        values: values,
+        output: output,
+        errors: this.validate(props.schema, output, context(props))
+      });
+    }
   },
   setValue: function(path, raw, parsed) {
     var schema = this.props.schema;
