@@ -15,10 +15,6 @@ var widgets  = require('../widgets');
 var $ = React.createElement;
 
 
-var makeTabs = React.createFactory(widgets.Tabs);
-var makeImage = React.createFactory(common.StructureImage);
-
-
 var keywords = [
   "uniform",
   "weaving"
@@ -171,7 +167,7 @@ var Ribbon = createReactClass({
 
     return $('div', null,
                  $('h2', null, ribbon.symbol),
-                 $('p', null, makeImage({
+                 $('p', null, $(common.StructureImage, {
                    prefix: 'Ribbon',
                    symbol: ribbon.symbol,
                    mayEnlarge: true })),
@@ -183,7 +179,7 @@ var Ribbon = createReactClass({
                  cell(ribbon),
                  vertices(ribbon),
                  edges(ribbon),
-                 $('a', 
+                 $('a',
                    {
                      href: 'https://topcryst.com/s.php?ttdName=' + ribbon.symbol,
                      target: '_blank'
@@ -200,7 +196,7 @@ var ribbonTable = function(items, link) {
      'kinds of vertex', 'kinds of edge'],
     items.map(function(ribbon, i) {
       return [
-        makeImage({
+        $(common.StructureImage, {
           prefix: 'Ribbon',
           symbol: ribbon.symbol
         }),
@@ -224,7 +220,7 @@ var Ribbons = createReactClass({
     return $('div', null,
                  $('h1', null, 'Search 1-Periodic'),
                  this.props.info ? $('p', null, '(' + this.props.info + ')') : null,
-                 makeTabs({ labels: ['Search Form', 'Results'],
+                 $(widgets.Tabs, { labels: ['Search Form', 'Results'],
                             spreadThreshold: 800,
                             enableRemoteSelection: this.subscribe
                           },

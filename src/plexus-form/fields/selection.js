@@ -30,7 +30,7 @@ var Selection = createReactClass({
   render: function() {
     var names = this.props.names;
 
-    return $('select', 
+    return $('select',
       {
         name    : this.props.label,
         value   : this.props.value || this.props.values[0],

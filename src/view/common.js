@@ -20,11 +20,6 @@ var raquo = '\u00bb';
 var common = module.exports;
 
 
-var makeToolTip = React.createFactory(widgets.WithToolTip);
-var makeDeferred = React.createFactory(Deferred);
-var makeActiveLink = React.createFactory(widgets.ActiveLink);
-
-
 common.makeBooleanProperties = function(names) {
   var result = {};
   names.forEach(function(name) {
@@ -162,7 +157,7 @@ var HelpSection = createReactClass({
 
 
 var helpSection = function(path) {
-  return makeDeferred({
+  return $(Deferred, {
     loader   : loader('help', path),
     component: HelpSection
   });
@@ -185,7 +180,7 @@ var helpLink = function(path, schema) {
   }, '?');
 
   if (url)
-    return makeToolTip(
+    return $(widgets.WithToolTip,
       { className: 'inlineBlock',
         content  : helpSection(url.replace(/^\/?help\//, '/'))
       },
@@ -325,15 +320,15 @@ common.StructureImage = createReactClass({
     if (this.state.error)
       return $('span', { className: 'thumbnail' }, '(no image)');
     if (this.props.mayEnlarge)
-      return makeToolTip(
+      return $(widgets.WithToolTip,
         { className: 'inlineBlock',
           content  : $('div', null, tip),
           hideAfter: 2000
         },
-        makeActiveLink({ className: 'noOutline',
-                         onClick: this.toggle
-                       },
-                       img));
+               $(widgets.ActiveLink, {
+                 className: 'noOutline',
+                 onClick: this.toggle
+               }, img));
     else
       return $('span', { className: 'thumbnail' }, img);
   }
@@ -392,7 +387,7 @@ var Results = createReactClass({
     };
 
     var link = function(i, text) {
-      return makeActiveLink({ href: i, onClick: this.select }, text);
+      return $(widgets.ActiveLink, { href: i, onClick: this.select }, text);
     }.bind(this);
 
     if (n < 1) {

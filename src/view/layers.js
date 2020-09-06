@@ -15,10 +15,6 @@ var widgets  = require('../widgets');
 var $ = React.createElement;
 
 
-var makeTabs = React.createFactory(widgets.Tabs);
-var makeImage = React.createFactory(common.StructureImage);
-
-
 var keywords = [
   "regular",
   "Archimedean",
@@ -178,7 +174,7 @@ var Layer = createReactClass({
 
     return $('div', null,
                  $('h2', null, layer.symbol),
-                 $('p', null, makeImage({
+                 $('p', null, $(common.StructureImage, {
                    prefix: 'Layer',
                    symbol: layer.symbol,
                    mayEnlarge: true })),
@@ -189,7 +185,7 @@ var Layer = createReactClass({
                  kinds(layer),
                  cell(layer),
                  vertices(layer),
-                 $('a', 
+                 $('a',
                    {
                      href: 'https://topcryst.com/s.php?ttdName=' + layer.symbol,
                      target: '_blank'
@@ -206,7 +202,7 @@ var layerTable = function(items, link) {
      'kinds of vertex', 'kinds of edge', 'kinds of face'],
     items.map(function(layer, i) {
       return [
-        makeImage({
+        $(common.StructureImage, {
           prefix: 'Layer',
           symbol: layer.symbol
         }),
@@ -231,7 +227,7 @@ var Layers = createReactClass({
     return $('div', null,
                  $('h1', null, 'Search 2-Periodic'),
                  this.props.info ? $('p', null, '(' + this.props.info + ')') : null,
-                 makeTabs({ labels: ['Search Form', 'Results'],
+                 $(widgets.Tabs, { labels: ['Search Form', 'Results'],
                             spreadThreshold: 800,
                             enableRemoteSelection: this.subscribe
                           },

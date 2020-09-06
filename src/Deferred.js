@@ -43,7 +43,7 @@ var Deferred = createReactClass({
     else if (this.state.showMessage)
       return $('div', null, $('p', null, 'Loading data...'));
     else
-      return $('div', );
+      return $('div');
   }
 });
 

@@ -52,7 +52,7 @@ var Home = createReactClass({
                      'Additional hosting by'),
                  $('h2', { className: 'center' },
                       'Berzelii Center EXSELENT',
-                      $('br', ),
+                      $('br'),
                       'Stockholm University'));
   }
 });
@@ -64,7 +64,7 @@ var makeLink = function(a, k) {
                a[1]+': ',
                makeLink([a[0], a[2]], k));
   else
-    return $('a', { key: k, href: a[0] }, a[1], $('br', ));
+    return $('a', { key: k, href: a[0] }, a[1], $('br'));
 };
 
 
@@ -95,7 +95,7 @@ var Links = createReactClass({
        'A tourist guide to the RCSR', 'download (PDF file, 12MB)']
     ];
 
-    return $('div', 
+    return $('div',
       null,
       $('h1', null, 'RCSR Links Page'),
       $('div', { className: 'article center' },

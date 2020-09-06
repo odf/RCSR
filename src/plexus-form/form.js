@@ -106,7 +106,7 @@ module.exports = createReactClass({
                     onKeyPress: this.handleKeyPress,
                     className : this.props.className
                   },
-                  this.props.extraButtons ? this.renderButtons() : $('span', ),
+                  this.props.extraButtons ? this.renderButtons() : $('span'),
                   renderedFields,
                   this.renderButtons());
   }

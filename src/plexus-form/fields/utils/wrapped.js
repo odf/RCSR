@@ -32,13 +32,13 @@ var FieldWrapper = createReactClass({
                             'form-element',
                             this.props.classes || []);
 
-    return $('div', 
+    return $('div',
       {
         className: classes.join(' '),
         key      : this.props.label,
         title    : makeTitle(this.props.description, this.props.errors)
       },
-      $('label', 
+      $('label',
         {
           htmlFor: this.props.label
         },
@@ -56,12 +56,12 @@ var SectionWrapper = createReactClass({
     var legendClasses = [].concat(errorClass(this.props.errors) || [],
                                   'form-section-title');
 
-    return $('fieldset', 
+    return $('fieldset',
       {
         className: classes.join(' '),
         key      : this.props.label
       },
-      $('legend', 
+      $('legend',
         {
           className: legendClasses.join(' '),
           title    : makeTitle(this.props.description, this.props.errors)

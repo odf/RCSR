@@ -56,9 +56,6 @@ var components = {
 };
 
 
-var makeUploader = React.createFactory(widgets.Uploader);
-
-
 var merge = function() {
   var args = Array.prototype.slice.call(arguments);
   var result = args.every(Array.isArray) ? [] : {};
@@ -544,20 +541,20 @@ var Testing = createReactClass({
               src: 'images/delete.gif'
             });
     return $('div', { key: kind },
-                 $('h2', null, kind),
-                 $('p', { className: 'withDeleteIcon' },
-                     $('input', { type: 'radio', name: 'type',
-                               value: kind,
-                               onChange: this.handleKindSelection,
-                               defaultChecked: kind == 'Nets' }),
-                     $('span', null, message),
-                     removeIcon),
-                 makeUploader({
-                   key       : kind,
-                   prompt    : 'Load Data',
-                   binary    : false,
-                   handleData: handleUpload
-                 }));
+             $('h2', null, kind),
+             $('p', { className: 'withDeleteIcon' },
+               $('input', { type: 'radio', name: 'type',
+                            value: kind,
+                            onChange: this.handleKindSelection,
+                            defaultChecked: kind == 'Nets' }),
+               $('span', null, message),
+               removeIcon),
+             $(widgets.Uploader, {
+               key       : kind,
+               prompt    : 'Load Data',
+               binary    : false,
+               handleData: handleUpload
+             }));
   },
 
   renderLoadImages: function() {
@@ -570,24 +567,24 @@ var Testing = createReactClass({
       };
 
       return $('figure', { key: name, className: 'inlineFigure' },
-                      $('div', { className: 'withDeleteIcon' },
-                            $('img', { src: images[name].thumbnail },
-                                  $('img', { className: 'deleteIcon',
-                                          onClick: remove,
-                                          src: 'images/delete.gif'
-                                        })),
-                            $('figcaption', { className: 'center' }, name)));
+               $('div', { className: 'withDeleteIcon' },
+                 $('img', { src: images[name].thumbnail }),
+                 $('img', { className: 'deleteIcon',
+                            onClick: remove,
+                            src: 'images/delete.gif'
+                          }),
+                 $('figcaption', { className: 'center' }, name)));
     };
 
     return $('div', { key: 'Images' },
-                 $('h2', null, 'Upload'),
-                 makeUploader({
-                   prompt    : 'Add Images',
-                   accept    : 'image/*',
-                   multiple  : true,
-                   binary    : true,
-                   handleData: this.handleImageUpload
-                 }),
+             $('h2', null, 'Upload'),
+             $(widgets.Uploader, {
+               prompt    : 'Add Images',
+               accept    : 'image/*',
+               multiple  : true,
+               binary    : true,
+               handleData: this.handleImageUpload
+             }),
                  ['Nets', 'Layers', 'Ribbons', 'Polyhedra', 'unknown']
                  .map(function(type) {
                    var content = Object.keys(images)

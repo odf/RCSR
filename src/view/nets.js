@@ -17,10 +17,6 @@ var hellip   = '\u2026';
 var $ = React.createElement;
 
 
-var makeTabs = React.createFactory(widgets.Tabs);
-var makeImage = React.createFactory(common.StructureImage);
-
-
 var keywords = [
   "bipartite",
   "chiral",
@@ -251,7 +247,7 @@ var tiling = function(net) {
                                      net.numberOfFaces, net.numberOfTiles,
                                      net.sizeOfDSymbol ]]));
   else
-    return $('div', );
+    return $('div');
 };
 
 
@@ -266,7 +262,7 @@ var Net = createReactClass({
 
     return $('div', null,
                  $('h2', null, net.symbol),
-                 $('p', null, makeImage({
+                 $('p', null, $(common.StructureImage, {
                    prefix: 'Net',
                    symbol: net.symbol,
                    mayEnlarge: true })),
@@ -278,7 +274,7 @@ var Net = createReactClass({
                  vertices(net),
                  edges(net),
                  tiling(net),
-                 $('a', 
+                 $('a',
                    {
                      href: 'https://topcryst.com/s.php?ttdName=' + net.symbol,
                      target: '_blank'
@@ -295,7 +291,7 @@ var netTable = function(items, link) {
      'edges', 'genus'],
     items.map(function(net, i) {
       return [
-        makeImage({
+        $(common.StructureImage, {
           prefix: 'Net',
           symbol: net.symbol
         }),
@@ -320,7 +316,7 @@ var Nets = createReactClass({
     return $('div', null,
                  $('h1', null, 'Search 3-Periodic'),
                  this.props.info ? $('p', null, '(' + this.props.info + ')') : null,
-                 makeTabs({ labels: ['Search Form', 'Results'],
+                 $(widgets.Tabs, { labels: ['Search Form', 'Results'],
                             spreadThreshold: 800,
                             enableRemoteSelection: this.subscribe
                           },

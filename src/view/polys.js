@@ -14,10 +14,6 @@ var widgets  = require('../widgets');
 var $ = React.createElement;
 
 
-var makeTabs = React.createFactory(widgets.Tabs);
-var makeImage = React.createFactory(common.StructureImage);
-
-
 var keywords = [
   "Archimedean",
   "cage",
@@ -175,7 +171,7 @@ var Polyhedron = createReactClass({
 
     return $('div', null,
                  $('h2', null, poly.symbol),
-                 $('p', null, makeImage({
+                 $('p', null, $(common.StructureImage, {
                    prefix: 'Poly',
                    symbol: poly.symbol,
                    mayEnlarge: true
@@ -201,7 +197,7 @@ var polyTable = function(items, link) {
      '# faces'],
     items.map(function(poly, i) {
       return [
-        makeImage({
+        $(common.StructureImage, {
           prefix: 'Poly',
           symbol: poly.symbol
         }),
@@ -229,7 +225,7 @@ var Polyhedra = createReactClass({
     return $('div', null,
                  $('h1', null, 'Search 0-Periodic'),
                  this.props.info ? $('p', null, '(' + this.props.info + ')') : null,
-                 makeTabs({ labels: ['Search Form', 'Results'],
+                 $(widgets.Tabs, { labels: ['Search Form', 'Results'],
                             spreadThreshold: 800,
                             enableRemoteSelection: this.subscribe
                           },

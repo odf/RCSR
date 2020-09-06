@@ -231,7 +231,7 @@ var WithToolTip = createReactClass({
     var pos = this.state.position;
 
     if (!this.state.active || pos == null)
-      return $('span', );
+      return $('span');
     else
       return $('div', { className: 'overlay highlight inlineBlock',
                      style: {
