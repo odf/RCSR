@@ -199,8 +199,8 @@ var makeFieldWrapper = function(schema) {
         'form-element',
         this.props.errors ? 'error' : []).join(' ');
 
-      return $('div', { className: classes, key: this.props.key },
-                   $('label', { htmlFor: this.props.key },
+      return $('div', { className: classes, },
+                   $('label', { htmlFor: this.props.label },
                            this.props.title),
                    helpLink(this.props.path, schema),
                    this.props.children);
@@ -218,7 +218,7 @@ var makeSectionWrapper = function(schema) {
         'form-section',
         this.props.path.length > 0 ? 'form-subsection' : []).join(' ');
 
-      return $('fieldset', { className: classes, key: this.props.key },
+      return $('fieldset', { className: classes, },
                         $('legend', { className: 'form-section-title' },
                                  this.props.title,
                                  helpLink(this.props.path, schema)),

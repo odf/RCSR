@@ -75,6 +75,7 @@ var SectionWrapper = createReactClass({
 var propsForWrapper = function(props) {
   return {
     label      : props.label,
+    key        : props.key,
     path       : props.path,
     errors     : props.errors,
     classes    : ou.getIn(props.schema, ['x-hints', 'form', 'classes']),

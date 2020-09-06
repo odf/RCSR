@@ -60,5 +60,5 @@ module.exports = function(fields, props) {
 };
 
 function makeKey(path) {
-  return path.join('_');
+  return path.length ? path.join('_') : '_';
 }
