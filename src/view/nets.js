@@ -262,10 +262,10 @@ var Net = createReactClass({
 
     return $('div', null,
                  $('h2', null, net.symbol),
-                 $('p', null, $(common.StructureImage, {
+                 $(common.StructureImage, {
                    prefix: 'Net',
                    symbol: net.symbol,
-                   mayEnlarge: true })),
+                   mayEnlarge: true }),
                  $('p', null, 'RCSR reference: ', $('a', { href: path }, url)),
                  $('ul', { className: 'plainList' },
                       common.formatReferences(net, refKinds, keywords)),
