@@ -11,6 +11,7 @@ var Deferred = createReactClass({
 
   getInitialState: function() {
     return {
+      unmounted: false,
       showMessage: false,
       data: null
     }
@@ -18,6 +19,10 @@ var Deferred = createReactClass({
 
   componentDidMount: function() {
     this.props.loader(this.handleLoaderEvent);
+  },
+
+  componentWillUnmount: function() {
+    this.setState({ unmounted: true });
   },
 
   componentDidUpdate: function(prevProps) {
@@ -28,7 +33,7 @@ var Deferred = createReactClass({
   handleLoaderEvent: function(err, res) {
     if (err)
       alert(ex+'\n'+ex.stack);
-    else {
+    else if (!this.state.unmounted) {
       if (res == null)
         this.setState({ showMessage: true });
       else
