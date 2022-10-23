@@ -122,7 +122,10 @@ var Systre = React.createClass({
        'download (1.8MB)'],
       ['/downloads/RCSRnets-2019-06-01.arc',
        'Systre archive file (.arc) for RCSR nets',
-       'download (2.2MB)']
+       'download (2.2MB)'],
+      ['/downloads/3dtInputFiles.zip',
+       '3dt input files for RCSR net tilings',
+       'download (587KB)']
     ];
 
     return $.div(null,
