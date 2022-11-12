@@ -9,7 +9,7 @@
     "morgan": "^1.9.1",
     "regenerator": "^0.4.12",
     "webpack": "^4.41.4",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.12"
   },
   "author": {
     "name": "Olaf Delgado-Friedrichs",
